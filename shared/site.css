@@ -1,0 +1,50 @@
+body {
+  color: #000000;
+  background-color: #FFFFFF;
+  margin: 5px;
+  padding: 10px 20px;
+}
+
+:visited { 
+  color: #FF0000;
+  background-color: #FFFFFF;
+}
+
+div.c3 {
+  margin: 1px;
+  padding: 5px 5px;
+  text-align: center;
+}
+
+div.c4 {
+  margin: 1px;
+  padding: 5px 5px;
+  text-align: center;
+  font-style: italic;
+}
+
+span.c2 {
+  font-size: 80%;
+}
+
+span.sc {
+  font-variant: small-caps;
+}
+
+h2.c1 {
+  font-style: italic;
+}
+
+h3.c1 {
+  font-style: italic;
+}
+
+h4.c1 {
+  font-weight: normal;
+}
+
+br.clear {
+  clear: both;
+  height: 0;
+  line-height: 0px;
+}
