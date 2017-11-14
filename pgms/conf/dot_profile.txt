@@ -1,0 +1,77 @@
+#!/bin/sh
+# .profile - Bourne shell init script
+# $Id: dot_profile.txt 1340 2014-06-04 01:20:32Z ranga $ 
+
+umask 022
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+PATH=$PATH:/usr/local/sbin:/usr/X11R6/bin:$HOME/bin
+PATH=$PATH:/usr/sfw/bin:/opt/sfw/bin:/usr/ccs/bin
+PATH=$PATH:/opt/local/bin:/opt/local/sbin
+export PATH
+
+HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
+
+if [ "X$TERM" = "Xscreen" ] ; then
+   TERM=vt100
+   export TERM
+fi
+
+CVS_RSH=/usr/bin/ssh
+export CVS_RSH
+    
+case $- in
+     *i*)   
+	PS1="$HOST$ "
+	PS2="$HOST> "
+	PAGER="more"
+	EDITOR="vi"
+	VISUAL="$EDITOR"
+	FCEDIT="$EDITOR"
+        CDPATH=".:$HOME:$HOME/Documents"
+	SHELL="`echo $0 | sed -e 's/^\-//' -e 's/.*\///'`"
+	
+        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH SHELL
+
+	if type less > /dev/null 2>&1 ; then
+           PAGER="less" 
+        fi
+
+	case $SHELL in 
+	    bash*) 
+		set -o notify emacs ignoreeof nonclobber		
+		;;
+	    ksh*)
+		set -o emacs
+                if [ -r "$HOME/.kshrc" ] ; then 
+                   ENV="$HOME/.kshrc"
+                   export ENV
+                fi
+		;;
+	esac
+	
+	cp () { /bin/cp -i "$@" ; }
+	mv () { /bin/mv -i "$@" ; }
+	rm () { /bin/rm -i "$@" ; }
+	ls () { /bin/ls -aFC "$@" ; }	
+	yes() { echo "yes" ; }
+	y()   { echo "y" ; }
+
+	case "`type alias 2>&1 | awk '{ print $NF; }'`" in
+	    *builtin*)
+		alias screen="screen -e^Dd"
+		alias snv=svn
+		;;
+	esac
+     ;;
+esac
+
+for LOCAL_STARTUP in "$HOME/.profile_$HOST" \
+                     "$HOME/.profile_local" 
+do
+   if [ -r "$LOCAL_STARTUP" ] ; then 
+      . "$LOCAL_STARTUP" 
+   fi
+done
+unset LOCAL_STARTUP
+

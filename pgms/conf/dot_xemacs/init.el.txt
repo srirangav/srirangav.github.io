@@ -1,0 +1,76 @@
+; init.el - xemacs/emacs initialization
+; $Id: init.el.txt 806 2006-11-21 17:44:04Z ranga $
+
+; global variable settings
+
+(setq column-number-mode t
+      line-number-mode t
+      require-final-newline t
+      dired-listing-switches "-al"
+      display-time-day-and-date t)
+
+(setq-default fill-column 76)
+
+; defined $HOME
+
+(defvar HOME (concat (getenv "HOME") "/"))
+(setq load-path (cons (concat HOME "share/emacs/site-lisp") 
+		      load-path))
+
+; display the time
+
+(display-time)
+
+; xemacs specific stuff
+
+(if (string-match "XEmacs" emacs-version)
+    (progn
+
+      ; load tramp
+
+      (setq tramp-syntax 'url
+	    tramp-default-method "ssh")
+      (require 'tramp)
+
+      (custom-set-variables
+       '(cperl-indent-level 4)
+       '(cperl-tab-always-intent t))))
+
+; key mappings
+
+;(global-set-key "\C-xa" 'beginning-of-buffer)
+;(global-set-key "\C-xe" 'end-of-buffer)
+;(global-set-key "\C-xp" 'clipboard-kill-ring-save)
+(global-set-key "\C-xg" 'goto-line)
+(global-set-key "\C-xr" 'revert-buffer)
+
+(keyboard-translate ?\C-h ?\C-?)
+
+; vi style paren matching using %
+
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
+
+(global-set-key "%" 'match-paren)
+
+; load .emacs_local 
+
+(if (file-exists-p (concat HOME ".emacs_local"))
+	(load-file (concat HOME ".emacs_local")))
+
+; confirm exit
+
+(defun confirm-exit-emacs ()
+ "ask for confirmation before exiting emacs"
+ (interactive)
+ (if (yes-or-no-p "Are you sure you want to exit? ")
+     (save-buffers-kill-emacs)))
+
+(global-unset-key "\C-x\C-c")
+(global-set-key "\C-x\C-c" 'confirm-exit-emacs)
+
+(message "Finished loading .emacs")
