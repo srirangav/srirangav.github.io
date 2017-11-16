@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../shared/copy.xsl"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8" />
+
+  <title>Emacs Notes</title>
+  <link href="../shared/site.css" type="text/css" 
+        rel="stylesheet" />
+</head>
+
+<body>
+
+<h2 class="c1">Emacs Notes</h2>
+
+<p>The these are some general notes about <a href=
+"http://www.gnu.org/software/emacs/">Emacs</a>.</p>
+<ul>
+<li><a href="emacs.html#formatting">Formatting</a></li>
+<li><a href="emacs.html#buffershortcuts">Buffer movement
+shortcuts</a></li>
+<li><a href="emacs.html#time">Date and Time Display</a></li>
+<li><a href="emacs.html#misc">Misc. Options</a></li>
+<li><a href="emacs.html#aspell">Using aspell instead of ispell</a></li>
+<li><a href="emacs.html#trimws">A function to delete trailing
+whitespace from the end of every line in the current
+buffer</a></li>
+<li><a href="emacs.html#viparen">Vi-style parenthesis matching
+using %</a></li>
+<li><a href="emacs.html#confirmexit">Confirm exit</a></li>
+</ul>
+
+<hr />
+
+<p><a name="formatting" id="formatting">Cutting, pasting and
+formatting</a></p>
+
+<blockquote>
+
+<p>Set Mark:
+<code>C-&lt;space&gt;</code> or <code>M-_</code></p>
+<p>Kill marked region: <code>C-w</code></p>
+<p>Copy marked region: <code>M-w</code></p>
+<p>Reformat current paragraph or marked region: <code>M-q</code></p>
+</blockquote>
+
+<blockquote>
+<dl>
+<dt>Force emacs to output spaces instead of tabs (auto "untabify"):</dt>
+<dd><pre>(custom-set-variables '(indent-tabs-mode nil))</pre></dd>
+<dt>Setting the default fill column to 75</dt>
+<dd><pre>(setq-default fill-column 75)</pre></dd>
+<dt>Set the c-mode indentation offset to 8 spaces:</dt>
+<dd><pre>(defun my-c-mode-common-hook()
+        (setq c-mode-basic-offset 8))
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)</pre></dd>
+<dt>Disable down-arrow and <code>C-n</code> from adding newlines
+at the end of a buffer</dt>
+<dd><pre>(setq next-line-add-newlines nil)</pre></dd>
+
+</dl>
+</blockquote>
+
+<hr />
+
+<p><a name="buffershortcuts" id="buffershortcuts">Buffer movement
+shortcuts</a></p>
+
+<blockquote>
+<dl>
+<dt>Goto line (C-x g)</dt>
+<dd><pre>(global-set-key "\C-xg" 'goto-line)</pre></dd>
+<dt>Goto beginning of buffer (C-x a, Standard Key M-&lt;)</dt>
+<dd><pre>(global-set-key "\C-xa" 'beginning-of-buffer)</pre></dd>
+<dt>Goto end of buffer (C-x e, Standard Key M-&gt;)</dt>
+<dd><pre>(global-set-key "\C-xe" 'end-of-buffer)</pre></dd>
+<dt>Revert to last saved version of buffer (C-x r)</dt>
+<dd>
+<pre>(global-set-key "\C-xr" 'revert-buffer)</pre></dd>
+</dl>
+</blockquote>
+
+<hr />
+
+<p><a name="time" id="time">Date and Time Display Options</a></p>
+
+<blockquote>
+<dl>
+<dt>Display time in status bar</dt>
+<dd><pre>(display-time)</pre></dd>
+<dt>Display date and time in status bar</dt>
+<dd><pre>(setq display-time-day-and-date t)
+(display-time)</pre></dd>
+<dt>Display time in 24 hour mode in status bar</dt>
+<dd><pre>(setq display-time-24hr-format t)
+(display-time)</pre></dd>
+</dl>
+</blockquote>
+
+<hr />
+
+<p><a name="misc" id="misc">Misc. Options</a></p>
+
+<blockquote>
+<dl>
+<dt>Display column number</dt>
+<dd><pre>(setq column-number-mode t)</pre></dd>
+<dt>Enable visual bell</dt>
+<dd><pre>(setq visible-bell t)</pre></dd>
+<dt>Disable menu bar</dt>
+<dd><pre>(menu-bar-mode -1)</pre></dd>
+</dl>
+</blockquote>
+
+<hr />
+
+<p><a name="aspell" id="aspell">Using</a>
+<a href="http://aspell.sourceforge.net/">aspell</a> instead of 
+<a href="http://ficus-www.cs.ucla.edu/geoff/ispell.html">ispell</a></p>
+
+<blockquote>
+<pre>(setq-default ispell-program-name "aspell")</pre>
+</blockquote>
+
+<hr />
+
+<p><a name="trimws" id="trimws">A function to delete trailing
+whitespace from the end of every line in the current
+buffer:</a></p>
+<pre>
+defun elc-delete-buffer-trailing-ws ()
+        "get rid of trailing whitespace in all lines in current buffer"
+        (interactive)
+        (save-excursion
+                (goto-char (point-min))
+                (end-of-line)
+                (delete-horizontal-space)
+                (loop do (let ((inhibit-field-text-motion t))
+                        (end-of-line 2)
+                        (delete-horizontal-space))
+                                while (/= (point) (point-max)))))
+</pre>
+<hr />
+<p><a name="viparen" id="viparen">Vi-style parenthesis matching
+using %</a></p>
+<pre>
+(defun match-paren (arg)
+        "Go to the matching paren if on a paren; otherwise insert %."
+        (interactive "p")
+        (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+                ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+                (t (self-insert-command (or arg 1)))))
+
+(global-set-key "%" 'match-paren)
+</pre>
+<hr />
+<p><a name="confirmexit" id="confirmexit">Confirm exit</a></p>
+<pre>
+(defun confirm-exit-emacs ()
+        "ask for confirmation before exiting emacs"
+        (interactive)
+        (if (yes-or-no-p "Are you sure you want to exit? ")
+                (save-buffers-kill-emacs)))
+
+(global-unset-key "\C-x\C-c")
+(global-set-key "\C-x\C-c" 'confirm-exit-emacs)
+</pre>
+
+<hr />
+
+  <div class="c3">
+
+    <p>
+    <span class="c2">
+    Valid
+    <a href="http://validator.w3.org/check/referer">XHTML</a> and 
+    <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
+    &nbsp;//&nbsp;
+    
+    <!-- Creative Commons License -->
+    Licensed under a 
+    <a rel="license" href=
+    "http://creativecommons.org/licenses/by/2.5/">Creative Commons 
+    Attribution 2.5 License</a>
+    <!-- /Creative Commons License -->
+
+    </span>
+    </p>
+    
+    <!--
+    <rdf:RDF xmlns="http://web.resource.org/cc/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+        <Work rdf:about="">
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+            <license 
+            rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
+        </Work>
+        <License rdf:about="http://creativecommons.org/licenses/by/2.5/">
+            <permits 
+            rdf:resource="http://web.resource.org/cc/Reproduction" />
+            <permits 
+            rdf:resource="http://web.resource.org/cc/Distribution" />
+            <requires 
+            rdf:resource="http://web.resource.org/cc/Notice" />
+            <requires 
+            rdf:resource="http://web.resource.org/cc/Attribution" />
+            <permits 
+            rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+        </License>
+    </rdf:RDF>
+    -->
+
+    <span class="c2">
+    $Id: emacs.html 764 2006-08-31 05:27:34Z ranga $
+    </span>
+  </div>
+
+</body>
+</html>

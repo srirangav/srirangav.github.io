@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../../shared/copy.xsl"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8" />
+
+  <title>SheepShaver on MacOS X</title>
+  <link href="../../shared/site.css" type="text/css"
+        rel="stylesheet" />
+</head>
+
+<body>
+  <h2 class="c1">SheepShaver on MacOS X</h2>
+
+<hr />
+
+  <p>I have used following steps to install MacOS 8.6 on SheepShaver on MacOS
+  10.6, 10.7, and 10.9 (Intel).</p>
+
+  <h3>Preliminary Notes:</h3>
+
+  <ol>
+
+  <li>
+  You will need a MacOS 8.5 CD from which to extract the Mac OS ROM.
+  <sup>[<a name="id.1" href="#fn.1">1</a>]</sup>
+  </li>
+
+  <li>
+  If you have any problems installing the MacOS 8.6 Update, Carbon Lib 1.6, 
+  the Font Manager Update 1.0, or QuickTime 4.1.2 (see below), try starting 
+  SheepShaver while holding down Shift to disable MacOS extensions and/or 
+  removing SheepShaver's nvram file located at 
+  <code>$HOME/.sheepshaver_nvram</code>.</li>
+
+  </ol>
+
+  <h3>Steps:</h3>
+
+  <ol>
+
+    <li><p>Download the latest Universal Binary Build of SheepShaver:    <sup>[<a name="id.2" href="#fn.2">2</a>]</sup>
+    <br /><br />
+    <a href=
+"http://www.xs4all.nl/~ronaldpr/sheepshaverforum/SheepShaver_UB_20140201.zip"
+>http://www.xs4all.nl/~ronaldpr/sheepshaverforum/SheepShaver_UB_20140201.zip</a>
+
+    </p>
+    </li>
+
+    <li><p>Mount a MacOS 8.5 CD and copy the MacOS ROM located in the System Folder of the MacOS 8.5 CD to the SheepShaver Folder.  The path for the
+    Mac OS ROM file should be:
+    <br /><br />
+    <code>/Volumes/Mac\ OS\ 8.5/System\ Folder/Mac\ OS\ ROM</code></p>
+    </li>
+
+    <li>Launch SheepShaver and follow Ronald P. Regensburg's <a href=
+    "http://www.emaculation.com/doku.php/sheepshaver_mac_os_x_setup"
+    >setup instructions</a>.
+    <sup>[<a name="id.3" href="#fn.3">3</a>]</sup>
+
+    <p>It is probably better to create a <a href=
+    "https://en.wikipedia.org/wiki/Hierarchical_File_System">HFS</a> volume
+    instead of a <a href="https://en.wikipedia.org/wiki/HFS%2B">HFS+</a>
+    volume for SheepShaver's main hard drive because some <a href=
+    "http://en.wikipedia.org/wiki/Self_mounting_image">self-mounting
+    images</a> (.smi) will not mount on HFS+ volumes.  Alternatively, one
+    can make a small HFS volume on which to copy such images.</p>
+
+	<p>To make SheepShaver's volume more <a href=
+	"https://support.apple.com/kb/HT1427">Time Machine</a> friendly,
+	it may be best to create a sparse bundle and copy SheepShaver's volume
+	to the sparse bundle.<sup>[<a name="id.4" href="#fn.4">4</a>]</sup></p>
+
+    <p>It may be necessary to enable the "Ignore Illegal Memory
+    Accesses" option in SheepShaver's preferences in order to play games
+    such as <a href=
+    "http://en.wikipedia.org/wiki/Star_Trek:_25th_Anniversary_(computer_game)"
+    >Star Trek 25th Anniversary</a> or <a href=
+    "http://en.wikipedia.org/wiki/Star_Trek:_Judgment_Rites"
+    >Star Trek Judgment Rights</a>.  It may also be necessary to disable
+    the "Allow Emulated CPU to Idle" option in SheepShaver's preferences in
+    order to play games such as <a href=
+    "https://en.wikipedia.org/wiki/Master_of_Orion_II%3A_Battle_at_Antares"
+    >Master of Orion II</a>.
+    <sup>[<a name="id.5" href="#fn.5">5</a>]</sup>
+    </p>
+
+
+    </li>
+
+    <li><p>Download and install the <a href="http://support.apple.com/kb/DL1259"
+    >MacOS 8.6 Update</a>:
+    <br /><br />
+    <a href=
+    "http://support.apple.com/downloads/DL1259/en_US/Mac_OS_8.6_Update.smi.bin"
+    >http://support.apple.com/downloads/DL1259/en_US/Mac_OS_8.6_Update.smi.bin</a>
+    </p>
+    </li>
+
+    <li><p>Download and install Carbon Lib 1.6:
+    <br /><br />
+    <a href=
+    "http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/System/Other_System/CarbonLib_1.6.smi.bin"
+    >http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/System/Other_System/CarbonLib_1.6.smi.bin</a>
+    </p>
+    </li>
+
+    <li><p>Download and install the Font Manager Update 1.0:
+    <br /><br />
+    <a href=
+    "http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/System/Other_System/Font_Manager_Update_1.0.smi.bin"
+    >http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/System/Other_System/Font_Manager_Update_1.0.smi.bin</a>
+    </p>
+    </li>
+
+    <li><p>Download and install QuickTime 4.1.2:
+    <sup>[<a name="id.6" href="#fn.6">6</a>]</sup>
+
+    <br /><br />
+    <a href="http://support.apple.com/kb/DL1134"
+    >http://support.apple.com/kb/DL1134</a>
+    </p>
+    </li>
+
+	<li><p>(Optional) Sometimes, after installing MacOS, when clicking on particular 
+	files, an error message stating that MacOS "Could to find a translation 
+	extension with appropriate translators" may appear.  To fix this error, 
+	follow the instructions in Apple's <a href=
+	"http://support.apple.com/kb/TA22236?viewlocale=en_US">Mac OS: "Could 
+	Not Find a Translation Extension" Message</a> technical note.  To delete the Desktop
+	files, as mentioned in the preceding technical note, follow the instructions in
+	Apple's <a href="http://support.apple.com/kb/HT2344">Mac OS: Rebuilding Desktop File
+	 and icon recovery</a> technical note.  While Apple recommends restarting while 
+	holding down Option-Command to rebuild the Desktop files, generally I prefer to 
+	delete the Desktop files using <a href=
+	"http://www.info-mac.org/archive_download.php?file=cfg/trash-desktop-131.hqx"
+	>Trash Desktop 1.3.1</a> and then restarting.
+	
+	</p>
+	</li>
+</ol>
+
+  <h3>Enable Printing to a LPR Printer (Optional)
+      <sup>[<a name="id.7" href="#fn.7">7</a>]</sup></h3>
+
+  <ol>
+     <li><p>Launch the Desktop Printer Utility, which should be located in the
+         "Apple Extras:Apple LaserWriter Software" folder of the SheepShaver
+         boot drive.</p>
+         <p><img src="osx_sheepshaver_images/ss_dp1.jpg"
+          alt="Apple Extras:Apple LaserWriter Software" /></p>
+     </li>
+
+     <li><p>The "New Desktop Printer" window should appear.  If the window does
+         not appear, Select the "New" option from the "File" menu or press
+         Cmd-N to make the "New Desktop Printer" it appear.</p>
+         <p><img src="osx_sheepshaver_images/ss_dp2.jpg"
+          alt="New Desktop Printer" /></p>
+     </li>
+
+     <li><p>Select "LaserWriter 8" and "Printer (LPR)" for the printer type,
+         and click the "OK" button.</p>
+     </li>
+     <li><p>In the next dialog, click the "Change..." button in the box
+         entitled "LPR Printer Selection."  In the "PostScript&trade;
+         Printer Description (PPD) File" box, keep the "Generic"
+         setting.</p>
+         <p><img src="osx_sheepshaver_images/ss_dp3.jpg"
+          alt="Create New Desktop Printer" /></p>
+	</li>
+     <li>
+     	<p>In the next dialog, entitled "Internet Printer," enter the IP
+     	 address of the printer in the text box labeled "Printer Address."
+     	 If the printer has a specific queue enter it in the text box
+     	 labeled "Queue."</p>
+         <p><img src="osx_sheepshaver_images/ss_dp4.jpg"
+          alt="Internet Printer" /></p>
+     </li>
+     <li>
+     	<p>Click the "Verify" button to verify that the printer and queue
+         settings work correctly. Then click the "OK" button. The
+         printer's IP address should now appear in the "LPR Printer
+         Selection" box.</p>
+         <p><img src="osx_sheepshaver_images/ss_dp5.jpg"
+          alt="New Desktop Printer" /></p>
+    </li>
+     <li>
+        <p>Click the "Create..." button to create the printer.</p>
+     </li>
+  </ol>
+
+  <h3>Additional Software <sup>[<a name="id.8" href="#fn.8">8</a>]</sup></h3>
+
+  <ul>
+  	 <li>Icons
+  	 <ol>
+     <li><p>Nice alternate sheep icons are available in Julia Nikolaeva's "The Farm" and "Aries" icon sets:</p>
+
+     <p>The Farm: <a href="http://www.flameia.com/ipack/farm.sit"
+     >http://www.flameia.com/ipack/farm.sit</a><br />
+     Aries: <a href="http://www.flameia.com/ipack/aries.sit"
+     >http://www.flameia.com/ipack/aries.sit</a>
+     </p>
+     <p>I prefer the sheep icon from "The Farm" because it works in
+     Mac OS 8.6 as well as Mac OS X.</p>
+     </li>
+
+	 <li>
+	 <p>Replacement <a href=
+	 "http://macintoshgarden.org/apps/mac-os-8-and-9-hard-drive-icons"
+	 >hard drive icons</a> from MacOS 8 and 9 for the default System 7
+	 hard drive icons used by SheepShaver: <a href=
+	 "http://s3.amazonaws.com/macgarden/mac_os_hd_icons.sit"
+	 >http://s3.amazonaws.com/macgarden/mac_os_hd_icons.sit</a>
+	 </p>
+	 </li>
+	 </ol>
+	 </li>
+
+	<li>Essential Applications / Utilities
+	<ol>
+     <li><p>
+     <a href="
+     http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/Utilities/Disk_Copy/"
+     >Disk Copy</a> 6.3.3:
+     <a href=
+     "http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/Utilities/Disk_Copy/Disk_Copy_6.3.3.smi.bin"
+     >http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/Utilities/Disk_Copy/Disk_Copy_6.3.3.smi.bin</a>
+     </p>
+     </li>
+
+     <li><p>Stuffit Lite 6.5:
+     <a href="http://www.info-mac.org/viewtopic.php?f=107&amp;t=1233"
+     >http://www.info-mac.org/viewtopic.php?f=107&amp;t=1233</a>
+     </p>
+     </li>
+
+	 <li>
+	 <p><a href="http://home.arcor.de/grouchosbox/tomeviewer.html"
+	 >TomeViewer</a> 1.3d3: <a href="http://www.tucows.com/preview/207002"
+	 >http://www.tucows.com/preview/207002</a>
+	 </p>
+	 </li>
+
+	 <li>
+	 <p>Trash Desktop 1.3.1:
+	 <a href=
+	 "http://www.info-mac.org/archive_download.php?file=cfg/trash-desktop-131.hqx"
+	 >http://www.info-mac.org/archive_download.php?file=cfg/trash-desktop-131.hqx</a>
+	 </p>
+	 </li>
+
+	 <li><p><a href="http://www.applefritter.com/node/13371">Find Stuff</a> 2.0.3:
+	 <a href="http://www.applefritter.com/files/find-stuff-203.hqx"
+	 >http://www.applefritter.com/files/find-stuff-203.hqx</a>
+	 </p>
+	 </li>
+	 
+	 </ol>
+	 </li>
+	 
+	 <li>Control Panels / Extensions
+	 <ol>
+     <li><p><a href="http://www.tempel.org/joliet/"
+     >Joilet File System Extension</a> 2.1b5:
+      <sup>[<a name="id.9" href="#fn.9">9</a>]</sup>
+     <a href="http://www.tempel.org/ftp/pub/Mac/JVA%202.1b5.sit"
+     >http://www.tempel.org/ftp/pub/Mac/JVA%202.1b5.sit</a>
+     </p>
+     </li>
+
+	 <li><p><a href="http://www.tempel.org/mac/#udfva"
+	>Adaptec UDF Volume Access</a> 1.0.4:
+	<a href=
+	"http://www.tempel.org/ftp/pub/Mac/outdated/udf-vol-acc-english-1.0.4.sit"
+	>http://www.tempel.org/ftp/pub/Mac/outdated/udf-vol-acc-english-1.0.4.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p><a href=
+	 "http://macintoshgarden.org/apps/virtual-dvd-romcd-utility"
+	 >Virtual DVD-ROM/CD Utility</a> 1.0d0:
+	 <a href=
+	 "http://s3.amazonaws.com/macgarden/VirtualCD_Imager_v1.0d0.sit"
+	 >http://s3.amazonaws.com/macgarden/VirtualCD_Imager_v1.0d0.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p><a href="http://jwwalker.com/pages/pdf.html"
+	 >PrintToPDF</a> 2.4.5:
+	 <a href="ftp://ftp.jwwalker.com/PrintToPDF-2.4.5.sit"
+	 >ftp://ftp.jwwalker.com/PrintToPDF-2.4.5.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://macintoshgarden.org/apps/themouse2b-11">The Mouse 2B</a>
+	  1.1: <sup>[<a name="id.10" href="#fn.10">10</a>]</sup>
+	 <a href="http://s3.amazonaws.com/macgarden/themouse2b-11.sit"
+	 >http://s3.amazonaws.com/macgarden/themouse2b-11.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p><a href="http://main.system7today.com/software/liteswitch.html"
+	 >LiteSwitch</a> 1.0:
+	 <sup>[<a name="id.11" href="#fn.11">11</a>]</sup>
+	 <a href="http://download.system7today.com/liteswitch.hqx"
+	 >http://download.system7today.com/liteswitch.hqx</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://www.wildbits.com/gravite/">Gravit&eacute;</a> 2.0.3:
+	 <a href="http://www.wildbits.com/files/gravite-203.sit"
+	 >http://www.wildbits.com/files/gravite-203.sit</a>
+	 </p>
+	 </li>
+
+	<li><p>
+	<a href="http://www.naturalordersort.org/">Natural Order</a>:
+	<a href="http://www.naturalordersort.org/NaturalOrder.cpt.hqx"
+	>http://www.naturalordersort.org/NaturalOrder.cpt.hqx</a>
+	</p>
+	</li>
+	
+	 <li><p>
+	 <a href="http://www.marcmoini.com/SmartScrollClassic.html">Smart Scroll
+	  Classic</a> 3.7.3: <a href=
+	  "http://www.marcmoini.com/Smart-Scroll-3.7.3.sit"
+	  >http://www.marcmoini.com/Smart-Scroll-3.7.3.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://www.applefritter.com/node/12165">OpenWith</a> 1.1.1:
+	 <a href="http://www.applefritter.com/files/open-with-cmm-111.hqx"
+	 >http://www.applefritter.com/files/open-with-cmm-111.hqx</a>
+	 </p>
+	 </li>
+
+	 <li><p><a href="http://macintoshgarden.org/apps/softwarefpu-307"
+	 >Software FPU</a> 3.07: <a href=
+	 "http://s3.amazonaws.com/macgarden/SoftwareFPU.img_.sit"
+	 >http://s3.amazonaws.com/macgarden/SoftwareFPU.img_.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://macintoshgarden.org/apps/windows-21">Windows</a>
+	 2.1: <a href="http://s3.amazonaws.com/macgarden/windows2.1.img_.sit"
+	 >http://s3.amazonaws.com/macgarden/windows2.1.img_.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://www.fnarr.net/old-finderpop/index.html"
+	 >FinderPop</a> 1.9.2:
+	 <a href="http://www.fnarr.net/old-finderpop/FinderPop192.sit"
+	 >http://www.fnarr.net/old-finderpop/FinderPop192.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://macintoshgarden.org/apps/applwindows-202"
+	 >ApplWindows</a> 2.0.2:
+	 <a href="http://s3.amazonaws.com/macgarden/applwindows_folder.sit"
+	 >http://s3.amazonaws.com/macgarden/applwindows_folder.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://www.mac.org/system/iconwrap/"
+	 >IconWrap II</a> 1.2:
+	 <a href="http://www.mac.org/system/iconwrap/IconWrap_II_1.2.sit.hqx"
+	 >http://www.mac.org/system/iconwrap/IconWrap_II_1.2.sit.hqx</a>
+	 </p>
+	 </li>
+	
+	</ol>
+	</li>
+	
+	 <li>Internet
+	 <ol>
+
+	 <li><p><a href="http://www.floodgap.com/software/classilla/releases/"
+	 >Classilla</a> 9.3.2:
+	 <a href="http://classilla.googlecode.com/files/Classilla9.3.2.sit"
+	 >http://classilla.googlecode.com/files/Classilla9.3.2.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p>Internet Explorer 5.1.7:
+	 <a href="http://web.archive.org/web/20051222035829/http://www.microsoft.com/mac/downloads.aspx?pid=download&amp;location=/mac/DOWNLOAD/IE/ie5_classic.xml&amp;secid=30&amp;ssid=11&amp;flgnosysreq=True"
+	 >http://web.archive.org/web/20051222035829/http://www.microsoft.com/mac/downloads.aspx?pid=download&amp;location=/mac/DOWNLOAD/IE/ie5_classic.xml&amp;secid=30&amp;ssid=11&amp;flgnosysreq=True</a>
+	 </p>
+	 </li>
+
+	  <li>
+	  <p><a href="http://www.mac.org/internet/fetch/">Fetch</a> 3.0.3:
+	  <a href="http://www.mac.org/internet/fetch/Fetch_3.0.3.sit.hqx"
+	  >http://www.mac.org/internet/fetch/Fetch_3.0.3.sit.hqx</a>
+	  </p>
+	  </li>
+
+	 <li><p>
+	 <a href="http://www.lysator.liu.se/~jonasw/freeware/niftyssh/"
+	 >Nifty Telnet SSH</a> 1.1r3:
+	 <a href=
+	 "http://www.lysator.liu.se/~jonasw/download/niftytelnet-1.1-ssh-r3.hqx"
+	 >http://www.lysator.liu.se/~jonasw/download/niftytelnet-1.1-ssh-r3.hqx</a>
+	 </p>
+	 </li>
+
+	 <li>
+	 <p><a href="http://sourceforge.net/projects/macssh/">MacSSH</a>
+	 2.1fc3: <a href=
+	 "http://sourceforge.net/projects/macssh/files/MacSSH%20PPC/2.1fc3/MacSSHPPC-2.1fc3.sit/download"
+	 >http://sourceforge.net/projects/macssh/files/MacSSH%20PPC/2.1fc3/MacSSHPPC-2.1fc3.sit/download</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://macintoshgarden.org/apps/ag-net-tools"
+	 >AG Net Tools</a> 1.0:
+	 <a href="http://s3.amazonaws.com/macgarden/agnettools.sit"
+	 >http://s3.amazonaws.com/macgarden/agnettools.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://macintoshgarden.org/apps/ottool-121">OTTool</a> 1.2.1:
+	 <a href=
+	 "http://macintoshgarden.org/sites/macintoshgarden.org/files/apps/OTTool_1.2.1.sit"
+	 >http://macintoshgarden.org/sites/macintoshgarden.org/files/apps/OTTool_1.2.1.sit</a>
+	 </p>
+	 </li>
+
+	</ol>
+	</li>
+	
+	<li>Document Viewers / Players (Postscript, PDF, JPEG, sound files, etc.)
+	<ol>
+	
+	<li><p><a href="http://pages.cs.wisc.edu/~ghost/macos/"
+	>MacGSView</a> 2.0b3: <a href=
+	"ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/aladdin/gs600/mac/test/MacGSView_2.0b3_Installer.bin"
+	>ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/aladdin/gs600/mac/test/MacGSView_2.0b3_Installer.bin</a>
+	</p>
+	</li>
+
+	 <li><p>
+	 Adobe <a href="http://www.adobe.com/products/reader.html">Acrobat Reader</a> 
+	 5.0.5 (English): 
+	 <a href=
+	 "http://web.archive.org/web/20021202143749/http://download.adobe.com/pub/adobe/acrobatreader/mac/5.x/monolithic/rs505enu.bin"
+	 >http://web.archive.org/web/20021202143749/http://download.adobe.com/pub/adobe/acrobatreader/mac/5.x/monolithic/rs505enu.bin</a>
+	 </p>
+	 </li>
+	 
+	 	 <li><p>
+	 <a href="http://www.aarongiles.com/macsoft/index.html"
+	 >JPEGView</a> 3.3: <a href=
+	 "http://www.aarongiles.com/macsoft/JPEGView3.3.smi.bin"
+	 >http://www.aarongiles.com/macsoft/JPEGView3.3.smi.bin</a>
+	 </p>
+	 </li>
+
+	 <li><p><a href=
+	 "http://www.mac.org/utilities/soundapp/">SoundApp</a> 2.4.3: <a href=
+	 "http://www.mac.org/utilities/soundapp/SoundApp_Fat.sit.hqx"
+	 >http://www.mac.org/utilities/soundapp/SoundApp_Fat.sit.hqx</a>
+	 </p>
+	 </li>
+
+	</ol>
+	</li>
+
+	<li>Text Editing / Word Processing
+	<ol>
+     <li><p>
+	 <a href=
+	 "http://main.system7today.com/software/bbedit6/bbedit6.html"
+	 >BBEdit Lite</a> 6.1.2:
+	 <a href="http://download.system7today.com/BBEdit_Lite_612.smi.hqx"
+	 >http://download.system7today.com/BBEdit_Lite_612.smi.hqx</a>
+	 </p>
+	 </li>
+
+	 <li><p>
+	 <a href="http://www.encyclomedia.ca/fwp/">Full Write Professional</a>
+	 2.0.6: <a href=
+	 "http://www.encyclomedia.ca/fwp/free_fullwrite_files/fullwrite206installer.sit"
+	 >http://www.encyclomedia.ca/fwp/free_fullwrite_files/fullwrite206installer.sit</a>
+	 </p>
+	 </li>
+
+	 <li><p><a href=
+	 "http://main.system7today.com/software/wordperfect/wordperfect.html"
+	 >WordPerfect</a> (both downloads are needed):</p>
+	 <p>
+	 <a href="http://download.system7today.com/corelwp35e.sea.bin"
+	 >http://download.system7today.com/corelwp35e.sea.bin</a><br />
+	 <a href="http://download.system7today.com/wordperfectupdates.img.bin"
+	 >http://download.system7today.com/wordperfectupdates.img.bin</a>
+	 </p>
+	 </li>
+
+	<li>
+	<p><a href="http://macintoshgarden.org/apps/quill-22">Quill</a> 2.2:
+	<a href=
+	"http://macintoshgarden.org/sites/macintoshgarden.org/files/apps/Quill_img.sit"
+	>http://macintoshgarden.org/sites/macintoshgarden.org/files/apps/Quill_img.sit</a>
+	</p>
+	</li>
+
+	<li>
+	<p><a href="http://www.lowendmac.com/misc/01/0702.html"
+	>Spell Tools</a> 1.3.3:
+	<a href="http://www.tucows.com/download.html?software_id=316079&amp;t=2"
+	>http://www.tucows.com/download.html?software_id=316079&amp;t=2</a>
+	</p>
+	</li>
+	
+	</ol>
+	</li>
+
+	<li>Hacking
+	<ol>
+
+
+	 <li><p>ResEdit and Forker:
+	 <sup>[<a name="id.12" href="#fn.12">12</a>]</sup>
+	 <br /><br />
+	 ResEdit 2.1.3: <a href=
+	 "http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/Utilities/ResEdit_2.1.3.sea.bin"
+	 >http://download.info.apple.com/Apple_Support_Area/Apple_Software_Updates/English-North_American/Macintosh/Utilities/ResEdit_2.1.3.sea.bin</a>
+	 <br /><br />
+	Forker 1.3: <a href="http://resexcellence.com/files/forker13.hqx"
+	>http://resexcellence.com/files/forker13.hqx</a>
+	</p>
+	</li>
+
+	<li>
+	<p><a href="http://sourceforge.net/projects/hexedit/">HexEdit</a> 2.00:
+	<a href=
+	"http://sourceforge.net/projects/hexedit/files/HexEdit/HexEdit%20v2.00/"
+	>http://sourceforge.net/projects/hexedit/files/HexEdit/HexEdit%20v2.00/</a>
+	</p>
+	</li>
+
+	<li>
+	<p><a href="http://www.gryphel.com/c/sw/progtool/rescompr/index.html"
+	>ResCompare</a> 2.53:
+	<a href=
+	"http://www.gryphel.com/c/sw/progtool/rescompr/c/rescompare2.53.sit.hqx"
+	>http://www.gryphel.com/c/sw/progtool/rescompr/c/rescompare2.53.sit.hqx</a>
+	</p>
+	</li>
+
+	 <li><p>
+	 <a href=
+	 "http://main.system7today.com/software/processinfo/processinfo.html"
+	 >ProcessInfo</a> 1.3.1: <a href=
+	 "http://download.system7today.com/ProcessInfo.sit.hqx"
+	 >http://download.system7today.com/ProcessInfo.sit.hqx</a>
+	 </p>
+	 </li>
+
+	 <li>
+	 <p><a href="http://www.pure-mac.com/diagclassic.html#memmap"
+	 >Memory Mapper</a> 1.5:
+	 <sup>[<a name="id.13" href="#fn.13">13</a>]</sup>
+	 <a href=
+	 "http://hyperarchive.lcs.mit.edu/HyperArchive/Archive/cfg/memmap.hqx"
+	 >http://hyperarchive.lcs.mit.edu/HyperArchive/Archive/cfg/memmap.hqx</a>
+	 </p>
+	 </li>
+	
+	<li>
+	<p><a href=
+	"http://www.gryphel.com/c/sw/sysutils/crtrchng/index.html"
+	>Creator Changer</a> 2.8.4:
+	<a href=
+	"http://www.gryphel.com/c/sw/sysutils/crtrchng/c/creator-changer-284.hqx"
+	>http://www.gryphel.com/c/sw/sysutils/crtrchng/c/creator-changer-284.hqx</a>
+	</p>
+	</li>
+
+	<li>
+	<p><a href=
+	"http://www.gryphel.com/c/sw/sysutils/checksum/index.html"
+	>Checksum</a> 1.3:
+	<a href=
+	"http://www.gryphel.com/c/sw/sysutils/checksum/c/checksum1.3.sit.hqx"
+	>http://www.gryphel.com/c/sw/sysutils/checksum/c/checksum1.3.sit.hqx</a>
+	</p>
+	</li>
+
+	</ol>
+	</li>
+
+	<li>Games
+	  <ol>
+
+	 <li>
+	 <p><a href="http://www.ski-epic.com/continuum_downloads/index.html"
+	 >Continuum</a> 1.04:
+	 <br /><br />
+	 <a href=
+	 "http://www.ski-epic.com/continuum_downloads/Continuum.bin"
+	 >http://www.ski-epic.com/continuum_downloads/Continuum.bin</a><br />
+	 <a href=
+	 "http://www.ski-epic.com/continuum_downloads/Continuum%20Galaxy"
+	 >http://www.ski-epic.com/continuum_downloads/Continuum%20Galaxy</a>
+	 </p>
+	 </li>
+
+	 <li>
+	 <p><a href="http://www.lysator.liu.se/~ingemar/games/misc.html"
+	 >Classic Daleks</a> 1.2: <a 
+	 href="ftp://ftp.lysator.liu.se/pub/mac/games/classicdaleks12.hqx"
+	 >ftp://ftp.lysator.liu.se/pub/mac/games/classicdaleks12.hqx</a>
+	 </p>	 
+	 </li>
+	 
+	 <li>
+	 <p><a href="http://www.paranoidproductions.com/odyssey/index.html"
+	 >Odyssey - The Legend of Nemesis</a>: 
+	 <a href=
+	 "http://www.paranoidproductions.com/odyssey/downloads/OdysseyFreeware.sit.hqx"
+	 >http://www.paranoidproductions.com/odyssey/downloads/OdysseyFreeware.sit.hqx</a>
+	 </p>
+	 </li>
+	 
+	 <li>
+	 <p><a href="http://www.traud.de/rescue/other.htm">Rescue!</a>
+	 2.0.5: <a href="http://www.traud.de/rescue/files/rescu205.hqx"
+	 >http://www.traud.de/rescue/files/rescu205.hqx</a>
+	 </p>
+	 </li>
+	
+	  </ol>
+	</li>
+	
+	<li>Other Applications / Utilities
+	<ol>
+
+	<li>
+	<p><a href="http://www.gryphel.com/c/sw/sysutils/burn/index.html"
+	>Burn</a> 2.5:
+	<a href="http://www.gryphel.com/c/sw/sysutils/burn/c/burn-25.hqx"
+	>http://www.gryphel.com/c/sw/sysutils/burn/c/burn-25.hqx</a>
+	</p>
+	</li>
+
+	 <li><p>
+	 <a href="http://macintoshgarden.org/apps/dropattribute">Drop•Attribute</a> 
+	 1.0.0: <a href="http://s3.amazonaws.com/macgarden/dropattribute_1.0.sit"
+	 >http://s3.amazonaws.com/macgarden/dropattribute_1.0.sit</a>
+	 </p>
+	 </li>
+	 
+	 <li><p>
+	 <a href="http://homes.cs.washington.edu/~fred/macshell.html">MacShell</a> 
+	 0.54b: <a href="ftp://ftp.cs.washington.edu/homes/fred/MacShell.0.54b.new.sit.hqx"
+	 >ftp://ftp.cs.washington.edu/homes/fred/MacShell.0.54b.new.sit.hqx</a>
+	 </p>
+	 </li>
+	 
+	 <li><p><a href="http://macintoshgarden.org/apps/x-launch"
+	 >X-Launch</a> 2.11: <a href=
+	 "http://macintoshgarden.org/sites/macintoshgarden.org/files/apps/x-launch_2.11.bin"
+	 >http://macintoshgarden.org/sites/macintoshgarden.org/files/apps/x-launch_2.11.bin</a>
+	 </p>
+	 </li>
+
+	<li>
+	<p><a href="http://www.gryphel.com/c/sw/sysutils/dsnfctnt/index.html"
+	>Disinfectant</a> 3.7.1:
+	<a href=
+	"http://www.gryphel.com/c/sw/sysutils/dsnfctnt/c/disinfectant371.sea.hqx"
+	>http://www.gryphel.com/c/sw/sysutils/dsnfctnt/c/disinfectant371.sea.hqx</a>
+	</p>
+	</li>
+
+	<li>
+	<p><a href="http://macintoshgarden.org/apps/broadcast-calendar-10"
+	>Broadcast Calendar</a> 1.0.1: <a href=
+	"http://macintoshgarden.org/sites/macintoshgarden.org/files/apps/Broadcast_Calendar_img.sit"
+	>http://macintoshgarden.org/sites/macintoshgarden.org/files/apps/Broadcast_Calendar_img.sit</a>
+	</p>
+	</li>
+	
+	</ol>
+	</li>
+	
+  </ul>
+
+
+
+  <h3>Endnotes</h3>
+
+  <div class="footnote">
+
+
+    <p>[<a name="fn.1" href="#id.1">1</a>] For other ways to extra a Mac OS
+    ROM, <em>see</em> SheepShaver v2.2 Installation and User's Guide (Linux),
+    <a href=
+    "http://www.open.ou.nl/hsp/Engels/SheepShaver_Help/rom_file_how_to.html">
+    <em>Rom File Extraction How-To</em></a>.
+    </p>
+
+    <p>[<a name="fn.2" href="#id.2">2</a>] Ronald P. Regensbrug,
+        <a href="http://www.emaculation.com/forum/viewtopic.php?f=20&amp;t=7360"
+        ><em>SheepShaver Builds for Mac OS X, Links and Downloads</em></a>,
+        <a href="http://www.emaculation.com/forum"
+        >E-Maculation Forums</a> (Nov. 17, 2011);
+        <em>see also</em> Matt Newburg, <a href="http://db.tidbits.com/article/10679"
+        ><em>SheepShaver Brings Classic Mac OS to Snow Leopard</em></a>,
+        <a href="http://tidbits.com/">TidBITS</a> (Oct. 23, 2009).
+    </p>
+
+    <p>[<a name="fn.3" href="#id.3">3</a>] Ronald P. Regensburg,
+        <a href="http://www.emaculation.com/doku.php/sheepshaver_mac_os_x_setup"
+        ><em>SheepShaver Setup Manual for Mac OS X</em></a>,
+        E-Maculation (Nov. 20, 2011).
+    </p>
+
+	<p>[<a name="fn.4" href="#id.4">4</a>] <em>See, e.g.</em>, Mark Wheadon,
+	<a href=
+	"http://www.markwheadon.com/blog/2009/06/backing-up-virtual-machine-using-sparse-bundle/"
+	><em>Efficient Backups: Storing VMs in a Sparse Bundle</em></a>,
+	<a href="http://www.markwheadon.com/blog/">Wheadon's Words</a>
+	(June 20, 2009).
+	</p>
+
+    <p>[<a name="fn.5" href="#id.5">5</a>] <em>See</em> Space Cadet,
+        <a href="http://www.emaculation.com/forum/viewtopic.php?t=5574"
+        ><em>Star Trek Judgment Rights CD</em></a>,
+        <a href="http://www.emaculation.com/forum"
+        >E-Maculation Forums</a>
+        (Oct. 15, 2007); Space Cadet, <a href=
+        "http://www.emaculation.com/forum/viewtopic.php?f=20&amp;t=6370"
+        ><em>Adjusting Processor Speed</em></a>, <a href=
+        "http://www.emaculation.com/forum">E-Maculation Forums</a>
+        (May 1, 2012).
+    </p>
+
+    <p>[<a name="fn.6" href="#id.6">6</a>] QuickTime 4.1.2 is the most recent
+       version of QuickTime that works under SheepShaver. <em>See</em> Peter
+       Holbrook, <a href=
+       "http://www.emaculation.com/forum/viewtopic.php?t=5219"
+       ><em>QuickTime</em></a>, <a href="http://www.emaculation.com/forum"
+    >E-Maculation Forums</a> (May 17, 2008).
+    </p>
+
+	<p>[<a name="fn.7" href="#id.7">7</a>] <em>See also</em> Ronald P.
+	 Regensburg, <a href=
+	 "http://www.emaculation.com/doku.php/sheepshaver_basilisk_printing"
+	 >Printing from SheepShaver and BasiliskII</a>, <a href=
+	 "http://www.emaculation.com/">E-Maculation</a> (Apr. 14, 2012).
+	</p>
+
+	<p>[<a name="fn.8" href="#id.8">8</a>] Other sources of MacOS
+	software and games include <a href="http://www.apple.com">Apple's</a>
+	<a href="http://www.info.apple.com/support/oldersoftwarelist.html"
+	>Older Software Downloads</a>, the <a href="http://macintoshgarden.org/"
+	>Macintosh Garden</a>, <a href="http://www.grenier-du-mac.net/"
+	>Le Grenier du Mac</a> (French), the <a href=
+	"http://archive.info-mac.org/">Info-Mac Archive</a>, <a href=
+	"http://www.mac.org/">mac.org</a>, <a href=
+	"http://main.system7today.com/index.html"
+	>System7 Today's</a> <a href=
+	"http://main.system7today.com/softwareindex/internet.html"
+	>Software</a> and <a href="http://main.system7today.com/gaming.html"
+	>Games</a> Guides,
+	<a href="http://applefritter.com/">AppleFritter's</a>
+	<a href= "http://applefritter.com/taxonomy/term/18?page=1">68K
+	Section</a>, the <a href="http://pcmuseum.ca/index.asp"
+	>Personal Computer Museum's</a> <a href=
+	"http://pcmuseum.ca/collections.asp?type=Software&amp;group=Macintosh"
+	>Mac Software Archive</a>, the <a href=
+	"https://sites.google.com/site/oldmacarchive/">Old Mac Archive</a>,
+	<a href="http://www.groomsville.co.uk/absmac/index.htm"
+	>Absolutely Mac's</a>
+	<a href="http://www.groomsville.co.uk/absmac/softframe.htm"
+	>Freeware Archive</a>,
+	<a href="http://www.giantmike.com/">Giant Mike's</a>
+        <a href="http://www.giantmike.com/old.html">Vintage Shareware
+        Collection</a>,
+	the <a href="http://www.gryphel.com/index.html">Gryphel Project's</a>
+	<a href="http://www.gryphel.com/c/sw/index.html">Software Archive</a>,
+	the <a href="http://www.umich.edu/">University of Michigan's</a>
+	<a href="http://www.umich.edu/~archive/mac/">Macintosh Software
+	Archive</a>,
+	the <a href="http://compmuseum.org/wiki/Main_Page"
+	>Highland Historic Computer Museum's</a> <a href=
+	"http://compmuseum.org/wiki/Category:Macintosh_disk_images">Macintosh Disk
+	Images</a> collection, 
+	Thomas Tempelmann's <a href="http://www.tempel.org/mac/">Macintosh Page</a>
+	and the <a href="http://www.macmothership.com/">Mac Mothership's</a>
+	<a href=
+	"http://www.macmothership.com/maccontent/app_mac.html">Applications</a>
+	and <a href=
+	"http://www.macmothership.com/maccontent/util_mac.html">Utilities</a>
+	 Centers.</p>
+
+    <p>[<a name="fn.9" href="#id.9">9</a>] <em>See</em> Space Cadet,
+    <a href="http://www.emaculation.com/forum/viewtopic.php?t=5028"
+    ><em>Multi Disc Games, DVDs, Initialize Disc Fix: TUTORIAL</em
+    ></a>, <a href="http://www.emaculation.com/forum"
+    >E-Maculation Forums</a> (Oct. 6, 2007).
+    </p>
+
+    <p>[<a name="fn.10" href="#id.10">10</a>] <em>See</em> Jim Witte,
+    <a href="http://www.emaculation.com/forum/viewtopic.php?t=7240"
+    ><em>Right Mousebutton in SheepShaver?</em></a>,
+    <a href="http://www.emaculation.com/forum"
+    >E-Maculation Forums</a> (Aug. 28, 2011).
+    </p>
+
+	<p>[<a name="fn.11" href="#id.11">11</a>] <em>See</em> Jim Witte,
+	<a href="http://www.emaculation.com/forum/viewtopic.php?t=7212"
+	><em>Way to Have Command-Tab Passed to SS?</em></a>,
+	<a href="http://www.emaculation.com/forum"
+    >E-Maculation Forums</a> (Aug. 2, 2011).
+	</p>
+
+	<p>[<a name="fn.12" href="#id.12">12</a>] <em>See</em> ResExcellence,
+	<a href="http://resexcellence.com/support_files/resedit.shtml"
+	><em>Download ResEdit</em></a>.  There is an unofficial version of
+	ResEdit 2.1.3 called SuperResEdit that incorporates many additional
+	features, including Forker.  <em>See</em>
+	<a href="http://macintoshgarden.org/">Macintosh Garden</a>,
+	<a href="http://macintoshgarden.org/apps/superresedit-213"
+	><em>SuperResEdit 2.1.3</em></a>.
+	</p>
+
+	<p>[<a name="fn.13" href="#id.13">13</a>] <em>See also</em> Brian Mason,
+	<a href="http://www.wap.org/journal/memmapper/memmaper.html"
+	><em>Memory Mapper 1.5 Reviewed</em></a>, <a href=
+	"http://www.wap.org/journal/">Washington Apple
+	Pi Journal</a> (March/April 2001).</p>
+
+</div>
+
+<hr />
+
+<p>
+<span class="c2">
+
+	<a href="../../index.html">Return to Sriranga's Homepage</a>&nbsp;/&nbsp;<a
+	   href="../index.html">Notes</a><br /><br />
+	   
+     Valid
+     XHTML [&nbsp;<a href="http://validator.w3.org/check/referer">W3C Validator</a>,
+     <a href="http://www.validome.org/referer">Validome</a>&nbsp;] and
+     <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>.
+</span>
+</p>
+
+</body>
+</html>
+

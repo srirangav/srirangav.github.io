@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../shared/copy.xsl"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8" />
+
+  <title>Extract Audio From a YouTube Video</title>
+  <link href="../shared/site.css" type="text/css"
+        rel="stylesheet" />
+</head>
+
+<body>
+  <h2 class="c1">Extract Audio From a YouTube Video</h2>
+
+<hr />
+
+  <p>The following steps can be used to extract the audio from a 
+  <a href="http://www.youtube.com">YouTube</a> video and convert 
+  it to a stereo MP3.</p>
+
+  <h3>Notes:</h3>
+
+  <ul>
+    <li>The steps assume that <a href="https://rg3.github.io/youtube-dl/"
+    >youtube-dl</a> and <a href="http://ffmpeg.org/">ffmpeg</a> are installed.  
+    For certain videos, youtube-dl may also need <a href=
+    "http://rtmpdump.mplayerhq.hu/">rtmpdump</a> to be installed.
+        On MacOSX, these programs are available from <a href="https://www.macports.org/"
+        >MacPorts</a>.
+    </li>
+
+    <li>Some of this information came from the following articles:
+        <p>Peter Leung, <a 
+        href="http://linuxcommando.blogspot.com/2013/09/extract-audio-track-from-youtube-video.html"
+        ><i>Extract Audio Track From A YouTube Video</i></a>, <a href=
+        "http://linuxcommando.blogspot.com/">Linux Commando</a>
+        (Sept. 26, 2013).<br />
+        Howard Pritchett, <a href="http://howto-pages.org/ffmpeg/"
+        ><i>Using ffmpeg to manipulate audio and video files</i></a>, 
+        <a href="http://howto-pages.org/">LINUX "howto" Pages</a>
+        (Feb. 1, 2012).<br />
+        Ricardo Garcia Gonzalez, <a href=
+        "https://rg3.github.io/youtube-dl/documentation.html"
+        >youtube-dl Documentation</a> (2014).<br />
+        <a href="https://askubuntu.com/">Ask Ubuntu</a>, <a href=
+        "https://askubuntu.com/questions/634584/how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl"
+        ><i>How to download youtube videos as a best quality audio mp3 using youtube-dl 
+        [duplicate]</i></a> (2015).
+        </p>
+    </li>
+  </ul>
+  <h3>Method 1:</h3>
+
+  <ol>
+
+    <li>Using youtube-dl, download the audio track in wav (uncompressed) format:
+    <p><code>$ youtube-dl --extract-audio --audio-format wav -o [OUTPUT].wav 
+    '[URL]'</code></p>
+    <p>Here <code>[OUTPUT].wav</code> is the name of the file that youtube-dl 
+    should save the audio to and <code>[URL]</code> is the URL of the video 
+    whose audio youtube-dl should extract.</p>
+    </li>
+
+    <li>After youtube-dl finishes downloading the audio track, 
+    convert the wav file to an MP3 using ffmpeg:
+    <p><code>$ ffmpeg -i [OUTPUT].wav -acodec mp3 -ab 256k 
+    -ac 2 [OUTPUT].mp3</code></p>
+	<p>Here the option <code>-acodec mp3</code> tells ffmpeg to convert the 
+	wav audio to an mp3 (other audio formats are also available), the option 
+	<code>-ab 256k</code> tells ffmpeg that the mp3 should be a 256k (high quality
+	, lower numbers can be used for lower quality)
+	mp3, and the option <code>-ac 2</code> tells ffmpeg that the mp3 should be in
+	stereo.</p>
+    </li>
+  </ol>
+
+	<h3>Method 2:</h3>
+	
+	<blockquote>
+	Tell youtube-dl to download the audio track and covert it to an mp3:
+    <p><code>$ youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 
+    -o [OUTPUT].mp3 '[URL]'</code></p>
+    <p>Here <code>[OUTPUT].mp3</code> is the name of the file that youtube-dl 
+    should save the audio to and <code>[URL]</code> is the URL of the video 
+    whose audio youtube-dl should extract.</p>
+	</blockquote>
+	
+    <hr />
+
+    <p>
+    <span class="c2">
+    Valid
+    <a href="http://validator.w3.org/check/referer">XHTML</a> and
+    <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
+
+    &nbsp;//&nbsp;
+
+    <!-- Creative Commons License -->
+    Licensed under a
+    <a rel="license" href=
+    "http://creativecommons.org/licenses/by/2.5/">Creative Commons
+    Attribution 2.5 License</a>
+    <!-- /Creative Commons License -->
+
+    </span>
+    </p>
+
+</body>
+</html>
