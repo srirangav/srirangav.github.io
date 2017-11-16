@@ -1,0 +1,83 @@
+##############################################################
+TESTCASE for Project 3: Virtual Memory
+CS140 Winter 1999
+8 March 1998
+
+Sriranga Veeraraghavan <srv@cisco.com> <r1sh11@leland.stanford.edu>
+Vaibhav Natu <vnatu@cisco.com> <vnatu1@leland.stanford.edu>
+##############################################################
+
+To build and test this assignement:
+
+cd <root dir of nachos sources>;
+gmake clean;
+cd userprog;
+gmake depend && gmake sun;
+cd ../test;
+gmake sun;
+cp ../userprog/SUN/nachos ./SUN;
+cd ./SUN;
+./nachos
+
+PROBLEM 1: Implement TLB
+
+To test the TLB compile nachos and copy the nachos executable into the
+directory:
+
+./test/SUN
+
+This assumes that you are in the root directory for the nachos
+sources. Then run nachos as follows:
+
+./test/nachos
+
+This will launch the shell program.  In the shell run the command:
+
+./filetest
+
+This is simple program that creates a file "/tmp/vvn" and write some
+data to it before closing. After that it reads this file and writes
+some characters from this file to a new file "/tmp/vvn.out". This
+program attempts to demonstrate that program execution, syscalls, &
+file operations work well with our implementation of TLB.  You can
+similarly execute other programs.
+
+Known Bugs:
+
+1. If the nachos executable is not located at test/nachos, it will
+   fail to find the shell executable. We assume that the shell
+   executable is stored in the same directory as nachos (./shell).
+
+2. When you run a program in the shell, the first time, the name of
+   the program is not read in correctly. Consequently, the program is
+   not run. However, if run the same program again, it will work
+   well. Any other program should also run fine.
+
+PROBLEM 2 & 3
+
+The test program for problems 2 and 3 is called cntln. It implements
+the wc -l functionality.
+
+To run cntln, in the nachos shell type the following:
+
+./cntln
+
+It will return output similar to the following:
+
+1386    /afs/ir/users/r/1/r1sh11/cs140/hw3/foo.txt
+
+In order to test other files, please modify line (7) in the cntln
+program:
+
+char *file1 = "/afs/ir/users/r/1/r1sh11/cs140/hw3/foo.txt";
+
+It is currently not possible to execute the program with arguments,
+due to problems with our exec implementation.
+
+This program opens a large file, mmaps the file into memory, and then
+walks through the virtual address space looking for the '\n'
+character. After it finishes scanning the file, it prints out the
+result to the screen and unmmap's the file.
+
+Since the file is much larger (~85K) this program exercizes our
+virtual memory functionality.

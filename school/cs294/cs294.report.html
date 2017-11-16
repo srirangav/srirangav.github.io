@@ -1,0 +1,378 @@
+<HTML>
+<HEAD>
+<TITLE>Sriranga's Homepage:School:CS294 Project</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" VLINK="#FF0000">
+<P><CENTER><B><FONT SIZE=+2>A Fuzzy Logic Water Temperature and Flow Controller</FONT SIZE></B></P>
+<P>By:
+Sriranga Veeraraghavan (SID 1215-9973)<BR>
+<P>CS294-2 Fuzzy Logic, Neural Networks and Soft Computing<BR>
+<a href="http://http.cs.berkeley.edu/People/Faculty/Homepages/zadeh.html">Prof Lotfi A. Zadeh</a>
+<BR>SP 97<BR>
+19 May 97</P>
+
+<P><B><A NAME="Abstract">Abstract</A>:</B><P></CENTER>
+This is an implementation of a water temperature and flow controller for use in shower and
+sinks.  The domain of facts considered are flow and temperature and the domain of actions that
+corresponds to these are control actions to achieve a given goal.  A rule base is formed using
+these facts and control actions.  This rule base is evaluated using the actual fuzzified goal
+computed with the existing conditions.  Applicable rules are filed and a conclusion is drawn. 
+The max-prod method is used to scale the conclusion and the mean of maxima method is used
+for defuzzification.  The fuzzy system is able to achieve a specified temperature and flow in
+most cases.<HR>
+
+<P><B><A NAME="Introduction">1.0 Introduction</A></B></P>
+<P>In the real world much of the knowledge is "fuzzy knowledge".  Human thinking and reasoning
+frequently involves processing this fuzzy knowledge and formulating responses.  When the
+boundary of a piece of information is not clear cut, the result is fuzzy knowledge.  For example,
+consider the concept of hot vs the concept of cold.  There is no temperature at which something
+goes from being cold to being hot.  To some people hot is about 65 F, to others it is cold. 
+Clearly, if the temperature is about 32 F it is cold, and if it is 100 F it is hot.  It is easy to
+distinguish these to regimes at the extremes, but values in between them have some potential
+of being both hot and cold, depending on the context.<P>
+
+This kind of information cannot be represented by classical set theory, because it only deals
+with objects whose membership to a set can be clearly defined.  It needs to be represented
+using the concept of fuzzy set theory, in which the membership of an element to a set can be
+partial.  The level to which an object belongs to a fuzzy set is called grade of membership of
+that element in that fuzzy set.  Formally, a fuzzy set A in a universe of discourse U is
+characterized by a membership function <A HREF="cs294.report.html#endnote1">[1]</A>:<P>
+
+<CENTER>&#181;A : U --> [0,1]<P></CENTER>
+
+which associates with each element x of U a number &#181;A(x) in the interval [0,1] which
+represents the grade of membership of x in the fuzzy set A.  Sometimes fuzzy sets are
+referred to as fuzzy terms.<P>
+
+Several fuzzy terms are associated with a fuzzy variable.  These fuzzy terms defines the set
+of values that a fuzzy variables may take.  For example, this project uses the fuzzy terms
+{cold,warm,hot} to describe water temperature.  Each of these terms represents a specific
+fuzzy set.<P>
+
+Sometimes fuzzy sets which are dealt with are classified as "increasing", "decreasing" and
+"approximating" <A HREF="cs294.report.html#endnote2">[2]</A>.  In this project an increasing 
+fuzzy set (function) is used to represent the concept of hot on the domain of temperature, 
+while a decreasing fuzzy set is used to represent the concept of cold.  An approximating 
+fuzzy set is used to describe warm temperatures.<P>
+
+Fuzzy control also uses linguistic notions that are meaning-independent of the particular
+physical domain.  The most common domain in fuzzy control consists of seven elements, which
+have domain names like "Positive Big" (PB), "Positive Medium" (PM), "Positive Small" (PS),
+"Zero" (ZR), "Negative Small" (NS), "Negative Medium" (NM) and "Negative Big" (NB).  The
+domain used to describe these is usually between [-6,6], which is called the "Standard"
+domain.  Sometimes the domain [-1,1] is used, in which case the domain is called "Normal" 
+<A HREF="cs294.report.html#endnote3">[3]</A>.<P>
+
+<B><A NAME="FuzzyFunctions">1.1 Fuzzy Functions</A></B><P>
+The fuzzy functions that are implemented in this project for describing the physical
+temperature domain are the "S", the "Z" and the "PI" functions.  Mathematically these are
+defined as:<P>
+
+<CENTER><TABLE>
+<TR VALIGN=TOP>
+	<TD>S function:</TD>
+	<TD>S(u,a,c) = 0,<i> u < a</i><BR>
+		S(u,a,c) = 2[(u-a)/(c-a)]**2, <i>a < u < (a+c)/2</i><BR>
+		S(u,a,c) = 1 - 2[(u-c)/(c-a)]**2, <i>(a+c)/2 < u < c</i><BR>
+		S(u,a,c) = 1, <i>u > c</i></TD>
+</TR>
+<TR><TD>Z function:</TD><TD>Z(u,a,c) = 1 - S(u,a,c)</TD></TR>
+<TR VALIGN=TOP>
+	<TD>PI function:</TD>
+	<TD>PI(u,a,c) = S(u,a,(a+c)/2), <i>u > (a+c)/2</i><BR>
+		PI(u,a,c) = Z(u,(a+c)/2,c), <i>(a+c)/2 < u</i></TD>
+</TR>
+</TABLE></CENTER><P>
+
+where f(u,a,c) corresponds to the grade of membership of u in the set f, with limits a and c,
+where a < c.<P>
+For the linguistic actions independent of physical domain the fuzzy functions "Gamma", "L"
+and "A" were implemented.  Mathematically these are:<P>
+
+<CENTER><TABLE>
+<TR VALIGN=TOP>
+	<TD>Gamma function:</TD>
+	<TD>Gamma(u,a,c) = 0, <i>u < a</i><BR>
+		Gamma(u,a,c) = (u-a)/(c-a), <i>a < u < c</i><BR>
+		Gamma(u,a,c) = 1, <i>u > c</i></TD>
+</TR>
+<TR><TD>L function:</TD><TD>1 - Gamma(u,a,c)</TD></TR>
+<TR VALIGN=TOP>
+	<TD>A function:</TD><TD>A(u,a,b,c) = 0, <i>u < a</i><BR>
+		A(u,a,b,c) = (u-a)/(b-a), <i>a < u < b</i><BR>
+		A(u,a,b,c) = (c-u)/(c-b), <i>b < u < c</i><BR>
+		A(u,a,b,c) = 0, <i>u > c</i></TD>
+</TR>
+</TABLE></CENTER><P>
+
+where f(u,a,c) corresponds to the grade of membership of u in the set f, with limits a and c,
+where a < c and a < b < c.<P>
+
+<P><B><A NAME="InferenceTechniques">1.2 Inference Techniques</A></B><P>
+A common use of linguistic variables is in fuzzy rules of the form,<P>
+<P><PRE><FONT FACE="TIMES">	if A then C</FONT FACE></PRE>
+<P><PRE><FONT FACE="TIMES">	if A and B then C</FONT FACE></PRE><P>
+The first form is called a simple rule since it has only one antecedent and only one consequent. 
+The second form is a "complex" rule and has multiple antecedents.  The second form also uses
+the "and" operation.  Complex rules can employ other operation, such as "or", but the rules in
+this projects' rule base use only the "and" operation, which gives the intersection of sets A
+and B (implemented as min).<P>
+To evaluate if a rule is true to some degree, the intersection between fact and the antecedent is
+found.  If we call this value z, the conclusion set can either be clipped of at z (max-min) or have
+its membership values scaled by z (max-prod).  This project implements max-prod.<P>
+When multiple rules are given together, they form a rule base.  The size of this rule base
+depends on the number of fuzzy variables and comparisons that must be made between them. 
+This project has two fuzzy variables consisting of three fuzzy sets each, and thus requires 8
+control rules.<P>
+The process of fuzzy inference is to evaluate each rule in the rule base and determine the level
+to which it is applicable.  The outcome of the fuzzy inference process is a fuzzy set, specifying
+the fuzzy distribution of a conclusion.<P>
+
+<B><A NAME="Defuzzification">1.3 Defuzzification</A></B><P>
+In control applications, only a single discrete action may be taken, so a single point that
+reflects the best value of the set needs to be selected.  This process of reducing a fuzzy set to
+a single point is know as defuzzification.<P>
+The two most common ways of defuzzifying a fuzzy set are center of gravity (cog) and mean of
+maxima (mom).  The center of gravity method tries to find the center of gravity of the entire
+fuzzy set and produces smoothly varying control output.  The mean of maxima method
+concentrates on the values where distribution reaches a maximum and produces less smooth
+control output, but is much faster since it is based on compares rather than calculations.  The
+mean of maxima method of defuzzification was chosen for this project.<P>
+The mean of maxima method returns the x coordinate at which the maximum membership value
+of the set is reached.  If the maximum membership occurs at more than one x coordinate, the
+average of these x positions is returned.  This method can be given formally as:<P>
+
+<CENTER><TABLE><TR><TD>x' =</TD><TD><IMG SRC=sum.bw.gif ALT="SUM (j=1,J)"></TD><TD> x''j/J</TD>
+</TR></TABLE></CENTER>
+
+<P>where x''j are x coordinates of all the maxima and J is the total number of maxima.
+
+<P><B><A NAME="Problem">2.0 Problem Statement</A></B><P>
+The goal of this project was to build a fuzzy logic water temperature and flow controller which
+could be used in showers and sinks to maintain a "warm" water temperature with "normal"
+flow.  This kind of control application lends itself to fuzzy reasoning, since the goals are fuzzy;
+there is no exact definition of where warm temperatures and normal flows begin and end.  Thus
+the control actions taken to achieve this condition also fuzzy.<P>
+The physical situation can be described as follows:<P>
+<UL>
+<LI>The water is drawn from two sources, hot and cold inlet pipes.
+<LI>The amount of water (flow) is controlled by the hot and cold valves.
+<LI>The hot and cold water mix at the facet or shower head.
+The following assumptions are made:
+<LI>The total flow out of the facet or shower head is equal to the flow of the cold
+water plus the flow of the hot water.
+<LI>Any change in the valve position immediately affects the flow.
+<LI>The cold and hot water mix perfectly
+<LI>The inlet temperatures/pressures are constant
+<LI>Setting the valves to high positions (mostly open) will have less of an effect
+than setting the valve to lower positions due to the effect of pressures
+(reflected by a scaling factor).
+</UL>
+The following equations govern the system:<P>
+<CENTER><TABLE>
+<TR VALIGN=TOP>
+	<TD>Fc = VcPc </TD>
+	<TD>Fc = Cold Flow<BR>
+		Vc = Cold Valve Position<BR>
+		Pc = Cold Inlet Pressure</TD>
+</TR>
+<TR VALIGN=TOP>
+	<TD>Fh = VhPh </TD>
+	<TD>Fh = Hot Flow<BR>
+		Vh = Hot Valve Position<BR>
+		Ph = Hot Inlet Pressure</TD>
+</TR>
+<TR VALIGN=TOP>
+	<TD>FTotal = Fc + Fh</TD>
+	<TD>FTotal = Total Flow</TD>
+</TR>
+<TR VALIGN=TOP>
+	<TD>TTotal = (TcFc + ThFh)/FTotal </TD>
+	<TD>TTotal = Total Temperature<BR> 
+		Tc = Cold InletTemperature<BR>
+		Th = Hot Inlet Temperature</TD>
+</TR>
+</TABLE></CENTER><P>
+where the valve positions (Vc and Vh) are in the domain [0,1].
+<P>Graphically the situation can be thought of as:
+<P><CENTER><IMG SRC=shower.bw.gif ALT="shower"></CENTER>
+
+<B><P><A NAME="Variables">2.1 Linguistic Variables Employed</A></B><P>
+Linguistic Variables were created to describe the concept of output Temperature and output
+Flow.  These were called outTemp and outFlow.  Also, two linguistic variables corresponding to
+the control actions for the hot and cold valve created.  These were called hot_valve_control
+and cold_valve_control.<P>
+
+The output Temperature fuzzy variable, outTemp, was described by three fuzzy sets
+corresponding to the notions of cold, warm and hot.  The output Flow fuzzy variable, outFlow
+was described by three fuzzy sets corresponding to the concepts of low, normal and strong 
+<A HREF="cs294.report.html#endnote4">[4]</A>.<P>
+
+The fuzzy variables, outTemp and outFlow, can take either symmetric or asymmetric forms
+ <A HREF="cs294.report.html#endnote5">[5]</A>, generic constructors provide this functionality.  
+The symmetric forms are:<P>
+
+<CENTER><TABLE>
+<TR><TD><IMG SRC=outTemp.bw.gif ALT="outTemp"></TD></TR>
+<TR><TD><IMG SRC=outFlow.bw.gif ALT="outFlow"></TD></TR>
+</TABLE></CENTER><P>
+
+The linguistic variables representing the valve control actions have been implemented in both
+the normal [-1,1] and standard domains [-6,6].  The fuzzy function "L" was used to describe a
+NB motion, the fuzzy function "Gamma" was used to describe a PB motion, while all other
+motions were described by the fuzzy function "A".  In the standard domain the valve control
+fuzzy variable looks like:<P>
+<CENTER><IMG SRC=valveControl.bw.gif ALT="valveControl"></CENTER>
+
+<B><A NAME="RuleBase">2.2 Rule Base</A></B><P>
+Eight fuzzy if-then rules are used in the rule base to determine the control action depending on
+the current temperature and flow.  These rules are:<P>
+<OL>
+<LI>If temperature is <U>cold</U> and <U>flow</U> is low <BR>then
+move hotvalve <U>PB</U> and coldvalve <U>PS</U><P>
+<LI>If temperature is <U>cold</U> and flow is <U>normal</U> <BR>then
+move hotvalve <U>PM</U> and coldvalve <U>ZR</U><P>
+<LI>If temperature is <U>cold</U> and flow is <U>strong</U> <BR>then
+move hotvalve <U>PM</U> and coldvalve <U>NB<BR>
+</U><BR>
+<LI>If temperature is <U>warm</U> and flow is <U>low</U> <BR>then
+move hotvalve <U>PS</U> and coldvalve <U>ZR<BR>
+</U><BR>
+<LI>If temperature is <U>warm</U> and flow is <U>strong</U> <BR>then
+move hotvalve <U>NM</U> and coldvalve <U>NS</U><P>
+<LI>If temperature is <U>hot</U> and flow is <U>low</U> <BR>then
+move hotvalve <U>NM</U> and coldvalve <U>PS</U><P>
+<LI>If temperature is <U>hot</U> and flow is <U>normal</U> <BR>then
+move hotvalve <U>NB</U> and coldvalve <U>PS</U><P>
+<LI>If temperature is <U>hot</U> and flow is <U>strong</U> <BR>then
+move hotvalve <U>NB</U> and coldvalve <U>NM</U><P>
+</OL>
+
+<B><A NAME="Implementation">2.3 Other Implementation Details</A></B><P>
+The fuzzy water temperature and flow controller was implemented using the Java language. 
+Java allowed for the greatest flexibility in program design and portability.<P>
+
+First of all, java is object oriented, allowing for each part of the program to be treated as a
+object with certain attributes or characteristics.  This is a intuitive way of thinking about
+fuzzy variables.  For example, the fuzzy variable outTemp has the characteristics cold, warm
+and hot (see file <A HREF="outTemp.java" TARGET=mainframe>outTemp.java</A>).  The object oriented 
+nature also allows for these attributes to be changed easily.  For example, if the description of 
+warm needed to be changed from a "PI" function to "A" function, a simple declaration change will 
+achieve the effect.<P>
+
+Second, java has a clear inheritance structure, which made writing descriptions of fuzzy
+functions simple.  Each fuzzy function was subclassed from a generic description of all possible
+fuzzy functions (see file 
+<A HREF="genericFuzzyFunction.java" TARGET=mainframe>genericFuzzyFunction.java</A>) 
+allowing all rule references and related calculations to be written in general 
+(see file <A HREF="ruleBase.java" TARGET=mainframe>ruleBase.java</A>).  Thus changing 
+fuzzy functions description would not change the method for calculating min-max, max-prod, etc.<P>
+
+Third, java has a straight forward package system, which allowed different parts of the
+project to be grouped together.  For example, all fuzzy function were placed in the package
+cs294pkg.fuzzyfunctions, while all fuzzy variables were placed in the package
+cs294.fuzzyvars.<P>
+
+Fourth, java supports native GUI methods, which made it easy to provide a gui interface for
+testing the system.<P>
+
+Finally, JDK 1.0.2 is available for free from java.sun.com, and it provided a consistent
+development environment on my Macintosh at home and the Unix platforms at school.<P>
+
+<B><A NAME="Results">3.0 Results and Conclusions</A></B><P>
+The system was tested in several conditions.  Two goal temperatures and flows were tested
+for.  These were 30 C and 12 liters/min and 36 C and 15 liters/min.  The tests were conducted
+for both simple delta and simple position.  Simple delta meant that the defuzzified control action
+was interpreted as a delta position to move to from the current valve position, while simple
+position meant that the defuzzified control action was interpreted as the position to move the
+valve to.  The tests were conducted from initial off, both valves half way open and both valves
+fully open.  The number of iterations that the system required to achieve the goal temperature,
+thus lower numbers are better.<P>
+
+<CENTER>
+<TABLE>
+<TR>
+	<TD ALIGN=CENTER><i>Both Valves<BR>Off</i></TD>
+	<TD ALIGN=CENTER><b>Iterations to achieve<BR>30 C & 12 l/min</b></TD>
+	<TD ALIGN=CENTER><b>Iterations to achieve<BR>36 C & 15 l/min</b></TD>
+</TR>
+<TR><TD>Simple Delta</TD><TD ALIGN=RIGHT>Infinity</TD><TD ALIGN=RIGHT>2</TD></TR>
+<TR><TD>Simple Position</TD><TD ALIGN=RIGHT>13</TD><TD ALIGN=RIGHT>3</TD></TR>
+</TABLE>
+<P>
+<TABLE>
+<TR>
+	<TD ALIGN=CENTER><i>Both Valves<BR>Half Open</i></TD>
+	<TD ALIGN=CENTER><b>Iterations to achieve<BR>30 C & 12 l/min</b></TD>
+	<TD ALIGN=CENTER><b>Iterations to achieve<BR>36 C & 15 l/min</b></TD>
+</TR>
+<TR><TD>Simple Delta</TD><TD ALIGN=RIGHT>16</TD><TD ALIGN=RIGHT>1</TD></TR>
+<TR><TD>Simple Position</TD><TD ALIGN=RIGHT>1</TD><TD ALIGN=RIGHT>2</TD></TR>
+</TABLE>
+<P>
+<TABLE>
+<TR>
+	<TD ALIGN=CENTER><i>Both Valves<BR>Fully Open</i></TD>
+	<TD ALIGN=CENTER><b>Iterations to achieve<BR>30 C & 12 l/min</b></TD>
+	<TD ALIGN=CENTER><b>Iterations to achieve<BR>36 C & 15 l/min</b></TD>
+</TR>
+<TR><TD>Simple Delta</TD><TD ALIGN=RIGHT>12</TD><TD ALIGN=RIGHT>1</TD></TR>
+<TR><TD>Simple Position</TD><TD ALIGN=RIGHT>Infinity</TD><TD ALIGN=RIGHT>5</TD></TR>
+</TABLE>
+</CENTER><P>
+Graphing these results,<P>
+
+<CENTER><IMG SRC=results.bw.gif ALT="Results"></CENTER><P>
+
+This leads to the conclusion that fuzzy control is effective in most cases involving the simple
+delta interpretation for the defuzzified control output.  On average the system required 2.3
+iterations to achieve control in the simple delta interpretation, whereas the system required an
+average of 10.5 iterations in the simple position interpretation.<P>
+
+<B><A NAME="FutureWork">3.1 Future Work</A></B><P>
+There are several improvements to this system that can be made.  First of all the fuzzy
+variable for temperature could be extended to include the concepts of cold, cool, comfortable,
+warm and hot, while the fuzzy variable for flow could be extended to include the concepts of
+weak, low, normal, powerful and strong.  Increasing the granularity of the fuzzy variables
+corresponding to temperature and flow will result in more rules and in greater precision in
+formulating control responses.<P>
+Second, the defuzzification method could be changed to the center of gravity method from the
+mean of maxima method.  This will allow for smoothly varying control output and will possible
+avoid the problems of control loss where the controller flips between too high and too low
+setting.  Implementing the center of gravity method would also require a generic trapezoidal
+fuzzy function to be implemented.<P>
+Third, many more test cases could be run, including test cases for:<P>
+<UL>
+<LI>Cold Valve off, Hot Valve partially open<BR>
+<LI>Cold Valve off, Hot valve fully open<BR>
+<LI>Cold Valve partially open, Hot Valve off<BR>
+<LI>Cold Valve partially open, Hot Valve fully open<BR>
+<LI>Cold Valve fully open, Hot Valve Off<BR>
+<LI>Cold Valve fully open, Hot Valve partially open<P>
+</UL>
+Running these tests will allow for a better understanding in which situation fuzzy control is
+effective, and in which situations improvements can be made.<P>
+
+<B><A NAME="Endnotes">4.0 Endnotes</A></B><P>
+<OL>
+<A NAME="endnote1"><LI></A>From W. Pedrycz and F. Gomida 1997 pg 23<BR>
+<A NAME="endnote2"><LI></A>From Driankov, Hellendoorn, Reinfrank pg 95<BR>
+<A NAME="endnote3"><LI></A>From Driankov, Hellendoorn, Reinfrank pg 96-97<BR>
+<A NAME="endnote4"><LI></A>The "Z" fuzzy function was used to describe cold temperatures and low 
+	pressures, the "PI" fuzzy function was used to describe warm temperatures and normal 
+	pressures, and the "S" fuzzy functions was used to describe hot temperatures and strong 
+	flow.<BR>
+<A NAME="endnote5"><LI></A>The asymmetric forms were used for early testing, and are retained 
+	since they only constitute 2 extra lines of code.<BR>
+</OL>
+<P>
+ 
+<B><A NAME="References">4.1 References</A></B><P>
+Pedrycz, W. and Gomida, F. <U>Introduction to Fuzzy Sets</U>. MIT Press 1997.<P>
+Drainkov, D., Hellendoorn, H. and Reinfrank, M. <U>An Introduction to Fuzzy Control</U>. Springer Verlag 1993.<P>
+Zadeh, L. <U>Fuzzy Logic and the Calculi of Fuzzy Rules and Fuzzy Graphs</U>. International Journal of Multiple-Valued Logic, 1, 1-39, 1996.<P>
+
+</BODY>
+</HTML>
+
+

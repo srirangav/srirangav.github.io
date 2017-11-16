@@ -1,0 +1,125 @@
+##############################################################
+TESTCASE for Project 4: File Systems
+CS140 Winter 1999
+12 March 1998
+
+Sriranga Veeraraghavan <srv@cisco.com> <r1sh11@leland.stanford.edu>
+Vaibhav Natu <vnatu@cisco.com> <vnatu1@leland.stanford.edu>
+##############################################################
+
+/*
+ * Formatting File System
+ */
+
+myth10:~/cs140/hw4/LATEST/test> ./nachos -f
+using 64 disk cache buffers
+Formatting file system
+initializing bitmap...
+async I/O daemon started
+Creating root directory... Done.
+Creating /swapdir directory... Done.
+Creating /bin directory... Done.
+Creating /usr directory... Done.
+Creating /usr/bin directory... Done.
+Creating /var directory... Done.
+Creating /var/tmp directory... Done.
+Loading user programs into file system...
+Loading /bin/shell... Done.
+Loading /bin/exit... Done.
+Loading /bin/halt... Done.
+Loading /bin/ls... Done.
+Loading /usr/bin/filetest... Done.
+Loading /usr/bin/cntln... Done.
+Loading /usr/bin/vmtest... Done.
+syncing files,bitmap,buffers
+File System: 3811 blocks avail (93%), 285 blocks used (6%)
+No threads ready or runnable, and no pending interrupts.
+Assuming the program completed.
+Machine halting!
+
+Ticks: total 645050, idle 562440, system 82610, user 0
+Disk I/O: reads 15, writes 52
+Console I/O: reads 0, writes 0
+Paging: faults 0
+Network I/O: packets received 0, sent 0
+syncing files,Segmentation fault
+
+/*
+Extensible files & hierarchical directories
+*/
+
+We were able to create more that 10 directories under /var/tmp
+directory:
+
+--  cd /var/tmp
+chDir /var/tmp: directory changed to #408
+--   ls
+  408          .  d      72 bytes,    1 blocks
+ 406         ..  d      72 bytes,    1 blocks
+ 447    foo.txt  r   85422 bytes,  340 blocks
+--   mkdir 1
+ --   mkdir 2
+ --   mkdir 3
+ --   mkdir 4
+ --   mkdir 5
+ --   mkdir 6
+ --   mkdir 7
+ --   mkdir 8
+ --   mkdir 9 
+ --   mkdir 10
+ --   mkdir 11
+ --   mkdir 12
+ --   cd 12
+ ChDir 12: directory changed to #812
+--   mkdir 1 
+ --   mkdir 2
+ --  cd ..
+ ChDir ..: directory changed to #408
+--   ls
+  408          .  d     360 bytes,    2 blocks
+ 406         ..  d      72 bytes,    1 blocks
+ 447    foo.txt  r   85422 bytes,  340 blocks
+ 789          1  d      48 bytes,    1 blocks
+      789          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 791          2  d      48 bytes,    1 blocks
+      791          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 793          3  d      48 bytes,    1 blocks
+      793          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 795          4  d      48 bytes,    1 blocks
+      795          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 797          5  d      48 bytes,    1 blocks
+      797          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 799          6  d      48 bytes,    1 blocks
+      799          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 801          7  d      48 bytes,    1 blocks
+      801          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 803          8  d      48 bytes,    1 blocks
+      803          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 806          9  d      48 bytes,    1 blocks
+      806          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 808         10  d      48 bytes,    1 blocks
+      808          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 810         11  d      48 bytes,    1 blocks
+      810          .  d      48 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+ 812         12  d      96 bytes,    1 blocks
+      812          .  d      96 bytes,    1 blocks
+      408         ..  d     360 bytes,    2 blocks
+      814         1   d      48 bytes,    1 blocks
+           814          .  d      48 bytes,    1 blocks
+           812         ..  d      96 bytes,    1 blocks
+      816          2  d      48 bytes,    1 blocks
+           816          .  d      48 bytes,    1 blocks
+           812         ..  d      96 bytes,    1 blocks
+-- 
+

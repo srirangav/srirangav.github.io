@@ -1,0 +1,321 @@
+$Id: hw2.patch 1023 2008-11-28 07:31:02Z ranga $
+
+CS244B HW#2 Squid Prefetch Extension Patch
+
+diff -cr src.orig/HttpHdrCc.c src/HttpHdrCc.c
+*** src.orig/HttpHdrCc.c	Sun Apr 29 20:09:36 2001
+--- src/HttpHdrCc.c	Wed May  2 01:23:05 2001
+***************
+*** 49,54 ****
+--- 49,56 ----
+      {"max-age", CC_MAX_AGE},
+      {"s-maxage", CC_S_MAXAGE},
+      {"max-stale", CC_MAX_STALE},
++     {"prefetch", CC_PREFETCH},
++     {"eject", CC_EJECT},
+      {"Other,", CC_OTHER}	/* ',' will protect from matches */
+  };
+  HttpHeaderFieldInfo *CcFieldsInfo = NULL;
+***************
+*** 79,84 ****
+--- 81,89 ----
+  {
+      HttpHdrCc *cc = memAllocate(MEM_HTTP_HDR_CC);
+      cc->max_age = cc->s_maxage = cc->max_stale = -1;
++     cc->prefetch = 0;
++     cc->eject = 0;
++     cc->url = StringNull;
+      return cc;
+  }
+  
+***************
+*** 101,108 ****
+--- 106,116 ----
+      const char *item;
+      const char *p;		/* '=' parameter */
+      const char *pos = NULL;
++     char q[4096];
+      int type;
+      int ilen;
++     int plen;
++     request_t * req;
+      assert(cc && str);
+  
+      /* iterate through comma separated list */
+***************
+*** 147,152 ****
+--- 155,178 ----
+  		cc->max_stale = -1;
+  	    }
+  	    break;
++ 	case CC_EJECT:
++ 	    cc->eject = 1;
++ 	    break;
++         case CC_PREFETCH:
++ 	    cc->prefetch = 1;
++ 	    if (!p) break;
++ 	    plen = strlen(p);
++ 	    if (plen <= 0 || plen > 4096) break;
++ 	    while (p && plen > 0 && (p[0] == '"' || p[0] == ' ')) { p++; plen--; }
++ 	    while (p && plen > 0 && (p[plen-1] == '"' || p[plen-1] == ' ')) plen--;
++ 	    if (plen <= 0) break;
++ 	    strncpy(q,p,plen);
++ 	    q[plen] = '\0';
++ 	    if ((req = urlParse(METHOD_GET,q)) != NULL) {
++ 	      stringInit(&cc->url,urlCanonical(req));
++ 	      requestDestroy(req);
++ 	    }
++             break;
+  	default:
+  	    /* note that we ignore most of '=' specs */
+  	    break;
+diff -cr src.orig/Makefile src/Makefile
+*** src.orig/Makefile	Sun Apr 29 20:09:37 2001
+--- src/Makefile	Wed May  2 01:19:14 2001
+***************
+*** 404,410 ****
+  	fi
+  
+  clean: 
+! 	-rm -rf *.o *pure_* core $(PROGS) $(UTILS) $(CGIPROGS) $(SUID_UTILS)
+  	-rm -f cf_gen cf_gen_defines.h cf_parser.c cf.data globals.c string_arrays.c
+  	-rm -f store_modules.c repl_modules.c squid.conf
+  	@for dir in $(SUBDIRS); do \
+--- 404,410 ----
+  	fi
+  
+  clean: 
+! 	-rm -rf *.o *~ *pure_* core $(PROGS) $(UTILS) $(CGIPROGS) $(SUID_UTILS)
+  	-rm -f cf_gen cf_gen_defines.h cf_parser.c cf.data globals.c string_arrays.c
+  	-rm -f store_modules.c repl_modules.c squid.conf
+  	@for dir in $(SUBDIRS); do \
+diff -cr src.orig/client_side.c src/client_side.c
+*** src.orig/client_side.c	Sun Apr 29 20:09:36 2001
+--- src/client_side.c	Wed May  2 01:46:22 2001
+***************
+*** 117,122 ****
+--- 117,139 ----
+  static int clientReplyBodyTooLarge(int clen);
+  static int clientRequestBodyTooLarge(int clen);
+  
++ int 
++ prefetchP(request_t * r) {
++   return (r && r->cache_control && r->cache_control->prefetch);
++ }
++ 
++ int
++ prefetch_asP(request_t * r) {
++   if (prefetchP(r)) 
++     return ((&r->cache_control->url)->buf != NULL);
++   return 0;
++ }
++ 
++ int 
++ ejectP(request_t * r) {
++   return (r && r->cache_control && r->cache_control->eject);
++ }
++ 
+  static int
+  checkAccelOnly(clientHttpRequest * http)
+  {
+***************
+*** 312,317 ****
+--- 329,341 ----
+  	http->request = requestLink(new_request);
+      }
+      clientInterpretRequestHeaders(http);
++     if (prefetch_asP(http->request)) {
++       StoreEntry * entry;
++       http->uri = (&http->request->cache_control->url)->buf;
++       http->log_uri = (&http->request->cache_control->url)->buf;
++       if ((entry = storeGetPublic(http->uri, METHOD_GET)) != NULL)
++         storeRelease(entry);
++     }
+  #if HEADERS_LOG
+      headersLog(0, 1, request->method, request);
+  #endif
+***************
+*** 580,586 ****
+      http_status status;
+      http_version_t version;
+      debug(33, 3) ("Config2.onoff.enable_purge = %d\n", Config2.onoff.enable_purge);
+!     if (!Config2.onoff.enable_purge) {
+  	http->log_type = LOG_TCP_DENIED;
+  	err = errorCon(ERR_ACCESS_DENIED, HTTP_FORBIDDEN);
+  	err->request = requestLink(http->request);
+--- 604,610 ----
+      http_status status;
+      http_version_t version;
+      debug(33, 3) ("Config2.onoff.enable_purge = %d\n", Config2.onoff.enable_purge);
+!     if (!Config2.onoff.enable_purge && !ejectP(http->request)) {
+  	http->log_type = LOG_TCP_DENIED;
+  	err = errorCon(ERR_ACCESS_DENIED, HTTP_FORBIDDEN);
+  	err->request = requestLink(http->request);
+***************
+*** 1239,1244 ****
+--- 1263,1273 ----
+      /* Handle Ranges */
+      if (request->range)
+  	clientBuildRangeHeader(http, rep);
++     /* replace content length for pre-fetch requests */
++     if (prefetchP(http->request) && httpHeaderHas(hdr,HDR_CONTENT_LENGTH)) {
++         httpHeaderDelById(hdr, HDR_CONTENT_LENGTH);
++         httpHeaderPutInt(hdr, HDR_CONTENT_LENGTH, 0);
++     }
+      /*
+       * Add a estimated Age header on cache hits.
+       */
+***************
+*** 1767,1773 ****
+  	/* NULL because clientWriteBodyComplete frees it */
+  	return;
+      }
+!     if (http->request->method == METHOD_HEAD) {
+  	if (rep) {
+  	    /* do not forward body for HEAD replies */
+  	    body_size = 0;
+--- 1796,1802 ----
+  	/* NULL because clientWriteBodyComplete frees it */
+  	return;
+      }
+!     if (http->request->method == METHOD_HEAD || prefetchP(http->request)) {
+  	if (rep) {
+  	    /* do not forward body for HEAD replies */
+  	    body_size = 0;
+***************
+*** 1812,1818 ****
+  	check_size += body_size;
+  	memBufAppend(&mb, body_buf, body_size);
+      }
+!     if (!http->request->range && http->request->method == METHOD_GET)
+  	assert(check_size == size);
+      /* write */
+      comm_write_mbuf(fd, mb, clientWriteComplete, http);
+--- 1841,1847 ----
+  	check_size += body_size;
+  	memBufAppend(&mb, body_buf, body_size);
+      }
+!     if (!http->request->range && http->request->method == METHOD_GET && !prefetchP(http->request))
+  	assert(check_size == size);
+      /* write */
+      comm_write_mbuf(fd, mb, clientWriteComplete, http);
+***************
+*** 2110,2116 ****
+  	http->log_type = LOG_TCP_MISS;
+  	sslStart(fd, url, r, &http->out.size, &http->al.http.code);
+  	return;
+!     } else if (r->method == METHOD_PURGE) {
+  	clientPurgeRequest(http);
+  	return;
+      } else if (r->method == METHOD_TRACE) {
+--- 2139,2145 ----
+  	http->log_type = LOG_TCP_MISS;
+  	sslStart(fd, url, r, &http->out.size, &http->al.http.code);
+  	return;
+!     } else if (r->method == METHOD_PURGE || ejectP(r)) {
+  	clientPurgeRequest(http);
+  	return;
+      } else if (r->method == METHOD_TRACE) {
+***************
+*** 2955,2961 ****
+  	sending = SENDING_HDRSONLY;
+      else if (reply->sline.status < HTTP_OK)
+  	sending = SENDING_HDRSONLY;
+!     else if (http->request->method == METHOD_HEAD)
+  	sending = SENDING_HDRSONLY;
+      else
+  	sending = SENDING_BODY;
+--- 2984,2990 ----
+  	sending = SENDING_HDRSONLY;
+      else if (reply->sline.status < HTTP_OK)
+  	sending = SENDING_HDRSONLY;
+!     else if (http->request->method == METHOD_HEAD || prefetchP(http->request))
+  	sending = SENDING_HDRSONLY;
+      else
+  	sending = SENDING_BODY;
+diff -cr src.orig/enums.h src/enums.h
+*** src.orig/enums.h	Sun Apr 29 20:09:36 2001
+--- src/enums.h	Tue May  1 19:04:06 2001
+***************
+*** 243,248 ****
+--- 243,250 ----
+      CC_S_MAXAGE,
+      CC_MAX_STALE,
+      CC_ONLY_IF_CACHED,
++     CC_PREFETCH,
++     CC_EJECT,
+      CC_OTHER,
+      CC_ENUM_END
+  } http_hdr_cc_type;
+Common subdirectories: src.orig/fs and src/fs
+diff -cr src.orig/http.c src/http.c
+*** src.orig/http.c	Sun Apr 29 20:09:36 2001
+--- src/http.c	Tue May  1 16:03:21 2001
+***************
+*** 795,801 ****
+  	if (!EBIT_TEST(cc->mask, CC_MAX_AGE)) {
+  	    const char *url = entry ? storeUrl(entry) : urlCanonical(orig_request);
+  	    httpHdrCcSetMaxAge(cc, getMaxAge(url));
+! 	    if (strLen(request->urlpath))
+  		assert(strstr(url, strBuf(request->urlpath)));
+  	}
+  	if (flags.only_if_cached)
+--- 795,801 ----
+  	if (!EBIT_TEST(cc->mask, CC_MAX_AGE)) {
+  	    const char *url = entry ? storeUrl(entry) : urlCanonical(orig_request);
+  	    httpHdrCcSetMaxAge(cc, getMaxAge(url));
+! 	    if (strLen(request->urlpath) && !prefetch_asP(request))
+  		assert(strstr(url, strBuf(request->urlpath)));
+  	}
+  	if (flags.only_if_cached)
+diff -cr src.orig/protos.h src/protos.h
+*** src.orig/protos.h	Sun Apr 29 20:09:36 2001
+--- src/protos.h	Tue May  1 19:08:36 2001
+***************
+*** 331,336 ****
+--- 331,339 ----
+  extern void httpHdrCcSetSMaxAge(HttpHdrCc * cc, int s_maxage);
+  extern void httpHdrCcUpdateStats(const HttpHdrCc * cc, StatHist * hist);
+  extern void httpHdrCcStatDumper(StoreEntry * sentry, int idx, double val, double size, int count);
++ extern int prefetchP(request_t * r);
++ extern int prefetch_asP(request_t * r);
++ extern int ejectP(request_t * r);
+  
+  /* Http Range Header Field */
+  extern HttpHdrRange *httpHdrRangeParseCreate(const String * range_spec);
+diff -cr src.orig/redirect.c src/redirect.c
+*** src.orig/redirect.c	Sun Apr 29 20:09:36 2001
+--- src/redirect.c	Wed May  2 02:08:56 2001
+***************
+*** 124,130 ****
+      }
+      r = xcalloc(1, sizeof(redirectStateData));
+      cbdataAdd(r, cbdataXfree, 0);
+!     r->orig_url = xstrdup(http->uri);
+      r->client_addr = conn->log_addr;
+      if (http->request->user_ident[0])
+  	r->client_ident = http->request->user_ident;
+--- 124,130 ----
+      }
+      r = xcalloc(1, sizeof(redirectStateData));
+      cbdataAdd(r, cbdataXfree, 0);
+!     r->orig_url = xstrdup(prefetch_asP(http->request) ? urlCanonical(http->request) : http->uri);
+      r->client_addr = conn->log_addr;
+      if (http->request->user_ident[0])
+  	r->client_ident = http->request->user_ident;
+Common subdirectories: src.orig/repl and src/repl
+diff -cr src.orig/structs.h src/structs.h
+*** src.orig/structs.h	Sun Apr 29 20:09:37 2001
+--- src/structs.h	Tue May  1 19:04:27 2001
+***************
+*** 684,689 ****
+--- 684,692 ----
+      int max_age;
+      int s_maxage;
+      int max_stale;
++     int prefetch;
++     int eject;
++     String url;
+  };
+  
+  /* http byte-range-spec */
