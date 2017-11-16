@@ -1,0 +1,44 @@
+[Scene: The early 90s, in an office of a certain Silly Valley computer
+manufacturer]
+
+"I've got a great idea."
+
+"Shoot."
+
+"You know how old programmers are usually overrun and crushed by the
+young turks? These kids are fresh out of college and can crank out C
+and C++ faster than us experienced old farts. I'm sick of that."
+
+"Me, too. That last intern who re-wrote the kernel page management..."
+
+"Worst review of my life, yup. So, why don't we design a new language,
+all whizzy and structure and garbage collected and stuff, and - get
+this - utterly isolated from the OS."
+
+"Like BASIC?"
+
+"Right! So they can't do anything real in it."
+
+"I get it. It's a teaching language."
+
+"No, we sell it as if it was a real language, too. That way colleges
+are sure to teach it. And it'll cripple our competitors once they
+latch onto it."
+
+"Neat."
+
+"Now the kids will come out of college knowing essentially nothing
+about processors, or memory systems, or I/O - hell, they'll never even
+have heard of exclusive-OR - and they go into companies thinking they
+know everything. And in ten or twenty years..."
+
+"We keep the castle safe for us. They can't touch the kernel. We give
+them a miserable excuse for a native call layer, use blocking I/O
+everywhere, and give them X-Windows style graphics for user
+interfaces. Yeah. I like it."
+
+"What should we call it?"
+
+[The rest is history...]
+
+From: http://www.dadhacker.com/blog/?p=1571

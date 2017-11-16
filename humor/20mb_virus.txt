@@ -1,0 +1,21 @@
+Answer the following questions:
+
+A 20MB virus is something you associate with:
+
+1. Highly skilled programmers: yes/no
+2. A big team of programmers:  yes/no
+3. A government-run operation: yes/no
+4. A covert operation:         yes/no
+
+Key:
+
+4 yes: You're in the camp of the conspiracy theorists.  Apply for a job at 
+       Kapersky's PR department.
+3 yes: Watch your tin-foil hat.
+2 yes: If you said "yes" to highly-skilled or covert operation, return your 
+       diploma now!
+1 yes: Watch your incoming traffic. That router doesn't protect you against 
+       all malware.
+0 yes: So you're the one who wrote it! 
+
+From: http://arstechnica.com/security/2012/05/spy-malware-infecting-iranian-networks-is-engineering-marvel-to-behold/?comments=1&post=22902181#comment-22902181

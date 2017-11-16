@@ -1,0 +1,35 @@
+From: cloos@jhcloos.com (James H. Cloos Jr.)
+Subject: Cautionary tale
+Newsgroups: rec.humor.funny.reruns
+Date: Fri, 28 Mar 2003 7:20:01 PST
+
+This is supposedly a true story from a recent Defence Science Lectures
+Series, as related by the head of the Australian DSTO's Land
+Operations/Simulation division.
+
+They've been working on some really nifty virtual reality simulators,
+the case in point being to incorporate Armed Reconnaissance
+Helicopters into exercises (from the data fusion point of view). Most
+of the people they employ on this sort of thing are ex- (or future)
+computer game programmers.  Anyway, as part of the reality parameters,
+they include things like trees and animals. For the Australian
+simulation they included kangaroos.  In particular, they had to model
+kangaroo movements and reactions to helicopters (since hordes of
+disturbed kangaroos might well give away a helicopter's position).
+
+Being good programmers, they just stole some code (which was
+originally used to model infantry detachments reactions under the same
+stimuli), and changed the mapped icon, the speed parameters, etc. The
+first time they've gone to demonstrate this to some visiting
+Americans, the hotshot pilots have decided to get "down and dirty"
+with the virtual kangaroos. So, they buzz them, and watch them
+scatter. The visiting Americans nod appreciatively... then gape as the
+kangaroos duck around a hill, and launch about two dozen Stinger
+missiles at the hapless helicopter.  Programmers look rather
+embarrassed at forgetting to remove *that* part of the infantry
+coding... and Americans leave muttering comments about not wanting to
+mess with the Aussie wildlife...
+
+As an addendum, simulator pilots from that point onwards avoided
+kangaroos like the plague, just like they were meant to do in the
+first place...

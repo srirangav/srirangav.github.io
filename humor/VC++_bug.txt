@@ -1,0 +1,124 @@
+Newsgroups: rec.humor.funny.reruns
+From: JDEMELLO@us.oracle.com (Jeff DeMello, Oracle Secure Systems)
+Organization: Oracle Corporation
+Subject: FUN: Microsoft C++
+
+Thanks to Rick Wessman....
+
+an actual bug report
+
+[ This is from a friend at Microsoft ]
+Bug #   Status          Title
+5143    ACTIVE          "Build done" signal makes no sound
+---------- ACTIVE - 01/30/95 - MIKEBLAS --------------------
+
+Visual C++ makes an audible signal when a build completes. When no developer
+is in the room, this signal doesn't make a sound. To reproduce:
+
+  1.       Start a build.
+
+  2.       Leave the room.
+
+  3.       Note that the chime does not make a sound.
+
+We should find a way to make the build bell make a sound even if nobody is
+there to hear it.
+
+This philosophical issue may need program management's attention before being
+resolved.
+
+---------- ASSIGNED to MATTHEWT - 01/30/95 - SCOTF ---------
+
+Can we use the telepathy support in Win95 to contact whomever is logged into
+the machine doing the build? Maybe we should just detect when the developer is
+leaving the room and prompt for a phone number where s/he can be reached.
+
+How about disabling leaving the room during a build?
+
+---------- RESOLVED - BY DESIGN - 01/31/95 - MATTHEWT ------
+---------- ACTIVE - 02/01/95 - MARKLAM ---------------------
+
+Actually, we can't do this either. The problem is that while you're out of the
+room your build is neither finished nor unfinished. It stays in a state of
+flux until you return and collapse the quantum uncertainty by observing it.
+
+Perhaps we could link the build finished event to a cat in a box?
+
+---------- ASSIGNED to HEISENBERG - 02/01/95 - MARKLAM -----
+---------- RESOLVED - NOT REPRO - 02/03/95 - HEISENBERG ----
+
+I cannot repro this. I tried standing just outside my door and it made the
+beep. Do I have to go further from my office? Would the mailroom do?
+
+---------- ACTIVE - 02/03/95 - MIKEBLAS --------------------
+
+The relative position of the mailroom and your office are relatively uncertain
+to me, Doctor.
+
+Please try again:
+
+  1.       start a build
+
+  2.       leave your office
+
+  3.       go down the hall
+
+  4.       wait until you don't hear the beep
+
+  5.       return to note that the build is done
+
+I think this is how I first repro'ed the problem, but I can't remember what I
+was doing to make it happen.
+
+The idea of disabling leaving the room might be the best possible solution, I
+think. When a build starts, the IDE should pop up a message that says "There
+are no more Fritos" or "The kitchen has closed early" or "The bathroom is
+being cleaned" so the developer will not be tempted to get up and wander
+around.
+
+With minimal rebuild in place, we should consider diversions that won't take
+as long to remedy: "You're expecting a phone call" or "Someone will stop by to
+see you soon".
+
+We need to think of messages that are easy to localize for VC++3.0J.
+
+---------- ASSIGNED to MIKEBLAS - 02/13/95 - MARKLAM -------
+
+To do this we'll need to avoid messages about the bathrooms and vending
+machines for external releases. Perhaps some customer research is needed to
+find out exactly *why* Visual C++ users leave their keyboards.
+
+Some suggestions (including MB_ types)
+Get a drink :
+(i) You're out of coffee
+(i) You're out of tea
+(i)(i) YYoouuvv''ee hhaadd eennoouugghh
+
+Get something to eat :
+(?) You have no food, remember
+/!\ You need to lose weight, fatso. Sit your ass down
+
+Exercise etc :
+(?) Did You Know - sunlight causes skin cancer
+(i) With a Nordik Trak you can get a workout in front of your monitor.
+Call for home delivery
+/!\ I didn't mean that about your weight
+
+See family :
+(i) They already know you love them
+/!\ They'll only want money for something
+/!\ Your in-laws have arrived
+
+Call of nature :
+
+This could be difficult. Consider supplying bed-pan or similar.
+
+---------- ASSIGNED to MIKEBLAS - 02/13/95 - MARKLAM -------
+---------- ASSIGNED to MIKEBLAS - 02/16/95 - HEISENBERG ----
+
+I attempted to repro this once more:
+
+I placed my machine in the forest at the edge of the campus. I started a
+'rebuild all' and ran out of the forest towards my mailroom. My build normally
+takes 3 minutes. After 5 minutes I had not heard anything, so I returned to my
+machine. Unfortunately a tree had fallen on it. I had not heard that, either.

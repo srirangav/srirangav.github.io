@@ -1,0 +1,168 @@
+			     TAO TE CHIP
+                 
+			    ::::::::::::::
+				  01
+			    ::::::::::::::
+
+The tao that can be tar(1)ed
+is not the entire Tao.
+The path that can be specified 
+is not the Full Path.
+
+We declare the names
+of all variables and functions.
+Yet the Tao has no type specifier.
+
+Dynamically binding, you realize the magic.
+Statically binding, you see only the hierarchy.
+
+Yet magic and hierarchy
+arise from the same source,
+and this source has a null pointer.
+
+			    ::::::::::::::
+				  02
+			    ::::::::::::::
+
+When users see one GUI as beautiful,
+other user interfaces become ugly.
+When users see some programs as winners,
+other programs become losers.
+
+Pointers and NULLs reference each other.
+High level and assembler depend on each other.
+Double and float cast to each other.
+High-endian and low-endian define each other.
+While and until follow each other.
+
+Therefore the Guru 
+programs without doing anything
+and teaches without saying anything.
+Warnings arise and he lets them come;
+processes are swapped and he lets them go.
+He has but doesn't possess,
+acts but doesn't expect.
+When his work is done, he deletes it.
+That is why it lasts forever.
+
+			    ::::::::::::::
+				  03
+			    ::::::::::::::
+
+When you overesteem great hackers,
+more users become cretins.
+When you develop encryption,
+more users become crackers.
+
+The Guru leads
+by emptying user's minds
+and increasing their quotas,
+by weakening their ambition
+and toughening their resolve.
+
+			    ::::::::::::::
+				  04
+			    ::::::::::::::
+
+The Tao is like a glob pattern:
+used but never used up.
+It is like the extern void:
+filled with infinite possibilities.
+
+It is masked but always present.
+I don't know who built to it.
+It came before the first kernel.
+
+			    ::::::::::::::
+				  05
+			    ::::::::::::::
+
+The Tao doesn't take sides;
+it gives birth to both wins and losses.
+The Guru doesn't take sides;
+she welcomes both hackers and lusers.
+
+The Tao is like a stack:
+the data changes but not the structure.
+the more you use it, the deeper it becomes;
+the more you talk of it, the less you understand.
+
+Hold on to the root.
+
+			    ::::::::::::::
+				  12
+			    ::::::::::::::
+
+Graphics blind the eyes.
+Audio files deafen the ear.
+Mouse clicks numb the fingers.
+Heuristics weaken the mind.
+
+			    ::::::::::::::
+				  17
+			    ::::::::::::::
+
+When the Guru administers, the users 
+are hardly aware that he exists.
+Next best is a sysop who is loved.
+Next, one who is feared.
+And worst, one who is despised.
+
+If you don't trust the users,
+you make them untrustworthy.
+
+The Guru doesn't talk, he hacks.
+When his work is done,
+the users say, "Amazing:
+we implemented it, all by ourselves!"
+
+			    ::::::::::::::
+				  19
+			    ::::::::::::::
+
+Throw away documentation and manuals,
+and users will be a hundred times happier.
+Throw away privileges and quotas,
+and users will do the Right Thing.
+Throw away proprietary and site licenses,
+and there won't be any pirating.
+
+If these three aren't enough,
+just stay at your home directory 
+and let all processes take their course.
+
+			    ::::::::::::::
+				  75
+			    ::::::::::::::
+
+When license fees are too high,
+users do things by hand.
+When the management is too intrusive,
+users lose their spirit.
+
+			    ::::::::::::::
+				  80
+			    ::::::::::::::
+
+If a system is administered wisely,
+its users will be content.
+They enjoy hacking their code
+and don't waste time implementing
+labor-saving shell scripts.
+Since they dearly love their accounts,
+they aren't interested in other machines.
+There may be telnet, rlogin, and ftp,
+but these don't access any hosts.
+There may be an arsenal of cracks and malware,
+but nobody ever uses them.
+People enjoy reading their mail,
+take pleasure in being with their newsgroups,
+spend weekends working at their terminals,
+delight in the doings at the site.
+And even though the next system is so close
+that users can hear its key clicks and biff beeps,
+they are content to die of old age
+without ever having gone to see it.
+
+With all due apology to Stephen Mitchell, who's translation was the
+basis for this, and, of course, Lao Tzu.

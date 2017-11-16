@@ -1,0 +1,33 @@
+From: Shaun Lipscombe <shaun.lipscombe@see.my.signature>
+Subject: 10 commandments
+Newsgroups: alt.religion.emacs
+Date: 18 Jan 1999 15:50:13 +0000
+Organization: Church of Emacs
+Message-ID: <wkn23g8tsa.fsf@mail.gasops.co.uk>
+
+I.    I am the extensible editor; you shall not have strange editors
+      before me
+
+II.   You shall not take the name of thine in vane; and this includes
+      posting's to alt.religion.emacs
+
+III.  Remember to keep holy the .emacs file
+
+IV.   Honor your gnus manual and elisp extensions.
+
+V.    You shall not kill;  `C-x C-c'
+
+VI.   You shall not commit adultery;  for your time you give to the
+      ever lasting study of my gospel.
+
+VII.  You shall not steal, unless it be for the cause of taking vi
+      books out of circulation.
+
+VIII. You shall not bear false witness against your neighbour, unless
+      your neighbour is a vi user.
+
+IX.   You shall not covet your neighbour's wife, see commandment VI
+
+X.    You shall not covet your neighbour's goods, unless your 
+      neighbours goods can amplify your commitment to the Church Of 
+      Emacs. (Ultra-10 SPARCstation/AlphaStation 600)

@@ -1,0 +1,8 @@
+A novice of the temple once approached the Master Programmer with a question.
+
+"Master, does Emacs have the Buddha nature?" the novice asked.
+
+The Master Programmer had been in the temple for many years and could be relied
+upon to know these things. He thought for several minutes before replying.
+
+"I don't see why not. It's bloody well got everything else."

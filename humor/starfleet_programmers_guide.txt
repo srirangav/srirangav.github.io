@@ -1,0 +1,26 @@
+Newsgroups: rec.humor.funny.reruns
+Subject: Rules for Starfleet Programmers
+From: wagner@utoday.UUCP (Mitch Wagner)
+
+From the Star Fleet Programmer's Style Guide:
+
+(1) If your robot is programmed to destroy all imperfection, make sure it
+    excludes itself (the "Nomad" rule).
+
+(2) Never allow calculation of the exact value of pi.
+
+(3) Be sure your machines are programmed to ignore Three Stooges routines
+    (This is known as Harry Mudd's Law).
+
+(4) Self-destruct routines are never carried through, so there is no need
+    to program them as anything more than a cosmetic shell. But be sure 
+    the countdown always runs past 1, to the last millisecond before the 
+    ship blows up, for dramatic values.
+
+(5) Include standard protections against viruses, Trojans, worms, and 
+    the ghosts of 19th-Century serial killers.
+
+(6) Women programmers are not allowed, as they *always* program the computer
+    to giggle and call the captain, "Honey." We have enough virility problems
+    because they make us wear tights and those silly boots and velour shirts.
+    We don't need this shit, too.

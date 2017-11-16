@@ -1,0 +1,44 @@
+Object Oriented Jedi
+ 
+Luke: "You used to program."
+ 
+Ben:  "I was once a software engineer the same as your father."
+ 
+Luke: "My father wasn't a software engineer. He was a custodian at
+       Lockheed-Martin."
+ 
+Ben:  "That's what your Uncle told you. He didn't hold with your father's
+       ideals. He thought he should go to work, not get a degree."
+  
+Luke: "I wish I had known him."
+ 
+Ben:  "He was a cunning object-oriented analyst and the best systems
+       programmer in the galaxy. I understand you've become quite a good
+       hacker yourself. And he was a good friend. For over ten years the
+       systems programmers created user interfaces. Before the dark
+       times. Before Microsoft."
+ 
+Luke: "How did my father die?"
+ 
+Ben:  "A young systems programmer named Bill Gates, who was a student until
+       his mommy kicked him out of her basement, founded Microsoft and
+       helped destroy the intuitive user interface. He betrayed and murdered
+       the Macintosh. Gates was seduced by the Dark Side of Money."
+ 
+Luke: "Money?"
+ 
+Ben:  "Yes, Money is what gives a programmer his resources. It's an exchange
+       system created by human beings. It surrounds us. Works for us. Binds
+       the economy together. Which reminds me. Your father wanted you to
+       have this when you were old enough, but your Uncle wouldn't allow it.
+       He thought you'd follow old Obi-Wan on some damn fool idealistic
+       crusade."
+ 
+Luke: "What is it?"
+ 
+Ben:  "It's an object modeling tool. The weapon of a systems programmer. Not
+       as random or clumsy as a lexical parser. An elegant compiler for a
+       more civilized age."
+
+From: http://www.ee.siue.edu/~bnoble/comp/humor/object_oriented_jedi.hum.txt
+

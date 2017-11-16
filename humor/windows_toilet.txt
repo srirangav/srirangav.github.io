@@ -1,0 +1,33 @@
+Date: Fri, 27 Feb 2004 11:06:53 -0800
+From: glen mccready <gkm@petting-zoo.net>
+To: 0xdeadbeef <0xdeadbeef@petting-zoo.net>
+
+Forwarded-by: Richard Todd <rmtodd@ichotolot.servalan.com>
+
+The item below was found on comp.risks today.  The thought of a system of
+toilets so complex that they *need* a Windows-based control system just 
+boggles the mind.  The fact that the toilets were down for two days until
+the vendor could fix the system is just icing on the cake.  To quote that 
+famous fictional engineer Montgomery Scott, "The more complicated they make
+the plumbing, the easier it is to stop up the drain."
+
+Date: Sat, 21 Feb 2004 11:01:12 +0000
+From: "Wendy M. Grossman" <wendyg@pelicancrossing.net>
+Subject: Bug in Windows-operated toilet system
+
+I was at a press conference on Thursday with PalmSource at One Aldwych,
+which is one of those hyper-modern London hotels.  One of its features is a
+airplane-style vacuum-operated toilet system.  One of the Palm execs told
+me that while they were staying at the hotel this system failed, and any
+time they wanted to use the bathroom or take a shower they had to call the
+reception desk and get escorted to the corporate headquarters in the
+building next door to use the facilities there.  For a couple of *days*.
+
+It transpires that the entire plumbing system is run by a Windows-based
+computer system and whatever went wrong with it was so obscure that they
+had to get a technician from the company that supplied it on a plane down
+from Scotland to fix it and reboot.
+
+The Blue Screen of Sewage?
+
+[There's a "Sucker" Borne Every Evacuation!  PGN]

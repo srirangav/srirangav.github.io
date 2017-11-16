@@ -1,0 +1,65 @@
+From: "dcoble" <dcoble@stic.net>
+Newsgroups: alt.jokes,rec.humor,za.humour
+Subject: Hippocratic Oath For Software Engineers
+Date: Sun, 27 Aug 2000 23:07:51 -0500
+
+Hippocratic Oath For Software Engineers
+
+Never write a line of code that someone else can understand.
+
+Make the simplest line of code appear complex. Use long
+counter intuitive names. Don't ever code "a=b", rather do something
+like:
+
+  AlphaNodeSemaphore=*(int)(&(unsigned long)(BetaFrameNodeFarm));
+
+Type fast, think slow.
+
+Never use direct references to anything ever. Bury everything in
+macros. Bury the macros in include files. Reference those include
+files indirectly from other include files. Use macros to reference
+those include files.
+
+Never include a comment that will help someone else understand your
+code. If they understand it, they don't need you.
+
+Never generate new sources. Always ifdef the old ones. Every binary
+in the world should be generated from the same sources.
+
+Never archive all the sources necessary to build a binary. Always
+hide on your own disk. If they can build your binary, they don't
+need you.
+
+Never code a function to return a value. All functions must return a
+pointer to a structure which contains a pointer to a value.
+
+Never discuss things in concrete terms. Always speak in abstract. If
+they can understand you, they don't need you.
+
+Never complete a project on time. If you do, they will think it was
+easy and anyone can do it and they don't need you.
+
+When someone stops by your office to ask a question, talk forever
+but don't answer the question. If they get their questions answered
+they don't need you.
+
+Load all sentences either written or spoken with alphabet soup. When
+someone asks you out to lunch, reply:
+
+  "I can't because I've almost got my RISC-based OSI/TCP/IP
+  client connected by BIBUS VMS VAX using SMTP over TCP
+  sending SNMP inquiry results to be encapsulated in UDP
+  packets for transmission to a SUN 4/280 NFS 4.3 BSD with
+  release 3.6 of RPC/XDR supporting our ONC effort working."
+
+Never clean your office. Absolutely never throw away an old listing.
+
+Never say hello to someone in hallway. Absolutely never address
+someone by name. If you must address someone by name, mumble or use
+the wrong name. Always maintain the mystique of being spaced out
+from concentrating on complex logic.
+
+Never wear a shirt that matches your pants. Wear a wrinkled shirt
+whenever possible. Your shirt must never be tucked in completely.
+Button the top button without wearing a tie. This will maximize your
+mystique.

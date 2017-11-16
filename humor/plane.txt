@@ -1,0 +1,11 @@
+At a recent computer software engineering course in the US, the
+participants were given an awkward question to answer:
+
+"If you had just boarded an airliner and discovered that your
+ team of programmers had been responsible for the flight control
+ software, how many of you would disembark immediately?"
+
+Among the ensuing forest of raised hands only one man sat
+motionless. When asked what he would do, he replied that he
+would be quite content to stay aboard. With his team's software,
+he said, the plane was unlikely to even taxi.

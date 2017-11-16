@@ -1,0 +1,80 @@
+Real Programmers Don't Eat Quiche (They Can't Even Spell Quiche)
+
+Real Programmers...
+
+Don't eat quiche. Real programmers don't even know how to spell quiche. They
+like Twinkies, Coke, and palate-scorching Szechwan food.
+
+Don't write applications programs. They program right down to the bare metal.
+Applications programs are for dullards who can't do systems programming.
+
+Don't write specs. Users should consider themselves lucky to get any programs
+at all and take what they get.
+
+Don't comment their code. If it was hard to write, it should be hard to
+understand and even harder to modify.
+
+Don't document. Documentation is for simps who can't read the listings or the
+objectdeck.
+
+Don't draw flowcharts. Flowcharts are, after all, the illiterate's form of
+documentation. Cavemen drew flowcharts; look how much it did for them.
+
+Don't use COBOL. COBOL is for wimpy applications programmers.
+
+Don't use FORTRAN. FORTRAN is for wimpy engineers who wear white socks, pipe
+stress freaks, and crystallography weenies. They get excited over finite state
+analysis and nuclear reactor simulation.
+
+Don't use LOGO. In fact, no programmers use LOGO after reaching puberty.
+
+Don't use APL, unless the whole program can be written on one line.
+
+Don't use LISP. Only effeminate programmers use more parentheses than actual
+code.
+
+Don't use Pascal, BLISS, Ada, or any of thise sissy-pinko computer science
+languages. Strong typing is a crutch for people with weak memories.
+
+Never work 9 to 5. If any real programmers are around at 9 a.m., it's because
+they were up all night.
+
+Disdain structured programming. Structured programming is for compulsive
+neurotics who were prematurely toilet-trained. They wear neckties and carefully
+line up sharp pencils on an otherwise clear desk.
+
+Scorn floating point arithmetic. The decimal point was invented for pansy
+bedwetters who are unable to think big.
+
+Don't believe in schedules. Planners make schedules. Managers firm-up
+schedules. Frightened coders strive to meet schedules. Real programmers ignore
+schedules.
+
+Don't play tennis or any other sport that requires a change of clothes.
+Mountain climbing is OK though, and real programmers often wear climbing boots
+to work in case a mountain should suddenly spring up in the middle of the
+machine room.
+
+Don't like the team programming concept. Unless, of course, they are the Chief
+Programmer.
+
+Have no use for managers. Managers are a necessary evil. Managers are for
+dealing with personnel bozos, bean counters, senior planners, and other mental
+defectives.
+
+Don't drive clapped-out Mavericks. They prefer BMWs, Lincolns, or pick-up
+trucks with floor shifts. Fast motorcycles are highly regarded.
+
+Like vending machine popcorn. Coders pop it in the microwave oven. Real
+programmers use the heat given off by the CPU. They can tell what job is
+running just by listening to the rate the corn is popping.
+
+Know every nuance of every instruction and use them all in every real program.
+Puppy architects won't allow execute instructions to address another execute
+as the target instruction. Real programmers despise such petty restrictions.
+
+Don't bring brown bag lunches to work. If the vending machine sells it, they
+eat it. If the vending machine doesn't sell it, they don't eat it. Vending
+machines don't sell quiche.
+
+- Author Unknown

@@ -1,0 +1,25 @@
+From: Martin <unclebob@ihug.co.nz>
+Subject: Re: An analogy of Operating Systems, from Hunzeker
+Newsgroups: rec.humor.d
+Date: 11 May 2003 16:19:2 +1200
+Organization: Ihug Limited
+
+Relayed-From: hall@wsl.dec.com (Jon "Maddog" Hall)
+
+> VMS is like a Soviet railroad train.  It's basicallya industrial
+> strength, but when you look at it closely, everything's a little
+> more shabby than you might like.  It gets the job done, but there's
+> no grace to it.
+>
+> The Mac operating system is like the monorail at Disney World.  It's
+> kind of spectacular and fun, but it doesn't go much of anywhere.
+> Still, the kids like it.
+>
+> Unix is like the maritime transit system in an impoverished
+> country. The ferryboats are dangerous as hell, offer no protection
+> from the weather and leak like sieves.  Every monsoon season a
+> couple of them capsize and drown all the passengers, but people
+> still line up for them and crowd aboard.
+
+Windows is like a SUV, bloated and inefficent, but people feel safer
+in it.

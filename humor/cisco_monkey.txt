@@ -1,0 +1,30 @@
+A tourist walked into a pet shop and was looking at the animals on
+display.  While he was there, another customer walked in and said to
+the shopkeeper, "I'll have a C monkey please."  
+
+The shopkeeper nodded, went over to a cage at the side of the shop and
+took out a monkey.  He fitted a collar and leash, handed it to the
+customer, saying, "That'll be $5000."  The customer paid and walked
+out with his monkey.
+
+Startled, the tourist went over to the shopkeeper and said, "That was
+a very expensive monkey. Most of them are only a few hundred dollars.
+Why did it cost so much?"  
+
+The shopkeeper answered, "Ah, that monkey can program in C-very fast,
+tight code, no bugs, well worth the money."  
+
+The tourist looked at the monkey in another cage.  "That one's even
+more expensive! $10,000!  What does it do?"  
+
+"Oh, that one's a C++ monkey; it can manage object-oriented
+programming, Visual C++, even some Java.  All the really useful
+stuff," replied the shopkeeper.  
+
+The tourist looked around for a little longer and saw a third monkey
+in a cage of its own.  The price tag around its neck read $50,000.  
+
+He gasped to the shopkeeper, "That one costs more than all the others
+put together!  What on earth does it do?"  The shopkeeper replied,
+"Well, I haven't actually seen it do anything, but it says it's a
+Cisco engineer."

@@ -1,0 +1,30 @@
+The wings on most aircraft are removable, and are held on by bolts of
+appropriate size. Smaller aircraft may have left and right wings built
+as a single assembly, while larger aircraft will have separate left
+and right wings. The C-130 Hercules follows the latter pattern, and
+each wing is held on by a set of 14 bolts, the individual bolts being
+about six inches in diameter, about four feet long, and made of
+incredibly tough steel. They get replaced every 10,000 or 20,000 hours
+of flight, lest one fail and cause the wing on that side to flutter
+and eventually to depart the aircraft.
+
+My friend Mike was a maintenance shop chief, responsible for
+maintenance on a number of C-130 aircraft. It was close to time to
+replace the wing bolts on one, and he did what he'd done so many times
+before: send in a requisition for 28 each Federal Stock Number
+something-or-other, so that they'd be ready and waiting when the
+aircraft needed them.
+
+But something happened that had never happened before: he got a call
+from Base Transportation, asking where he wanted his boxcar to be
+parked. "Boxcar?", he responded. "Yeah. The boxcar full of crates of
+C-130 wing bolts. Where do you want us to put it?"
+
+Someone had changed the unit of measure for C-130 wing bolts from
+"each" to "set of 28", since all of them were always replaced at the
+same time. It made sense to do it. Somewhere in the mass of paperwork
+that had come over Mike's desk in the past few months, there doubtless
+was a memo notifying him of the change, too. He never found it, but he
+certainly remembered from then on.
+
+From: http://mikea.ath.cx/units-of-measure.html

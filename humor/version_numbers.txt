@@ -1,0 +1,93 @@
+		  SOFTWARE VERSION NUMBERS EXPLAINED 
+ 
+By now you have undoubtedly noticed that all software packages have 
+version numbers. In theory each version represents improvements to the 
+product, but many people have found that the version numbers tend to 
+follow a general pattern. Use this guide to decipher the hidden 
+meaning of version numbers.  Also, do not be fooled. Using the year as 
+the version number is a clever ploy, but it does not eliminate the 
+fact that 4.0 follows 3.1. 
+ 
+1.0: 
+ 
+  Also known as "one point uh-oh", or "barely out of beta". We had to 
+  release because the lab guys had reached a point of exhaustion and 
+  the marketing guys were in a cold sweat of terror. We're praying 
+  that you'll find it more functional than, say, a computer virus and 
+  that its operation has some resemblance to that specified in the 
+  marketing copy. 
+ 
+1.1: 
+ 
+  We fixed all the killer bugs. 
+ 
+1.2: 
+ 
+  Uh, we introduced a few new bugs fixing the killer bugs and so we 
+  had to fix them, too. 
+ 
+2.0: 
+ 
+  We did the product we really wanted to do to begin with. Mind you, 
+  it's really not what the customer needs yet, but we're working on 
+  it. 
+ 
+2.1: 
+ 
+  Well, not surprisingly, we broke some things in making major changes 
+  so we had to fix them. But we did a really good job of testing this 
+  time, so we don't think we introduced any new bugs while we were 
+  fixing these bugs. 
+ 
+2.2: 
+ 
+  Uh, sorry, one slipped through. One lousy typo error and you won't 
+  believe how much trouble it caused! 
+ 
+2.3: 
+ 
+  Some anal-retentive pain in the rear found a deep-seated bug that's 
+  been there since 1.0 and has been raising heck until we fixed it. 
+ 
+3.0: 
+ 
+  Hey, we finally think we've got it right! Most of the customers are 
+  really happy with this. 
+ 
+3.1: 
+ 
+  Of course we did break a few little things. 
+ 
+4.0: 
+ 
+  More features. It's doubled in size now, by the way, and you'll need 
+  to get memory and a faster processor ... 
+ 
+4.1: 
+ 
+  Just one or two bugs this time. Honest. 
+ 
+5.0: 
+ 
+  We really need to go on to a new product but we have an installed 
+  base out there to protect. We're cutting the staffing after this. 
+ 
+6.0: 
+ 
+  We had to fix a few things we broke in 5.0. Not very many, but it's 
+  been so long since we looked at this thing we might as well call it 
+  a major upgrade. Oh, yeah, we added a few flashy cosmetic features 
+  so we could justify the major upgrade number. 
+ 
+6.1: 
+ 
+  Since I'm leaving the company and I'm the last guy left in the lab 
+  who works on the product, I wanted to make sure that all the changes 
+  I've made are incorporated before I go. I added some cute demos, 
+  too, since I was getting pretty bored back here in my dark little 
+  corner (I kept complaining about the lighting but they wouldn't do 
+  anything). They're talking about obsolescence planning but they'll 
+  try to keep selling it for as long as there's a buck or two to be 
+  made. I'm leaving the bits in as good a shape as I can in case 
+  somebody has to tweak them, but it'll be sheer luck if no one loses 
+  the source code. 

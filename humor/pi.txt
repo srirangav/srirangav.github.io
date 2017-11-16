@@ -1,0 +1,45 @@
+[From comp.risks, written by Keith F. Lynch <kfl@keithlynch.net>]
+
+WARNING:  Do NOT calculate Pi in binary.  It is conjectured that
+          this number is normal, meaning that it contains ALL
+          finite bit strings.
+
+If you compute it, you will be guilty of:
+
+* Copyright infringement (of all books, all short stories, all
+  newspapers, all magazines, all web sites, all music, all
+  movies, and all software, including the complete Windows source
+  code)
+* Trademark infringement
+* Possession of child pornography
+* Espionage (unauthorized possession of top secret information)
+* Possession of DVD-cracking software
+* Possession of threats to the President
+* Possession of everyone's SSN, everyone's credit card numbers,
+  everyone's PIN numbers, everyone's unlisted phone numbers, and
+  everyone's passwords
+* Defaming Islam.  Not technically illegal, but you'll have to go
+  into hiding along with Salman Rushdie.
+* Defaming Scientology.  Which IS illegal -- just ask Keith
+  Henson.
+
+Also, your computer will contain all of the nastiest known
+computer viruses.  In fact, all of the nastiest POSSIBLE computer
+viruses.
+
+Some of the files on my PC are intensely personal, and I for one
+don't want you snooping through a copy of them.
+
+You might get away with computing just a few digits, but why risk
+it? There's no telling how far into Pi you can go without finding
+the secret documents about the JFK assassination, a photograph of
+your neighbor's six year old daughter doing the nasty with the
+family dog, or a complete copy of the not-yet-released Pearl
+Harbor movie.  So just don't do it.
+
+The same warning applies to e, the square root of 2, Euler's
+constant, Phi, the cosine of any non-zero algebraic number, and
+the vast majority of all other real numbers.
+
+There's a reason why these numbers are always computed and shown
+in decimal, after all.

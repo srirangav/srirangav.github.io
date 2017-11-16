@@ -1,0 +1,22 @@
+BSD:  
+
+   A psychoactive drug, popular in the 80s, probably developed 
+   at UC Berkeley or thereabouts.  
+
+   Similar in many ways to the prescription-only medication called 
+   "System V", but infinitely more useful. (Or, at least, more fun.)  
+
+   The full chemical name is "Berkeley Standard Distribution".
+
+FreeBSD ('BSD'):
+
+   It is a small Daemon wearing sneakers. It is normally found on 
+   Internet servers and powerful desktops, and moves very quickly. 
+
+   A kill of this poweful creature is enough to tick off any 
+   sysadmin. It is highly magical, having the power to serve. It 
+   resists DoS and SYN flood attacks. 
+
+   Nothing is known about its attack.
+
+   No battles to the death are recalled. 

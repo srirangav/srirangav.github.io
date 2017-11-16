@@ -1,0 +1,14 @@
+Them old days
+
+In days of old, when men were men
+(The old grey-bearded hacker said)
+We chipped software out of rocks
+Bent parenthesis into curly-blocks
+Synchronized with rusty locks
+Had to wind-up all our clocks
+Padded structs with dirty socks
+Thought GO-TOs were orthodox
+(The aged hacker cocked his head)
+"Things were so much simpler, then."
+
+From http://www.dadhacker.com/blog/?p=979
