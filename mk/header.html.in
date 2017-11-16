@@ -14,9 +14,6 @@
   <title>##TITLE##</title>
 
   <link href="##ROOTDIR##/shared/site.css" type="text/css" rel="stylesheet" />
-  <link rel="shortcut icon" type="##ROOTDIR##/image/x-icon" 
-        href="##ROOTDIR##/images/favicon.ico" />
-  <link rel="icon" type="image/jpg" href="##ROOTDIR##/images/favicon.jpg" />
 
 </head>
 
