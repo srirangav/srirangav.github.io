@@ -9,7 +9,7 @@
   "text/html; charset=utf-8" />
 
   <title>Firefox Notes</title>
-  <link href="../shared/site.css" type="text/css" 
+  <link href="../shared/site.css" type="text/css"
         rel="stylesheet" />
 </head>
 
@@ -30,40 +30,45 @@
 
 <blockquote>
 
+<p>
+<a href=
+"https://support.mozilla.org/en-US/kb/firefox-dns-over-https"
+>Enable DNS over HTTPS</a>
+
 <p>Disable Geolocation:
 <ol>
-<li>In the URL bar, type <code>about:config</code> and 
+<li>In the URL bar, type <code>about:config</code> and
 click the "I accept the risk!" button.</li>
 <li>Search for <code>geo.enabled</code>.  Double click to set the value to "false".</li>
-<li>Search for <code>geo.wifi.uri</code>.  Double click it and set the value to 
+<li>Search for <code>geo.wifi.uri</code>.  Double click it and set the value to
 <code>http://127.0.0.1</code>.</li>
 </ol>
 <blockquote>
 Source: Jay, <a href=
 "http://securityspread.com/2013/08/13/configuring-browser-privacy-security-firefox/"
->Configuring your browser for best privacy and security – Firefox</a>, 
+>Configuring your browser for best privacy and security – Firefox</a>,
 <a href="http://securityspread.com/">Security Spread</a> (Aug. 13, 2013).
 </blockquote>
 </p>
 
 <p>Prevent Accidental Quits:
 <ol>
-<li>In the URL bar, type <code>about:config</code> and 
+<li>In the URL bar, type <code>about:config</code> and
 click the "I accept the risk!" button.</li>
-<li>Search for <code>warnOn</code>.  Double click on any of the settings that are set 
+<li>Search for <code>warnOn</code>.  Double click on any of the settings that are set
 to "false" to toggle them to "true".</li>
 </ol>
 <blockquote>
 Source: Adam Dachis, <a href=
 "https://lifehacker.com/5819311/how-to-prevent-yourself-from-accidentally-quitting-firefox-or-chrome"
->How to Prevent Yourself from Accidentally Quitting Firefox or Chrome</a>, 
+>How to Prevent Yourself from Accidentally Quitting Firefox or Chrome</a>,
 <a href="https://lifehacker.com/">LifeHacker</a> (July 8, 2011).
 </blockquote>
 </p>
 
 <p>Alternate Location for Bookmarks
 <ol>
-<li>In the URL bar, type <code>about:config</code> and 
+<li>In the URL bar, type <code>about:config</code> and
 click the "I accept the risk!" button.</li>
 <li>Search for <code>browser.bookmarks.file</code>.  Double click it to specify the new
 location for the bookmark file.</li>
@@ -72,18 +77,18 @@ location for the bookmark file.</li>
 
 <p>Disable Blinking Text
 <ol>
-<li>In the URL bar, type <code>about:config</code> and 
+<li>In the URL bar, type <code>about:config</code> and
 click the "I accept the risk!" button.</li>
-<li>Search for <code>browser.blink_allowed</code>.  Double click it to set it to 
+<li>Search for <code>browser.blink_allowed</code>.  Double click it to set it to
 "false".</li>
 </ol>
 </p>
 
 <p>Disable Scrolling Text
 <ol>
-<li>In the URL bar, type <code>about:config</code> and 
+<li>In the URL bar, type <code>about:config</code> and
 click the "I accept the risk!" button.</li>
-<li>Search for <code>browser.display.enable_marquee</code>.  Double click it to set it to 
+<li>Search for <code>browser.display.enable_marquee</code>.  Double click it to set it to
 "false".</li>
 </ol>
 </p>
@@ -92,8 +97,40 @@ click the "I accept the risk!" button.</li>
 <hr />
 
 <p><a name="addons" id="addons">Addons</a></p>
+
+Recommended:
+
+<blockquote>
 <ul>
-<li>Cookie AutoDelete: 
+
+<li>Canvas Blocker:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/canvasblocker/"
+>https://addons.mozilla.org/en-US/firefox/addon/canvasblocker/</a>
+<br />
+<a href="https://github.com/kkapsner/CanvasBlocker/"
+>https://github.com/kkapsner/CanvasBlocker/</a>
+</li>
+
+<li>CSS Exfil Protection
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/css-exfil-protection/"
+>https://addons.mozilla.org/en-US/firefox/addon/css-exfil-protection/</a>
+<br />
+<a href="https://www.mike-gualtieri.com/css-exfil-vulnerability-tester"
+>https://www.mike-gualtieri.com/css-exfil-vulnerability-tester</a>
+</li>
+
+<li>ClearURLs:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/clearurls/"
+>https://addons.mozilla.org/en-US/firefox/addon/clearurls/</a>
+<br />
+<a href="https://gitlab.com/KevinRoebert/ClearUrls"
+>https://gitlab.com/KevinRoebert/ClearUrls</a>
+</li>
+
+<li>Cookie AutoDelete:
 <br />
 <a href="https://addons.mozilla.org/en-US/firefox/addon/cookie-autodelete/"
 >https://addons.mozilla.org/en-US/firefox/addon/cookie-autodelete/</a>
@@ -101,6 +138,7 @@ click the "I accept the risk!" button.</li>
 <a href=
 "https://github.com/Cookie-AutoDelete">https://github.com/Cookie-AutoDelete</a>
 </li>
+
 <li>Cookie Quick Manager:
 <br />
 <a href="https://addons.mozilla.org/en-US/firefox/addon/cookie-quick-manager/"
@@ -109,18 +147,25 @@ click the "I accept the risk!" button.</li>
 <a href="https://github.com/ysard/cookie-quick-manager"
 >https://github.com/ysard/cookie-quick-manager</a>
 </li>
+
+<li>Decentraleyes:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/"
+>https://addons.mozilla.org/en-US/firefox/addon/decentraleyes/</a>
+<br />
+<a href="https://decentraleyes.org/">https://decentraleyes.org/</a>
+</li>
+
 <li>Ghostery:
 <br />
 <a href="https://www.ghostery.com/">https://www.ghostery.com/</a>
 </li>
+
 <li>HTTPS Everywhere:
 <br />
 <a href="https://www.eff.org/https-everywhere">https://www.eff.org/https-everywhere</a>
 </li>
-<li>Privacy Badger:
-<br />
-<a href="https://www.eff.org/privacybadger">https://www.eff.org/privacybadger</a>
-</li>
+
 <li>Link Cleaner:
 <br />
 <a href="https://addons.mozilla.org/en-US/firefox/addon/link-cleaner/"
@@ -129,6 +174,16 @@ click the "I accept the risk!" button.</li>
 <a href="https://github.com/idlewan/link_cleaner"
 >https://github.com/idlewan/link_cleaner</a>
 </li>
+
+<li>Smart Referer:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/smart-referer/"
+>https://addons.mozilla.org/en-US/firefox/addon/smart-referer/</a>
+<br />
+<a href="https://gitlab.com/smart-referer/smart-referer"
+>https://gitlab.com/smart-referer/smart-referer</a>
+</li>
+
 <li>uBlock Origin:
 <br />
 <a href="https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/"
@@ -137,6 +192,7 @@ click the "I accept the risk!" button.</li>
 <a href="https://github.com/gorhill/uBlock#ublock-origin"
 >https://github.com/gorhill/uBlock#ublock-origin</a>
 </li>
+
 <li>uMatrix:
 <br />
 <a href="https://addons.mozilla.org/en-US/firefox/addon/umatrix/"
@@ -144,7 +200,39 @@ click the "I accept the risk!" button.</li>
 <br />
 <a href="https://github.com/gorhill/uMatrix">https://github.com/gorhill/uMatrix</a>
 </li>
+
 </ul>
+</blockquote>
+
+Other:
+
+<blockquote>
+<ul>
+
+<li>Neat URL:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/neat-url/"
+>https://addons.mozilla.org/en-US/firefox/addon/neat-url/</a>
+</li>
+
+<li>Privacy Badger:
+<br />
+<a href="https://www.eff.org/privacybadger"
+>https://www.eff.org/privacybadger</a>
+</li>
+
+<li>Tracking Token Stripper:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/utm-tracking-token-stripper/"
+>https://addons.mozilla.org/en-US/firefox/addon/utm-tracking-token-stripper/</a>
+<br />
+<a href="https://github.com/jparise/chrome-utm-stripper"
+>https://github.com/jparise/chrome-utm-stripper</a>
+</li>
+
+</ul>
+</blockquote>
+
 <blockquote>
 </blockquote>
 
@@ -155,39 +243,39 @@ click the "I accept the risk!" button.</li>
     <p>
     <span class="c2">
     Valid
-    <a href="http://validator.w3.org/check/referer">XHTML</a> and 
+    <a href="http://validator.w3.org/check/referer">XHTML</a> and
     <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
     &nbsp;//&nbsp;
-    
+
     <!-- Creative Commons License -->
-    Licensed under a 
+    Licensed under a
     <a rel="license" href=
-    "http://creativecommons.org/licenses/by/2.5/">Creative Commons 
+    "http://creativecommons.org/licenses/by/2.5/">Creative Commons
     Attribution 2.5 License</a>
     <!-- /Creative Commons License -->
 
     </span>
     </p>
-    
+
     <!--
     <rdf:RDF xmlns="http://web.resource.org/cc/"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
         <Work rdf:about="">
             <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
-            <license 
+            <license
             rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
         </Work>
         <License rdf:about="http://creativecommons.org/licenses/by/2.5/">
-            <permits 
+            <permits
             rdf:resource="http://web.resource.org/cc/Reproduction" />
-            <permits 
+            <permits
             rdf:resource="http://web.resource.org/cc/Distribution" />
-            <requires 
+            <requires
             rdf:resource="http://web.resource.org/cc/Notice" />
-            <requires 
+            <requires
             rdf:resource="http://web.resource.org/cc/Attribution" />
-            <permits 
+            <permits
             rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
         </License>
     </rdf:RDF>
