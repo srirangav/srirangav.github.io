@@ -35,6 +35,7 @@
 <a href=
 "https://support.mozilla.org/en-US/kb/firefox-dns-over-https"
 >Enable DNS over HTTPS</a>
+</p>
 
 <p>Disable Geolocation:
     <ol>
@@ -98,7 +99,6 @@
     <a href="https://www.ghacks.net/">ghacks</a> (Oct. 28, 2019).
     </blockquote>
 </p>
-
 
 <p>Prevent Accidental Quits:
     <ol>
@@ -229,6 +229,15 @@ Recommended:
 >https://github.com/hensm/hide_private_mode</a>
 </li>
 
+<li>History Cleaner:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/history-cleaner/"
+>https://addons.mozilla.org/en-US/firefox/addon/history-cleaner/</a>
+<br />
+<a href="https://github.com/Rayquaza01/HistoryCleaner"
+>https://github.com/Rayquaza01/HistoryCleaner</a>
+</li>
+
 <li>HTTPS Everywhere:
 <br />
 <a href="https://www.eff.org/https-everywhere">https://www.eff.org/https-everywhere</a>
@@ -301,6 +310,8 @@ Other:
 </ul>
 </blockquote>
 
+</blockquote>
+
 <hr />
 
 <p><a name="appearance" id="appearance">Appearance</a></p>
@@ -323,11 +334,23 @@ Other:
 </li>
 
 <li>Enable User Chrome and User Content on <a href=
-"https://www.mozilla.org/en-US/firefox/69.0/releasenotes/">Firefox 69</a> and newer:
-<br />
-<a href=
-"https://www.ghacks.net/2019/05/24/firefox-69-userchrome-css-and-usercontent-css-disabled-by-default/"
->https://www.ghacks.net/2019/05/24/firefox-69-userchrome-css-and-usercontent-css-disabled-by-default/</a>
+"https://www.mozilla.org/en-US/firefox/69.0/releasenotes/">Firefox 69</a> and
+newer:
+    <ol>
+        <li>In the URL bar, type <code>about:config</code> and
+            click the "I accept the risk!" button.
+        </li>
+        <li>Search for <code>toolkit.legacyUserProfileCustomizations.stylesheets</code>.
+            Double click it to set it to "true".
+        </li>
+    </ol>
+
+    <blockquote>
+    Source: Martin Brinkmann, <a href=
+    "https://www.ghacks.net/2019/05/24/firefox-69-userchrome-css-and-usercontent-css-disabled-by-default/"
+    >Firefox 69: userChrome.css and userContent.css disabled by default</a>,
+    <a href="https://www.ghacks.net/">ghacks</a> (May 24, 2019).
+    </blockquote>
 </li>
 
 <li>Green Padlock Icon
