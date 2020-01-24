@@ -137,3 +137,7 @@ You want: miles
 "500 miles, or a little bit more."
 
 Trey Harris
+
+-------------------------------------------------------------------------
+
+Related XKCD Comic: https://xkcd.com/2259/
