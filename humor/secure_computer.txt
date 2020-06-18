@@ -1,0 +1,8 @@
+Salesman: "This computer is 100% secure you could no more penetrate it or 
+          exfiltrate data from it than you could that large rock decorating 
+          our parking lot."
+Customer: *Flips switch to on.* "How about now?"
+Salesman: "Errrr…."
+
+From: https://hackaday.com/2020/06/18/copy-and-paste-deemed-insecure/
+
