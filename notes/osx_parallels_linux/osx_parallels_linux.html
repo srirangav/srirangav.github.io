@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../shared/copy.xsl"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8" />
+
+  <title>Parallels & Linux Notes</title>
+  <link href="../shared/site.css" type="text/css"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+<h2 class="c1">Parallels and Linux Notes</h2>
+
+<p>The these are some general notes about running Linux under <a href=
+"https://www.parallels.com/">Parallels</a>.</p>
+
+<ul>
+
+    <li><a href="osx_parallels_linux.html#u2010">Parallels 15 and
+    Ubuntu 20.10</a>
+    </li>
+
+    <li><a href="osx_parallels_linux.html#fw">Enable the firewall</a></li>
+
+    <li><a href="osx_parallels_linux.html#nodesk">Disable the desktop
+    picture</a>
+    </li>
+
+    <li><a href="osx_parallels_linux.html#noavahi">Disable Avahi</a></li>
+
+    <li><a href="osx_parallels_linux.html#nocups">Disable CUPS</a></li>
+    <li><a href="osx_parallels_linux.html#nosnaps">Disable Snaps on
+    Ubuntu 20.10</a>
+    </li>
+
+</ul>
+
+<hr />
+<p><b><a name="u2010" id="u2010">Running <a href=
+"https://releases.ubuntu.com/20.10/">Ubuntu 20.10</a> on Parallels 15</b>
+</p>
+
+Although Ubuntu 20.10 installs without any issues under Parallels 15, due
+to procfs and mmap changes in the Linux kernel v5.6 (and newer), the Parallels
+Tools for Linux that are included in Parallels 15 will not install.
+See, e.g.:
+
+<ul>
+
+    <li><a href="https://forum.parallels.com/threads/patch-for-kernel-5-6.349625/"
+>https://forum.parallels.com/threads/patch-for-kernel-5-6.349625/</a>
+    </li>
+
+    <li><a href=
+"https://forum.parallels.com/threads/unable-to-reinstall-parallels-tools-on-debian-bullseye.349865/"
+>https://forum.parallels.com/threads/unable-to-reinstall-parallels-tools-on-debian-bullseye.349865/</a>
+    </li>
+
+    <li><a href=
+    "https://gist.github.com/rudolfratusinski/a4d9e3caff11a4d9d81d2e84abc9afbf"
+    >https://gist.github.com/rudolfratusinski/a4d9e3caff11a4d9d81d2e84abc9afbf</a>
+    </li>
+
+    <li><code>down_read(&mm->mmap_sem)</code> needs to
+    replaced with <code>mmap_read_lock(mm)</code> and
+    <code>up_read(&mm->mmap_sem)</code> needs to
+    replaced with <code>mmap_read_unlock(mm)</code> (See, e.g.,
+    <a href="https://sourceware.org/git/?p=systemtap.git;a=blobdiff;f=runtime/linux/access_process_vm.h;h=327d0e611f47cbf445d470e383649afc9220a957;hp=94c480496c75f5afcfe8615e10d5e4ac78fd627e;hb=37066e2c3a9d9f48fc01b13ec0493b1c67551275;hpb=6af5df835df110552fa2209a403d04e3a84d8997">
+    https://sourceware.org/git/?p=systemtap.git;a=blobdiff;f=runtime/linux/access_process_vm.h;h=327d0e611f47cbf445d470e383649afc9220a957;hp=94c480496c75f5afcfe8615e10d5e4ac78fd627e;hb=37066e2c3a9d9f48fc01b13ec0493b1c67551275;hpb=6af5df835df110552fa2209a403d04e3a84d8997</a>)
+    </li>
+
+</ul>
+
+The following steps (based on Post Nos. <a href=
+"https://forum.parallels.com/threads/unable-to-reinstall-parallels-tools-on-debian-bullseye.349865/#post-867188"
+>5</a> and <a href=
+"https://forum.parallels.com/threads/unable-to-reinstall-parallels-tools-on-debian-bullseye.349865/#post-867521"
+>9</a> in the <a href=
+"https://forum.parallels.com/threads/unable-to-reinstall-parallels-tools-on-debian-bullseye.349865/"
+>second Parallels forums thread</a> above and the mmap changes above) appear to make
+it possible to install Parallels Tools on Ubuntu 20.10 running under
+Parallels 15:
+
+<ol>
+
+<li>Enable downloads from source code repositories:
+<p><a href=
+"https://askubuntu.com/questions/158871/how-do-i-enable-the-source-code-repositories"
+>https://askubuntu.com/questions/158871/how-do-i-enable-the-source-code-repositories</a>
+</p>
+</li>
+
+<li>Install the packages needed to rebuild the Parallels Tools Linux kernel
+modules and install them:
+    <p>
+        <code>
+        $ sudo apt-get install gcc make dkms libelf-dev bison flex linux-source
+        </code>
+    </p>
+
+    <p>See also: <a href="https://kb.parallels.com/en/113394"
+    >https://kb.parallels.com/en/113394</a>,
+    <a href=
+    "https://wiki.ubuntu.com/Kernel/SourceCode"
+    >https://wiki.ubuntu.com/Kernel/SourceCode</a>.
+    </p>
+
+</li>
+
+<li>Mount the Parallels Tools CD image in the Parallels instances running
+Ubuntu 20.10 (Parallels Action Menu, Install Parallels Tools).</li><br />
+<li>Make a working directory to patch Parallels Tools. For example:
+    <p>
+        <code>
+        $ mkdir -p ~/Documents/pt_mod
+        </code>
+    </p>
+</li>
+
+<li>Make working directories for patching the Parallels Tools:
+    <p>
+        <code>
+        $ mkdir -p ~/Documents/pt<br />
+        $ mkdir -p ~/Documents/pt_mod
+        </code>
+    </p>
+</li>
+
+<li>Copy the Parallels Tools to the working directory:
+    <p>
+        <code>
+        $ cd ~/Documents/pt
+        $ cp -r /media/cdrom0/* .
+        </code>
+    </p>
+</li>
+
+<li>Extract the Parallels Tools Linux kernel modules, save them, and fix the
+file ownership of the extracted kernel modules:
+    <p>
+        <code>
+        $ cd ~/Documents/pt_mod<br />
+        $ tar -xvzf ../pt/kmods/prl_mod.tar.gz .<br />
+        $ chown -R "$USER" .<br />
+        $ mv ../pt/kmods/prl_mod.tar.gz ../pt/kmods/prl_mod-orig.tar.gz
+        </code>
+    </p>
+</li>
+
+
+<li>Copy this <a href="prl_kmods_u20-10.patch">patch</a> to the directory
+where the Parallels Tools Linux kernel modules were extracted apply it:
+    <p>
+        <code>
+        $ cd ~/Documents/pt_mod<br />
+        $ patch -p0 < ../pt_mod/prl_kmods_u20-10.patch
+        </code>
+    </p>
+</li>
+
+<li>Test the patch to make sure it is working (there should be no build
+errors) and the clean the directory:
+    <p>
+        <code>
+        $ cd ~/Documents/pt_mod<br />
+        $ make -f Makefile.kmods<br />
+        $ make -f Makefile.kmods clean
+        </code>
+    </p>
+</li>
+
+<li>Update the Linux kernel config:
+    <p>
+        <code>
+        $ cd /usr/src/linux-headers-5.8.0-44-generic<br />
+        $ sudo make oldconfig<br />
+        </code>
+    </p>
+</li>
+
+<li>Replace the original Parallels Linux kernel modules with the patched
+version:
+    <p>
+        <code>
+        $ cd ~/Documents/pt_mod<br />
+        $ tar -zcvf ../pt/kmods/prl_mod.tar.gz .<br />
+        </code>
+    </p>
+</li>
+
+<li>Build the patched Parallels Linux kernel modules:
+    <p>
+        <code>
+        $ cd ~/Documents/pt/kmods<br />
+        $ make -f Makefile.kmods
+        </code>
+    </p>
+</li>
+
+<li>Install the Parallels Tools (you have have to reboot twice before
+everything works properly):
+    <p>
+        <code>
+        $ cd ~/Documents/pt/<br />
+        $ sudo ./install
+        </code>
+    </p>
+</li>
+
+</ol>
+
+<hr />
+
+<p><b><a name="fw" id="fw">Enable the firewall</b></p>
+
+<p>
+    <code>
+    $ sudo ufw enable
+    </code>
+</p>
+
+From: <a href=
+"https://www.techrepublic.com/article/how-to-secure-your-ubuntu-18-04-desktop-installation-in-one-easy-step/"
+>https://www.techrepublic.com/article/how-to-secure-your-ubuntu-18-04-desktop-installation-in-one-easy-step/</a>
+
+<p>(Optional) Install a GUI firewall:
+    <p>
+        <code>
+        $ sudo apt-get install gufw
+        </code>
+    </p>
+</p>
+
+<hr />
+
+<p><b><a name="nodesk" id="nodesk">Disable the desktop picture</b></p>
+
+<p>
+    <code>
+    $ gsettings set org.gnome.desktop.background picture-uri ""
+    </code>
+</p>
+
+From: <a href="https://www.fcpace.com/node/55"
+>https://www.fcpace.com/node/55</a>
+
+<hr />
+
+<p><b><a name="noavahi" id="noavahi">Disable <a href="https://www.avahi.org/"
+>Avahi</a></b>
+</p>
+
+<p>
+    <code>
+    $ systemctl disable --now avahi-daemon.socket<br />
+    $ systemctl disable --now avahi-daemon.service
+    </code>
+</p>
+
+From: <a href=
+"https://unix.stackexchange.com/questions/255197/how-to-disable-avahi-daemon-without-uninstalling-it"
+>https://unix.stackexchange.com/questions/255197/how-to-disable-avahi-daemon-without-uninstalling-it</a>
+
+<hr />
+
+<p><b><a name="nocups" id="nocups">Disable <a href="https://www.cups.org/"
+>CUPS</a></b>
+</p>
+
+<p>
+    <code>
+    $ systemctl disable --now cups.service cups.socket cups.path
+    </code>
+</p>
+
+From: <a href=
+"https://unix.stackexchange.com/questions/480082/how-to-disable-cups-service-on-reboot-with-systemd"
+>https://unix.stackexchange.com/questions/480082/how-to-disable-cups-service-on-reboot-with-systemd</a>
+
+<hr />
+
+<p><b><a name="nosnaps" id="nosnaps">Disable Snaps on Ubuntu 20.10</b></p>
+
+<ul>
+    <li><a href="https://www.kevin-custer.com/blog/disabling-snaps-in-ubuntu-20-04/"
+    >https://www.kevin-custer.com/blog/disabling-snaps-in-ubuntu-20-04/</a>
+    </li>
+
+    <li><a href="https://techwiser.com/remove-snap-ubuntu/"
+    >https://techwiser.com/remove-snap-ubuntu/</a>
+    </li>
+
+    <li><a href="https://hackaday.com/2020/06/24/whats-the-deal-with-snap-packages/"
+    >https://hackaday.com/2020/06/24/whats-the-deal-with-snap-packages/</a>
+    </li>
+
+    <li><a href=" https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu"
+    >https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu</a>
+    </li>
+</ul>
+
+<ol>
+
+<li>After a fresh Ubuntu 20.10 install, remove the installed snaps in the
+following order:
+<p>
+    <code>
+    $ sudo snap remove --purge snap-store<br />
+    $ sudo snap remove --purge gtk-common-themes<br />
+    $ sudo snap remove --purge gnome-3-34-1804<br />
+    $ sudo snap remove --purge core18<br />
+    $ sudo snap remove --purge snapd
+    </code>
+</p>
+</li>
+
+<li>Verify that no snaps are installed:
+<p>
+    <code>
+    $ snap list
+    </code>
+</p>
+</li>
+
+<li>Unmount /var/snap
+<p>
+    <code>
+    $ sudo umount /var/snap
+    </code>
+</p>
+</li>
+
+<li>Remove snap:
+<p>
+    <code>
+    $ sudo apt autoremove --purge snapd gnome-software-plugin-snap
+    </code>
+</p>
+</li>
+
+<li>Mark snap as being held so that installing other packages doesn't
+re-enable it:
+<p>
+    <code>
+    $ sudo apt-mark hold snapd
+    </code>
+</p>
+</li>
+
+<li>Remove snap directories:
+<p>
+    <code>
+    $ sudo rm -rf /var/cache/snapd/ /var/snap /var/lib/snap<br />
+    $ rm -rf ~/snap
+    </code>
+</p>
+</li>
+
+</ol>
+
+<hr />
+
+
+
+  <div class="c3">
+
+    <p>
+    <span class="c2">
+
+    <!-- Creative Commons License -->
+    Licensed under a
+    <a rel="license" href=
+    "http://creativecommons.org/licenses/by/2.5/">Creative Commons
+    Attribution 2.5 License</a>
+    <!-- /Creative Commons License -->
+
+    </span>
+    </p>
+
+    <!--
+    <rdf:RDF xmlns="http://web.resource.org/cc/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+        <Work rdf:about="">
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+            <license
+            rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
+        </Work>
+        <License rdf:about="http://creativecommons.org/licenses/by/2.5/">
+            <permits
+            rdf:resource="http://web.resource.org/cc/Reproduction" />
+            <permits
+            rdf:resource="http://web.resource.org/cc/Distribution" />
+            <requires
+            rdf:resource="http://web.resource.org/cc/Notice" />
+            <requires
+            rdf:resource="http://web.resource.org/cc/Attribution" />
+            <permits
+            rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+        </License>
+    </rdf:RDF>
+    -->
+
+  </div>
+
+</body>
+</html>

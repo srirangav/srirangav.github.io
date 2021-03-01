@@ -1,0 +1,177 @@
+diff -Naur --no-dereference kmods_orig/prl_fs/SharedFolders/Guest/Linux/prl_fs/prlfs_compat.h kmods_edited/prl_fs/SharedFolders/Guest/Linux/prl_fs/prlfs_compat.h
+--- kmods_orig/prl_fs/SharedFolders/Guest/Linux/prl_fs/prlfs_compat.h	2021-02-28 14:56:51.741792164 -0800
++++ kmods_edited/prl_fs/SharedFolders/Guest/Linux/prl_fs/prlfs_compat.h	2021-02-28 16:31:44.871766129 -0800
+@@ -11,7 +11,7 @@
+ 
+ static struct proc_dir_entry *
+ prlfs_proc_create(char *name, umode_t mode, struct proc_dir_entry *parent,
+-                  struct file_operations *fops)
++                  struct proc_ops *fops)
+ {
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0)
+ 	struct proc_dir_entry *p = create_proc_entry(name, mode, parent);
+diff -Naur --no-dereference kmods_orig/prl_fs/SharedFolders/Guest/Linux/prl_fs/super.c kmods_edited/prl_fs/SharedFolders/Guest/Linux/prl_fs/super.c
+--- kmods_orig/prl_fs/SharedFolders/Guest/Linux/prl_fs/super.c	2021-02-28 14:56:51.741792164 -0800
++++ kmods_edited/prl_fs/SharedFolders/Guest/Linux/prl_fs/super.c	2021-02-28 16:31:07.625261263 -0800
+@@ -25,7 +25,7 @@
+ 
+ static struct pci_dev *tg_dev;
+ 
+-extern struct file_operations prlfs_names_fops;
++extern struct proc_ops prlfs_names_fops;
+ extern struct inode_operations prlfs_names_iops;
+ 
+ static int prlfs_strtoui(char *cp, unsigned *result){
+@@ -517,12 +517,11 @@
+ 	return seq_open(file, &seq_sf_op);
+ }
+ 
+-static struct file_operations proc_sf_operations = {
+-	.owner		= THIS_MODULE,
+-	.open		= proc_sf_open,
+-	.read		= seq_read,
+-	.llseek		= seq_lseek,
+-	.release	= seq_release,
++static struct proc_ops proc_sf_operations = {
++	.proc_open	= proc_sf_open,
++	.proc_read	= seq_read,
++	.proc_lseek	= seq_lseek,
++	.proc_release	= seq_release,
+ };
+ 
+ static int prlfs_proc_init(void)
+diff -Naur --no-dereference kmods_orig/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.c kmods_edited/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.c
+--- kmods_orig/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.c	2021-02-28 14:56:51.745791916 -0800
++++ kmods_edited/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.c	2021-02-28 17:58:33.047344914 -0800
+@@ -347,13 +347,12 @@
+ 	return seq_open(file, &freeze_seq_ops);
+ }
+ 
+-struct file_operations freeze_ops = {
+-	.owner		= THIS_MODULE,
+-	.open		= freeze_open,
+-	.read		= seq_read,
+-	.write		= freeze_write,
+-	.llseek		= seq_lseek,
+-	.release	= seq_release,
++struct proc_ops freeze_ops = {
++	.proc_open	= freeze_open,
++	.proc_read	= seq_read,
++	.proc_write	= freeze_write,
++	.proc_lseek	= seq_lseek,
++	.proc_release	= seq_release,
+ };
+ 
+ int __init init_module(void)
+diff -Naur --no-dereference kmods_orig/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prlfs_freeze_compat.h kmods_edited/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prlfs_freeze_compat.h
+--- kmods_orig/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prlfs_freeze_compat.h	2021-02-28 14:56:51.745791916 -0800
++++ kmods_edited/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prlfs_freeze_compat.h	2021-02-28 17:59:14.726105898 -0800
+@@ -10,7 +10,7 @@
+ static struct proc_dir_entry *
+ prlfs_freeze_proc_create(char *name, umode_t mode,
+                          struct proc_dir_entry *parent,
+-                         struct file_operations *fops)
++                         struct proc_ops *fops)
+ {
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0)
+ 	struct proc_dir_entry *p = create_proc_entry(name, mode, parent);
+diff -Naur --no-dereference kmods_orig/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg.c kmods_edited/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg.c
+--- kmods_orig/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg.c	2021-02-28 14:56:51.741792164 -0800
++++ kmods_edited/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg.c	2021-02-28 16:26:18.685355477 -0800
+@@ -391,7 +391,7 @@
+ 
+ static struct proc_dir_entry *
+ prltg_proc_create_data(char *name, umode_t mode, struct proc_dir_entry *parent,
+-	struct file_operations *fops, void *data)
++	struct proc_ops *fops, void *data)
+ {
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(3,10,0)
+ 	struct proc_dir_entry *p = create_proc_entry(name, mode, parent);
+@@ -406,7 +406,7 @@
+ #endif
+ }
+ 
+-int prl_tg_probe_common(struct pci_dev *pdev, board_t board, struct file_operations *fops)
++int prl_tg_probe_common(struct pci_dev *pdev, board_t board, struct proc_ops *fops)
+ {
+ 	struct tg_dev *dev;
+ 	int rc = -ENOMEM;
+@@ -510,10 +510,10 @@
+ 	pci_set_drvdata(pdev, NULL);
+ }
+ 
+-static struct file_operations prl_tg_fops = {
+-	.write		= prl_tg_write,
+-	.open		= prl_tg_open,
+-	.release	= prl_tg_release,
++static struct proc_ops prl_tg_fops = {
++	.proc_write	= prl_tg_write,
++	.proc_open	= prl_tg_open,
++	.proc_release	= prl_tg_release,
+ };
+ 
+ static int prl_tg_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+diff -Naur --no-dereference kmods_orig/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg_call.c kmods_edited/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg_call.c
+--- kmods_orig/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg_call.c	2021-02-28 14:56:51.741792164 -0800
++++ kmods_edited/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg_call.c	2021-02-28 16:29:31.780789050 -0800
+@@ -106,13 +106,15 @@
+ 	uple->writable = sbuf->Writable;
+ 	uple->count = npages;
+ 
+-	down_read(&current->mm->mmap_sem);
++	/* down_read(&current->mm->mmap_sem); */
++	mmap_read_lock(current->mm);
+ 	/* lock userspace pages */
+ 	got = prl_get_user_pages(
+ 				 sbuf->u.Va, npages,
+ 				 sbuf->Writable,
+ 				 uple->p, NULL);
+-	up_read(&current->mm->mmap_sem);
++	/* up_read(&current->mm->mmap_sem); */
++	mmap_read_unlock(current->mm);
+ 
+ 	if (got < npages) {
+ 		DPRINTK("[2] %d < %d	\n", got, npages);
+diff -Naur --no-dereference kmods_orig/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg_common.h kmods_edited/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg_common.h
+--- kmods_orig/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg_common.h	2021-02-28 14:56:51.741792164 -0800
++++ kmods_edited/prl_tg/Toolgate/Guest/Linux/prl_tg/prltg_common.h	2021-02-28 16:27:22.027848693 -0800
+@@ -188,9 +188,9 @@
+ }
+ 
+ struct pci_dev;
+-struct file_operations;
++struct proc_ops;
+ // Exported functions
+-int prl_tg_probe_common(struct pci_dev *pdev, board_t board, struct file_operations *fops);
++int prl_tg_probe_common(struct pci_dev *pdev, board_t board, struct proc_ops *fops);
+ void prl_tg_remove_common(struct tg_dev *dev);
+ #ifdef CONFIG_PM
+ int prl_tg_suspend_common(struct tg_dev *dev, pm_message_t state);
+diff -Naur --no-dereference kmods_orig/prl_vid/Video/Guest/Linux/kmod/prlvtg.c kmods_edited/prl_vid/Video/Guest/Linux/kmod/prlvtg.c
+--- kmods_orig/prl_vid/Video/Guest/Linux/kmod/prlvtg.c	2021-02-28 14:56:51.745791916 -0800
++++ kmods_edited/prl_vid/Video/Guest/Linux/kmod/prlvtg.c	2021-02-28 17:56:23.787200282 -0800
+@@ -486,18 +486,18 @@
+ }
+ #endif
+ 
+-static struct file_operations prl_vtg_fops = {
+-	.write		= prl_vtg_write,
++static struct proc_ops prl_vtg_fops = {
++	.proc_write	= prl_vtg_write,
+ #ifdef HAVE_OLD_IOCTL
+ 	.ioctl		= prl_vtg_ioctl,
+ #endif
+ #ifdef HAVE_UNLOCKED_IOCTL
+-	.unlocked_ioctl	= prl_vtg_unlocked_ioctl,
++	.proc_ioctl	= prl_vtg_unlocked_ioctl,
+ #endif
+-	.open		= prl_vtg_open,
+-	.release	= prl_vtg_release,
++	.proc_open	= prl_vtg_open,
++	.proc_release	= prl_vtg_release,
+ #ifdef PRLVTG_MMAP
+-	.mmap		= prl_vtg_mmap,
++	.proc_mmap	= prl_vtg_mmap,
+ #endif
+ };
+ 
