@@ -22,21 +22,20 @@
 
 <ul>
 
-    <li><a href="osx_parallels_linux.html#u2010">Parallels 15 and
-    Ubuntu 20.10</a>
-    </li>
+    <li><a href="index.html#u2010">Parallels 15 and Ubuntu 20.10</a></li>
 
-    <li><a href="osx_parallels_linux.html#fw">Enable the firewall</a></li>
+    <li><a href="index.html#fw">Enable the firewall</a></li>
 
-    <li><a href="osx_parallels_linux.html#nodesk">Disable the desktop
-    picture</a>
-    </li>
+    <li><a href="index.html#nodesk">Disable the desktop picture</a></li>
 
-    <li><a href="osx_parallels_linux.html#noavahi">Disable Avahi</a></li>
+    <li><a href="index.html#noavahi">Disable Avahi</a></li>
 
-    <li><a href="osx_parallels_linux.html#nocups">Disable CUPS</a></li>
-    <li><a href="osx_parallels_linux.html#nosnaps">Disable Snaps on
-    Ubuntu 20.10</a>
+    <li><a href="index.html#nocups">Disable CUPS</a></li>
+
+    <li><a href="index.html#nosnaps">Disable Snaps on Ubuntu 20.10</a></li>
+
+    <li><a href="index.html#gtweaks"
+    >Install Gnome Tweaks and Extensions</a>
     </li>
 
 </ul>
@@ -258,8 +257,7 @@ From: <a href="https://www.fcpace.com/node/55"
 
 <p>
     <code>
-    $ systemctl disable --now avahi-daemon.socket<br />
-    $ systemctl disable --now avahi-daemon.service
+    $ sudo systemctl disable --now avahi-daemon.socket avahi-daemon.service<br />
     </code>
 </p>
 
@@ -275,7 +273,7 @@ From: <a href=
 
 <p>
     <code>
-    $ systemctl disable --now cups.service cups.socket cups.path
+    $ sudo systemctl disable --now cups.service cups.socket cups.path
     </code>
 </p>
 
@@ -366,6 +364,20 @@ re-enable it:
 
 <hr />
 
+<p><b><a name="gtweaks" id="gtweaks">Enable Gnome Tweaks and Extension</a></b>
+</p>
+
+<p>
+    <code>
+    $ sudo apt install gnome-tweaks gnome-shell-extension-prefs<br />
+    </code>
+</p>
+
+From: <a href=
+"https://www.omgubuntu.co.uk/2020/10/things-to-do-after-installing-ubuntu-20-10-groovy-gorilla"
+>https://www.omgubuntu.co.uk/2020/10/things-to-do-after-installing-ubuntu-20-10-groovy-gorilla</a>
+
+<hr />
 
 
   <div class="c3">
