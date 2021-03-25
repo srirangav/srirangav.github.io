@@ -1,0 +1,25 @@
+"If debugging is the process of removing software bugs, then programming
+must be the process of putting them in." -Edsger Dijkstra
+
+"Everyone knows that debugging is twice as hard as writing a program in
+the first place. So if you're as clever as you can be when you write it,
+how will you ever debug it?" -Brian Kernighan
+
+"The trouble with programmers is that you can never tell what a programmer
+is doing until it’s too late." -Seymour Cray
+
+"It’s not a bug; it's an undocumented feature." -Anonymous
+
+"I’ve finally learned what 'upward compatible' means.  It means we get to
+keep all our old mistakes." -Dennie van Tassel
+
+"Measuring programming progress by lines of code is like measuring aircraft
+building progress by weight." -Bill Gates
+
+"First learn computer science and all the theory.  Next develop a programming
+style.  Then forget all that and just hack." -George Carrette
+
+"There are only two kinds of programming languages: those people always bitch 
+about and those nobody uses." -Bjarne Stroustrup
+
+

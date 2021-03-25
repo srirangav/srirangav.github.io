@@ -1,3 +1,6 @@
+"There are two major products that come out of Berkeley: LSD and UNIX. 
+We don' believe this to be a coincidence." -Jeremy S. Anderson
+
 BSD:  
 
    A psychoactive drug, popular in the 80s, probably developed 
@@ -8,7 +11,7 @@ BSD:
 
    The full chemical name is "Berkeley Standard Distribution".
 
-FreeBSD ('BSD'):
+FreeBSD:
 
    It is a small Daemon wearing sneakers. It is normally found on 
    Internet servers and powerful desktops, and moves very quickly. 
@@ -20,3 +23,4 @@ FreeBSD ('BSD'):
    Nothing is known about its attack.
 
    No battles to the death are recalled. 
+
