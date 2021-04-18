@@ -1,13 +1,16 @@
-body {
-  color: #000000;
-  background-color: #FFFFFF;
-  margin: 5px;
-  padding: 10px 20px;
+@media (prefers-color-scheme: dark) {
+  body {
+       background-color: black;
+       color: white;
+  }
+  a:link {
+       color: LightBlue;
+  }
 }
 
-:visited { 
-  color: #FF0000;
-  background-color: #FFFFFF;
+body {
+  margin: 5px;
+  padding: 10px 20px;
 }
 
 div.c3 {
@@ -43,8 +46,3 @@ h4.c1 {
   font-weight: normal;
 }
 
-br.clear {
-  clear: both;
-  height: 0;
-  line-height: 0px;
-}
