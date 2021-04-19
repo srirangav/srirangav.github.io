@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<html>
+
 <head>
   <meta http-equiv="Content-Type" content=
   "text/html; charset=utf-8" />
 
-  <title>Parallels & Linux Notes</title>
+  <title>Parallels &amp; Linux Notes</title>
   <link href="../shared/site.css" type="text/css"
         rel="stylesheet" />
 </head>
@@ -36,7 +38,7 @@
 </ul>
 
 <hr />
-<p><b><a name="u2010" id="u2010">Parallels Tools for <a href=
+<p><b><a id="u2010">Parallels Tools</a> for <a href=
 "https://releases.ubuntu.com/20.10/">Ubuntu 20.10</a> on Parallels 15</b>
 </p>
 
@@ -61,9 +63,9 @@ See, e.g.:
     >https://gist.github.com/rudolfratusinski/a4d9e3caff11a4d9d81d2e84abc9afbf</a>
     </li>
 
-    <li><code>down_read(&mm->mmap_sem)</code> needs to
+    <li><code>down_read(&amp;mm->mmap_sem)</code> needs to
     replaced with <code>mmap_read_lock(mm)</code> and
-    <code>up_read(&mm->mmap_sem)</code> needs to
+    <code>up_read(&amp;mm->mmap_sem)</code> needs to
     replaced with <code>mmap_read_unlock(mm)</code> (See, e.g.,
     <a href="https://sourceware.org/git/?p=systemtap.git;a=blobdiff;f=runtime/linux/access_process_vm.h;h=327d0e611f47cbf445d470e383649afc9220a957;hp=94c480496c75f5afcfe8615e10d5e4ac78fd627e;hb=37066e2c3a9d9f48fc01b13ec0493b1c67551275;hpb=6af5df835df110552fa2209a403d04e3a84d8997">
     https://sourceware.org/git/?p=systemtap.git;a=blobdiff;f=runtime/linux/access_process_vm.h;h=327d0e611f47cbf445d470e383649afc9220a957;hp=94c480496c75f5afcfe8615e10d5e4ac78fd627e;hb=37066e2c3a9d9f48fc01b13ec0493b1c67551275;hpb=6af5df835df110552fa2209a403d04e3a84d8997</a>)
@@ -108,7 +110,7 @@ modules and install them:
 </li>
 
 <li>Mount the Parallels Tools CD image in the Parallels instances running
-Ubuntu 20.10 (Parallels Action Menu, Install Parallels Tools).</li><br />
+Ubuntu 20.10 (Parallels Action Menu, Install Parallels Tools).</li>
 <li>Make a working directory to patch Parallels Tools. For example:
     <p>
         <code>
@@ -153,7 +155,7 @@ where the Parallels Tools Linux kernel modules were extracted apply it:
     <p>
         <code>
         $ cd ~/Documents/pt_mod<br />
-        $ patch -p0 < ../pt_mod/prl_kmods_u20-10.patch
+        $ patch -p0 &lt; ../pt_mod/prl_kmods_u20-10.patch
         </code>
     </p>
 </li>
@@ -211,7 +213,7 @@ everything works properly):
 
 <hr />
 
-<p><b><a name="fw" id="fw">Enable the firewall</b></p>
+<p><b><a id="fw">Enable the firewall</a></b></p>
 
 <p>
     <code>
@@ -233,7 +235,7 @@ From: <a href=
 
 <hr />
 
-<p><b><a name="nodesk" id="nodesk">Disable the desktop picture</b></p>
+<p><b><a id="nodesk">Disable the desktop picture</a></b></p>
 
 <p>
     <code>
@@ -246,7 +248,7 @@ From: <a href="https://www.fcpace.com/node/55"
 
 <hr />
 
-<p><b><a name="noavahi" id="noavahi">Disable <a href="https://www.avahi.org/"
+<p><b><a id="noavahi">Disable</a> <a href="https://www.avahi.org/"
 >Avahi</a></b>
 </p>
 
@@ -262,7 +264,7 @@ From: <a href=
 
 <hr />
 
-<p><b><a name="nocups" id="nocups">Disable <a href="https://www.cups.org/"
+<p><b><a id="nocups">Disable</a> <a href="https://www.cups.org/"
 >CUPS</a></b>
 </p>
 
@@ -278,7 +280,7 @@ From: <a href=
 
 <hr />
 
-<p><b><a name="nosnaps" id="nosnaps">Disable Snaps on Ubuntu 20.10</b></p>
+<p><b><a id="nosnaps">Disable Snaps on Ubuntu 20.10</a></b></p>
 
 <ul>
     <li><a href="https://www.kevin-custer.com/blog/disabling-snaps-in-ubuntu-20-04/"
@@ -359,7 +361,7 @@ re-enable it:
 
 <hr />
 
-<p><b><a name="gtweaks" id="gtweaks">Enable Gnome Tweaks and Extension</a></b>
+<p><b><a id="gtweaks">Enable Gnome Tweaks and Extension</a></b>
 </p>
 
 <p>
@@ -374,46 +376,9 @@ From: <a href=
 
 <hr />
 
-  <div class="c3">
-
-    <p>
-    <span class="c2">
-
-    <!-- Creative Commons License -->
-    Licensed under a
-    <a rel="license" href=
-    "http://creativecommons.org/licenses/by/2.5/">Creative Commons
-    Attribution 2.5 License</a>
-    <!-- /Creative Commons License -->
-
-    </span>
-    </p>
-
-    <!--
-    <rdf:RDF xmlns="http://web.resource.org/cc/"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-        <Work rdf:about="">
-            <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
-            <license
-            rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
-        </Work>
-        <License rdf:about="http://creativecommons.org/licenses/by/2.5/">
-            <permits
-            rdf:resource="http://web.resource.org/cc/Reproduction" />
-            <permits
-            rdf:resource="http://web.resource.org/cc/Distribution" />
-            <requires
-            rdf:resource="http://web.resource.org/cc/Notice" />
-            <requires
-            rdf:resource="http://web.resource.org/cc/Attribution" />
-            <permits
-            rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
-        </License>
-    </rdf:RDF>
-    -->
-
-  </div>
+<span class="c2">
+<a href="../../index.html">Home</a>&nbsp;/&nbsp;<a href="../index.html">Notes</a>
+</span>
 
 </body>
 </html>
