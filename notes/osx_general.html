@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;
+        charset=utf-8" />
+  <title>General MacOS X Notes</title>
+  <link href="../shared/site.css" type="text/css"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+<h2 class="c1">General MacOS X Notes</h2>
+
+<p>These are some general notes about MacOS X.</p>
+
+<ul>
+    <li><a href="osx_general.html#osxramdisk">Creating a Ram Disk</a></li>
+    <li><a href="osx_general.html#osxshell">Changing Shells</a></li>
+    <li><a href="osx_general.html#osxx11">X11 Options</a></li>
+    <li><a href="osx_general.html#osxscreenshot">Changing Screenshot Format</a></li>
+    <li><a href="osx_general.html#osxversion">Getting Version Info</a></li>
+    <li><a href="osx_general.html#osxdsstore">Disable .DSStore on Network Volumes</a></li>
+    <li><a href="osx_general.html#osxafpguest">Disable AFP Guest Access</a></li>
+    <li><a href="osx_general.html#osxdashboard">Disable Dashboard</a></li>
+</uL>
+
+<hr />
+
+<h3>
+<a id="osxramdisk">Creating Ram Disk in MacOS X</a>
+</h3>
+
+<ol>
+    <li>Create and mount the ramdisk:
+        <pre>$ hdid -nomount ram://<b><i>size</i></b>
+/dev/disk<b><i>X</i></b></pre>
+        <p>Here <b><i>size</i></b> should be 2 * 1024 * desired size in MB and
+        <b><i>X</i></b> will be the disk number for the ramdisk that hdid 
+        allocated.</p>
+    </li>
+
+    <li>Format the ramdisk for HFS+:
+        <pre>$ diskutil eraseDisk HFS+ RAMDISK disk<b><i>X</i></b>
+Started erase on disk disk<b><i>X</i></b>
+Creating Partition Map
+5% ..Formatting Disk  100% ..
+Finished erase on disk disk<b><i>X</i></b>
+Finished partitioning on disk disk<b><i>X</i></b></pre>
+    </li>
+
+      <li>Eject the disk when you are finished using it:
+          <pre>$ hdiutil detach /dev/disk<b><i>X</i></b></pre>
+      </li>
+</ol>
+
+<hr />
+
+<h3><a id="osxshell">Changing Shells on MacOS X</a></h3>
+
+<pre>$ sudo niutil -createprop / /Users/<b><i>username</i></b> shell <b><i>shell</i></b></pre>
+  
+where <b><i>username</i></b> is your short username and <b><i>shell</i></b>
+is the full path to the new shell.
+
+<hr />
+
+<h3><a id="osxx11">MacOS X X11 Options</a></h3>
+  
+<dl>
+    <dt>Map Option to META:</dt>
+    <dd><pre>$ defaults write com.apple.x11 swap_alt_meta -bool true</pre></dd>
+
+    <dt>Disable X11 Server from listening for remote connection:</dt>
+    <dd><pre>$ defaults write com.apple.x11 nolisten_tcp -boolean true</pre></dd>
+</dl>
+  
+<hr />
+
+<h3><a id="osxscreenshot">MacOS X Screenshot Type</a></h3>
+
+<pre>$ defaults write com.apple.screencapture type <b><i>type</i></b></pre>
+
+where <b><i>type</i></b> is either pdf, png, jpg or gif.
+
+<hr />
+
+<h3><a id="osxversion">Getting MacOS X Version Info</a></h3>
+  
+<dl>
+    <dt>System Version:</dt>
+    <dd>
+        <pre>$ defaults read loginwindow SystemVersionStampAsString</pre>
+        <pre>$ sw_vers -productVersion</pre>
+    </dd>
+    <dt>Build Version:</dt>
+    <dd>
+        <pre>$ defaults read loginwindow BuildVersionStampAsString</pre>
+        <pre>$ sw_vers -buildVersion</pre>
+    </dd>
+</dl>
+
+<hr />
+
+<h3><a id="osxdsstore">Disable .DSStore files on Network Volumes</a></h3>
+
+<pre>$ defaults write com.apple.desktopservices DSDontWriteNetworkStores true</pre>
+  
+<hr />
+
+<h3><a id="osxafpguest">Disable AFP Guest Access</a></h3>
+
+<pre>$ defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool false</pre>
+
+<hr />
+
+<h3><a id="osxdashboard">Disable Dashboard</a></h3>
+
+<dl>
+      <dt>To disable Dashboard:</dt>
+      <dd>
+      <pre>$ defaults write com.apple.dashboard mcx-disabled -boolean YES
+$ killall Dock</pre>
+      </dd>
+      <dt>To enable Dashboard:</dt>
+      <dd>
+      <pre>$ defaults write com.apple.dashboard mcx-disabled -boolean NO
+$ killall Dock</pre>
+      </dd>  
+</dl>
+  
+<hr />
+
+<span class="c2">
+<a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>
+</span>
+
+</body>
+</html>

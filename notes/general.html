@@ -5,11 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for Mac OS X (vers 1st December 2004), see www.w3.org" />
   <meta http-equiv="Content-Type" content=
   "text/html; charset=utf-8" />
-
   <title>General Notes</title>
   <link href="../shared/site.css" type="text/css" 
         rel="stylesheet" />
@@ -30,27 +27,6 @@
   <a href="general.html#vim">VIM</a>
   </p>
   
-  MacOS X:
-
-  <blockquote>
-  <a href="general.html#osxramdisk">Creating a Ram Disk</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#osxshell">Changing Shells</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#osxx11">X11 Options</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#osxscreenshot">Changing Screenshot Format</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#osxversion">Getting Version Info</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#osxdsstore">Disabling .DSStore files on Network
-  Volumes</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#osxafpguest">Disabling AFP Guest Access</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#osxdashboard">Disabling Dashboard</a>
-  </blockquote>
-
   SSH:
 
   <blockquote>
@@ -153,116 +129,6 @@
   href="http://mark.stosberg.com/Tech/text_editor_review.html#vim"
   >http://mark.stosberg.com/Tech/text_editor_review.html#vim</a>.
   <hr />
-
-  <h3>
-  <a name="osxramdisk" id="osxramdisk">Creating Ram Disk in MacOS X</a>
-  </h3>
-
-  The following steps can be used to create a ram disk in MacOS X.
-  <ol>
-  <li>Create and mount the ramdisk:
-  <pre>$ hdid -nomount ram://<b><i>size</i></b>
-/dev/disk<b><i>X</i></b></pre>
-  <p>Here <b><i>size</i></b> should be 2 * 1024 * desired size in MB and
-  <b><i>X</i></b> will be the disk number for the ramdisk that hdid 
-  allocated.</p>
-  </li>
-  <li>Format the ramdisk for HFS+:
-  <pre>$ diskutil eraseDisk HFS+ RAMDISK disk<b><i>X</i></b>
-Started erase on disk disk<b><i>X</i></b>
-Creating Partition Map
-5% ..Formatting Disk  100% ..
-Finished erase on disk disk<b><i>X</i></b>
-Finished partitioning on disk disk<b><i>X</i></b></pre>
-  </li>
-  <li>Eject the disk when you are finished using it:
-  <pre>$ hdiutil detach /dev/disk<b><i>X</i></b></pre>
-  </li>
-  </ol>
-
-  <hr />
-  <h3><a name="osxshell" id="osxshell">Changing Shells on MacOS X</a></h3>
-
-  <dl>
-  <dt>To change shells on MacOS X:</dt>
-  <dd><pre>$ sudo niutil -createprop / /Users/<b><i>username</i></b> shell <b><i>shell</i></b></pre>
-  </dd>
-  </dl>
-  
-  Here <b><i>username</i></b> is your short username and <b><i>shell</i></b>
-  is the full path to the new shell.
-
-  <hr />
-  <h3><a name="osxx11" id="osxx11">MacOS X X11 Options</a></h3>
-  
-  <dl>
-  <dt>Map Option to META:</dt>
-  <dd><pre>$ defaults write com.apple.x11 swap_alt_meta -bool true</pre></dd>
-  <dt>Disable X11 Server from listening for remote connection:</dt>
-  <dd><pre>$ defaults write com.apple.x11 nolisten_tcp -boolean true</pre></dd>
-  </dl>
-  
-  <hr />
-  <h3><a name="osxscreenshot" id="osxscreenshot">MacOS X Screenshot 
-  Type</a></h3>
-
-  <dl>
-  <dt>To change the screenshot format on MacOS X:</dt>
-  <dd><pre>$ defaults write com.apple.screencapture type <b><i>type</i></b></pre></dd>
-  </dl>
-
-  Here <b><i>type</i></b> is either pdf, png, jpg or gif.
-
-  <hr />
-  <h3><a name="osxversion" id="osxversion">Getting MacOS X Version 
-  Info</a></h3>
-  
-  <dl>
-  <dt>System Version:</dt>
-  <dd><pre>$ defaults read loginwindow SystemVersionStampAsString</pre></dd>
-  <dt>Build Version:</dt>
-  <dd><pre>$ defaults read loginwindow BuildVersionStampAsString</pre></dd>
-  </dl>
-
-  <hr />
-  <h3><a name="osxdsstore" id="osxdsstore">Disabling .DSStore files on 
-  Network Volumes in MacOS X</a></h3>
-
-  <dl>
-  <dt>To prevent MacOS X from creating .DSStore files on Network Volumes:</dt>
-  <dd>
-  <pre>$ defaults write com.apple.desktopservices DSDontWriteNetworkStores true</pre>
-  </dd>
-  </dl>
-  
-  <hr />
-  <h3><a name="osxdsstore" id="osxafpguest">Disabling AFP Guest Access 
-  on MacOS X</a></h3>
-
-  <dl>
-  <dt>To disable AFP Guest access:</dt>
-  <dd>
-  <pre>$ defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool false</pre>
-  </dd>
-  </dl>
-
-  <hr />
-  <h3><a name="osxdsstore" id="osxdashboard">Disabling Dashboard on 
-  MacOS X</a></h3>
-
-  <dl>
-  <dt>To disable Dashboard:</dt>
-  <dd>
-  <pre>$ defaults write com.apple.dashboard mcx-disabled -boolean YES
-$ killall Dock</pre>
-  </dd>
-  <dt>To enable Dashboard:</dt>
-  <dd>
-  <pre>$ defaults write com.apple.dashboard mcx-disabled -boolean NO
-$ killall Dock</pre>
-  </dd>
-  
-  </dl>
   
   <hr />
   <h3><a name="sshtunnel" id="sshtunnel">SSH Tunneling</a></h3>
@@ -311,7 +177,7 @@ $ killall Dock</pre>
 
   <hr />
 
-  <h3><a name="sshagent" id="sshkagent">SSH Agent</a></h3>
+  <h3><a name="sshagent" id="sshagent">SSH Agent</a></h3>
   
   <dl>
   <dt>To start ssh-agent:</dt>
@@ -375,7 +241,7 @@ $ killall Dock</pre>
   <hr />
 
   <h3><a href="http://subversion.tigris.org/">Subversion</a>
-  <a name="snvbackup" id="svnbackup">Backup and Restore</a></h3>
+  <a name="svnbackup" id="svnbackup">Backup and Restore</a></h3>
 
   <dl>
   
