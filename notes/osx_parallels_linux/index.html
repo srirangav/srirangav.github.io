@@ -14,7 +14,9 @@
 
 <h2 class="c1">Parallels and Linux Notes</h2>
 
-<p>The these are some general notes about running Linux under <a href=
+<p>The these are some general notes about running Linux (<a href=
+"https://ubuntu.com/">Ubuntu</a> and <a href=
+"https://www.debian.org/index.en.html">Debian</a>) under <a href=
 "https://www.parallels.com/">Parallels</a> on MacOS X.</p>
 
 <ul>
@@ -22,6 +24,8 @@
     <li><a href="index.html#u2010">Parallels 15 and Ubuntu 20.10</a></li>
 
     <li><a href="index.html#nosnaps">Disable Snaps on Ubuntu 20.10</a></li>
+
+    <li><a href="index.html#updates">System Updates</a></li>
 
     <li><a href="index.html#fw">Enable the firewall</a></li>
 
@@ -34,6 +38,8 @@
     <li><a href="index.html#gtweaks"
     >Install Gnome Tweaks and Extensions</a>
     </li>
+    
+    <li><a href="index.html#isos">CDs/ISOs</a></li>
 
 </ul>
 
@@ -294,11 +300,37 @@ re-enable it:
 
 <hr />
 
+<p><b><a id="updates">System Updates</a></b></p>
+
+<ol>
+
+    <li>Get the most recent updates: 
+        <p><code>$ sudo apt-get update</code></p>
+    </li>
+
+    <li>Install the updates:
+        <p><code>$ sudo apt-get upgrade</code></p>
+    </li>
+</ol>
+
+From: <a href="https://www.3cx.com/blog/voip-howto/os-security-updates-debian/"
+>https://www.3cx.com/blog/voip-howto/os-security-updates-debian/</a>
+
+<hr />
+
 <p><b><a id="fw">Enable the firewall</a></b></p>
 
 <p>
     <code>
     $ sudo ufw enable
+    </code>
+</p>
+
+On Debian 10, you may need to install ufw:
+
+<p>
+    <code>
+    $ sudo apt-get install ufw
     </code>
 </p>
 
@@ -361,8 +393,7 @@ From: <a href=
 
 <hr />
 
-<p><b><a id="gtweaks">Enable Gnome Tweaks and Extension</a></b>
-</p>
+<p><b><a id="gtweaks">Enable Gnome Tweaks and Extension</a></b></p>
 
 <p>
     <code>
@@ -376,9 +407,58 @@ From: <a href=
 
 <hr />
 
+<p><b><a id="isos">CDs/ISOs</a></b></p>
+
+<ul>
+
+    <li>Make an ISO from DVD/CDROM:
+
+    <p><code>$ dd if=/dev/sr0 bs=8M of=<i>name</i>.iso</code></p>
+
+    where <i>name</i> is the name of the ISO.
+
+    <p>From: <a href="https://www.wikihow.com/Create-an-ISO-File-in-Linux"
+    >https://www.wikihow.com/Create-an-ISO-File-in-Linux</a></p>
+
+    </li>
+
+    <li>Make an ISO from Directory:
+
+        <p>
+        <ol>
+            <li>Install xorriso:
+
+            <p><code>$ sudo apt-get install xorriso</code></p>
+
+            </li>
+
+            <li>Create the ISO:
+
+            <p><code>$ xorrisofs -v -J -r -V <i>label</i> -o <i>name</i>.iso 
+            <i>path</i></code></p>
+
+            where <i>label</i> is the label for the ISO, 
+            <i>name</i> is the name of the ISO, and 
+            <i>path</i> is the directory from which the ISO should be made.
+        
+            </li>
+        </ol>
+        </p>
+
+    <p>From: <a href=
+    "https://wiki.debian.org/BurnCd#Make_an_ISO_9660_image_file"
+    >https://wiki.debian.org/BurnCd#Make_an_ISO_9660_image_file</a></p>
+    
+    </li>
+
+</ul>
+
+<hr />
+
 <span class="c2">
 <a href="../../index.html">Home</a>&nbsp;/&nbsp;<a href="../index.html">Notes</a>
 </span>
 
 </body>
 </html>
+
