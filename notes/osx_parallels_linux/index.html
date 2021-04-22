@@ -21,6 +21,8 @@
 
     <li><a href="index.html#u2010">Parallels 15 and Ubuntu 20.10</a></li>
 
+    <li><a href="index.html#nosnaps">Disable Snaps on Ubuntu 20.10</a></li>
+
     <li><a href="index.html#fw">Enable the firewall</a></li>
 
     <li><a href="index.html#nodesk">Disable the desktop picture</a></li>
@@ -28,8 +30,6 @@
     <li><a href="index.html#noavahi">Disable Avahi</a></li>
 
     <li><a href="index.html#nocups">Disable CUPS</a></li>
-
-    <li><a href="index.html#nosnaps">Disable Snaps on Ubuntu 20.10</a></li>
 
     <li><a href="index.html#gtweaks"
     >Install Gnome Tweaks and Extensions</a>
@@ -213,73 +213,6 @@ everything works properly):
 
 <hr />
 
-<p><b><a id="fw">Enable the firewall</a></b></p>
-
-<p>
-    <code>
-    $ sudo ufw enable
-    </code>
-</p>
-
-From: <a href=
-"https://www.techrepublic.com/article/how-to-secure-your-ubuntu-18-04-desktop-installation-in-one-easy-step/"
->https://www.techrepublic.com/article/how-to-secure-your-ubuntu-18-04-desktop-installation-in-one-easy-step/</a>
-
-<p>(Optional) Install a GUI firewall:
-    <p>
-        <code>
-        $ sudo apt-get install gufw
-        </code>
-    </p>
-</p>
-
-<hr />
-
-<p><b><a id="nodesk">Disable the desktop picture</a></b></p>
-
-<p>
-    <code>
-    $ gsettings set org.gnome.desktop.background picture-uri ""
-    </code>
-</p>
-
-From: <a href="https://www.fcpace.com/node/55"
->https://www.fcpace.com/node/55</a>
-
-<hr />
-
-<p><b><a id="noavahi">Disable</a> <a href="https://www.avahi.org/"
->Avahi</a></b>
-</p>
-
-<p>
-    <code>
-    $ sudo systemctl disable --now avahi-daemon.socket avahi-daemon.service<br />
-    </code>
-</p>
-
-From: <a href=
-"https://unix.stackexchange.com/questions/255197/how-to-disable-avahi-daemon-without-uninstalling-it"
->https://unix.stackexchange.com/questions/255197/how-to-disable-avahi-daemon-without-uninstalling-it</a>
-
-<hr />
-
-<p><b><a id="nocups">Disable</a> <a href="https://www.cups.org/"
->CUPS</a></b>
-</p>
-
-<p>
-    <code>
-    $ sudo systemctl disable --now cups.service cups.socket cups.path
-    </code>
-</p>
-
-From: <a href=
-"https://unix.stackexchange.com/questions/480082/how-to-disable-cups-service-on-reboot-with-systemd"
->https://unix.stackexchange.com/questions/480082/how-to-disable-cups-service-on-reboot-with-systemd</a>
-
-<hr />
-
 <p><b><a id="nosnaps">Disable Snaps on Ubuntu 20.10</a></b></p>
 
 <ul>
@@ -358,6 +291,73 @@ re-enable it:
 </li>
 
 </ol>
+
+<hr />
+
+<p><b><a id="fw">Enable the firewall</a></b></p>
+
+<p>
+    <code>
+    $ sudo ufw enable
+    </code>
+</p>
+
+From: <a href=
+"https://www.techrepublic.com/article/how-to-secure-your-ubuntu-18-04-desktop-installation-in-one-easy-step/"
+>https://www.techrepublic.com/article/how-to-secure-your-ubuntu-18-04-desktop-installation-in-one-easy-step/</a>
+
+<p>(Optional) Install a GUI firewall:
+    <p>
+        <code>
+        $ sudo apt-get install gufw
+        </code>
+    </p>
+</p>
+
+<hr />
+
+<p><b><a id="nodesk">Disable the desktop picture</a></b></p>
+
+<p>
+    <code>
+    $ gsettings set org.gnome.desktop.background picture-uri ""
+    </code>
+</p>
+
+From: <a href="https://www.fcpace.com/node/55"
+>https://www.fcpace.com/node/55</a>
+
+<hr />
+
+<p><b><a id="noavahi">Disable</a> <a href="https://www.avahi.org/"
+>Avahi</a></b>
+</p>
+
+<p>
+    <code>
+    $ sudo systemctl disable --now avahi-daemon.socket avahi-daemon.service<br />
+    </code>
+</p>
+
+From: <a href=
+"https://unix.stackexchange.com/questions/255197/how-to-disable-avahi-daemon-without-uninstalling-it"
+>https://unix.stackexchange.com/questions/255197/how-to-disable-avahi-daemon-without-uninstalling-it</a>
+
+<hr />
+
+<p><b><a id="nocups">Disable</a> <a href="https://www.cups.org/"
+>CUPS</a></b>
+</p>
+
+<p>
+    <code>
+    $ sudo systemctl disable --now cups.service cups.socket cups.path
+    </code>
+</p>
+
+From: <a href=
+"https://unix.stackexchange.com/questions/480082/how-to-disable-cups-service-on-reboot-with-systemd"
+>https://unix.stackexchange.com/questions/480082/how-to-disable-cups-service-on-reboot-with-systemd</a>
 
 <hr />
 
