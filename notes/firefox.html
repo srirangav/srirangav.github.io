@@ -23,7 +23,7 @@
 
 <hr />
 
-<p><a name="settings" id="settings">Settings</a></p>
+<p><a id="settings">Settings</a></p>
 
 <blockquote>
 
@@ -96,6 +96,113 @@
     </blockquote>
 </p>
 
+<p>Prevent Javascript attempts to interfere with cut and paste:
+    <ol>
+        <li>In the URL bar, type <code>about:config</code> and
+            click the "I accept the risk!" button.
+        </li>
+        <li>Search for
+            <code>dom.event.clipboardevents.enabled</code>.
+            Double click to set the value to "false".
+        </li>
+    </ol>
+
+    <blockquote>
+    Source: Chris Siebenmann, <a href=
+    "https://utcc.utoronto.ca/~cks/space/blog/web/FirefoxClipboardeventsIssue"
+    >A Firefox surprise from disabling dom.event.clipboardevents.enabled</a>,
+    <a href="https://utcc.utoronto.ca/~cks/space/">CSpace</a> (Apr. 16, 2021).
+    </blockquote>
+</p>
+
+<p>Enable Privacy Features:
+    <ol>
+        <li>In the URL bar, type <code>about:config</code> and
+            click the "I accept the risk!" button.
+        </li>
+        <li>Search for
+            <code>beacon.enabled</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>browser.safebrowsing.downloads.remote.enabled</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>browser.send_pings</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>browser.sessionstore.privacy_level</code>.
+            Double click to set the value to "2".
+        </li>
+        <li>Search for
+            <code>browser.urlbar.speculativeConnect.enabled </code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>extensions.pocket.enabled</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>identity.fxaccounts.enabled</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>identity.fxaccounts.toolbar.enabled</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>network.dns.disablePrefetch</code>.
+            Double click to set the value to "true".
+        </li>
+        <li>Search for
+            <code>network.dns.disablePrefetchFromHTTPS</code>.
+            Double click to set the value to "true".
+        </li>
+        <li>Search for
+            <code>network.predictor.enabled</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>network.predictor.enable-prefetch</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>network.prefetch-next</code>.
+            Double click to set the value to "false".
+        </li>
+        <li>Search for
+            <code>network.IDN_show_punycode</code>.
+            Double click to set the value to "true".
+        </li>
+        <li>Search for
+            <code>privacy.trackingprotection.enabled</code>.
+            Double click to set the value to "true".
+        </li>
+        <li>Search for
+            <code>privacy.trackingprotection.cryptomining.enabled</code>.
+            Double click to set the value to "true".
+        </li>
+        <li>Search for
+            <code>privacy.trackingprotection.fingerprinting.enabled</code>.
+            Double click to set the value to "true".
+        </li>
+        <li>Search for
+            <code>webgl.disabled</code>.
+            Double click to set the value to "true".
+        </li>
+
+    </ol>
+
+    <blockquote>
+    Source: Dan Schmid, <a href=
+    "https://danschmid.de/en/blog/install-firefox-under-freebsd-and-set-it-up-with-privacy"
+    >Install Firefox under Freebsd and set it up with privacy</a>,
+    <a href="https://danschmid.de/">Dan Schmid</a> (Apr. 30, 2021).
+    </blockquote>
+</p>
+
 <p>Prevent Accidental Quits:
     <ol>
         <li>In the URL bar, type <code>about:config</code> and
@@ -145,30 +252,11 @@
     </ol>
 </p>
 
-<p>Prevent Javascript attempts to interfere with cut and paste:
-    <ol>
-        <li>In the URL bar, type <code>about:config</code> and
-            click the "I accept the risk!" button.
-        </li>
-        <li>Search for
-            <code>dom.event.clipboardevents.enabled</code>.
-            Double click to set the value to "false".
-        </li>
-    </ol>
-
-    <blockquote>
-    Source: Chris Siebenmann, <a href=
-    "https://utcc.utoronto.ca/~cks/space/blog/web/FirefoxClipboardeventsIssue"
-    >A Firefox surprise from disabling dom.event.clipboardevents.enabled</a>,
-    <a href="https://utcc.utoronto.ca/~cks/space/">CSpace</a> (Apr. 16, 2021).
-    </blockquote>
-</p>
-
 </blockquote>
 
 <hr />
 
-<p><a name="addons" id="addons">Addons</a></p>
+<p><a id="addons">Addons</a></p>
 
 <blockquote>
 
@@ -193,6 +281,15 @@ Recommended:
 <br />
 <a href="https://github.com/kkapsner/CanvasBlocker/"
 >https://github.com/kkapsner/CanvasBlocker/</a>
+</li>
+
+<li>Chameleon:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/chameleon-ext/"
+>https://addons.mozilla.org/en-US/firefox/addon/chameleon-ext/</a>
+<br />
+<a href="https://sereneblue.github.io/chameleon/"
+>https://sereneblue.github.io/chameleon/</a>
 </li>
 
 <li>ClearURLs:
@@ -276,6 +373,21 @@ Recommended:
 >https://github.com/idlewan/link_cleaner</a>
 </li>
 
+<li>Privacy Badger:
+<br />
+<a href="https://www.eff.org/privacybadger"
+>https://www.eff.org/privacybadger</a>
+</li>
+
+<li>Redirect AMP to HTML:
+<br />
+<a href="https://addons.mozilla.org/en-US/firefox/addon/amp2html/"
+>https://addons.mozilla.org/en-US/firefox/addon/amp2html/</a>
+<br />
+<a href="https://www.daniel.priv.no/web-extensions/amp2html.html"
+>https://www.daniel.priv.no/web-extensions/amp2html.html</a>
+</li>
+
 <li>Smart Referer:
 <br />
 <a href="https://addons.mozilla.org/en-US/firefox/addon/smart-referer/"
@@ -323,13 +435,14 @@ Other:
 <a href="https://addons.mozilla.org/en-US/firefox/addon/neat-url/"
 >https://addons.mozilla.org/en-US/firefox/addon/neat-url/</a>
 </li>
-
-<li>Privacy Badger:
+<li>I don't care about cookies:
 <br />
-<a href="https://www.eff.org/privacybadger"
->https://www.eff.org/privacybadger</a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/i-dont-care-about-cookies/"
+>https://addons.mozilla.org/en-US/firefox/addon/i-dont-care-about-cookies/</a>
+<br />
+<a href="https://www.i-dont-care-about-cookies.eu/"
+>https://www.i-dont-care-about-cookies.eu/</a>
 </li>
-
 <li>Tracking Token Stripper:
 <br />
 <a href="https://addons.mozilla.org/en-US/firefox/addon/utm-tracking-token-stripper/"
@@ -357,7 +470,7 @@ Other:
 
 <hr />
 
-<p><a name="appearance" id="appearance">Appearance</a></p>
+<p><a id="appearance">Appearance</a></p>
 
 <blockquote>
 
