@@ -1,15 +1,20 @@
 ; init.el - xemacs/emacs initialization
-; $Id: init.el.txt 806 2006-11-21 17:44:04Z ranga $
 
 ; global variable settings
 
 (setq column-number-mode t
       line-number-mode t
       require-final-newline t
+      next-line-add-newlines nil
       dired-listing-switches "-al"
-      display-time-day-and-date t)
+      display-time-day-and-date t
+      display-time-24hr-format t)
 
 (setq-default fill-column 76)
+
+;; Force emacs to output spaces instead of tabs (auto "untabify")
+
+(custom-set-variables '(indent-tabs-mode nil))
 
 ; defined $HOME
 
@@ -23,24 +28,24 @@
 
 ; xemacs specific stuff
 
-(if (string-match "XEmacs" emacs-version)
-    (progn
+;; (if (string-match "XEmacs" emacs-version)
+;;     (progn
 
-      ; load tramp
+;;       ; load tramp
 
-      (setq tramp-syntax 'url
-	    tramp-default-method "ssh")
-      (require 'tramp)
+;;       (setq tramp-syntax 'url
+;; 	    tramp-default-method "ssh")
+;;       (require 'tramp)
 
-      (custom-set-variables
-       '(cperl-indent-level 4)
-       '(cperl-tab-always-intent t))))
+;;       (custom-set-variables
+;;        '(cperl-indent-level 4)
+;;        '(cperl-tab-always-intent t))))
 
 ; key mappings
 
-;(global-set-key "\C-xa" 'beginning-of-buffer)
-;(global-set-key "\C-xe" 'end-of-buffer)
-;(global-set-key "\C-xp" 'clipboard-kill-ring-save)
+;; (global-set-key "\C-xa" 'beginning-of-buffer)
+;; (global-set-key "\C-xe" 'end-of-buffer)
+;; (global-set-key "\C-xp" 'clipboard-kill-ring-save)
 (global-set-key "\C-xg" 'goto-line)
 (global-set-key "\C-xr" 'revert-buffer)
 
