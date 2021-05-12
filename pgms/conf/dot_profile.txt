@@ -7,45 +7,34 @@ umask 022
 
 # set the PATH to directories where binaries are usually located
 
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-PATH=$PATH:/usr/X11R6/bin:/opt/local/bin:/opt/local/sbin
-PATH=$PATH:/usr/sfw/bin:/opt/sfw/bin:/usr/ccs/bin:$HOME/bin
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/opt/local/bin:/opt/local/sbin
+PATH=$PATH:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin
 export PATH
 
-# set HOST to the short hostname
-
-#HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
-
-# fix TERM, if necessary
-
-# if [ "X$TERM" = "Xscreen" ] ; then
-#     TERM=vt100
-#     export TERM
-# fi
-
-# set variables for interactive shells
-
 case $- in
+
+    # interactive shell startup
+    
     *i*)
-        # PS1="$HOST$ "
-        # PS2="$HOST> "
+
+	# default prompt
+	
         PS1="$ "
         PS2="> "
 
         # change the prompt if running as root (e.g. via sudo)
 
         if [ X"$EUID" = X"0" ] ; then
-            # PS1="$HOST# "
-            # PS2="$HOST#> "
             PS1="# "
             PS2="#> "
         fi
+	
         PAGER="more"
         EDITOR="vi"
         VISUAL="$EDITOR"
         FCEDIT="$EDITOR"
         CDPATH=".:$HOME:$HOME/Documents"
-        SHELL="`echo $0 | sed -e 's/^\-//' -e 's/.*\///'`"
+        #SHELL="`echo $0 | sed -e 's/^\-//' -e 's/.*\///'`"
 
         export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH SHELL
 
@@ -57,11 +46,11 @@ case $- in
 
         # set bash and ksh specific options
 
-        case $SHELL in
-            bash*)
+        case "$0" in
+            *bash*)
                 set -o notify emacs ignoreeof nonclobber
                 ;;
-            ksh*)
+            *ksh*)
                 set -o emacs
                 if [ -r "$HOME/.kshrc" ] ; then
                    ENV="$HOME/.kshrc"
@@ -79,24 +68,11 @@ case $- in
         yes() { echo "yes" ; }
         y()   { echo "y" ; }
 
-        # if aliases are available, then alias screen and subversion
-
-        # case "`type alias 2>&1 | awk '{ print $NF; }'`" in
-        #     *builtin*)
-        #         alias screen="screen -e^Dd"
-        #         alias snv=svn
-        #         ;;
-        # esac
         ;;
 esac
 
-# look for and load any local shell startup files
+# look for and load a local shell startup files
 
-for LOCAL_STARTUP in "$HOME/.profile_$HOST" \
-                     "$HOME/.profile_local"
-do
-    if [ -r "$LOCAL_STARTUP" ] ; then
-        . "$LOCAL_STARTUP"
-    fi
-done
-unset LOCAL_STARTUP
+if [ -r "$HOME/.profile_local" ] ; then
+    . "$HOME/.profile_local"
+fi
