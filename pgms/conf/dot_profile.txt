@@ -14,27 +14,31 @@ export PATH
 
 # set HOST to the short hostname
 
-HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
+#HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
 
 # fix TERM, if necessary
 
-if [ "X$TERM" = "Xscreen" ] ; then
-    TERM=vt100
-    export TERM
-fi
+# if [ "X$TERM" = "Xscreen" ] ; then
+#     TERM=vt100
+#     export TERM
+# fi
 
 # set variables for interactive shells
 
 case $- in
     *i*)
-        PS1="$HOST$ "
-        PS2="$HOST> "
+        # PS1="$HOST$ "
+        # PS2="$HOST> "
+        PS1="$ "
+        PS2="> "
 
         # change the prompt if running as root (e.g. via sudo)
 
         if [ X"$EUID" = X"0" ] ; then
-            PS1="$HOST# "
-            PS2="$HOST#> "
+            # PS1="$HOST# "
+            # PS2="$HOST#> "
+            PS1="# "
+            PS2="#> "
         fi
         PAGER="more"
         EDITOR="vi"
@@ -77,12 +81,12 @@ case $- in
 
         # if aliases are available, then alias screen and subversion
 
-        case "`type alias 2>&1 | awk '{ print $NF; }'`" in
-            *builtin*)
-                alias screen="screen -e^Dd"
-                alias snv=svn
-                ;;
-        esac
+        # case "`type alias 2>&1 | awk '{ print $NF; }'`" in
+        #     *builtin*)
+        #         alias screen="screen -e^Dd"
+        #         alias snv=svn
+        #         ;;
+        # esac
         ;;
 esac
 
