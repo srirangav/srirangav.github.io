@@ -28,22 +28,28 @@ case $- in
             PS1="# "
             PS2="#> "
         fi
+
+	# include our home directory and our documents folder
+	# in the CDPATH
 	
-        PAGER="more"
+	CDPATH=".:$HOME:$HOME/Documents"
+
+	# default the editor to vi
+	
         EDITOR="vi"
         VISUAL="$EDITOR"
         FCEDIT="$EDITOR"
-        CDPATH=".:$HOME:$HOME/Documents"
-        #SHELL="`echo $0 | sed -e 's/^\-//' -e 's/.*\///'`"
 
-        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH SHELL
-
-        # if less is available, use it
-
+        # if less is available, use it as our pager, otherwise
+	# default to more
+	
+        PAGER="more"
         if type less > /dev/null 2>&1 ; then
             PAGER="less"
         fi
-
+	
+	export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
+	
         # set bash and ksh specific options
 
         case "$0" in
