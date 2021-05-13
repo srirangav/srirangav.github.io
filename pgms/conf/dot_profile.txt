@@ -74,6 +74,16 @@ case $- in
         yes() { echo "yes" ; }
         y()   { echo "y" ; }
 
+        # define aliases (if alias is available)
+        
+        if type alias > /dev/null 2>&1 ; then
+
+            # run bc with standard functions and scale set to 20
+            
+            alias bc="bc -lq" ;
+            
+        fi
+
         ;;
 esac
 
