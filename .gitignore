@@ -1,6 +1,11 @@
-# Xcode
 Makefile
+
+# Mac
+
 .DS_Store
+
+# Xcode
+
 build/
 *.pbxuser
 !default.pbxuser
@@ -17,3 +22,8 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+
+# emacs
+
+*~
+
