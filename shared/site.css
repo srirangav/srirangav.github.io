@@ -4,13 +4,14 @@
        color: white;
   }
   a:link {
-       color: LightBlue;
+       color: LightGray;
   }
 }
 
 body {
   margin: 5px;
   padding: 10px 20px;
+  font-family: sans-serif;
 }
 
 div.c3 {
