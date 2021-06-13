@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>MacPorts Notes</title>
+      <link href="../shared/site.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+
+<h2 class="c1">MacPorts Notes</h2>
+
+<p>The these are some general notes about 
+<a href="https://www.macports.org/">MacPorts</a>.</p>
+<ul>
+    <li><a href="macports.html#common">Commonly Used Ports</a></li>
+    <li><a href="macports.html#contrib">Contributing to MacPorts</a></li>
+</ul>
+
+<hr />
+
+<p><a id="common">Commonly Used Ports</a></p>
+
+<blockquote>
+
+    <ol>
+        <li>diff-pdf: <a href="https://vslavik.github.io/diff-pdf/"
+        >https://vslavik.github.io/diff-pdf/</a></li>
+        <li>dnscyrpt-proxy: <a href="https://github.com/DNSCrypt/dnscrypt-proxy"
+        >https://github.com/DNSCrypt/dnscrypt-proxy</a></li>
+        <li>gnupg2: <a href="https://www.gnupg.org/">https://www.gnupg.org/</a></li>
+        <li>innoextract: <a href="https://constexpr.org/innoextract/"
+        >https://constexpr.org/innoextract/</a></li>
+        <li>newsboat: <a href="https://newsboat.org/">https://newsboat.org/</a></li>
+        <li>rclone: <a href="https://rclone.org/">https://rclone.org/</a></li>
+        <li>libpst: <a href="https://www.five-ten-sg.com/libpst/"
+        >https://www.five-ten-sg.com/libpst/</a></li>
+        <li>youtube-dl: <a href="https://www.youtube-dl.org/"
+        >https://www.youtube-dl.org/</a></li>
+    </ol>
+
+</blockquote>
+
+<hr />
+<p><a id="contrib">Contributing to MacPorts</a></p>
+
+<blockquote>
+    
+    <ol>
+        <li>Create a fork on GitHub</li>
+        <li><p>Clone the fork locally: 
+            <pre>git clone https://github.com/<i>username</i>/macports-ports.git</pre>
+            where <i>username</i> your github username</p>
+        </li>
+        <li>Add the the official repository as the upstream: 
+            <pre>git remote add upstream https://github.com/macports/macports-ports.git</pre>
+        </li>
+        <li>Fetch upstream changes:
+            <pre>git fetch upstream</pre>
+        </li>
+        <li><p>Create a branch for changes: 
+            <pre>git checkout -b <i>portname</i>-<i>version</i></pre>
+            where <i>portname</i> is the name of the port and <i>version</i>
+            is the version of the port</p>
+        </li>
+        <li><p>After making changes committed them: 
+            <pre>git commit -a -m "<i>portname</i>: update to <i>version</i>" [-S]</pre>
+            where <i>portname</i> is the name of the port, <i>version</i>
+            is the version of the port, and -S is optional (assuming that signing
+            commits has been setup)</p>
+        </li>
+        <li><p>Push the changes upstream:
+            <pre>git push --set-upstream origin <i>portname</i>-<i>version</i></pre>
+            where <i>portname</i> is the name of the port and <i>version</i>
+            is the version of the port</p>
+        </li>
+        <li>Open a pull request on GitHub</li>
+        <li><p>Switch back to the main/master branch:
+            <pre>git checkout master</pre></p>
+        </li>
+    </ol>
+
+</blockquote>
+
+<hr />
+<p>
+<span class="c2">
+<a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>   
+</span>
+</p>
+
+</body>
+</html>
+
