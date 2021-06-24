@@ -1,0 +1,25 @@
+Comments from
+https://hackaday.com/2021/06/21/a-collection-of-linux-tools-on-steroids/
+
+Mark Sears:
+
+    In the beginning there was C and life was good, but not good enough. So
+    the shell was invented. And life was good, but not good enough. So make
+    was invented. and life was good enough.
+
+    But not good enough for some people. So autoconf was invented, and then
+    automake (because autoconf is incomprehensible). And, sorry, but you
+    lost me.
+
+    So cmake was invented. And the same thing.
+
+    Make and shell scripting work (as noted below), are sufficient, easy to
+    understand if done properly, require no other tools or dependencies.
+
+KB:
+
+    I googled LSD and apparently you need a dealer to get it.  But it
+    appears to make things more colourful indeed! ...
+    
+    (See https://github.com/Peltoche/lsd)
+
