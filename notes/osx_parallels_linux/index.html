@@ -29,15 +29,17 @@
 
     <li><a href="index.html#fw">Enable the firewall</a></li>
 
+    <li><a href="index.html#gtweaks"
+    >Install Gnome Tweaks and Extensions</a>
+    </li>
+
     <li><a href="index.html#nodesk">Disable the desktop picture</a></li>
 
     <li><a href="index.html#noavahi">Disable Avahi</a></li>
 
     <li><a href="index.html#nocups">Disable CUPS</a></li>
-
-    <li><a href="index.html#gtweaks"
-    >Install Gnome Tweaks and Extensions</a>
-    </li>
+    
+    <li><a href="index.html#rmapps">Remove Extra Apps</a></li>
     
     <li><a href="index.html#isos">CDs/ISOs</a></li>
     
@@ -351,6 +353,23 @@ From: <a href=
 
 <hr />
 
+<p><b><a id="gtweaks">Enable</a> <a href=
+      "https://wiki.gnome.org/Apps/Tweaks">Gnome Tweaks</a> and 
+      Gnome Shell Extensions 
+      (if using <a href="https://www.gnome.org/">Gnome</a>)</b></p>
+
+<p>
+    <code>
+    $ sudo apt install gnome-tweaks gnome-shell-extension-prefs<br />
+    </code>
+</p>
+
+From: <a href=
+"https://www.omgubuntu.co.uk/2020/10/things-to-do-after-installing-ubuntu-20-10-groovy-gorilla"
+>https://www.omgubuntu.co.uk/2020/10/things-to-do-after-installing-ubuntu-20-10-groovy-gorilla</a>
+
+<hr />
+
 <p><b><a id="nodesk">Disable the desktop picture</a></b></p>
 
 <p>
@@ -396,17 +415,31 @@ From: <a href=
 
 <hr />
 
-<p><b><a id="gtweaks">Enable Gnome Tweaks and Extension</a></b></p>
+<p><b><a id="rmapps">Remove Extra Apps</a></b></p>
 
-<p>
-    <code>
-    $ sudo apt install gnome-tweaks gnome-shell-extension-prefs<br />
-    </code>
-</p>
+<ol>
+    <li>Remove <a href="https://www.libreoffice.org/">LibreOffice</a>:
+        <p><code>$ sudo apt-get remove --purge libreoffice*</code></p>
+    </li>
+    <li>Remove <a href="https://docs.xfce.org/apps/parole/start">parole</a>:
+        <p><code>$ sudo apt-get remove --purge parole</code></p>
+    </li>
+    <li>Clean up:
+        <p><code>$ sudo apt-get clean &amp;&amp; sudo apt-get autoremove</code></p>
+    </li>
+</ol>
 
-From: <a href=
-"https://www.omgubuntu.co.uk/2020/10/things-to-do-after-installing-ubuntu-20-10-groovy-gorilla"
->https://www.omgubuntu.co.uk/2020/10/things-to-do-after-installing-ubuntu-20-10-groovy-gorilla</a>
+From: 
+<ul>
+    <li><a href=
+      "https://askubuntu.com/questions/180403/how-to-uninstall-libreoffice"
+      >https://askubuntu.com/questions/180403/how-to-uninstall-libreoffice</a>
+    </li>
+    <li><a href=
+      "https://installlion.com/debian/stretch/main/p/parole/uninstall/index.html"
+      >https://installlion.com/debian/stretch/main/p/parole/uninstall/index.html</a>
+    </li>
+</ul>
 
 <hr />
 
