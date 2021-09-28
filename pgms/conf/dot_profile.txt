@@ -8,7 +8,8 @@ umask 022
 # set the PATH to directories where binaries are usually located
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/opt/local/bin:/opt/local/sbin
-PATH=$PATH:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin
+PATH=$PATH:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin
+PATH=$PATH:/usr/local/zfs/bin:$HOME/bin
 export PATH
 
 case $- in
