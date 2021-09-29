@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../shared/copy.xsl"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
   <meta http-equiv="Content-Type" content=
   "text/html; charset=utf-8" />
@@ -19,42 +16,41 @@
 
   <blockquote>
 
-  <p>
-  <a href="general.html#gpg">GnuPG</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#wgetstdout">Output Urls to STDOUT with wget</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#vim">VIM</a>
-  </p>
+      <p>
+      <a href="general.html#gpg">GnuPG</a>
+      &nbsp;&#183;&nbsp;
+      <a href="general.html#wgetstdout">Output Urls to STDOUT with wget</a>
+      &nbsp;&#183;&nbsp;
+      <a href="general.html#vim">VIM</a>
+      </p>
   
-  SSH:
+      SSH:
 
-  <blockquote>
-  <a href="general.html#sshtunnel">Tunneling</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#sshfingerprint">SSH Key Fingerprint</a>  
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#sshagent">SSH Agent</a>  
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#sshkeepalives">SSH Keepalives</a>  
-  </blockquote>
+      <blockquote>
+      <a href="general.html#sshtunnel">Tunneling</a>
+      &nbsp;&#183;&nbsp;
+      <a href="general.html#sshfingerprint">SSH Key Fingerprint</a>  
+      &nbsp;&#183;&nbsp;
+      <a href="general.html#sshagent">SSH Agent</a>  
+      &nbsp;&#183;&nbsp;
+      <a href="general.html#sshkeepalives">SSH Keepalives</a>  
+      </blockquote>
   
-  Subversion:
+      Subversion:
 
-  <blockquote>
-  <a href="general.html#svncreate">Creating a New Repository</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#svnprop">Property Settings</a>
-  &nbsp;&#183;&nbsp;
-  <a href="general.html#svnbackup">Backup and Restore</a>
-  </blockquote>
+      <blockquote>
+      <a href="general.html#svncreate">Creating a New Repository</a>
+      &nbsp;&#183;&nbsp;
+      <a href="general.html#svnprop">Property Settings</a>
+      &nbsp;&#183;&nbsp;
+      <a href="general.html#svnbackup">Backup and Restore</a>
+      </blockquote>
   
   </blockquote>
   
   <hr />
 
-  <h3><a name="wgetstdout" id="wgetstdout">Output Urls to STDOUT with
-  wget</a></h3>
+  <h3><a id="wgetstdout">Output Urls to STDOUT with wget</a></h3>
   
   It is possible to have wget to ouput the content of a Url to STDOUT
   a la curl using a Bourne-like shell on systems that support the 
@@ -66,7 +62,7 @@
   
   <hr />
   
-  <h3><a name="gpg" id="gpg">GnuPG Notes</a></h3>
+  <h3><a id="gpg">GnuPG Notes</a></h3>
   
   The following are some commonly used 
   <a href="http://www.gnupg.org">GnuPG</a> commands.
@@ -92,7 +88,7 @@
       <pre>$ curl <b><i>url</i></b> | gpg --import</pre>
   </li>
   <li>Importing a public key from a <b><i>keyserver</i></b>:
-<pre>$ gpg --keyserver <b><i>keyserver</i></b> --recv-key <b><i>id</i></b></pre>
+      <pre>$ gpg --keyserver <b><i>keyserver</i></b> --recv-key <b><i>id</i></b></pre>
       <p><i>See</i> <a
       href="http://www.gnupg.org/gph/en/manual.html#AEN84"
       >http://www.gnupg.org/gph/en/manual.html#AEN84</a>.</p>
@@ -112,7 +108,7 @@
 
   <hr />
 
-  <h3><a name="vim" id="vim">VIM Notes</a></h3>
+  <h3><a id="vim">VIM Notes</a></h3>
   
   The following are some commonly used 
   <a href="http://www.vim.org">VIM</a> commands.
@@ -130,8 +126,7 @@
   >http://mark.stosberg.com/Tech/text_editor_review.html#vim</a>.
   <hr />
   
-  <hr />
-  <h3><a name="sshtunnel" id="sshtunnel">SSH Tunneling</a></h3>
+  <h3><a id="sshtunnel">SSH Tunneling</a></h3>
   
   <dl>
   <dt>To create an SSH tunnel for a tcp service running on a 
@@ -165,7 +160,7 @@
   
   <hr />
 
-  <h3><a name="sshfingerprint" id="sshfingerprint">SSH Key Fingerprint</a></h3>
+  <h3><a id="sshfingerprint">SSH Key Fingerprint</a></h3>
   
   <dl>
   <dt>To get a SSH key fingerprint, do the following:</dt>
@@ -177,7 +172,7 @@
 
   <hr />
 
-  <h3><a name="sshagent" id="sshagent">SSH Agent</a></h3>
+  <h3><a id="sshagent">SSH Agent</a></h3>
   
   <dl>
   <dt>To start ssh-agent:</dt>
@@ -195,7 +190,7 @@
   
   <hr />
 
-  <h3><a name="sshkeepalives" id="sshkeepalives">SSH Keepalives</a></h3>
+  <h3><a id="sshkeepalives">SSH Keepalives</a></h3>
   
   <dl>
   <dt>Add the following to $HOME/.ssh/config to prevent dropped 
@@ -214,7 +209,7 @@
   <hr />
 
   <h3>Creating a New <a href="http://subversion.tigris.org/">Subversion</a>
-  <a name="svncreate" id="svncreate">Repository</a></h3>
+  <a id="svncreate">Repository</a></h3>
 
   <dl>
   <dt>To create a new subversion repository:</dt>
@@ -227,7 +222,7 @@
   <hr />
 
   <h3><a href="http://subversion.tigris.org/">Subversion</a>
-  <a name="svnprop" id="svnprop">Properties</a></h3>
+  <a id="svnprop">Properties</a></h3>
   
   <dl>
   <dt>Set execute permissions on a file:</dt>
@@ -241,7 +236,7 @@
   <hr />
 
   <h3><a href="http://subversion.tigris.org/">Subversion</a>
-  <a name="svnbackup" id="svnbackup">Backup and Restore</a></h3>
+  <a id="svnbackup">Backup and Restore</a></h3>
 
   <dl>
   
@@ -269,14 +264,6 @@ $ svnadmin load <b><i>repository</i></b> &lt; <b><i>dump</i></b></pre>
 
   <div class="c3">
 
-    <p>
-    <span class="c2">
-    Valid
-    <a href="http://validator.w3.org/check/referer">XHTML</a> and 
-    <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
-
-    &nbsp;//&nbsp;
-    
     <!-- Creative Commons License -->
     Licensed under a 
     <a rel="license" href=
@@ -284,9 +271,6 @@ $ svnadmin load <b><i>repository</i></b> &lt; <b><i>dump</i></b></pre>
     Attribution 2.5 License</a>
     <!-- /Creative Commons License -->
 
-    </span>
-    </p>
-    
     <!--
     <rdf:RDF xmlns="http://web.resource.org/cc/"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -311,9 +295,6 @@ $ svnadmin load <b><i>repository</i></b> &lt; <b><i>dump</i></b></pre>
     </rdf:RDF>
     -->
 
-    <span class="c2">
-    $Id: general.html 785 2006-10-16 16:22:52Z ranga $
-    </span>
   </div>
 </body>
 </html>
