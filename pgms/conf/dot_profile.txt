@@ -18,15 +18,17 @@ case $- in
     
     *i*)
 
+	HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
+
 	# default prompt
 	
-        PS1="$ "
+        PS1="$HOST$ "
         PS2="> "
 
         # change the prompt if running as root (e.g. via sudo)
 
         if [ X"$EUID" = X"0" ] ; then
-            PS1="# "
+            PS1="$HOST# "
             PS2="#> "
         fi
 
@@ -93,3 +95,4 @@ esac
 if [ -r "$HOME/.profile_local" ] ; then
     . "$HOME/.profile_local"
 fi
+
