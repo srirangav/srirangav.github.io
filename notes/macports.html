@@ -63,7 +63,11 @@
             where <i>portname</i> is the name of the port and <i>version</i>
             is the version of the port</p>
         </li>
-        <li><p>After making changes committed them: 
+        <li><p>After making changes, lint the Portfile: 
+            <pre>port lint --nitpick -D .</pre></p>
+        </li>
+
+        <li><p>Commit the changes: 
             <pre>git commit -a -m "<i>portname</i>: update to <i>version</i>" [-S]</pre>
             where <i>portname</i> is the name of the port, <i>version</i>
             is the version of the port, and -S is optional (assuming that signing
