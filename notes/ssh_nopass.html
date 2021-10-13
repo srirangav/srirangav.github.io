@@ -1,15 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../shared/copy.xsl"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for Mac OS X (vers 1st December 2004), see www.w3.org" />
   <meta http-equiv="Content-Type" content=
   "text/html; charset=utf-8" />
-
   <title>SSH Without a Password</title>
   <link href="../shared/site.css" type="text/css"
         rel="stylesheet" />
@@ -32,8 +27,12 @@
     <li>These steps seem to work on systems running <a href=
     "http://www.openssh.org">OpenSSH</a>.</li>
 
-    <li>The steps assume that a DSA key is being used. To use a RSA
-    key substitute 'rsa' for 'dsa'.</li>
+    <li>The steps assume that a RSA key is being used because
+    OpenSSH has deprecated DSA keys as being "too [] weak and
+    [] recommend[s] against [their] use" (see <a href=
+    "https://www.openssh.com/legacy.html"
+    >OpenSSH Legacy Options</a>). To use a DSA key (for example,
+    on an older system) substitute 'dsa' for 'rsa'.</li>
 
     <li>The steps assume that you are using a Bourne-like shell
     (sh, <a href="http://www.kornshell.com/">ksh</a> or <a href=
@@ -53,13 +52,13 @@
       <pre>
 $ mkdir -p $HOME/.ssh
 $ chmod 0700 $HOME/.ssh
-$ ssh-keygen -t dsa -f $HOME/.ssh/id_dsa -P ''
-</pre>This should result in two files, $HOME/.ssh/id_dsa (private
-key) and $HOME/.ssh/id_dsa.pub (public key).
+$ ssh-keygen -t rsa -f $HOME/.ssh/id_rsa -P ''
+</pre>This should result in two files, $HOME/.ssh/id_rsa (private
+key) and $HOME/.ssh/id_rsa.pub (public key).
     </li>
 
     <li>
-      <p>Copy $HOME/.ssh/id_dsa.pub to the
+      <p>Copy $HOME/.ssh/id_rsa.pub to the
       <b><i>server</i></b>.</p>
     </li>
 
@@ -67,12 +66,12 @@ key) and $HOME/.ssh/id_dsa.pub (public key).
       <p>On the <b><i>server</i></b> run the following
       commands:</p>
       <pre>
-$ cat id_dsa.pub &gt;&gt; $HOME/.ssh/authorized_keys2
+$ cat id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys2
 $ chmod 0600 $HOME/.ssh/authorized_keys2
 </pre>Depending on the version of OpenSSH the following commands
 may also be required:
       <pre>
-$ cat id_dsa.pub &gt;&gt; $HOME/.ssh/authorized_keys
+$ cat id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys
 $ chmod 0600 $HOME/.ssh/authorized_keys
 </pre>An alternative is to create a link from authorized_keys2 to
 authorized_keys:
@@ -84,9 +83,19 @@ $ cd $HOME/.ssh &amp;&amp; ln -s authorized_keys2 authorized_keys
     <li>
       <p>On the <b><i>client</i></b> test the results by ssh'ing to
       the <b><i>server</i></b>:</p>
-      <pre>
-$ ssh -i $HOME/.ssh/id_dsa <b><i>server</i></b>
-</pre>
+      <pre>$ ssh -i $HOME/.ssh/id_rsa <b><i>server</i></b></pre>
+      If a password prompt appears, adding the <code>-v</code> 
+      option before <code>-i</code> may be helpful to determine
+      the problem.  
+      
+      <p>For example, when connecting to older SSH servers using a
+      newer SSH client, the option 
+      <code>-oKexAlgorithms=+diffie-hellman-group1-sha1</code>
+      may be necessary because the newer client, by default,
+      has disabled support for a key exchange algorithm used
+      by the older SSH server (see <a href=
+      "https://www.openssh.com/legacy.html"
+      >OpenSSH Legacy Options</a>).</p>
     </li>
 
     <li>
@@ -94,9 +103,9 @@ $ ssh -i $HOME/.ssh/id_dsa <b><i>server</i></b>
       <b><i>client</i></b>:</p>
       <pre>
 Host <b><i>server</i></b>
-         IdentityFile ~/.ssh/id_dsa
+         IdentityFile ~/.ssh/id_rsa
 </pre>This allows ssh access to the <b><i>server</i></b> without
-having to specify the path to the id_dsa file as an argument to ssh
+having to specify the path to the id_rsa file as an argument to ssh
 each time.
     </li>
   </ol>
@@ -119,28 +128,11 @@ each time.
 
   <h3>Translations:</h3>
   <ul>
-     <li>German translation by Kate Bondareva:
-         <a href=
-         "http://www.autoteiledirekt.de/science/ssh-ohne-passwort"
-         >http://www.autoteiledirekt.de/science/ssh-ohne-passwort</a>
-     </li>
      <li>Indonesian translation by Jordan Silaen /
          <a href="http://ChameleonJohn.com">ChameleonJohn.com</a>:
          <a href=
             "http://www.chameleonjohn.com/translations/ssh_nopass-Indonesian"
          >http://www.chameleonjohn.com/translations/ssh_nopass-Indonesian</a>
-     </li>
-     <li>Kazakh translation by John Vorohovsky:
-         <a href="http://13motors.com/myblog/sshnopass/"
-         >http://13motors.com/myblog/sshnopass/</a>
-     </li>
-     <li>Polish translation by Nick Stasov:
-         <a href="http://led24.de/blog/ssh-bez-hasla"
-	 >http://led24.de/blog/ssh-bez-hasla</a>
-     </li>
-     <li>Russian translation by Prof. Nikolay Pershikov:
-         <a href="http://partsopen.com/blog/?p=75"
-         >http://partsopen.com/blog/?p=75</a>
      </li>
   </ul>
 
@@ -150,11 +142,6 @@ each time.
 
     <p>
     <span class="c2">
-    Valid
-    <a href="http://validator.w3.org/check/referer">XHTML</a> and
-    <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
-
-    &nbsp;//&nbsp;
 
     <!-- Creative Commons License -->
     Licensed under a
@@ -190,9 +177,6 @@ each time.
     </rdf:RDF>
     -->
 
-    <span class="c2">
-    $Id: ssh_nopass.html 1495 2016-11-02 21:38:44Z ranga $
-    </span>
   </div>
 </body>
 </html>
