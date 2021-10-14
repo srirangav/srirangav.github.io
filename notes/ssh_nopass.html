@@ -89,13 +89,21 @@ $ cd $HOME/.ssh &amp;&amp; ln -s authorized_keys2 authorized_keys
       the problem.  
       
       <p>For example, when connecting to older SSH servers using a
-      newer SSH client, the option 
+      newer SSH client (for example, connecting to a MacOSX 10.4 
+      (Tiger) server from a MacOSX 11 (Big Sur) client), the option 
       <code>-oKexAlgorithms=+diffie-hellman-group1-sha1</code>
       may be necessary because the newer client, by default,
       has disabled support for a key exchange algorithm used
       by the older SSH server (see <a href=
       "https://www.openssh.com/legacy.html"
       >OpenSSH Legacy Options</a>).</p>
+      
+      Also, starting with OpenSSH 8.8, ssh and sftp won't connect
+      to servers that offer ssh-rsa as their key type.  The 
+      <code>-oHostKeyAlgorithms=+ssh-rsa</code> will work around
+      this issue (see, for example, <a href=
+      "https://community.atlassian.com/t5/Bitbucket-articles/OpenSSH-8-8-client-incompatibility-and-workaround/ba-p/1826047">
+      OpenSSH 8.8 client incompatibility and workaround</a>).
     </li>
 
     <li>
@@ -104,10 +112,21 @@ $ cd $HOME/.ssh &amp;&amp; ln -s authorized_keys2 authorized_keys
       <pre>
 Host <b><i>server</i></b>
          IdentityFile ~/.ssh/id_rsa
-</pre>This allows ssh access to the <b><i>server</i></b> without
+</pre>
+<p>This allows ssh access to the <b><i>server</i></b> without
 having to specify the path to the id_rsa file as an argument to ssh
-each time.
+each time.</p>
+    For older servers that need the options
+    <code>-oKexAlgorithms=+diffie-hellman-group1-sha1</code>
+    and/or <code>-oHostKeyAlgorithms=+ssh-rsa</code>, add the 
+    following lines to <code>$HOME/.ssh/config</code> to the
+    appropriate <code><i>server</i></code> entry:
+    <pre>
+    KexAlgorithms +diffie-hellman-group1-sha1
+    HostKeyAlgorithms +ssh-rsa
+    PubkeyAcceptedKeyTypes +ssh-rsa</pre>
     </li>
+    
   </ol>
 
   <h3>Helpful manpages:</h3>
