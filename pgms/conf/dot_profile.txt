@@ -84,6 +84,10 @@ case $- in
             # run bc with standard functions and scale set to 20
             
             alias bc="bc -lq" ;
+
+            # alias to get the current working git branch
+
+            alias gitcb="git rev-parse --abbrev-ref HEAD" ;
             
         fi
 
