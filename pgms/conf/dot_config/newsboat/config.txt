@@ -1,13 +1,16 @@
 # newsboat config
 
-# open links in the MacOSX default browser (and keep it in 
-# the background)
-browser	"open -g"
+# open links in the MacOSX default browser (and keep it in the background)
+
+browser "open -g"
 
 # populate / update all feeds on startup
 
 refresh-on-startup yes
 prepopulate-query-feeds yes
+
+# automatically add all podcast episodes to the download queue
+# podcast-auto-enqueue yes
 
 # custom key bindings 
 
@@ -18,8 +21,8 @@ unbind-key g
 unbind-key ^B
 unbind-key ^F
 
-bind-key G end
-bind-key g home
+bind-key G  end
+bind-key g  home
 bind-key ^B pageup
 bind-key ^F pagedown
 
@@ -30,23 +33,35 @@ unbind-key C
 unbind-key d
 unbind-key D
 unbind-key f
+unbind-key j
+unbind-key J
+unbind-key k
+unbind-key K
 unbind-key n
+unbind-key p
 unbind-key u
 unbind-key U
 unbind-key x
 
-bind-key C mark-feed-read       # Catch-up by marking all articles 
-                                # in a feed as read
-bind-key n toggle-article-read 	# mark article New / unread
-bind-key u toggle-article-read 	# mark article new / Unread
-bind-key d delete-article      	# Delete article
+bind-key C mark-feed-read       # Catch-up by marking all articles in a 
+                                # feed as read
+bind-key n toggle-article-read  # mark article New / unread
+bind-key u toggle-article-read  # mark article new / Unread
+bind-key d delete-article       # Delete article
 bind-key D delete-all-articles  # Delete all articles in current feed
-bind-key x purge-deleted	# eXpunge deleted articles
+bind-key x purge-deleted        # eXpunge deleted articles
+bind-key p pb-download          # download podcast episode
+bind-key j next                 # next article
+bind-key k prev                 # previous article
 
 # other key bindings
 
-bind-key U show-urls		# show Urls (b/c 'u' is used for 
-                                # toggling status)
-bind-key f edit-flags		# Flag / mark an article
-bind-key m edit-flags		# flag / Mark and article
+bind-key U show-urls            # show Urls (b/c 'u' is used for toggling 
+                                # status)
+bind-key f edit-flags           # Flag / mark an article
+bind-key m edit-flags           # flag / Mark and article
 
+# podboat settings
+
+download-path            "~/Music/Podcasts/%h-%n"
+download-filename-format "%F-%n-%t.%e"
