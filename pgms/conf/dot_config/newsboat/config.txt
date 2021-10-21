@@ -61,9 +61,9 @@ unbind-key x
 
 bind-key C mark-feed-read       # Catch-up by marking all articles in a 
                                 # feed as read
-bind-key n toggle-article-read 	# mark article New / unread
-bind-key u toggle-article-read 	# mark article new / Unread
-bind-key d delete-article      	# Delete article
+bind-key n toggle-article-read  # mark article New / unread
+bind-key u toggle-article-read  # mark article new / Unread
+bind-key d delete-article       # Delete article
 bind-key D delete-all-articles  # Delete all articles in current feed
 bind-key x purge-deleted        # eXpunge deleted articles
 bind-key p pb-download          # download podcast episode
@@ -72,10 +72,10 @@ bind-key k prev                 # previous article
 
 # other key bindings
 
-bind-key U show-urls		# show Urls (b/c 'u' is used for toggling 
-                            # status)
-#bind-key f edit-flags		# Flag / mark an article
-bind-key m edit-flags		# flag / Mark and article
+bind-key U show-urls            # show Urls (b/c 'u' is used for toggling 
+                                # status)
+#bind-key f edit-flags          # Flag / mark an article
+bind-key m edit-flags           # flag / Mark and article
 
 # macro to open urls in firefox (type ',f' to invoke)
 # see https://wiki.archlinux.org/title/Newsboat
