@@ -18,10 +18,10 @@ case $- in
     
     *i*)
 
-	HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
+        HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
 
-	# default prompt
-	
+        # default prompt
+    
         PS1="$HOST$ "
         PS2="> "
 
@@ -32,27 +32,27 @@ case $- in
             PS2="#> "
         fi
 
-	# include our home directory and our documents folder
-	# in the CDPATH
-	
-	CDPATH=".:$HOME:$HOME/Documents"
+        # include our home directory and our documents folder
+        # in the CDPATH
+    
+        CDPATH=".:$HOME:$HOME/Documents"
 
-	# default the editor to vi
-	
+        # default the editor to vi
+    
         EDITOR="vi"
         VISUAL="$EDITOR"
         FCEDIT="$EDITOR"
 
         # if less is available, use it as our pager, otherwise
-	# default to more
-	
+        # default to more
+    
         PAGER="more"
         if type less > /dev/null 2>&1 ; then
             PAGER="less"
         fi
-	
-	export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
-	
+    
+        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
+    
         # set bash and ksh specific options
 
         case "$0" in
@@ -78,17 +78,19 @@ case $- in
         y()   { echo "y" ; }
 
         # define aliases (if alias is available)
-        
+
         if type alias > /dev/null 2>&1 ; then
 
-            # run bc with standard functions and scale set to 20
-            
-            alias bc="bc -lq" ;
+            # run bc with -l option to load the math 
+            # library so that we get floating point 
+            # math, instead of just integer math
+
+            alias bc="bc -l" ;
 
             # alias to get the current working git branch
 
             alias gitcb="git rev-parse --abbrev-ref HEAD" ;
-            
+
         fi
 
         ;;
@@ -99,4 +101,3 @@ esac
 if [ -r "$HOME/.profile_local" ] ; then
     . "$HOME/.profile_local"
 fi
-
