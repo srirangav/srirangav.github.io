@@ -14,6 +14,7 @@ genindex:
     fi
 	$(MKDIR)/genindex.pl -r "$(MKDIR)/.." \
 	                     -t "$(TITLE)" \
+	                     -c "$(CAPTION)" \
 	                     -h "mk/header.html.in" \
 	                     -b "dir" \
 	                     -f "mk/footer.html.in" . > index.html

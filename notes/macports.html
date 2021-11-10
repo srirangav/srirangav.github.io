@@ -19,11 +19,14 @@
 
 <hr />
 
-<p><a id="common">Commonly Used Ports</a></p>
+<p><a id="common">Commonly Used Ports (x86 / M1)</a></p>
 
 <blockquote>
 
     <ol>
+        <li>ccache (compiler cache): <a href="https://ccache.dev"
+        >https://ccache.dev</a></li>
+        
         <li>diff-pdf (diff pdfs): <a href="https://vslavik.github.io/diff-pdf/"
         >https://vslavik.github.io/diff-pdf/</a></li>
 
@@ -31,6 +34,9 @@
         "https://github.com/DNSCrypt/dnscrypt-proxy"
         >https://github.com/DNSCrypt/dnscrypt-proxy</a></li>
 
+        <li>dosbox-x (enhanced dosbox): <a href="https://dosbox-x.com/"
+        >https://dosbox-x.com/</a></li>
+        
         <li>gnupg2 (GNU pretty good privacy): <a href="https://www.gnupg.org/"
         >https://www.gnupg.org/</a></li>
 
@@ -85,38 +91,38 @@
     <ol>
         <li>Create a fork on GitHub</li>
         <li><p>Clone the fork locally: 
-            <pre>git clone https://github.com/<i>username</i>/macports-ports.git</pre>
+            <pre>$ git clone https://github.com/<i>username</i>/macports-ports.git</pre>
             where <i>username</i> your github username</p>
         </li>
         <li>Add the the official repository as the upstream: 
-            <pre>git remote add upstream https://github.com/macports/macports-ports.git</pre>
+            <pre>$ git remote add upstream https://github.com/macports/macports-ports.git</pre>
         </li>
         <li>Fetch upstream changes:
-            <pre>git fetch upstream</pre>
+            <pre>$ git fetch upstream</pre>
         </li>
         <li><p>Create a branch for changes: 
-            <pre>git checkout -b <i>portname</i>-<i>version</i></pre>
+            <pre>$ git checkout -b <i>portname</i>-<i>version</i></pre>
             where <i>portname</i> is the name of the port and <i>version</i>
             is the version of the port</p>
         </li>
         <li><p>After making changes, lint the Portfile: 
-            <pre>port lint --nitpick -D .</pre></p>
+            <pre>$ port lint --nitpick -D .</pre></p>
         </li>
 
         <li><p>Commit the changes: 
-            <pre>git commit -a -m "<i>portname</i>: update to <i>version</i>" [-S]</pre>
+            <pre>$ git commit -a -m "<i>portname</i>: update to <i>version</i>" [-S]</pre>
             where <i>portname</i> is the name of the port, <i>version</i>
             is the version of the port, and -S is optional (assuming that signing
             commits has been setup)</p>
         </li>
         <li><p>Push the changes upstream:
-            <pre>git push --set-upstream origin <i>portname</i>-<i>version</i></pre>
+            <pre>$ git push --set-upstream origin <i>portname</i>-<i>version</i></pre>
             where <i>portname</i> is the name of the port and <i>version</i>
             is the version of the port</p>
         </li>
         <li>Open a pull request on GitHub</li>
         <li><p>Switch back to the main/master branch:
-            <pre>git checkout master</pre></p>
+            <pre>$ git checkout master</pre></p>
         </li>
     </ol>
 

@@ -14,6 +14,7 @@ my %OPTS = ();
 
 my $ROOTDIR = "";
 my $TITLE = "";
+my $CAPTION = "";
 my %DIRS = ();
 my $ENTRIES = "";
 my $NAVIGATION = "";
@@ -24,7 +25,9 @@ my $FOOTERF = "";
 
 # TODO: Add support of navigation
 
-getopts("b:r:t:h:f:", \%OPTS);
+getopts("b:r:t:h:f:c:", \%OPTS);
+
+# base directory for generating navigation information
 
 $ROOTDIR = $OPTS{'r'};
 unless (defined($ROOTDIR) && -d $ROOTDIR) {
@@ -32,11 +35,15 @@ unless (defined($ROOTDIR) && -d $ROOTDIR) {
     exit(1);
 }
 
+# page header 
+
 $HEADERF = $OPTS{'h'};
 unless (defined($HEADERF) && $HEADERF ne "") {
     printUsage();
     exit(1);
 }
+
+# page body
 
 $BODYF = $OPTS{'b'};
 unless (defined($BODYF) && $BODYF ne "") {
@@ -44,7 +51,11 @@ unless (defined($BODYF) && $BODYF ne "") {
     exit(1);
 }
 
+# generate an index if the page body is "dir"
+
 $GENINDEX = 1 if ($BODYF eq "dir");
+
+# page footer
 
 $FOOTERF = $OPTS{'f'};
 unless (defined($FOOTERF) && $FOOTERF ne "") {
@@ -52,39 +63,50 @@ unless (defined($FOOTERF) && $FOOTERF ne "") {
     exit(1);
 }
 
+# page title 
+
 $TITLE = $OPTS{'t'};
 unless (defined($TITLE) && $TITLE ne "") {
-	printUsage();
-	exit(1);
+    printUsage();
+    exit(1);
 }
+
+# optional page caption
+
+$CAPTION = $OPTS{'c'};
+$CAPTION = "" unless defined($CAPTION);
 
 $DIRS{'ABS_ROOT'} = abs_path($ROOTDIR);
 $DIRS{'CWD'} = abs_path(Cwd::getcwd());
 $DIRS{'REL_ROOT'} = getRelPathToRoot($DIRS{'ABS_ROOT'}, $DIRS{'CWD'});
 
+# index generation was not requested
+
 if ($GENINDEX != 1) {
-	exit (1) if (printHeader($DIRS{'REL_ROOT'}, $HEADERF, $TITLE) != 0 ||
-				 printBody($DIRS{'REL_ROOT'}, $BODYF) != 0 || 	
-    			 printFooter($DIRS{'REL_ROOT'}, $FOOTERF, $NAVIGATION) != 0);
-	exit (0);
+    exit (1) if (printHeader($DIRS{'REL_ROOT'}, $HEADERF, $TITLE, $CAPTION) != 0 ||
+                 printBody($DIRS{'REL_ROOT'}, $BODYF) != 0 ||   
+                 printFooter($DIRS{'REL_ROOT'}, $FOOTERF, $NAVIGATION) != 0);
+    exit (0);
 }
+
+# generate the index
 
 $ENTRIES = getFiles($DIRS{'CWD'});
 
 if (defined($ENTRIES) && 
     ref($ENTRIES) eq "HASH" && 
     int($ENTRIES->{'count'}) > 0) {
-    
+
     delete($ENTRIES->{'count'});
-    
-    exit(1) if (printHeader($DIRS{'REL_ROOT'}, $HEADERF, $TITLE) != 0);
-    
+
+    exit(1) if (printHeader($DIRS{'REL_ROOT'}, $HEADERF, $TITLE, $CAPTION) != 0);
+
     print "<dl>\n";
-    
+
     my $ENTRY = "";
     my $FILE = "";
     my $NAME = "";
-    
+
     foreach $ENTRY (sort(keys(%{$ENTRIES}))) {
         my $SEP = "";
         print "\t<dt>$ENTRY</dt>\n\t\t<dd>\n";
@@ -94,7 +116,7 @@ if (defined($ENTRIES) &&
                 ($NAME = $FILE) =~ s/_/ /g;
                 $NAME =~ s/\.(txt|htm|html|pdf)$//;
                 $NAME =~ s/((^\w)|(\s\w))/\U$1/xg;
-                $NAME =~ s/ V / v\. /;                
+                $NAME =~ s/ V / v\. /;
 #                $NAME =~ s/([\w\']+)/\u\L$1/g;
                 print <<EOHREF;
 \t\t\t $SEP <a href="$FILE">$NAME</a> 
@@ -160,7 +182,7 @@ sub getFiles
 
     if (defined($dir) && -d $dir) {
         if (opendir(DH,$dir)) {
-        	$entry = readdir(DH);
+            $entry = readdir(DH);
             while ($entry) {
         
                 # look for txt, html or pdf files 
@@ -196,11 +218,11 @@ sub getFiles
             closedir(DH);
         }
     } else {
-    	if (defined($dir)) {
-    		printError ("getFiles: $dir not a directory!");
-    	} else {
-    		printError ("getFiles: dir not defined!");
-    	}
+        if (defined($dir)) {
+            printError ("getFiles: $dir not a directory!");
+        } else {
+            printError ("getFiles: dir not defined!");
+        }
     }
 
     $entries{'count'} = $count;
@@ -218,7 +240,7 @@ sub printUsage
     $pgm =~ s/^.*\///;  
 
     print "usage: $pgm -r [root dir] -t [title] -h [header file]";
-    print "-b [body file] -f [footer file]\n";
+    print "-c [caption] -b [body file] -f [footer file]\n";
 
     return 0;
 }
@@ -232,15 +254,16 @@ sub printHeader
     my $rootDir = "";
     my $headerf = "";
     my $title = "";
+    my $caption = "";
     my $line = "";
     
     # get the root directory
     
     $rootDir = shift @_;
     unless (defined($rootDir) && -d $rootDir) {
-		printError ("printHeader: rootDir not defined!");
-    	return -1;
-   	}
+        printError ("printHeader: rootDir not defined!");
+        return -1;
+    }
     $rootDir =~ s/\/+/\//g;
     $rootDir =~ s/\/$//;
     
@@ -249,22 +272,25 @@ sub printHeader
     $headerf = shift @_;
     unless (defined($headerf) && -r "$rootDir/$headerf") {
         if (defined($headerf)) {
-        	printError ("printHeader: cannot read $rootDir/$headerf!");
+            printError ("printHeader: cannot read $rootDir/$headerf!");
         } else {
-        	printError ("printHeader: headerf not defined!");
+            printError ("printHeader: headerf not defined!");
         }
-    	return -1;
+        return -1;
     }
     
     $title = shift @_;
     unless (defined($title) && $title ne "") {
-    	printError("printHeader: title not defined!");
-    	return -1;
+        printError("printHeader: title not defined!");
+        return -1;
     }
     
+    $caption = shift @_;
+    $caption = "" unless (defined($caption));
+    
     unless (open(HEADERFD, "$rootDir/$headerf")) {
-		printError("printHeader: cannot open $rootDir/$headerf!");
-    	return -1;
+        printError("printHeader: cannot open $rootDir/$headerf!");
+        return -1;
     }
 
     while (!eof(HEADERFD)) {
@@ -274,12 +300,13 @@ sub printHeader
         
         $line =~ s/\#\#TITLE\#\#/$title/g;
         $line =~ s/\#\#ROOTDIR\#\#/$rootDir/g;
+        $line =~ s/\#\#CAPTION\#\#/$caption/g;
         
         print "$line\n";
     }
 
-    close (HEADERFD);    
-    
+    close (HEADERFD);
+
     return 0;
 }
 
@@ -305,15 +332,15 @@ sub printBody
     
     $rawbodyf = shift @_;
     if (defined($rawbodyf)) {
-    	$bodyf = "$rootDir/" if ($rawbodyf !~ /^\.\//);
-    	$bodyf .= "$rawbodyf";
+        $bodyf = "$rootDir/" if ($rawbodyf !~ /^\.\//);
+        $bodyf .= "$rawbodyf";
     }
     return -1 unless (-r "$bodyf");
 
     # print out the body
     
     return -1 unless (open(BODYFD, "$bodyf"));
-	
+    
     while (!eof(BODYFD)) {
         $line = <BODYFD>;
         next if (!defined($line));
@@ -374,6 +401,6 @@ sub printFooter
 
 sub printError
 {
-	print STDERR "ERROR: @_\n";
-	return 0;
+    print STDERR "ERROR: @_\n";
+    return 0;
 }

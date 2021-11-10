@@ -125,11 +125,35 @@
   <li>Spell checking the current file:
      <pre>:!aspell -c %</pre>
   </li>
+  <li><p>Hard wrap to 80 columns:</p>
+      <ol>
+        <li><p>Set the text width to 80 columns:
+            <pre>:set textwidth=80</pre>
+            or 
+            <pre>:set tw=80</pre>
+        </p></li>
+        <li><p>To format the entire file, go to the start of the
+               file, <code>gg</code>, and then: <code>gqG</code>
+        </p></li>
+        <li><p>To format the current line only: <code>gq$</code><p></li>
+        <li><p>To format the current paragraph only: <code>gq}</code>
+        <p></li>
+      </ol>
+      Alternative: <code>:%!fold -w <i>col</i></code>
+  </li>
   </ul>
 
-  <i>See</i> <a 
-  href="http://mark.stosberg.com/Tech/text_editor_review.html#vim"
-  >http://mark.stosberg.com/Tech/text_editor_review.html#vim</a>.
+  <i>Sources:</i> 
+  <ul>
+    <li><p><a href=
+              "http://mark.stosberg.com/Tech/text_editor_review.html#vim"
+        >http://mark.stosberg.com/Tech/text_editor_review.html#vim</a></p>
+    </li>
+    <li><p><a href=
+              "https://stackoverflow.com/questions/3033423/"
+        >https://stackoverflow.com/questions/3033423/</a></p>
+    </li>
+  </ul>
   <hr />
   
   <h3><a id="sshtunnel">SSH Tunneling</a></h3>
