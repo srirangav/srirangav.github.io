@@ -37,7 +37,7 @@
       </blockquote>
   
       Subversion:
-
+      
       <blockquote>
       <a href="general.html#svncreate">Creating a New Repository</a>
       &nbsp;&#183;&nbsp;
@@ -47,9 +47,9 @@
       </blockquote>
 
       Git:
-      
+
       <blockquote>
-      <a href="general.html#gitcurbranch">Get Current Branch</a>
+      <a href="general.html#gitbranches">Branches</a>
       </blockquote>
   
   </blockquote>
@@ -238,8 +238,7 @@
   
   <hr />
 
-  <h3>Creating a New <a href="http://subversion.tigris.org/">Subversion</a>
-  <a id="svncreate">Repository</a></h3>
+  <h3>Creating a New Subversion <a id="svncreate">Repository</a></h3>
 
   <dl>
   <dt>To create a new subversion repository:</dt>
@@ -251,8 +250,7 @@
     
   <hr />
 
-  <h3><a href="http://subversion.tigris.org/">Subversion</a>
-  <a id="svnprop">Properties</a></h3>
+  <h3>Subversion <a id="svnprop">Properties</a></h3>
   
   <dl>
   <dt>Set execute permissions on a file:</dt>
@@ -265,8 +263,7 @@
   
   <hr />
 
-  <h3><a href="http://subversion.tigris.org/">Subversion</a>
-  <a id="svnbackup">Backup and Restore</a></h3>
+  <h3>Subversion <a id="svnbackup">Backup and Restore</a></h3>
 
   <dl>
   
@@ -289,14 +286,29 @@ $ svnadmin load <b><i>repository</i></b> &lt; <b><i>dump</i></b></pre>
   "http://wiki2.archlinux.org/index.php/Subversion_backup_and_restore"
   >http://wiki2.archlinux.org/index.php/Subversion_backup_and_restore</a>.
   </p>
-  
+
   <hr />
 
-  <h3><a id="gitcurbranch">Get Current Git Branch:</a></h3>
-  
-  <pre>$ git rev-parse --abbrev-ref HEAD</pre>
-  
-  From: https://stackoverflow.com/questions/1417957/#1418022
+  <h3>Working with Git <a id="gitbranches"> Branches</a></h3>
+
+    <dl>
+        <dt>List local branches:</dt> 
+        <dd><pre>$ git branch</pre></dd>
+        <dt>List remote branches:</dt> 
+        <dd><pre>$ git branch -r</pre></dd>
+        <dt>List all branches:</dt> 
+        <dd><pre>$ git branch -a</pre></dd>
+        <dt>List current branch:</dt>
+        <dd><pre>$ git rev-parse --abbrev-ref HEAD</pre></dt>
+    </dl>
+
+  <i>See</i>:
+  <ul>
+    <li><p><a href="https://infoheap.com/git-list-branches/"
+    >https://infoheap.com/git-list-branches/</a></p></li>
+    <li><p><a href="https://stackoverflow.com/questions/1417957/#1418022"
+    >https://stackoverflow.com/questions/1417957/#1418022</a></p></li>
+  </ul>  
 
   <hr />
   
