@@ -100,8 +100,10 @@
         <li>Add the the official repository as the upstream: 
             <pre>$ git remote add upstream https://github.com/macports/macports-ports.git</pre>
         </li>
-        <li>Fetch upstream changes:
-            <pre>$ git fetch upstream</pre>
+        <li><p>On GitHub, update the fork to include any upstream changes.</p></li>
+        <li>Fetch upstream changes locally:
+            <pre>$ git pull
+$ git fetch upstream</pre>
         </li>
         <li><p>Create a branch for changes: 
             <pre>$ git checkout -b <i>portname</i>-<i>version</i></pre>
@@ -116,7 +118,7 @@
             <pre>$ git commit -a -m "<i>portname</i>: update to <i>version</i>" [-S]</pre>
             where <i>portname</i> is the name of the port, <i>version</i>
             is the version of the port, and -S is optional (assuming that signing
-            commits has been setup)</p>
+            commits is enabled)</p>
         </li>
         <li><p>Push the changes upstream:
             <pre>$ git push --set-upstream origin <i>portname</i>-<i>version</i></pre>
@@ -124,6 +126,14 @@
             is the version of the port</p>
         </li>
         <li>Open a pull request on GitHub</li>
+        <li><p>If changes are requested, make the changes, lint the Portfile (see 
+            above), and then override the prior commit:
+            <pre>$ git commit --amend -a -m "<i>portname</i>: update to <i>version</i>" [-S]
+$ git push origin -f</pre>
+            where <i>portname</i> is the name of the port, <i>version</i>
+            is the version of the port, and -S is optional (assuming that signing
+            commits is enabled)</p>
+        </li>
         <li><p>Switch back to the main/master branch:
             <pre>$ git checkout master</pre></p>
         </li>
