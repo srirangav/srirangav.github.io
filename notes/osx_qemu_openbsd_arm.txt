@@ -1,7 +1,7 @@
 OpenBSD 7.0 ARM64 on QEMU
 -------------------------
 
-I was able to get OpenBSD 7.0 ARM64 running on qemu 6.1.0 on 
+I was able to get OpenBSD 7.0 ARM64 running on qemu 6.2.0 on 
 MacOSX 11 (Big Sur) on M1 using the steps below.  
 
 Preliminary Notes
@@ -18,8 +18,8 @@ Installing OpenBSD 7.0 ARM64 under QEMU
 
 1. Download the Tianocore EDK2 firmware / bios for ARM64:
 
-    https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/4276/QEMU-AARCH64/RELEASE_GCC5/QEMU_EFI.fd
-    
+    https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/4422/QEMU-AARCH64/RELEASE_GCC5/QEMU_EFI.fd
+
 2. Download the OpenBSD 7.0 install image for ARM64:
 
     https://ftp.openbsd.org/pub/OpenBSD/7.0/arm64/install70.img
@@ -29,11 +29,12 @@ Installing OpenBSD 7.0 ARM64 under QEMU
    $ qemu-img create -f qcow2 OpenBSD-7.0-arm64.qcow2 [size]G
    
    where [size] is the virtual disk's size in gigabytes.  I normally
-   use 10G for the disk size.
+   use 16G for the disk size.
    
 4. Boot qemu with the OpenBSD 7.0 ARM64 installer:
 
-   $ qemu-system-aarch64 -M virt -m [memory] -cpu cortex-a53 -smp 2 \
+   $ qemu-system-aarch64 -M virt,highmem=off,accel=hvf \
+     -m [memory] -cpu cortex-a72 -smp 2 \
      -drive if=none,file=install70.img,format=raw,id=hd \
      -device virtio-blk-device,drive=hd \
      -netdev user,id=mynet -device virtio-net-pci,netdev=mynet \
@@ -42,7 +43,7 @@ Installing OpenBSD 7.0 ARM64 under QEMU
      -bios QEMU_EFI.fd
      
     where [memory] is the amount of memory for the virtual machine.
-    I normally use 1024 (1GB) for the virtual machine's memory.
+    I normally use 2048 (1GB) for the virtual machine's memory.
     
     The above command assumes that the OpenBSD 7.0 arm install image
     is located in the current directory.  If you have downloaded it
@@ -71,28 +72,29 @@ Running OpenBSD 7.0 ARM64 under QEMU
 
 Start OpenBSD as follows:
 
-    $ qemu-system-aarch64 -M virt -m [memory] -cpu cortex-a53 -smp 2 \
+    $ qemu-system-aarch64 -M virt,highmem=off,accel=hvf \
+      -m [memory] -cpu cortex-a72 -smp 2 \
       -hda OpenBSD-7.0-arm64.qcow2 \
       -netdev user,id=mynet,hostfwd=tcp:127.0.0.1:[port]-:22 \
       -device virtio-net-pci,netdev=mynet \
       -no-reboot \
       -bios QEMU_EFI.fd
 
-where [memory] is the amount of memory for the virtual machine (I 
-normally use 1024 (1GB) for the virtual machine's memory) and [port]
-is the port on the host system that can be used to connect to sshd
-running on the OpenBSD ARM64 QEMU virtual machine, e.g.:
+    where [memory] is the amount of memory for the virtual machine (I 
+    normally use 1024 (1GB) for the virtual machine's memory) and [port]
+    is the port on the host system that can be used to connect to sshd
+    running on the OpenBSD ARM64 QEMU virtual machine, e.g.:
 
-    $ ssh -p [port] [user]@localhost
+        $ ssh -p [port] [user]@localhost
     
-    or
+        or
     
-    $ sftp -P [port] [user]@localhost
+        $ sftp -P [port] [user]@localhost
     
-    or
+        or
     
-    $ scp -P [port] [user]@localhost
-    
+        $ scp -P [port] [user]@localhost
+
 Optional Post Install Steps
 ---------------------------
 
@@ -119,18 +121,23 @@ Optional Post Install Steps
 
     https://srirangav.github.io/notes/ssh_nopass.html
 
-4. Check for any patches that need to be installed:
+4. Install all available patches
 
-    $ doas syspatch -c
+    $ doas syspatch
     
     See: https://man.openbsd.org/syspatch
 
-5. Install curl, git, gnupg2, xorriso
+5. Install curl, git, gnupg2, xorriso, lscpu
 
     $ doas pkg_add curl
     $ doas pkg_add git
     $ doas pkg_add gnupg2
     $ doas pkg_add xorriso
+    $ doas pkg_add lscpu
+    
+6. Update installed packages:
+
+   $ doas pkg_add -u
 
 References
 ----------
@@ -142,10 +149,10 @@ NetBSD/evbarm under QEMU:  https://wiki.netbsd.org/ports/evbarm/qemu_arm/
 OpenSUSE under QEMU:       https://en.opensuse.org/openSUSE:AArch64#Using_an_emulator
 Installing Debian on QEMU: https://translatedcode.wordpress.com/2016/11/03/installing-debian-on-qemus-32-bit-arm-virt-board/
                            https://translatedcode.wordpress.com/2017/07/24/installing-debian-on-qemus-64-bit-arm-virt-board/
+ArsTechnica Forums:        https://arstechnica.com/civis/viewtopic.php?f=19&t=1473419
 
-TODO
-----
+History
+-------
 
-Add instructions about how to build qemu with hypervisor support on M1, see:
-
-https://gist.github.com/nrjdalal/e70249bb5d2e9d844cc203fd11f74c55
+12/16/2021 - Updates for qemu 6.2.0
+10/21/2021 - Initial version 
