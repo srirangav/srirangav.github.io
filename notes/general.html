@@ -299,7 +299,17 @@ $ svnadmin load <b><i>repository</i></b> &lt; <b><i>dump</i></b></pre>
         <dt>List all branches:</dt> 
         <dd><pre>$ git branch -a</pre></dd>
         <dt>List current branch:</dt>
-        <dd><pre>$ git rev-parse --abbrev-ref HEAD</pre></dt>
+        <dd><pre>$ git rev-parse --abbrev-ref HEAD</pre></dd>
+        <dt>Delete local branch:</dt>
+        <dd><p><pre>$ git branch -D <i>branch</i></pre>
+            where <i>branch</i> is the name of the branch to be
+            deleted.</p></dd>
+        <dt>Delete remote branch:</dt>
+        <dd><p><pre>$ git push origin --delete <i>branch</i></pre>
+            where <i>branch</i> is the name of the branch to be
+            deleted.</p></dd>
+        <dt>Synchronize local branches with remote branches:</dt>
+        <dd><pre>$ git fetch -p</pre></dd>
     </dl>
 
   <i>See</i>:
@@ -308,6 +318,12 @@ $ svnadmin load <b><i>repository</i></b> &lt; <b><i>dump</i></b></pre>
     >https://infoheap.com/git-list-branches/</a></p></li>
     <li><p><a href="https://stackoverflow.com/questions/1417957/#1418022"
     >https://stackoverflow.com/questions/1417957/#1418022</a></p></li>
+    <li><p><a href=
+    "https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/"
+    >https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/</a>
+    </p></li>
+    <li><p><a href="https://stackoverflow.com/questions/2003505/"
+    >https://stackoverflow.com/questions/2003505/</a></p></li>
   </ul>  
 
   <hr />
