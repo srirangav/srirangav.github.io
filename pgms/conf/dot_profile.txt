@@ -35,7 +35,7 @@ case $- in
         # include our home directory and our documents folder
         # in the CDPATH
     
-        CDPATH=".:$HOME:$HOME/Documents"
+        CDPATH=".:$HOME:$HOME/Documents:$HOME/Documents/src"
 
         # default the editor to vi
     
