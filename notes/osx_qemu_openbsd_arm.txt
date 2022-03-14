@@ -18,7 +18,7 @@ Installing OpenBSD 7.0 ARM64 under QEMU
 
 1. Download the Tianocore EDK2 firmware / bios for ARM64:
 
-    https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/4422/QEMU-AARCH64/RELEASE_GCC5/QEMU_EFI.fd
+    https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/4480/QEMU-AARCH64/RELEASE_GCC5/QEMU_EFI.fd
 
 2. Download the OpenBSD 7.0 install image for ARM64:
 
@@ -34,7 +34,7 @@ Installing OpenBSD 7.0 ARM64 under QEMU
 4. Boot qemu with the OpenBSD 7.0 ARM64 installer:
 
    $ qemu-system-aarch64 -M virt,highmem=off,accel=hvf \
-     -m [memory] -cpu cortex-a72 -smp 2 \
+     -m [memory] -cpu cortex-a72 -smp 4,core=2 \
      -drive if=none,file=install70.img,format=raw,id=hd \
      -device virtio-blk-device,drive=hd \
      -netdev user,id=mynet -device virtio-net-pci,netdev=mynet \
@@ -73,7 +73,7 @@ Running OpenBSD 7.0 ARM64 under QEMU
 Start OpenBSD as follows:
 
     $ qemu-system-aarch64 -M virt,highmem=off,accel=hvf \
-      -m [memory] -cpu cortex-a72 -smp 2 \
+      -m [memory] -cpu cortex-a72 -smp 4,core=2 \
       -hda OpenBSD-7.0-arm64.qcow2 \
       -netdev user,id=mynet,hostfwd=tcp:127.0.0.1:[port]-:22 \
       -device virtio-net-pci,netdev=mynet \
@@ -139,6 +139,30 @@ Optional Post Install Steps
 
    $ doas pkg_add -u
 
+7. Enable softupdates:
+
+   https://www.openbsd.org/faq/faq14.html#SoftUpdates
+
+8. Make /tmp a ramdisk:
+
+   8.1 Secure the permissions on /tmp
+
+       $ doas umount /tmp
+       $ chmod 1777 /tmp
+  
+   8.2 Add the following to /etc/fstab:
+
+       swap /tmp mfs rw,nodev,nosuid,-s=300m 0 0
+
+       This creates a 300MB ramdisk for /tmp, the size can be
+       change as needed
+ 
+   From: https://dataswamp.org/~solene/2018-05-08-mfs-tmp.html
+
+9. Shutting down the system:
+
+   $ doas shutdown -p now
+
 References
 ----------
 
@@ -154,5 +178,7 @@ ArsTechnica Forums:        https://arstechnica.com/civis/viewtopic.php?f=19&t=14
 History
 -------
 
+03/14/2022 - Add additional optional post-install steps
 12/16/2021 - Updates for qemu 6.2.0
 10/21/2021 - Initial version 
+
