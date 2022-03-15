@@ -66,6 +66,8 @@ key) and $HOME/.ssh/id_rsa.pub (public key).
       <p>On the <b><i>server</i></b> run the following
       commands:</p>
       <pre>
+$ mkdir -p $HOME/.ssh
+$ chmod 0700 $HOME/.ssh
 $ cat id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys2
 $ chmod 0600 $HOME/.ssh/authorized_keys2
 </pre>Depending on the version of OpenSSH the following commands
