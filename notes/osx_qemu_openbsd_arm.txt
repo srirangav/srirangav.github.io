@@ -43,12 +43,12 @@ Installing OpenBSD 7.0 ARM64 under QEMU
      -bios QEMU_EFI.fd
      
     where [memory] is the amount of memory for the virtual machine.
-    I normally use 2048 (1GB) for the virtual machine's memory.
+    I normally use 1024 (1GB) for the virtual machine's memory.
     
     The above command assumes that the OpenBSD 7.0 arm install image
     is located in the current directory.  If you have downloaded it
     to a different location, you will need to change the -drive option
-    to specify the full path the the install image.
+    to specify the full path to the install image.
     
     The above command also assumes that the virtual machine's disk
     image is located in the current directory.  If you have placed 
@@ -178,7 +178,7 @@ ArsTechnica Forums:        https://arstechnica.com/civis/viewtopic.php?f=19&t=14
 History
 -------
 
-03/14/2022 - Add additional optional post-install steps
+03/14/2022 - Add additional optional post-install steps, correct typos
 12/16/2021 - Updates for qemu 6.2.0
 10/21/2021 - Initial version 
 
