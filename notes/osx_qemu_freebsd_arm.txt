@@ -1,0 +1,281 @@
+FreeBSD 13.0 ARM64 on QEMU
+--------------------------
+
+I was able to get FreeBSD 13.0 ARM64 running on qemu 6.2.0 on 
+MacOSX 11 (Big Sur) on M1 using the steps below.  
+
+Preliminary Notes
+-----------------
+
+I installed qemu from MacPorts (https://www.macports.org/), but
+this should work with qemu compiled from source or installed 
+using Homebrew, see:
+
+https://gist.github.com/nrjdalal/e70249bb5d2e9d844cc203fd11f74c55
+
+Installing FreeBSD 13.0 ARM64 under QEMU
+----------------------------------------
+
+1. Download the Tianocore EDK2 firmware / bios for ARM64:
+
+    https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/4480/QEMU-AARCH64/RELEASE_GCC5/QEMU_EFI.fd
+
+2. Download a pre-installed FreeBSD 13.0 ARM64 image:
+
+    https://download.freebsd.org/ftp/releases/VM-IMAGES/13.0-RELEASE/aarch64/Latest/FreeBSD-13.0-RELEASE-arm64-aarch64.qcow2.xz
+
+3. Decompress the image, for example:
+
+    $ xz -d FreeBSD-13.0-RELEASE-arm64-aarch64.qcow2.xz 
+
+   I usually install xz using macports.  Unarchiver (https://theunarchiver.com/) 
+   works too.
+ 
+4. Boot qemu with FreeBSD ARM64:
+
+    $ qemu-system-aarch64 -smp 2,cores=2 -cpu cortex-a57 \
+      -M virt,highmem=off,accel=hvf -bios QEMU_EFI.fd -m [memory] \
+      -drive if=none,file=FreeBSD-13.0-RELEASE-arm64-aarch64.qcow2,format=qcow2,id=hd0 \
+      -device virtio-blk-device,drive=hd0 \
+      -netdev user,id=net0,hostfwd=tcp:127.0.0.1:[port]-:22 \
+      -device virtio-net-device,netdev=net0
+
+   where [memory] is the amount of memory for the virtual machine
+   (I normally use 1024 (1GB) for the virtual machine's memory),
+   and [port] is the port on the host system that can be used to 
+   connect to sshd running on the FreeBSD ARM64 QEMU virtual machine, 
+   e.g.:
+
+        $ ssh -p [port] [user]@localhost
+    
+        or
+    
+        $ sftp -P [port] [user]@localhost
+    
+        or
+    
+        $ scp -P [port] [user]@localhost
+    
+   The above command assumes that the bios and the FreeBSD 13.0 
+   pre-installed image are located in the current directory.  If 
+   these were downloaded to a different location, the -bios and
+   -drive option will need to be changed to specify the full path 
+   to the bios and the pre-installed image, respectively.
+    
+5. In QEMU's View menu, switch to serial0 from default compat_monitor0,
+   so that you can interact with the installer.
+
+6. After FreeBSD boots, login as root and set root's password using
+   the 'passwd' command.
+
+7. Add a unprivileged user to use for normal logins (consider adding
+   this user to the 'wheel' group to allow them to use su/sudo):
+   
+   https://docs.freebsd.org/en/books/handbook/basics/index.html#users-modifying-adduser
+   
+Optional Post Install Steps
+---------------------------
+
+1. As root, enable sshd:
+
+    # sysrc sshd_enable=yes
+    # service sshd start
+
+2. Configure sshd to not permit root login, read .rhosts / .shosts files, 
+   or accept empty by enabling the following settings in /etc/ssh/sshd_config:
+
+    PermitRootLogin no
+    IgnoreRhosts yes
+    PermitEmptyPasswords no
+     
+3. Enable password-less SSH login:
+
+    https://srirangav.github.io/notes/ssh_nopass.html
+
+4. As root, install and configure doas to allow users in the wheel group
+   to execute commands as root:
+
+    # /usr/sbin/pkg install doas
+    # echo 'permit persist :wheel' > /usr/local/etc/doas.conf
+   
+   This may take some time as it needs initialize the pkg system.
+   
+   See: https://docs.freebsd.org/en/books/handbook/ports/index.html#ports
+        https://docs.freebsd.org/en/books/handbook/security/index.html#security-doas
+
+5. Install all available patches
+
+    $ doas freebsd-update fetch
+    $ doas freebsd-update install
+    
+    See: https://docs.freebsd.org/en/books/handbook/security/index.html#security-advisories
+
+6. Install bash, and change the unprivileged user's shell to bash
+
+    $ doas pkg install bash
+    $ chsh -s /usr/local/bin/bash
+
+7. Install curl, git, gnupg2, xorriso
+
+    $ doas pkg install curl
+    $ doas pkg install git
+    $ doas pkg install gnupg2
+    $ doas pkg install xorriso
+    
+8. Update installed packages:
+
+    $ doas pkg update
+    $ doas pkg upgrade
+
+9. Enable the firewall:
+
+    9.1. Enable pf:
+    
+         $ doas sysrc pf_enable=yes
+         $ doas sysrc pf_rules="/etc/pf.conf"
+
+    9.2. Configure pf:    
+    
+         See: https://docs.freebsd.org/en/books/handbook/firewalls/#firewalls-pf
+    
+         The following could be used for pf.conf:
+        
+            ext_if = "vtnet0"
+            tcp_services = "{ ssh, domain, www, https }"
+            udp_services = "{ domain, ntp }"
+            icmp_types = "{ echoreq, unreach }"
+            martians = "{ 127.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12, \
+                          169.254.0.0/16, 192.0.2.0/24, 0.0.0.0/8, \
+                          240.0.0.0/4 }"
+            table <bruteforce> persist
+
+            scrub in all fragment reassemble no-df max-mss 1440
+
+            block all
+            block drop in quick on $ext_if from $martians to any
+            block drop out quick on $ext_if from any to $martians
+            pass out proto tcp to any port $tcp_services keep state
+            pass quick inet proto { tcp, udp } to any port $udp_services keep state
+            pass inet proto icmp all icmp-type $icmp_types keep state
+            pass quick proto { tcp } from 10.0.2.0/24 to 10.0.2.0/24 \
+                 port ssh flags S/SA keep state \
+                 (max-src-conn 15, max-src-conn-rate 5/3, \
+                 overload <bruteforce> flush global)
+    
+    9.3. Start pf:
+    
+         $ doas service pf start
+
+10. Make /tmp a ramdisk:
+
+    10.1. Secure the permissions on /tmp
+
+          $ doas umount /tmp
+          $ doas chmod 1777 /tmp
+  
+    10.2. Add the following to /etc/fstab:
+
+          md     /tmp    mfs   rw,nosuid,noexec,-s64M 0 0
+
+          This creates a 64MB ramdisk for /tmp, the size, specified
+          after -s, can be change as needed
+ 
+    See: https://www.refmanual.com/2012/11/12/mount-a-ram-disk-to-tmp-on-freebsd/
+         https://dataswamp.org/~solene/2018-05-08-mfs-tmp.html
+
+13. Grow the disk image / root file systems:
+
+    13.1. Shut down the system (if running):
+
+          $ doas shutdown -p now
+       
+    13.2. On MacOSX, resize the disk image:
+    
+          $ qemu-img resize FreeBSD-13.0-RELEASE-arm64-aarch64.qcow2 +10G
+        
+          This add 10GB to the image.  A different size can be specified,
+          as needed.
+        
+          See: https://docs.fedoraproject.org/en-US/Fedora/18/html/Virtualization_Administration_Guide/sect-Virtualization-Tips_and_tricks-Using_qemu_img.html
+
+    13.3. Restart the FreeBSD VM and wait for it to boot.
+    
+    13.4. Determine the name of the disk using gpart:
+    
+          $ gpart show
+        
+          For me, it is usually vtbd0, and after resizing shows as corrupt.
+    
+    13.5. If gpart says the disk is corrupt, fix it:
+    
+          $ doas gpart recover vtbd0
+        
+          See: https://docs.freebsd.org/en/books/handbook/disks/#disks-growing
+    
+    13.6. Resize the root partition:
+    
+          $ doas gpart resize -i 3 vtbd0
+    
+          Here 'gpart show' showed that the UFS partition was partition 3,
+          hence the '-i 3' option, and that the disk was vtbd0
+        
+    13.7. Grow the root partition:
+    
+          $ doas growfs -y /dev/gpt/rootfs
+        
+          If this doesn't work, try rebooting into single user mode
+          and resizing.
+        
+          See: https://www.digitalocean.com/community/questions/freebsd-growfs-operation-not-permitted-aka-enlarge-your-partition
+
+14. Change the hostname:
+
+    $ doas sysrc hostname="qemu-freebsd"
+    
+    See: https://lists.freebsd.org/pipermail/freebsd-questions/2006-April/119355.html
+
+15. Set the localtime zone, for example, to US/Pacific:
+
+    $ doas cp /usr/share/zoneinfo/US/Pacific /etc/localtime
+    
+    See: https://www.cyberciti.biz/faq/howto-set-date-and-time-timezone-in-freebsd/
+    
+16. Enable ntpd:
+
+    $ doas sysrc ntpd_enable="YES"
+    $ doas sysrc ntpd_sync_on_start="YES"
+    $ doas sysrc ntpd_user="ntpd" 
+    $ doas sysrc ntpdate_enable="YES"
+    $ doas sysrc ntpdate_flags="europe.pool.ntp.org"
+    $ doas service ntpd start 
+
+    See: https://www.pc-freak.net/blog/how-to-configure-ntp-server-ntpd-to-synchronize-server-clock-over-the-internet-on-freebsd/
+         https://docs.freebsd.org/en/books/handbook/network-servers/index.html#network-ntp
+    
+17. Set the time (in case it is out of sync):
+
+    $ doas ntpdate -buv europe.pool.ntp.org
+
+18. Get information about the emulated CPU:
+
+    $ sysctl hw.model hw.machine hw.ncpu
+    
+    See: https://www.cyberciti.biz/faq/howto-find-out-freebsd-cpuinfo/
+
+References
+----------
+
+The following references were helpful in getting this working:
+
+FreeBSD Wiki:              https://wiki.freebsd.org/arm64/QEMU
+QEMU Wiki:                 https://wiki.qemu.org/Documentation/Platforms/ARM
+NetBSD/evbarm under QEMU:  https://wiki.netbsd.org/ports/evbarm/qemu_arm/
+OpenSUSE under QEMU:       https://en.opensuse.org/openSUSE:AArch64#Using_an_emulator
+Installing Debian on QEMU: https://translatedcode.wordpress.com/2016/11/03/installing-debian-on-qemus-32-bit-arm-virt-board/
+                           https://translatedcode.wordpress.com/2017/07/24/installing-debian-on-qemus-64-bit-arm-virt-board/
+ArsTechnica Forums:        https://arstechnica.com/civis/viewtopic.php?f=19&t=1473419
+
+History
+-------
+
+03/15/2022 - Initial version 
