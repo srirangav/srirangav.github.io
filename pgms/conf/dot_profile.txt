@@ -62,9 +62,16 @@ case $- in
             *ksh*)
 
                 set -o emacs
-                set -o notify ignoreeof nonclobber >/dev/null 2>&1
+               
+                # additional option, may not be available on
+                # all ksh versions
 
+                set -o notify >/dev/null 2>&1
+                set -o ignoreeof >/dev/null 2>&1
+                set -o nonclobber >/dev/null 2>&1
+  
                 # bash style tab completion for pdksh
+                # in emacs mode
 
                 if type bind > /dev/null 2>&1 ; then 
                    bind "^I=complete"
