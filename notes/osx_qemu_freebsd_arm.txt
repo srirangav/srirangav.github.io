@@ -87,7 +87,7 @@ Optional Post Install Steps
     PermitRootLogin no
     IgnoreRhosts yes
     PermitEmptyPasswords no
-     
+    
 3. Enable password-less SSH login:
 
     https://srirangav.github.io/notes/ssh_nopass.html
@@ -110,7 +110,13 @@ Optional Post Install Steps
     
     See: https://docs.freebsd.org/en/books/handbook/security/index.html#security-advisories
 
-6. Install bash, and change the unprivileged user's shell to bash
+6. Install ksh, and change the unprivileged user's shell to ksh
+
+    $ doas pkg install pdksh
+    $ chsh -s /usr/local/bin/ksh
+
+   Alternatively, install bash and change the unprivileged user's
+   shell to bash:
 
     $ doas pkg install bash
     $ chsh -s /usr/local/bin/bash
@@ -278,4 +284,5 @@ ArsTechnica Forums:        https://arstechnica.com/civis/viewtopic.php?f=19&t=14
 History
 -------
 
+03/16/2022 - Add installing pdksh as the preferred shell
 03/15/2022 - Initial version 
