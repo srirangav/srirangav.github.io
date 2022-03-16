@@ -57,7 +57,7 @@ case $- in
 
         case "$0" in
             *bash*)
-                set -o emacs notify ignoreeof nonclobber
+                set -o emacs notify ignoreeof noclobber
                 ;;
             *ksh*)
 
@@ -68,7 +68,7 @@ case $- in
 
                 set -o notify >/dev/null 2>&1
                 set -o ignoreeof >/dev/null 2>&1
-                set -o nonclobber >/dev/null 2>&1
+                set -o noclobber >/dev/null 2>&1
   
                 # bash style tab completion for pdksh
                 # in emacs mode
