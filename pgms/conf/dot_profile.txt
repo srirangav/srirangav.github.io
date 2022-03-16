@@ -57,10 +57,20 @@ case $- in
 
         case "$0" in
             *bash*)
-                set -o notify emacs ignoreeof nonclobber
+                set -o emacs notify ignoreeof nonclobber
                 ;;
             *ksh*)
+
                 set -o emacs
+                set -o notify ignoreeof nonclobber >/dev/null 2>&1
+
+                # bash style tab completion for pdksh
+
+                if type bind > /dev/null 2>&1 ; then 
+                   bind "^I=complete"
+                   bind "^I^I=complete-list"
+                fi
+
                 if [ -r "$HOME/.kshrc" ] ; then
                    ENV="$HOME/.kshrc"
                    export ENV
@@ -87,10 +97,6 @@ case $- in
 
             alias bc="bc -l" ;
 
-            # alias to get the current working git branch
-
-            alias gitcb="git rev-parse --abbrev-ref HEAD" ;
-
         fi
 
         ;;
@@ -101,3 +107,4 @@ esac
 if [ -r "$HOME/.profile_local" ] ; then
     . "$HOME/.profile_local"
 fi
+
