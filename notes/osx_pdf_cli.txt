@@ -1,0 +1,58 @@
+Viewing the Text in PDFs in Terminal
+------------------------------------
+
+On MacOSX sometimes it is nice to be able to view / search the 
+text in a PDF in Terminal, instead of in Preview or another GUI 
+application.  
+
+Preliminary Notes
+-----------------
+
+These steps assume that MacPorts (https://www.macports.org/) is 
+installed in its default location (/opt/local) and that 
+/opt/local/bin and /opt/local/sbin are in your $PATH.
+
+Steps
+-----
+
+1. Install xpdf and xpdf-tools through MacPorts:
+
+   $ sudo port install xpdf
+   $ sudo port install xpdf-tools
+
+2. Configure the default papersize ('letter' for me):
+
+   $ sudo paperconfig -p letter
+
+3. Use pdftotext to extract and view the text in a PDF:
+
+   $ pdftotext -layout -nopgbrk [PDF] - | less
+
+   where [PDF] is the path to the PDF to be viewed. 
+
+   The '-layout' option tells pdftotext to try to preserve the 
+   formatting / layout in the PDF (an alternative to this is 
+   the '-table' option), and the '-nopgbrk' option tells 
+   pdftotext to not insert pagebreaks (^L).
+
+4. (Optional) To wrap the output to 75 columns, use fold or fmt:
+
+   $ pdftotext -layout -nopgbrk [PDF] - | fold -w 75 -s | less
+
+   or
+
+   $ pdftotext -layout -nopgbrk [PDF] - | fmt -w 75 -ps | less
+
+References
+----------
+
+https://stackoverflow.com/questions/3570591
+https://unix.stackexchange.com/questions/25173
+https://www.linuxfromscratch.org/blfs/view/systemd/general/libpaper.html
+https://www.systutorials.com/docs/linux/man/8-paperconfig/
+
+History
+-------
+
+03/18/2022 - Initial version
+
