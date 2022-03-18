@@ -20,6 +20,12 @@ Steps
    $ sudo port install xpdf
    $ sudo port install xpdf-tools
 
+   or
+
+   Install poppler through MacPorts:
+
+   $ sudo port install poppler
+ 
 2. Configure the default papersize ('letter' for me):
 
    $ sudo paperconfig -p letter
@@ -58,6 +64,8 @@ Steps
 References
 ----------
 
+https://www.xpdfreader.com/index.html
+https://github.com/freedesktop/poppler
 https://stackoverflow.com/questions/3570591
 https://unix.stackexchange.com/questions/25173
 https://www.linuxfromscratch.org/blfs/view/systemd/general/libpaper.html
@@ -66,6 +74,8 @@ https://www.systutorials.com/docs/linux/man/8-paperconfig/
 History
 -------
 
+v.0.1.2 03/18/2022 - Update to add references to poppler (dervied from
+                     xpdf)
 v.0.1.1 03/18/2022 - Update with notes about non-ascii characters in 
                      a PDF
 v.0.1   03/18/2022 - Initial version
