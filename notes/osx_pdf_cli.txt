@@ -43,6 +43,18 @@ Steps
 
    $ pdftotext -layout -nopgbrk [PDF] - | fmt -w 75 -ps | less
 
+   If the [PDF] file contains non-ascii characters, fold or fmt may 
+   abort, in which case we can specify LC_ALL=C as an enviroment
+   variable to fold or fmt:
+
+   $ pdftotext -layout -nopgbrk [PDF] - | LC_ALL=C fold -w 75 -s | less
+
+   or
+
+   $ pdftotext -layout -nopgbrk [PDF] - | LC_ALL=C fmt -w 75 -ps | less
+
+   See: https://unix.stackexchange.com/questions/475548
+
 References
 ----------
 
@@ -54,5 +66,7 @@ https://www.systutorials.com/docs/linux/man/8-paperconfig/
 History
 -------
 
-03/18/2022 - Initial version
+v.0.1.1 03/18/2022 - Update with notes about non-ascii characters in 
+                     a PDF
+v.0.1   03/18/2022 - Initial version
 
