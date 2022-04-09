@@ -101,7 +101,10 @@
   </li>
   <li>Creating a ascii signature in a separate file:
       <pre>$ gpg -asb -o <b><i>signature_file</i></b> <b><i>file</i></b></pre>
-      <p>If -o <b><i>signature_file</i></b> is omitted, the signature
+      or
+      <pre>$ gpg --sign --detach-sign --armor --output <b><i>signature_file</i></b> <b><i>file</i></b></pre>
+
+      <p>If -o / --output <b><i>signature_file</i></b> is omitted, the signature
       is stored in <b><i>file</i></b>.asc.</p> 
   </li>
   <li>Verifying a signature:
