@@ -1,6 +1,13 @@
-set showmode
-set shiftwidth=4 
-set tabstop=4 
-set expandtab
-set number
-syntax on
+" .vimrc - vim configuration
+" based on: https://stackoverflow.com/questions/1218390
+
+set showmode        " show current mode (insert/append/etc.) in status bar
+set showcmd         " show typed command in status bar
+set number          " show line numbers
+set ruler           " show cursor position in status bar
+set ignorecase      " case insensitive searching
+set smartcase       " case sensitive if uppercase characters are provided
+set smartindent     " smart auto indenting
+set shiftwidth=4    " 4 spaces for autoindents
+set tabstop=4       " 4 spaces per tab
+set expandtab       " turn tabs into spaces
