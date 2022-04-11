@@ -11,3 +11,4 @@ set smartindent     " smart auto indenting
 set shiftwidth=4    " 4 spaces for autoindents
 set tabstop=4       " 4 spaces per tab
 set expandtab       " turn tabs into spaces
+"set cul             " highlight current line
