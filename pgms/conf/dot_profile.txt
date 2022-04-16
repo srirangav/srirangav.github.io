@@ -49,6 +49,10 @@ case $- in
         PAGER="more"
         if type less > /dev/null 2>&1 ; then
             PAGER="less"
+            LESSHISTFILE="/dev/null"
+            LESSHISTSIZE="0"
+            LESSSECURE="YES"
+            export LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
     
         export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
@@ -56,16 +60,14 @@ case $- in
         # set bash and ksh specific options
 
         case "$0" in
-
             *bash*)
                 set -o emacs notify ignoreeof noclobber
                 ;;
-
             *ksh*)
 
                 set -o emacs
                
-                # additional options, may not be available on
+                # additional option, may not be available on
                 # all ksh versions
 
                 set -o notify >/dev/null 2>&1
@@ -87,7 +89,7 @@ case $- in
                 ;;
         esac
 
-        # safety and utility functions
+        # create some safety functions
 
         cp () { /bin/cp -i "$@" ; }
         mv () { /bin/mv -i "$@" ; }
@@ -102,7 +104,7 @@ case $- in
 
             # run bc with -l option to load the math 
             # library so that we get floating point 
-            # math instead of just integer math
+            # math, instead of just integer math
 
             alias bc="bc -l" ;
 
@@ -111,7 +113,7 @@ case $- in
         ;;
 esac
 
-# look for and load a local shell startup file
+# look for and load a local shell startup files
 
 if [ -r "$HOME/.profile_local" ] ; then
     . "$HOME/.profile_local"
