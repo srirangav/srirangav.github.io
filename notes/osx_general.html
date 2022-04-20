@@ -15,29 +15,38 @@
 <p>These are some general notes about MacOS X.</p>
 
 <ul>
+    <li><a href="osx_general.html#osxquitfinder">Add Quit to Finder</a></li>
     <li><a href="osx_general.html#osxramdisk">Creating a Ram Disk</a></li>
     <li><a href="osx_general.html#osxshell">Changing Shells</a></li>
     <li><a href="osx_general.html#osxx11">X11 Options</a></li>
-    <li><a href="osx_general.html#osxscreenshot">Changing Screenshot 
+    <li><a href="osx_general.html#osxscreenshot">Changing Screenshot
         Format</a></li>
     <li><a href="osx_general.html#osxversion">Getting Version Info</a></li>
     <li><a href="osx_general.html#osxdsstore">Disable .DSStore on Network 
         Volumes</a></li>
-    <li><a href="osx_general.html#osxafpguest">Disable AFP Guest Access</a></li>
+    <li><a href="osx_general.html#osxafpguest">Disable AFP Guest
+        Access</a></li>
     <li><a href="osx_general.html#osxdashboard">Disable Dashboard</a></li>
-    <li><a href="osx_general.html#hqicons">Built-in High Quality Icons</a></li>
+    <li><a href="osx_general.html#hqicons">Built-in High Quality
+        Icons</a></li>
     <li><a href="osx_general.html#kext">List Kernel Extensions</a></li>
-    <li><a href="osx_general.html#findertags">Disable/enable recent tags 
+    <li><a href="osx_general.html#findertags">Disable/enable recent tags
         in Finder</a></li>
-    <li><a href="osx_general.html#bigsuricon">Location of Icon for / on Big 
-        Sur (11.x)</a></li>
-    <li><a href="osx_general.html#bigsurpath">Restore classic path in Finder
-        windows on Big Sur (11.x)</a></li>
-    <li><a href="osx_general.html#bigsuralert">Restore classic alerts Big 
+    <li><a href="osx_general.html#bigsuricon">Location of Icon for / on
+        Big Sur (11.x)</a></li>
+    <li><a href="osx_general.html#bigsurpath">Restore classic path in
+        Finder windows on Big Sur (11.x)</a></li>
+    <li><a href="osx_general.html#bigsuralert">Restore classic alerts Big
         Sur (11.x) and Monterey (12.x)</a></li>
     <li><a href="osx_general.html#lowpower"
         >Enable/disable low power mode on Monterey (12.x)</a></li>
 </uL>
+
+<hr />
+
+<h3><a id="osxquitfinder">Add Quit to Finder</a></h3>
+
+<pre>$ defaults write com.apple.Finder QuitMenuItem 1 &amp;&amp; killall Finder</pre>
 
 <hr />
 
@@ -49,9 +58,9 @@
     <li>Create and mount the ramdisk:
         <pre>$ hdid -nomount ram://<b><i>size</i></b>
 /dev/disk<b><i>X</i></b></pre>
-        <p>Here <b><i>size</i></b> should be 2 * 1024 * desired size in MB and
-        <b><i>X</i></b> will be the disk number for the ramdisk that hdid 
-        allocated.</p>
+        <p>Here <b><i>size</i></b> should be 2 * 1024 * desired size in MB
+        and <b><i>X</i></b> will be the disk number for the ramdisk that
+        hdid allocated.</p>
     </li>
 
     <li>Format the ramdisk for HFS+:
@@ -83,10 +92,12 @@ is the full path to the new shell.
   
 <dl>
     <dt>Map Option to META:</dt>
-    <dd><pre>$ defaults write com.apple.x11 swap_alt_meta -bool true</pre></dd>
-
+    <dd>
+    <pre>$ defaults write com.apple.x11 swap_alt_meta -bool true</pre></dd>
     <dt>Disable X11 Server from listening for remote connection:</dt>
-    <dd><pre>$ defaults write com.apple.x11 nolisten_tcp -boolean true</pre></dd>
+    <dd>
+    <pre>$ defaults write com.apple.x11 nolisten_tcp -boolean true</pre>
+    </dd>
 </dl>
   
 <hr />
@@ -162,8 +173,8 @@ From: Paul Horowitz, <a href=
 
 <p>Big Sur (11.x) and newer: <code>$ kmutil showloaded</code></p>
 
-From: Lloyd Chambers, <a 
-href="https://macperformanceguide.com/blog/2021/20210511_1300-macOS-kextstat.html"
+From: Lloyd Chambers, <a href=
+"https://macperformanceguide.com/blog/2021/20210511_1300-macOS-kextstat.html"
 >macOS Big Sur: how to List Active Kernel Extensions</a>, <a 
 href="https://macperformanceguide.com/"
 >MacPerformance Guide</a> (May 11, 2021).
@@ -186,11 +197,13 @@ $ killall Finder</pre>
 
 <hr />
 
-<h3><a id="bigsurpath">Restore classic path in Finder windows on 
+<h3><a id="bigsurpath">Restore classic path in Finder windows on
     Big Sur (11.x)</a></h3>
 
 <ol>
-   <li><pre>$ defaults write -g NSWindowSupportsAutomaticInlineTitle -bool false</pre></li>
+   <li>
+   <pre>$ defaults write -g NSWindowSupportsAutomaticInlineTitle -bool false</pre>
+   </li>
    <li>Relaunch the Finder</li>
 </ol>
 
@@ -200,7 +213,7 @@ From: <a href="https://mjtsai.com/blog/">Michael Tsai</a>, <a href=
 
 <hr />
 
-<h3><a id="bigsuralert">Restore classic alerts Big Sur (11.x) and 
+<h3><a id="bigsuralert">Restore classic alerts Big Sur (11.x) and
 Monterey (12.x):</a></h3>
 
 <pre>$ defaults write -g NSAlertMetricsGatheringEnabled -bool false</pre>
@@ -211,13 +224,14 @@ From: <a href="https://mjtsai.com/blog/">Michael Tsai</a>, <a href=
 
 <hr />
 
-<h3><a id="lowpower">Enable/disable low power mode on Monterey (12.x):</a></h3>
+<h3><a id="lowpower"
+>Enable/disable low power mode on Monterey (12.x):</a></h3>
 
 <pre>$ sudo pmset -a lowpowermode 1
 $ sudo pmset -a lowpowermode 0</pre>
 
-From: <a 
-href="https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/"
+From: <a href=
+"https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/"
 >https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/</a>.
 
 <hr />
