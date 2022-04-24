@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8" />
+  <title>Git Notes</title>
+  <link href="../shared/site.css" type="text/css"
+        rel="stylesheet" />
+</head>
+
+<body>
+  <h2 class="c1">Git</h2>
+
+  <p>These are some notes about git.</p>
+
+    <ul>
+      <li><a href="git.html#branches">Branches</a></li>
+      <li><a href="git.html#rebase">Rebasing</a></li>
+    </ul>
+
+  <hr />
+
+  <h3>Working with <a id="branches">Branches</a></h3>
+
+    <dl>
+        <dt>List local branches:</dt>
+        <dd><pre>$ git branch</pre></dd>
+        <dt>List remote branches:</dt>
+        <dd><pre>$ git branch -r</pre></dd>
+        <dt>List all branches:</dt>
+        <dd><pre>$ git branch -a</pre></dd>
+        <dt>List current branch:</dt>
+        <dd><pre>$ git rev-parse --abbrev-ref HEAD</pre></dd>
+        <dt>Delete local branch:</dt>
+        <dd><p><pre>$ git branch -D <i>branch</i></pre>
+            where <i>branch</i> is the name of the branch to be
+            deleted.</p></dd>
+        <dt>Delete remote branch:</dt>
+        <dd><p><pre>$ git push origin --delete <i>branch</i></pre>
+            where <i>branch</i> is the name of the branch to be
+            deleted.</p></dd>
+        <dt>Synchronize local branches with remote branches:</dt>
+        <dd><pre>$ git fetch -p</pre></dd>
+        <dt>Rename local branches:</dt>
+        <dd><p><pre>$ git checkout master
+$ git branch -m <i>oldname</i> <i>newname</i></pre>
+            where <i>oldname</i> is the existing name for the
+            branch and <i>newname</i> is the new name for the
+            branch.</p></dd>
+    </dl>
+
+  <i>See</i>:
+  <ul>
+    <li><a href="https://infoheap.com/git-list-branches/"
+    >https://infoheap.com/git-list-branches/</a></li>
+    <li><a href="https://stackoverflow.com/questions/1417957/#1418022"
+    >https://stackoverflow.com/questions/1417957/#1418022</a></li>
+    <li><a href=
+    "https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/"
+    >https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/</a>
+    </li>
+    <li><a href="https://stackoverflow.com/questions/2003505/"
+    >https://stackoverflow.com/questions/2003505/</a></li>
+    <li><a href=
+    "https://www.hostinger.com/tutorials/how-to-rename-a-git-branch"
+    >https://www.hostinger.com/tutorials/how-to-rename-a-git-branch</a>
+    </li>
+  </ul>
+
+  <hr />
+
+
+  <h3><a id="rebase">Rebasing Commits</a></h3>
+
+   <ol>
+    <li><p>To rebase a commit, count the number of commits from the first
+        commit to the last commit that you want to rebase and run 
+        <code>git rebase</code> as follows:
+    <pre>$ git rebase -i HEAD~<i>num</i></pre>
+    where <i>num</i> is the number of commits from the first commit through
+    the last commit to be rebased, inclusive.</p></li>
+    <li>In the editor that opens, mark the first commit as 
+    <code>pick</code>, and the remaining as <code>squash</code>.</li>
+   </ol>
+   
+  <i>See</i>: 
+  <a href="https://www.git-tower.com/learn/git/faq/git-squash/"
+  >https://www.git-tower.com/learn/git/faq/git-squash/</a>
+
+  <hr />
+
+  <div class="c3">
+
+    <!-- Creative Commons License -->
+    Licensed under a
+    <a rel="license" href=
+    "http://creativecommons.org/licenses/by/2.5/">Creative Commons
+    Attribution 2.5 License</a>
+    <!-- /Creative Commons License -->
+
+    <!--
+    <rdf:RDF xmlns="http://web.resource.org/cc/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+        <Work rdf:about="">
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+            <license
+            rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
+        </Work>
+        <License rdf:about="http://creativecommons.org/licenses/by/2.5/">
+            <permits
+            rdf:resource="http://web.resource.org/cc/Reproduction" />
+            <permits
+            rdf:resource="http://web.resource.org/cc/Distribution" />
+            <requires
+            rdf:resource="http://web.resource.org/cc/Notice" />
+            <requires
+            rdf:resource="http://web.resource.org/cc/Attribution" />
+            <permits
+            rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+        </License>
+    </rdf:RDF>
+    -->
+
+  </div>
+</body>
+</html>

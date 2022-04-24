@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content=
   "text/html; charset=utf-8" />
   <title>General Notes</title>
-  <link href="../shared/site.css" type="text/css" 
+  <link href="../shared/site.css" type="text/css"
         rel="stylesheet" />
 </head>
 
@@ -23,54 +23,38 @@
       &nbsp;&#183;&nbsp;
       <a href="general.html#vim">VIM</a>
       </p>
-  
+
       SSH:
 
       <blockquote>
       <a href="general.html#sshtunnel">Tunneling</a>
       &nbsp;&#183;&nbsp;
-      <a href="general.html#sshfingerprint">SSH Key Fingerprint</a>  
+      <a href="general.html#sshfingerprint">SSH Key Fingerprint</a>
       &nbsp;&#183;&nbsp;
-      <a href="general.html#sshagent">SSH Agent</a>  
+      <a href="general.html#sshagent">SSH Agent</a>
       &nbsp;&#183;&nbsp;
-      <a href="general.html#sshkeepalives">SSH Keepalives</a>  
-      </blockquote>
-  
-      Subversion:
-      
-      <blockquote>
-      <a href="general.html#svncreate">Creating a New Repository</a>
-      &nbsp;&#183;&nbsp;
-      <a href="general.html#svnprop">Property Settings</a>
-      &nbsp;&#183;&nbsp;
-      <a href="general.html#svnbackup">Backup and Restore</a>
+      <a href="general.html#sshkeepalives">SSH Keepalives</a>
       </blockquote>
 
-      Git:
-
-      <blockquote>
-      <a href="general.html#gitbranches">Branches</a>
-      </blockquote>
-  
   </blockquote>
-  
+
   <hr />
 
   <h3><a id="wgetstdout">Output Urls to STDOUT with wget</a></h3>
-  
+
   It is possible to have wget to ouput the content of a Url to STDOUT
-  a la curl using a Bourne-like shell on systems that support the 
+  a la curl using a Bourne-like shell on systems that support the
   /dev/fd filesystem:
-  
+
   <pre>( exec 6&gt;&amp;1 ; wget -O /dev/fd/6 <b><i>url</i></b> 2&gt;/dev/null ; exec 6&gt;&amp;- )</pre>
-  
+
   Here <b><i>url</i></b> is the url to be displayed.
-  
+
   <hr />
-  
+
   <h3><a id="gpg">GnuPG Notes</a></h3>
-  
-  The following are some commonly used 
+
+  The following are some commonly used
   <a href="http://www.gnupg.org">GnuPG</a> commands.
   <ul>
   <li>Create a new key:
@@ -89,7 +73,7 @@
   <li>Importing a public key from a <b><i>file</i></b>:
       <pre>$ gpg --import <b><i>file</i></b></pre>
   </li>
-  <li>Importing a public key from a <b><i>url</i></b> using 
+  <li>Importing a public key from a <b><i>url</i></b> using
       <a href="http://curl.haxx.se/">curl</a>:
       <pre>$ curl <b><i>url</i></b> | gpg --import</pre>
   </li>
@@ -105,11 +89,11 @@
       <pre>$ gpg --sign --detach-sign --armor --output <b><i>signature_file</i></b> <b><i>file</i></b></pre>
 
       <p>If -o / --output <b><i>signature_file</i></b> is omitted, the signature
-      is stored in <b><i>file</i></b>.asc.</p> 
+      is stored in <b><i>file</i></b>.asc.</p>
   </li>
   <li>Verifying a signature:
       <pre>$ gpg --verify <b><i>signature_file</i></b> <b><i>file</i></b></pre>
-      <p>If <b><i>file</i></b> is omitted, then 
+      <p>If <b><i>file</i></b> is omitted, then
          <b><i>signature_file</i></b> must have the name
          <b><i>file</i></b>.asc.</p>
   </li>
@@ -118,8 +102,8 @@
   <hr />
 
   <h3><a id="vim">VIM Notes</a></h3>
-  
-  The following are some commonly used 
+
+  The following are some commonly used
   <a href="http://www.vim.org">VIM</a> commands.
   <ul>
   <li>CVS commit'ing the current file:
@@ -132,7 +116,7 @@
       <ol>
         <li><p>Set the text width to 80 columns:
             <pre>:set textwidth=80</pre>
-            or 
+            or
             <pre>:set tw=80</pre>
         </p></li>
         <li><p>To format the entire file, go to the start of the
@@ -146,7 +130,7 @@
   </li>
   </ul>
 
-  <i>Sources:</i> 
+  <i>Sources:</i>
   <ul>
     <li><p><a href=
               "http://mark.stosberg.com/Tech/text_editor_review.html#vim"
@@ -158,17 +142,17 @@
     </li>
   </ul>
   <hr />
-  
+
   <h3><a id="sshtunnel">SSH Tunneling</a></h3>
-  
+
   <dl>
-  <dt>To create an SSH tunnel for a tcp service running on a 
-  <b><i>server</i></b>, do the following on the 
+  <dt>To create an SSH tunnel for a tcp service running on a
+  <b><i>server</i></b>, do the following on the
   <b><i>client</i></b>:</dt>
   <dd><pre>$ ssh -N -L <b><i>client_port</i></b>:localhost:<b><i>server_port</i></b> <b><i>user</i></b>@<b><i>server</i></b></pre>
   </dd>
   </dl>
-  
+
   Here <b><i>client_port</i></b> is the port to connect to
   on the <b><i>client</i></b> and <b><i>server_port</i></b>
   is the port on which the service is running on the
@@ -190,14 +174,14 @@
   <i>See</i> <a href=
   "http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm"
   >http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm</a>.
-  
+
   <hr />
 
   <h3><a id="sshfingerprint">SSH Key Fingerprint</a></h3>
-  
+
   <dl>
   <dt>To get a SSH key fingerprint, do the following:</dt>
-  <dd><pre>$ ssh-keygen -l -f <b><i>public_key</i></b></pre></dd>  
+  <dd><pre>$ ssh-keygen -l -f <b><i>public_key</i></b></pre></dd>
   <dt>Here <b><i>public_key</i></b> is the path to the public key. For
   example the key fingerprint for the dsa host key can be obtained by:</dt>
   <dd><pre>$ ssh-keygen -l -f /etc/ssh/ssh_host_dsa_key.pub</pre></dd>
@@ -206,7 +190,7 @@
   <hr />
 
   <h3><a id="sshagent">SSH Agent</a></h3>
-  
+
   <dl>
   <dt>To start ssh-agent:</dt>
   <dd><pre>$ eval `ssh-agent`</pre></dd>
@@ -220,133 +204,33 @@
 
   <i>See</i> <a href="http://www.cs.utk.edu/~england/ssh.html"
   >http://www.cs.utk.edu/~england/ssh.html</a>.
-  
+
   <hr />
 
   <h3><a id="sshkeepalives">SSH Keepalives</a></h3>
-  
+
   <dl>
-  <dt>Add the following to $HOME/.ssh/config to prevent dropped 
+  <dt>Add the following to $HOME/.ssh/config to prevent dropped
   connections:</dt>
   <dd><pre>Host *
     ServerAliveInterval 120
     ServerAliveCountMax 3</pre>
-  </dd>  
+  </dd>
   </dl>
 
   <i>See</i> <a href="http://www.kehlet.cx/articles/129.html"
   >http://www.kehlet.cx/articles/129.html</a>; <a href=
   "http://www.snailbook.com/faq/timeouts.auto.html"
   >http://www.snailbook.com/faq/timeouts.auto.html</a>.
-  
-  <hr />
-
-  <h3>Creating a New Subversion <a id="svncreate">Repository</a></h3>
-
-  <dl>
-  <dt>To create a new subversion repository:</dt>
-  <dd><pre>$ svnadmin create <b><i>path</i></b></pre></dd>
-  </dl>
-
-  <p>Here <b><i>path</i></b> is the absolute path of where the repository
-  should be located.</p>
-    
-  <hr />
-
-  <h3>Subversion <a id="svnprop">Properties</a></h3>
-  
-  <dl>
-  <dt>Set execute permissions on a file:</dt>
-  <dd><pre>$ snv propset svn:executable 1 <b><i>file</i></b></pre></dd>
-  <dt>Remove execute permissions from a file:</dt>
-  <dd><pre>$ svn propdel svn:executable <b><i>file</i></b></pre></dd>
-  <dt>Enable RCS/CVS style Id tags on a file:</dt>
-  <dd><pre>$ svn propset svn:keywords Id <b><i>file</i></b></pre></dd>
-  </dl>
-  
-  <hr />
-
-  <h3>Subversion <a id="svnbackup">Backup and Restore</a></h3>
-
-  <dl>
-  
-  <dt>To Backup a respository:</dt>
-  <dd>
-  <pre>$ svnadmin dump <b><i>repository</i></b> &gt; <b><i>dump</i></b></pre>
-  </dd>
-  
-  <dt>To Restore a backup:</dt>
-  <dd>
-  <pre>$ svnadmin create <b><i>repository</i></b>
-$ svnadmin load <b><i>repository</i></b> &lt; <b><i>dump</i></b></pre>
-  </dd>
-  </dl>
-
-  Here <b><i>repository</i></b> is the absolute path to the repository and
-  <b><i>dump</i></b> is the filename for the backup.
-  <p><i>See</i> 
-  <a href=
-  "http://wiki2.archlinux.org/index.php/Subversion_backup_and_restore"
-  >http://wiki2.archlinux.org/index.php/Subversion_backup_and_restore</a>.
-  </p>
 
   <hr />
 
-  <h3>Working with Git <a id="gitbranches"> Branches</a></h3>
-
-    <dl>
-        <dt>List local branches:</dt> 
-        <dd><pre>$ git branch</pre></dd>
-        <dt>List remote branches:</dt> 
-        <dd><pre>$ git branch -r</pre></dd>
-        <dt>List all branches:</dt> 
-        <dd><pre>$ git branch -a</pre></dd>
-        <dt>List current branch:</dt>
-        <dd><pre>$ git rev-parse --abbrev-ref HEAD</pre></dd>
-        <dt>Delete local branch:</dt>
-        <dd><p><pre>$ git branch -D <i>branch</i></pre>
-            where <i>branch</i> is the name of the branch to be
-            deleted.</p></dd>
-        <dt>Delete remote branch:</dt>
-        <dd><p><pre>$ git push origin --delete <i>branch</i></pre>
-            where <i>branch</i> is the name of the branch to be
-            deleted.</p></dd>
-        <dt>Synchronize local branches with remote branches:</dt>
-        <dd><pre>$ git fetch -p</pre></dd>
-        <dt>Rename local branches:</dt>
-        <dd><p><pre>$ git checkout master
-$ git branch -m <i>oldname</i> <i>newname</i></pre>
-            where <i>oldname</i> is the existing name for the
-            branch and <i>newname</i> is the new name for the
-            branch.</p></dd>
-    </dl>
-
-  <i>See</i>:
-  <ul>
-    <li><p><a href="https://infoheap.com/git-list-branches/"
-    >https://infoheap.com/git-list-branches/</a></p></li>
-    <li><p><a href="https://stackoverflow.com/questions/1417957/#1418022"
-    >https://stackoverflow.com/questions/1417957/#1418022</a></p></li>
-    <li><p><a href=
-    "https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/"
-    >https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/</a>
-    </p></li>
-    <li><p><a href="https://stackoverflow.com/questions/2003505/"
-    >https://stackoverflow.com/questions/2003505/</a></p></li>
-    <li><p><a href=
-    "https://www.hostinger.com/tutorials/how-to-rename-a-git-branch"
-    >https://www.hostinger.com/tutorials/how-to-rename-a-git-branch</a></p>
-    </li>
-  </ul>  
-
-  <hr />
-  
   <div class="c3">
 
     <!-- Creative Commons License -->
-    Licensed under a 
+    Licensed under a
     <a rel="license" href=
-    "http://creativecommons.org/licenses/by/2.5/">Creative Commons 
+    "http://creativecommons.org/licenses/by/2.5/">Creative Commons
     Attribution 2.5 License</a>
     <!-- /Creative Commons License -->
 
@@ -356,19 +240,19 @@ $ git branch -m <i>oldname</i> <i>newname</i></pre>
         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
         <Work rdf:about="">
             <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
-            <license 
+            <license
             rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
         </Work>
         <License rdf:about="http://creativecommons.org/licenses/by/2.5/">
-            <permits 
+            <permits
             rdf:resource="http://web.resource.org/cc/Reproduction" />
-            <permits 
+            <permits
             rdf:resource="http://web.resource.org/cc/Distribution" />
-            <requires 
+            <requires
             rdf:resource="http://web.resource.org/cc/Notice" />
-            <requires 
+            <requires
             rdf:resource="http://web.resource.org/cc/Attribution" />
-            <permits 
+            <permits
             rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
         </License>
     </rdf:RDF>

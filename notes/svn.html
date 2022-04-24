@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8" />
+  <title>Subversion Notes</title>
+  <link href="../shared/site.css" type="text/css" 
+        rel="stylesheet" />
+</head>
+
+<body>
+  <h2 class="c1">Subversion Notes</h2>
+
+  <p>These are some general notes about Subversion</p>
+
+    <ul>
+      <li><a href="svn.html#svncreate">Creating a New Repository</a></li>
+      <li><a href="svn.html#svnprop">Property Settings</a></li>
+      <li><a href="svn.html#svnbackup">Backup and Restore</a></li>
+    </ul>  
+    
+  <hr />
+  
+  <h3>Creating a New Subversion <a id="svncreate">Repository</a></h3>
+
+  <dl>
+  <dt>To create a new subversion repository:</dt>
+  <dd><pre>$ svnadmin create <b><i>path</i></b></pre></dd>
+  </dl>
+
+  <p>Here <b><i>path</i></b> is the absolute path of where the repository
+  should be located.</p>
+    
+  <hr />
+
+  <h3>Subversion <a id="svnprop">Properties</a></h3>
+  
+  <dl>
+  <dt>Set execute permissions on a file:</dt>
+  <dd><pre>$ snv propset svn:executable 1 <b><i>file</i></b></pre></dd>
+  <dt>Remove execute permissions from a file:</dt>
+  <dd><pre>$ svn propdel svn:executable <b><i>file</i></b></pre></dd>
+  <dt>Enable RCS/CVS style Id tags on a file:</dt>
+  <dd><pre>$ svn propset svn:keywords Id <b><i>file</i></b></pre></dd>
+  </dl>
+  
+  <hr />
+
+  <h3>Subversion <a id="svnbackup">Backup and Restore</a></h3>
+
+  <dl>
+  
+  <dt>To Backup a respository:</dt>
+  <dd>
+  <pre>$ svnadmin dump <b><i>repository</i></b> &gt; <b><i>dump</i></b></pre>
+  </dd>
+  
+  <dt>To Restore a backup:</dt>
+  <dd>
+  <pre>$ svnadmin create <b><i>repository</i></b>
+$ svnadmin load <b><i>repository</i></b> &lt; <b><i>dump</i></b></pre>
+  </dd>
+  </dl>
+
+  Here <b><i>repository</i></b> is the absolute path to the repository and
+  <b><i>dump</i></b> is the filename for the backup.
+  <p><i>See</i> 
+  <a href=
+  "http://wiki2.archlinux.org/index.php/Subversion_backup_and_restore"
+  >http://wiki2.archlinux.org/index.php/Subversion_backup_and_restore</a>.
+  </p>
+
+  <hr />
+  
+  <div class="c3">
+
+    <!-- Creative Commons License -->
+    Licensed under a 
+    <a rel="license" href=
+    "http://creativecommons.org/licenses/by/2.5/">Creative Commons 
+    Attribution 2.5 License</a>
+    <!-- /Creative Commons License -->
+
+    <!--
+    <rdf:RDF xmlns="http://web.resource.org/cc/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+        <Work rdf:about="">
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+            <license 
+            rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
+        </Work>
+        <License rdf:about="http://creativecommons.org/licenses/by/2.5/">
+            <permits 
+            rdf:resource="http://web.resource.org/cc/Reproduction" />
+            <permits 
+            rdf:resource="http://web.resource.org/cc/Distribution" />
+            <requires 
+            rdf:resource="http://web.resource.org/cc/Notice" />
+            <requires 
+            rdf:resource="http://web.resource.org/cc/Attribution" />
+            <permits 
+            rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+        </License>
+    </rdf:RDF>
+    -->
+
+  </div>
+</body>
+</html>
