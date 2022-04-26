@@ -35,8 +35,15 @@ span.sc {
   font-variant: small-caps;
 }
 
-h2.c1 {
+h1.c1 {
+  font-size: 110%;
   font-style: italic;
+  font-weight: normal;
+}
+
+h2.c1 {
+  font-size: 100%;
+  font-weight: normal;
 }
 
 h3.c1 {
