@@ -1,70 +1,80 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC
+ "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <title>MacPorts Notes</title>
-      <link href="../shared/site.css" type="text/css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MacPorts Notes</title>
+    <style type="text/css">
+        @import "../shared/site.css";
+    </style>
 </head>
 
 <body>
 
-<h2 class="c1">MacPorts Notes</h2>
+<h1 class="c1">MacPorts Notes</h1>
 
-<p>The these are some general notes about 
+<p>The these are some general notes about
 <a href="https://www.macports.org/">MacPorts</a>.</p>
 <ul>
     <li><a href="macports.html#common">Commonly Used Ports</a></li>
     <li><a href="macports.html#contrib">Contributing to MacPorts</a></li>
+    <li><a href="macports.html#cdrtools">Making ISO images</a></li>
 </ul>
 
-<hr />
+<hr>
 
-<p><a id="common">Commonly Used Ports (x86 / M1)</a></p>
+<h2 class="c1"><a id="common">Commonly Used Ports (x86 / M1)</a></h2>
 
 <blockquote>
 
     <ol>
         <li>ccache (compiler cache): <a href="https://ccache.dev"
         >https://ccache.dev</a></li>
-        
+
+        <li>cdrtools (make ISOs from CDs): <a href=
+        "http://cdrtools.sourceforge.net/private/cdrecord.html"
+        >http://cdrtools.sourceforge.net/private/cdrecord.html</a></li>
+
         <li>dnscyrpt-proxy (encrypted dns): <a href=
         "https://github.com/DNSCrypt/dnscrypt-proxy"
         >https://github.com/DNSCrypt/dnscrypt-proxy</a></li>
 
         <li>dosbox-x (enhanced dosbox): <a href="https://dosbox-x.com/"
         >https://dosbox-x.com/</a></li>
-       
+
         <li>gnupg2 (GNU pretty good privacy): <a href="https://www.gnupg.org/"
         >https://www.gnupg.org/</a></li>
 
-        <li>innoextract (extract files from Windows installers): 
+        <li>innoextract (extract files from Windows installers):
         <a href="https://constexpr.org/innoextract/"
         >https://constexpr.org/innoextract/</a></li>
 
-        <li>libpst (extract files from Outlook PST archives): 
+        <li>libpst (extract files from Outlook PST archives):
         <a href="https://www.five-ten-sg.com/libpst/"
         >https://www.five-ten-sg.com/libpst/</a></li>
 
-        <li>ncftp (FTP client): 
+        <li>ncftp (FTP client):
         <a href="http://www.ncftpd.com/ncftp/"
         >http://www.ncftpd.com/ncftp/</a></li>
 
-        <li>newsboat (terminal based RSS reader): 
+        <li>newsboat (terminal based RSS reader):
         <a href="https://newsboat.org/"
         >https://newsboat.org/</a></li>
 
-        <li>octave (matlab-like math package): 
+        <li>octave (matlab-like math package):
         <a href="https://www.gnu.org/software/octave/index"
         >https://www.gnu.org/software/octave/</a></li>
 
         <li>openssh: <a href="https://www.openssh.com/"
         >https://www.openssh.com/</a></li>
 
-        <li>qemu (multi-architecture emulator): 
+        <li>qemu (multi-architecture emulator):
         <a href="https://www.qemu.org/"
         >https://www.qemu.org/</a></li>
 
-        <li>rclone (sync files to cloud services): 
+        <li>rclone (sync files to cloud services):
         <a href="https://rclone.org/"
         >https://rclone.org/</a></li>
 
@@ -75,16 +85,16 @@
         <li>smartmontools (get SMART status for drives):
         <a href="https://www.smartmontools.org/"
         >https://www.smartmontools.org/</a></li>
-        
-        <li>tig (terminal based git history browser): 
+
+        <li>tig (terminal based git history browser):
         <a href="https://jonas.github.io/tig/"
         >https://jonas.github.io/tig/</a></li>
-        
+
         <li>unshield (extract Installshield archives):
         <a href="https://github.com/twogood/unshield"
         >https://github.com/twogood/unshield</a></li>
-        
-        <li>youtube-dl (video downloader): 
+
+        <li>youtube-dl (video downloader):
         <a href="https://www.youtube-dl.org/"
         >https://www.youtube-dl.org/</a></li>
 
@@ -92,18 +102,18 @@
 
 </blockquote>
 
-<hr />
-<p><a id="contrib">Contributing to MacPorts</a></p>
+<hr>
+<h2 class="c1"><a id="contrib">Contributing to MacPorts</a></h2>
 
 <blockquote>
-    
+
     <ol>
-        <li>Create a fork on GitHub</li>
-        <li><p>Clone the fork locally: 
+        <li><p>Create a fork on GitHub</p></li>
+        <li>Clone the fork locally:
             <pre>$ git clone https://github.com/<i>username</i>/macports-ports.git</pre>
-            where <i>username</i> your github username</p>
+            where <i>username</i> your github username.<br><br>
         </li>
-        <li>Add the the official repository as the upstream: 
+        <li>Add the the official repository as the upstream:
             <pre>$ git remote add upstream https://github.com/macports/macports-ports.git</pre>
         </li>
         <li><p>On GitHub, update the fork to include any upstream changes.</p></li>
@@ -111,46 +121,86 @@
             <pre>$ git pull
 $ git fetch upstream</pre>
         </li>
-        <li><p>Create a branch for changes: 
+        <li>Create a branch for changes:
             <pre>$ git checkout -b <i>portname</i>-<i>version</i></pre>
             where <i>portname</i> is the name of the port and <i>version</i>
-            is the version of the port</p>
+            is the version of the port<br><br>
         </li>
-        <li><p>After making changes, lint the Portfile: 
-            <pre>$ port lint --nitpick -D .</pre></p>
+        <li>After making changes, lint the Portfile:
+            <pre>$ port lint --nitpick -D .</pre>
         </li>
-
-        <li><p>Commit the changes: 
+        <li>Commit the changes:
             <pre>$ git commit -a -m "<i>portname</i>: update to <i>version</i>" [-S]</pre>
             where <i>portname</i> is the name of the port, <i>version</i>
             is the version of the port, and -S is optional (assuming that signing
-            commits is enabled)</p>
+            commits is enabled)<br><br>
         </li>
-        <li><p>Push the changes upstream:
+        <li>Push the changes upstream:
             <pre>$ git push --set-upstream origin <i>portname</i>-<i>version</i></pre>
             where <i>portname</i> is the name of the port and <i>version</i>
-            is the version of the port</p>
+            is the version of the port<br>
         </li>
-        <li>Open a pull request on GitHub</li>
-        <li><p>If changes are requested, make the changes, lint the Portfile (see 
+        <li><p>Open a pull request on GitHub</p></li>
+        <li>If changes are requested, make the changes, lint the Portfile (see
             above), and then override the prior commit:
             <pre>$ git commit --amend -a -m "<i>portname</i>: update to <i>version</i>" [-S]
 $ git push origin -f</pre>
             where <i>portname</i> is the name of the port, <i>version</i>
             is the version of the port, and -S is optional (assuming that signing
-            commits is enabled)</p>
+            commits is enabled)<br><br>
         </li>
-        <li><p>Switch back to the main/master branch:
-            <pre>$ git checkout master</pre></p>
+        <li>Switch back to the main/master branch:
+            <pre>$ git checkout master</pre>
         </li>
     </ol>
 
 </blockquote>
 
-<hr />
+<hr>
+<h2 class="c1"><a id="cdrtools">Making ISO images</a></h2>
+
+<blockquote>
+
+    <ol>
+        <li>Install cdrools:
+        <pre>$sudo port install cdrtools</pre>
+        </li>
+        <li>Make a mount point for the cd, if it doesn't exist:
+        <pre>$ sudo mkdir /Volumes/cdrom</pre>
+        </li>
+        <li><p>Find the non-Mac/HFS partition/slice on the cd using
+        <code>diskutil list</code> (often it is slice 1)</p>
+        </li>
+        <li>Mount the non-Mac/HFS partition on the cdrom:
+        <pre>$ sudo mount_cd9660 -r /dev/disk[<i>X</i>]s[<i>Y</i>] /Volumes/cdrom</pre>
+        where <i>X</i> is the disk number for the cd shown by
+        <code>diskutil list</code> and <i>Y</i> is the slice number for the cd
+        shown by <code>diskutil list</code>.<br><br>
+        </li>
+        <li>Create the ISO image using <code>mkisofs</code> from cdrtools:
+        <pre>$ mkisofs -v -J -r -V [<i>VOLNAME</i>] -o [<i>ISO PATH</i>] /Volumes/cdrom</pre>
+        where <i>VOLNAME</i> is the volume name for the ISO and
+        <i>ISO PATH</i> is the location where the ISO should be saved.<br><br>
+        </li>
+        <li>Unmount the cd:
+        <pre>$ umount /Volumes/cdrom</pre>
+        </li>
+        <li>Eject the cd:
+        <pre>$ diskutil eject /dev/disk[<i>X</i>]</pre>
+        where <i>X</i> is the disk number shown by <code>diskutil list</code>.<br>
+        </li>
+    </ol>
+
+    Based on: <a href=
+    "https://lists.macports.org/pipermail/macports-users/2022-April/051105.html"
+    >https://lists.macports.org/pipermail/macports-users/2022-April/051105.html</a>
+</blockquote>
+
+<hr>
+
 <p>
 <span class="c2">
-<a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>   
+<a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>
 </span>
 </p>
 
