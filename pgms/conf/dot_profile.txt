@@ -15,13 +15,13 @@ export PATH
 case $- in
 
     # interactive shell startup
-    
+
     *i*)
 
         HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
 
         # default prompt
-    
+
         PS1="$HOST$ "
         PS2="> "
 
@@ -34,18 +34,18 @@ case $- in
 
         # include our home directory and our documents folder
         # in the CDPATH
-    
+
         CDPATH=".:$HOME:$HOME/Documents:$HOME/Documents/src"
 
         # default the editor to vi
-    
+
         EDITOR="vi"
         VISUAL="$EDITOR"
         FCEDIT="$EDITOR"
 
         # if less is available, use it as our pager, otherwise
         # default to more
-    
+
         PAGER="more"
         if type less > /dev/null 2>&1 ; then
             PAGER="less"
@@ -54,9 +54,20 @@ case $- in
             LESSSECURE="YES"
             export LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
-    
-        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
-    
+
+        # see if a terminal browser is available
+
+        BROWSER=""
+        if type links > /dev/null 2>&1 ; then
+            BROWSER="links"
+        elif type lynx > /dev/null 2>&1 ; then
+            BROWSER="lynx"
+        elif type w3m > /dev/null 2>&1 ; then
+            BROWSER="w3m"
+        fi
+
+        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH BROWSER
+
         # set bash and ksh specific options
 
         case "$0" in
@@ -66,14 +77,14 @@ case $- in
             *ksh*)
 
                 set -o emacs
-               
+
                 # additional option, may not be available on
                 # all ksh versions
 
                 set -o notify >/dev/null 2>&1
                 set -o ignoreeof >/dev/null 2>&1
                 set -o noclobber >/dev/null 2>&1
-  
+
                 # bash style tab completion for pdksh
                 # in emacs mode
 
@@ -102,8 +113,8 @@ case $- in
 
         if type alias > /dev/null 2>&1 ; then
 
-            # run bc with -l option to load the math 
-            # library so that we get floating point 
+            # run bc with -l option to load the math
+            # library so that we get floating point
             # math, instead of just integer math
 
             alias bc="bc -l" ;
