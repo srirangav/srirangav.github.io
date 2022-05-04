@@ -92,53 +92,63 @@ Optional Post Install Steps
 
     https://srirangav.github.io/notes/ssh_nopass.html
 
-4. As root, install and configure doas to allow users in the wheel group
-   to execute commands as root:
-
-    # /usr/sbin/pkg install doas
-    # echo 'permit persist :wheel' > /usr/local/etc/doas.conf
+4. As root, install and configure sudo to allow users in the wheel group
+   to execute commands as root.
    
+   4.1 Install sudo:
+
+    # /usr/sbin/pkg install sudo
+
+   4.2 Edit the sudoers file:
+       
+    # visudo
+
+   4.3 Uncomment the following line:
+   
+    # %wheel ALL=(ALL) ALL
+
    This may take some time as it needs initialize the pkg system.
    
    See: https://docs.freebsd.org/en/books/handbook/ports/index.html#ports
-        https://docs.freebsd.org/en/books/handbook/security/index.html#security-doas
+        https://www.sudo.ws/posts/2021/01/sudo-on-freebsd/
+        https://docs.freebsd.org/en/books/handbook/security/index.html#security-sudo
 
 5. Install all available patches
 
-    $ doas freebsd-update fetch
-    $ doas freebsd-update install
+    $ sudo freebsd-update fetch
+    $ sudo freebsd-update install
     
     See: https://docs.freebsd.org/en/books/handbook/security/index.html#security-advisories
 
 6. Install ksh, and change the unprivileged user's shell to ksh
 
-    $ doas pkg install pdksh
+    $ sudo pkg install pdksh
     $ chsh -s /usr/local/bin/ksh
 
    Alternatively, install bash and change the unprivileged user's
    shell to bash:
 
-    $ doas pkg install bash
+    $ sudo pkg install bash
     $ chsh -s /usr/local/bin/bash
 
 7. Install curl, git, gnupg2, xorriso
 
-    $ doas pkg install curl
-    $ doas pkg install git
-    $ doas pkg install gnupg2
-    $ doas pkg install xorriso
+    $ sudo pkg install curl
+    $ sudo pkg install git
+    $ sudo pkg install gnupg2
+    $ sudo pkg install xorriso
     
 8. Update installed packages:
 
-    $ doas pkg update
-    $ doas pkg upgrade
+    $ sudo pkg update
+    $ sudo pkg upgrade
 
 9. Enable the firewall:
 
     9.1. Enable pf:
     
-         $ doas sysrc pf_enable=yes
-         $ doas sysrc pf_rules="/etc/pf.conf"
+         $ sudo sysrc pf_enable=yes
+         $ sudo sysrc pf_rules="/etc/pf.conf"
 
     9.2. Configure pf:    
     
@@ -170,14 +180,14 @@ Optional Post Install Steps
     
     9.3. Start pf:
     
-         $ doas service pf start
+         $ sudo service pf start
 
 10. Make /tmp a ramdisk:
 
     10.1. Secure the permissions on /tmp
 
-          $ doas umount /tmp
-          $ doas chmod 1777 /tmp
+          $ sudo umount /tmp
+          $ sudo chmod 1777 /tmp
   
     10.2. Add the following to /etc/fstab:
 
@@ -193,7 +203,7 @@ Optional Post Install Steps
 
     13.1. Shut down the system (if running):
 
-          $ doas shutdown -p now
+          $ sudo shutdown -p now
        
     13.2. On MacOSX, resize the disk image:
     
@@ -214,20 +224,20 @@ Optional Post Install Steps
     
     13.5. If gpart says the disk is corrupt, fix it:
     
-          $ doas gpart recover vtbd0
+          $ sudo gpart recover vtbd0
         
           See: https://docs.freebsd.org/en/books/handbook/disks/#disks-growing
     
     13.6. Resize the root partition:
     
-          $ doas gpart resize -i 3 vtbd0
+          $ sudo gpart resize -i 3 vtbd0
     
           Here 'gpart show' showed that the UFS partition was partition 3,
           hence the '-i 3' option, and that the disk was vtbd0
         
     13.7. Grow the root partition:
     
-          $ doas growfs -y /dev/gpt/rootfs
+          $ sudo growfs -y /dev/gpt/rootfs
         
           If this doesn't work, try rebooting into single user mode
           and resizing.
@@ -236,31 +246,31 @@ Optional Post Install Steps
 
 14. Change the hostname:
 
-    $ doas sysrc hostname="qemu-freebsd"
+    $ sudo sysrc hostname="qemu-freebsd"
     
     See: https://lists.freebsd.org/pipermail/freebsd-questions/2006-April/119355.html
 
 15. Set the localtime zone, for example, to US/Pacific:
 
-    $ doas cp /usr/share/zoneinfo/US/Pacific /etc/localtime
+    $ sudo cp /usr/share/zoneinfo/US/Pacific /etc/localtime
     
     See: https://www.cyberciti.biz/faq/howto-set-date-and-time-timezone-in-freebsd/
     
 16. Enable ntpd:
 
-    $ doas sysrc ntpd_enable="YES"
-    $ doas sysrc ntpd_sync_on_start="YES"
-    $ doas sysrc ntpd_user="ntpd" 
-    $ doas sysrc ntpdate_enable="YES"
-    $ doas sysrc ntpdate_flags="europe.pool.ntp.org"
-    $ doas service ntpd start 
+    $ sudo sysrc ntpd_enable="YES"
+    $ sudo sysrc ntpd_sync_on_start="YES"
+    $ sudo sysrc ntpd_user="ntpd" 
+    $ sudo sysrc ntpdate_enable="YES"
+    $ sudo sysrc ntpdate_flags="europe.pool.ntp.org"
+    $ sudo service ntpd start 
 
     See: https://www.pc-freak.net/blog/how-to-configure-ntp-server-ntpd-to-synchronize-server-clock-over-the-internet-on-freebsd/
          https://docs.freebsd.org/en/books/handbook/network-servers/index.html#network-ntp
     
 17. Set the time (in case it is out of sync):
 
-    $ doas ntpdate -buv europe.pool.ntp.org
+    $ sudo ntpdate -buv europe.pool.ntp.org
 
 18. Get information about the emulated CPU:
 
@@ -284,5 +294,6 @@ ArsTechnica Forums:        https://arstechnica.com/civis/viewtopic.php?f=19&t=14
 History
 -------
 
+05/03/2022 - Switch from doas to sudo
 03/16/2022 - Add installing pdksh as the preferred shell
 03/15/2022 - Initial version 
