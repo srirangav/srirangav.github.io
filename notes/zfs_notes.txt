@@ -48,9 +48,9 @@ needs to first be created.
    where [name] is the name of the pool, and [device] is the operating
    system device identifier for the hard disk.
 
-   For example, if the hard drive is /dev/disk5 (as shown by '$ diskutil list'
-   on MacOSX), then the following command will create a pool named 'Mercury'
-   on that hard drive:
+   For example, if the hard drive is /dev/disk5 (as shown by '$ diskutil
+   list' on MacOSX), then the following command will create a pool named
+   'Mercury' on that hard drive:
 
     $ sudo zpool create -f -o ashift=12 \
                            -o feature@async_destroy=enabled \
@@ -62,14 +62,14 @@ needs to first be created.
                            -O compression=lz4 \
                            Mercury disk5
 
-   The '-O casesensitivity=insensitive' and '-O normalization=formD' are optional,
-   but helpful on MacOSX because they make the pool to act like more like a
-   standard Mac disk.  See, e.g.:
+   The '-O casesensitivity=insensitive' and '-O normalization=formD' are
+   optional, but helpful on MacOSX because they make the pool to act like
+   more like a standard Mac disk.  See, e.g.:
 
     https://openzfsonosx.org/wiki/Zpool#Feature_flags
 
-   Note, this command also enables compression for the zpool, which I prefer.
-   For more information about ZFS compression, see:
+   Note, this command also enables compression for the zpool, which I
+   prefer.  For more information about ZFS compression, see:
 
     https://klarasystems.com/articles/openzfs1-understanding-transparent-compression/
 
@@ -86,11 +86,12 @@ needs to first be created.
                            -O compression=lz4 \
                            [name] [device1] ... [deviceN]
 
-   where [name] is the name of the pool, and [device1] through [deviceN] are
-   the operating system device identifiers for the hard disks being combined.
+   where [name] is the name of the pool, and [device1] through [deviceN]
+   are the operating system device identifiers for the hard disks being
+   combined.
 
-   This is the equivalent of a RAID 0 volume and offers no protection against
-   drive failure, see:
+   This is the equivalent of a RAID 0 volume and offers no protection
+   against drive failure, see:
 
     https://en.m.wikipedia.org/wiki/Standard_RAID_levels
 
@@ -108,19 +109,20 @@ needs to first be created.
                            -O compression=lz4 \
                            [name] mirror [device1] ... [deviceN]
 
-   where [name] is the name of the pool, and [device1] through [deviceN] are
-   the operating system device identifiers for the hard disks being combined.
-   The 'mirror' command between the [name] and [device1] through [deviceN] tells
-   zfs to mirror the contents of the first disk on all the other disks.
+   where [name] is the name of the pool, and [device1] through [deviceN]
+   are the operating system device identifiers for the hard disks being
+   combined.  The 'mirror' command between the [name] and [device1]
+   through [deviceN] tells zfs to mirror the contents of the first disk
+   on all the other disks.
 
-   This is the equivalent of a RAID 1 volume and preserves data as long as at
-   least one drive is operational:
+   This is the equivalent of a RAID 1 volume and preserves data as long
+   as at least one drive is operational:
 
     https://en.m.wikipedia.org/wiki/Standard_RAID_levels
 
 NOTE: When the disk(s) in the zpool are ssd, use '-o ashift=13' instead of
-      '-o ashift=12', as above.  An ashift value of 13 may be better for ssds
-      to avoid performance degradation over time, see, e.g.:
+      '-o ashift=12', as above.  An ashift value of 13 may be better for
+      ssds to avoid performance degradation over time, see, e.g.:
 
         https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#alignment-shift-ashift
         https://old.reddit.com/r/zfs/comments/6duz3j/zfs_on_a_purely_ssd_setup/
@@ -133,6 +135,12 @@ NOTE: When the disk(s) in the zpool are ssd, use '-o ashift=13' instead of
       that helps limit performance degradation of ssds, see:
 
         https://en.m.wikipedia.org/wiki/Trim_(computing)
+
+      For SMR hard drives, TRIM support should be disabled:
+
+        $ sudo zpool set autotrim=off [name]
+
+      See: https://vermaden.wordpress.com/2022/05/08/zfs-on-smr-drives/
 
 ----------------------------
 Mounting / Importing a zpool
@@ -454,15 +462,16 @@ To List latest snapshot on all volumes:
 
     $ zfs list | awk '/enc\// { print $1; }' | \
       while read VOL ; do \
-      zfs list -H -t snapshot "$VOL" | sort -rn | head -1 | awk '{ print $1; }'; \
+          zfs list -H -t snapshot "$VOL" | i\
+          sort -rn | head -1 | awk '{ print $1; }'; \
       done
 
 ---------------------
 Replicating Snapshots
 ---------------------
 
-1. The first time a snapshot is being replicated, the entire snapshot must be sent,
-   as follows:
+1. The first time a snapshot is being replicated, the entire snapshot must
+   be sent, as follows:
 
     $ zfs send -ec -v [src_pool]/[src_vol]@[snap] | \
       zfs receive -s -v [dest_pool]/[dest_vol]
@@ -472,8 +481,10 @@ Replicating Snapshots
     [src_pool]  is the name of the zpool where the snapshot is located
     [src_vol]   is the name of the filesystem where the snapshot is located
     [snap]      is the snapshot's name (ex. 2021-11-05-01)
-    [dest_pool] is the name of the zpool to which the snap will be replicated
-    [dest_vol]  is the name of the filesystem to which the snapshot will be replicated
+    [dest_pool] is the name of the zpool to which the snap will be
+                replicated
+    [dest_vol]  is the name of the filesystem to which the snapshot will
+                be replicated
 
 2. Once a snapshot has been replicated, incremental differences can be sent
    as follows:
@@ -486,24 +497,29 @@ Replicating Snapshots
 
     [src_pool]  is the name of the zpool where the snapshot is located
     [src_vol]   is the name of the filesystem where the snapshot is located
-    [snap_old]  is the starting snapshot's name (ex. 2021-11-05-01); this snapshot
-                must exist on [dest_pool]/[dest_vol]
+    [snap_old]  is the starting snapshot's name (ex. 2021-11-05-01); this
+                snapshot must exist on [dest_pool]/[dest_vol]
     [snap_new]  is the ending snapshot's name (ex. 2021-12-05-01)
-    [dest_pool] is the name of the zpool to which the snap will be replicated
-    [dest_vol]  is the name of the filesystem to which the snapshot will be replicated
+    [dest_pool] is the name of the zpool to which the snap will be
+                replicated
+    [dest_vol]  is the name of the filesystem to which the snapshot will
+                be replicated
 
 3. If replication fails before completing, it can be resumed as follows:
 
-    $ TOKEN="`zfs get -H receive_resume_token [dest_pool]/[dest_vol] | awk '{ print $3;}'`"
+    $ TOKEN="`zfs get -H receive_resume_token [dest_pool]/[dest_vol] | \
+      awk '{ print $3;}'`"
     $ zfs send -ec -v -t "$TOKEN" | zfs receive -s -v [dest_pool]/[dest_vol]
 
    where:
 
-    [dest_pool] is the name of the zpool to which the snap will be replicated
-    [dest_vol]  is the name of the filesystem to which the snapshot will be replicated
+    [dest_pool] is the name of the zpool to which the snap will be
+                replicated
+    [dest_vol]  is the name of the filesystem to which the snapshot will
+                be replicated
 
-   In some cases, it may be necessary to abort the incomplete replicated snapshot,
-   which can be done as follows:
+   In some cases, it may be necessary to abort the incomplete replicated
+   snapshot, which can be done as follows:
 
     $ zfs receive -a [dest_pool]/[dest_vol]
 
@@ -517,4 +533,5 @@ References:
 History
 -------
 
+05/09/2022 - Add tips for SMR drives0
 04/22/2022 - Initial Version
