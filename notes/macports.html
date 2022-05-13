@@ -51,6 +51,11 @@
         <a href="https://dosbox-x.com/"
         >https://dosbox-x.com/</a></li>
 
+        <li>gh (git hub CLI):
+        <a href="https://docs.github.com/en/github-cli/github-cli/about-github-cli"
+        >https://docs.github.com/en/github-cli/github-cli/about-github-cli</a>
+        </li>
+
         <li>gnupg2 (GNU pretty good privacy):
         <a href="https://www.gnupg.org/"
         >https://www.gnupg.org/</a></li>
@@ -152,7 +157,11 @@
         <li>Add the the official repository as the upstream:
             <pre>$ git remote add upstream https://github.com/macports/macports-ports.git</pre>
         </li>
-        <li><p>On GitHub, update the fork to include any upstream changes.</p></li>
+        <li><p>On GitHub, update the fork to include any upstream changes, for
+        example:</p>
+            <pre>$ gh repo sync <i>username</i>/macports-ports</pre>
+            where <i>username</i> your github username.<br><br>
+        </li>
         <li>Fetch upstream changes locally:
             <pre>$ git fetch upstream &amp;&amp; git pull</pre>
         </li>
