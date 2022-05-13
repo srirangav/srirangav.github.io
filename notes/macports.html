@@ -199,6 +199,24 @@ $ git push origin -f</pre>
         <li>Switch back to the main/master branch:
             <pre>$ git checkout master</pre>
         </li>
+        <li>Once the pull request is merged, delete the local and remote branches:
+            <br><br>
+            <ul>
+            <li>Delete the local branch:
+                <pre>$ git branch -D <i>portname</i>-<i>version</i></pre>
+                where <i>portname</i> is the name of the port and <i>version</i>
+                is the version of the port<br><br>
+            </li>
+            <li>Delete the remote branch:
+                <pre>$ git push origin --delete <i>portname</i>-<i>version</i></pre>
+                where <i>portname</i> is the name of the port and <i>version</i>
+                is the version of the port<br><br>
+            </li>
+            <li>Synchronize local and remote branches:
+                <pre>$ git fetch -p</pre>
+            </li>
+            </ul>
+        </li>
     </ol>
 
 </blockquote>
