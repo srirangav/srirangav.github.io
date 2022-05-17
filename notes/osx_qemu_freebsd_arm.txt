@@ -1,8 +1,8 @@
-FreeBSD 13.0 ARM64 on QEMU
---------------------------
+FreeBSD ARM64 on QEMU
+---------------------
 
-I was able to get FreeBSD 13.0 ARM64 running on qemu 6.2.0 on 
-MacOSX 11 (Big Sur) on M1 using the steps below.  
+I was able to get FreeBSD 13 ARM64 running on qemu on MacOSX 11 
+(Big Sur) on M1 using the steps below.  
 
 Preliminary Notes
 -----------------
@@ -13,12 +13,12 @@ using Homebrew, see:
 
 https://gist.github.com/nrjdalal/e70249bb5d2e9d844cc203fd11f74c55
 
-Installing FreeBSD 13.0 ARM64 under QEMU
+Installing FreeBSD ARM64 under QEMU
 ----------------------------------------
 
 1. Download the Tianocore EDK2 firmware / bios for ARM64:
 
-    https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/4480/QEMU-AARCH64/RELEASE_GCC5/QEMU_EFI.fd
+    https://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/4534/QEMU-AARCH64/RELEASE_GCC5/QEMU_EFI.fd
 
 2. Download a pre-installed FreeBSD 13.0 ARM64 image:
 
@@ -278,6 +278,29 @@ Optional Post Install Steps
     
     See: https://www.cyberciti.biz/faq/howto-find-out-freebsd-cpuinfo/
 
+Upgrading
+---------
+
+1. Fetch FreeBSD 13.1-RELEASE
+
+    $ sudo freebsd-update -r 13.1-RELEASE upgrade
+
+2. Install FreeBSD 13.1-RELEASE
+
+    $ sudo freebsd-update install
+
+3. Reboot
+
+4. Finish the update once the virtual machine has rebooted:
+
+    $ sudo freebsd-update install
+
+5. Update packages:
+
+    $ sudo pkg-static upgrade -f
+
+See: https://docs.freebsd.org/en/books/handbook/cutting-edge/
+
 References
 ----------
 
@@ -294,6 +317,7 @@ ArsTechnica Forums:        https://arstechnica.com/civis/viewtopic.php?f=19&t=14
 History
 -------
 
+05/17/2022 - Add updating to FreeBSD 13.1-RELEASE
 05/03/2022 - Switch from doas to sudo
 03/16/2022 - Add installing pdksh as the preferred shell
 03/15/2022 - Initial version 
