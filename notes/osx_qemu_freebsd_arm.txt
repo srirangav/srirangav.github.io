@@ -283,6 +283,8 @@ Upgrading
 
 1. Fetch FreeBSD 13.1-RELEASE
 
+    $ sudo freebsd-update fetch
+    $ sudo freebsd-update install
     $ sudo freebsd-update -r 13.1-RELEASE upgrade
 
 2. Install FreeBSD 13.1-RELEASE
@@ -299,7 +301,8 @@ Upgrading
 
     $ sudo pkg-static upgrade -f
 
-See: https://docs.freebsd.org/en/books/handbook/cutting-edge/
+See: https://www.freebsd.org/releases/13.1R/installation/
+     https://docs.freebsd.org/en/books/handbook/cutting-edge/
 
 References
 ----------
