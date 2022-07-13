@@ -49,6 +49,9 @@
     <li><a href="index.html#screen">Install screen</a></li>
 
     <li><a href="index.html#libbsd">Install libbsd</a></li>
+
+    <li><a href="index.html#dnscrypt">Install dnscrypt</a></li>
+
 </ul>
 
 <hr />
@@ -421,6 +424,10 @@ From: <a href=
 <p><b><a id="rmapps">Remove Extra Apps</a></b></p>
 
 <ol>
+    <li>Remove Nano</a>:
+        <p><code>$ sudo apt-get remove --purge nano</code></p>
+    </li>
+
     <li>Remove <a href="https://www.libreoffice.org/">LibreOffice</a>:
         <p><code>$ sudo apt-get remove --purge libreoffice*</code></p>
     </li>
@@ -536,10 +543,38 @@ From:
 </blockquote>
 
 <p>From: <a href=
-"https://stackoverflow.com/questions/19671152/usr-bin-ld-cannot-find-lbsd"
->https://stackoverflow.com/questions/19671152/usr-bin-ld-cannot-find-lbsd</a>
+"https://stackoverflow.com/questions/19671152"
+>https://stackoverflow.com/questions/19671152</a>
 </p>
 
+<hr />
+
+<p><b><a id="dnscrypt">Install</a>
+      <a href="https://www.dnscrypt.org/">dnscrypt</a></b></p>
+
+<ul>
+    <li>Install <code>dncrypt-proxy</code>:
+    <p><code>$ sudo apt install dnscrypt-proxy</code></p>
+    </li>
+    <li>
+        <p>Edit <code>/etc/dnscrypt-proxy/dnscrypt-proxy.toml</code> 
+        as needed.</p>
+    </li>
+    <li>Restart <code>dnscrypt-proxy</code>:
+    <p><code>$ sudo systemctl restart dnscrypt-proxy</code></p>
+    </li>
+    <li><p>Use NetworkManager (e.g. <code>nmtui</code>) to set the 
+    DNS server to 127.0.2.1 and enable the ignore DNS servers set
+    by the DHCP server.</p></li>
+    <li>Restart NetworkManager:
+        <p><code>$ sudo systemctl restart NetworkManager</code></p>
+    </li>
+</ul>
+
+<p>From: <a href=
+"https://linuxconfig.org/how-to-encrypt-your-dns-with-dnscrypt-on-ubuntu-and-debian"
+>https://linuxconfig.org/how-to-encrypt-your-dns-with-dnscrypt-on-ubuntu-and-debian</a>
+</p>
 
 <hr />
 
