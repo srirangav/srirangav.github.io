@@ -3,201 +3,148 @@
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content=
-  "text/html; charset=utf-8" />
-  <title>SSH Without a Password</title>
-  <link href="../shared/site.css" type="text/css"
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=utf-8" />
+    <title>SSH Without a Password</title>
+    <link href="../shared/site.css" type="text/css"
         rel="stylesheet" />
 </head>
 
 <body>
-  <h2 class="c1">SSH Without a Password</h2>
 
-  <p>The following steps can be used to ssh from one system to
-  another without specifying a password.</p>
+    <h2 class="c1">SSH without a Password</h2>
 
-  <h3>Notes:</h3>
+    The following steps can be used to ssh from one system to
+    another without specifying a password.
 
-  <ul>
-    <li>The system from which the ssh session is started via the
-    ssh command is the <b><i>client</i></b>.</li>
-    <li>The system that the ssh session connects to is the
-    <b><i>server</i></b>.</li>
+    <h3>Notes:</h3>
 
-    <li>These steps seem to work on systems running <a href=
-    "http://www.openssh.org">OpenSSH</a>.</li>
+    <ul>
+        <li>The system from which the ssh session is started via the
+        ssh command is the <i>client</i>.
+        </li>
 
-    <li>The steps assume that a RSA key is being used because
-    OpenSSH has deprecated DSA keys as being "too [] weak and
-    [] recommend[s] against [their] use" (see <a href=
-    "https://www.openssh.com/legacy.html"
-    >OpenSSH Legacy Options</a>). To use a DSA key (for example,
-    on an older system) substitute 'dsa' for 'rsa'.</li>
+        <li>The system that the ssh session connects to is the
+        <i>server</i>.
+        </li>
 
-    <li>The steps assume that you are using a Bourne-like shell
-    (sh, <a href="http://www.kornshell.com/">ksh</a> or <a href=
-    "http://www.gnu.org/software/bash/bash.html">bash</a>)</li>
+        <li>These steps seem to work on systems running <a href=
+        "http://www.openssh.org">OpenSSH</a>.
+        </li>
 
-    <li>Some of this information came from:<br />
-      <a href="http://www.der-keiler.de/Mailing-Lists/securityfocus/Secure_Shell/2002-12/0083.html"
-      >http://www.der-keiler.de/Mailing-Lists/securityfocus/Secure_Shell/2002-12/0083.html</a>
-    </li>
-  </ul>
-  <h3>Steps:</h3>
+        <li>The steps assume that a RSA key is being used because
+        OpenSSH has deprecated DSA keys as being "too [] weak and
+        [] recommend[s] against [their] use" (see <a href=
+        "https://www.openssh.com/legacy.html"
+        >OpenSSH Legacy Options</a>). To use a DSA key (for example,
+        on an older system) substitute 'dsa' for 'rsa'.
+        </li>
 
-  <ol>
-    <li>
-      <p>On the <b><i>client</i></b> run the following
-      commands:</p>
-      <pre>
-$ mkdir -p $HOME/.ssh
-$ chmod 0700 $HOME/.ssh
-$ ssh-keygen -t rsa -f $HOME/.ssh/id_rsa -P ''
-</pre>This should result in two files, $HOME/.ssh/id_rsa (private
-key) and $HOME/.ssh/id_rsa.pub (public key).
-    </li>
+        <li>The steps assume that you are using a Bourne-like shell
+        (sh, <a href="http://www.kornshell.com/">ksh</a> or <a href=
+        "http://www.gnu.org/software/bash/bash.html">bash</a>)
+        </li>
 
-    <li>
-      <p>Copy $HOME/.ssh/id_rsa.pub to the
-      <b><i>server</i></b>.</p>
-    </li>
+        <li>Some of this information came from:<br />
+          <a href="http://www.der-keiler.de/Mailing-Lists/securityfocus/Secure_Shell/2002-12/0083.html"
+          >http://www.der-keiler.de/Mailing-Lists/securityfocus/Secure_Shell/2002-12/0083.html</a>
+        </li>
+    </ul>
+  
+    <hr />
 
-    <li>
-      <p>On the <b><i>server</i></b> run the following
-      commands:</p>
-      <pre>
-$ mkdir -p $HOME/.ssh
-$ chmod 0700 $HOME/.ssh
-$ cat id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys2
-$ chmod 0600 $HOME/.ssh/authorized_keys2
-</pre>Depending on the version of OpenSSH the following commands
-may also be required:
-      <pre>
-$ cat id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys
-$ chmod 0600 $HOME/.ssh/authorized_keys
-</pre>An alternative is to create a link from authorized_keys2 to
-authorized_keys:
-      <pre>
-$ cd $HOME/.ssh &amp;&amp; ln -s authorized_keys2 authorized_keys
-</pre>
-    </li>
+    <h3>Steps:</h3>
 
-    <li>
-      <p>On the <b><i>client</i></b> test the results by ssh'ing to
-      the <b><i>server</i></b>:</p>
-      <pre>$ ssh -i $HOME/.ssh/id_rsa <b><i>server</i></b></pre>
-      If a password prompt appears, adding the <code>-v</code> 
-      option before <code>-i</code> may be helpful to determine
-      the problem.  
-      
-      <p>For example, when connecting to older SSH servers using a
-      newer SSH client (for example, connecting to a MacOSX 10.4 
-      (Tiger) server from a MacOSX 11 (Big Sur) client), the option 
-      <code>-oKexAlgorithms=+diffie-hellman-group1-sha1</code>
-      may be necessary because the newer client, by default,
-      has disabled support for a key exchange algorithm used
-      by the older SSH server (see <a href=
-      "https://www.openssh.com/legacy.html"
-      >OpenSSH Legacy Options</a>).</p>
-      
-      Also, starting with OpenSSH 8.8, ssh and sftp won't connect
-      to servers that offer ssh-rsa as their key type.  The 
-      <code>-oHostKeyAlgorithms=+ssh-rsa</code> will work around
-      this issue (see, for example, <a href=
-      "https://community.atlassian.com/t5/Bitbucket-articles/OpenSSH-8-8-client-incompatibility-and-workaround/ba-p/1826047">
-      OpenSSH 8.8 client incompatibility and workaround</a>).
-    </li>
+    <ol>
+        <li>
+        <p>On the <i>client</i> run the following commands:
+        <pre>$ mkdir -p ~/.ssh
+$ chmod 0700 ~/.ssh
+$ ssh-keygen -t rsa -f ~/.ssh/id_rsa -P ''</pre>
 
-    <li>
-      <p>(Optional) Add the following $HOME/.ssh/config on the
-      <b><i>client</i></b>:</p>
-      <pre>
-Host <b><i>server</i></b>
-         IdentityFile ~/.ssh/id_rsa
-</pre>
-<p>This allows ssh access to the <b><i>server</i></b> without
-having to specify the path to the id_rsa file as an argument to ssh
-each time.</p>
-    For older servers that need the options
-    <code>-oKexAlgorithms=+diffie-hellman-group1-sha1</code>
-    and/or <code>-oHostKeyAlgorithms=+ssh-rsa</code>, add the 
-    following lines to <code>$HOME/.ssh/config</code> to the
-    appropriate <code><i>server</i></code> entry:
-    <pre>
-    KexAlgorithms +diffie-hellman-group1-sha1
-    HostKeyAlgorithms +ssh-rsa
-    PubkeyAcceptedKeyTypes +ssh-rsa</pre>
-    </li>
-    
-  </ol>
+        This should result in two files, <code>~/.ssh/id_rsa</code> 
+        (private key) and <code>~/.ssh/id_rsa.pub</code> (public key).
+        </p>
+        </li>
 
-  <h3>Helpful manpages:</h3>
+        <li>
+            <p>Copy <code>~/.ssh/id_rsa.pub</code> to the 
+            <i>server</i>.
+            </p>
+        </li>
 
-  <ul>
-    <li><a href=
-    "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
-    ssh(1)</a></li>
+        <li>
+            <p>On the <i>server</i> run the following commands:
+            <pre>$ mkdir -p ~/.ssh
+$ chmod 0700 ~/.ssh
+$ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys2
+$ chmod 0600 ~/.ssh/authorized_keys2</pre>
 
-    <li><a href=
-    "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-keygen&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
-    ssh-keygen(1)</a></li>
+            Depending on the version of OpenSSH the following commands
+            may also be required:
+            <pre>$ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+$ chmod 0600 ~/.ssh/authorized_keys</pre>
 
-    <li><a href=
-    "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh_config&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
-    ssh_config(5)</a></li>
-  </ul>
+            An alternative is to create a link from authorized_keys2 to
+            authorized_keys:
+            <pre>$ cd ~/.ssh &amp;&amp; ln -s authorized_keys2 authorized_keys</pre>
+            </p>
+        </li>
 
-  <h3>Translations:</h3>
-  <ul>
-     <li>Indonesian translation by Jordan Silaen /
+        <li>
+            <p>On the <i>client</i> test the results by ssh'ing to
+            the <i>server</i>:
+            <pre>$ ssh -i ~/.ssh/id_rsa <i>server</i></pre>
+            If a password prompt appears, adding the <code>-v</code> 
+            option before <code>-i</code> may be helpful to determine
+            the problem.
+            </p>
+       </li>
+
+        <li>
+            <p>(Optional) Add the following ~/.ssh/config on the
+            <i>client</i>:
+            <pre>Host <i>server</i>
+     IdentityFile ~/.ssh/id_rsa</pre>
+
+            This allows access to the <i>server</i> without having
+            to specify the <code>id_rsa</code> file as an argument 
+            to <code>ssh</code> each time.
+            </p>
+        </li>
+    </ol>
+
+    <h3>Helpful manpages:</h3>
+
+    <ul>
+        <li><a href=
+        "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
+        ssh(1)</a></li>
+
+        <li><a href=
+        "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-keygen&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
+        ssh-keygen(1)</a></li>
+
+        <li><a href=
+        "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh_config&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
+        ssh_config(5)</a></li>
+    </ul>
+
+    <h3>Translations:</h3>
+    <ul>
+        <li>Indonesian translation by Jordan Silaen /
          <a href="http://ChameleonJohn.com">ChameleonJohn.com</a>:
          <a href=
             "http://www.chameleonjohn.com/translations/ssh_nopass-Indonesian"
          >http://www.chameleonjohn.com/translations/ssh_nopass-Indonesian</a>
-     </li>
-  </ul>
+        </li>
+    </ul>
 
     <hr />
 
-  <div class="c3">
-
-    <p>
     <span class="c2">
-
-    <!-- Creative Commons License -->
-    Licensed under a
-    <a rel="license" href=
-    "http://creativecommons.org/licenses/by/2.5/">Creative Commons
-    Attribution 2.5 License</a>
-    <!-- /Creative Commons License -->
-
+    <a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>
     </span>
-    </p>
 
-    <!--
-    <rdf:RDF xmlns="http://web.resource.org/cc/"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-        <Work rdf:about="">
-            <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
-            <license
-            rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
-        </Work>
-        <License rdf:about="http://creativecommons.org/licenses/by/2.5/">
-            <permits
-            rdf:resource="http://web.resource.org/cc/Reproduction" />
-            <permits
-            rdf:resource="http://web.resource.org/cc/Distribution" />
-            <requires
-            rdf:resource="http://web.resource.org/cc/Notice" />
-            <requires
-            rdf:resource="http://web.resource.org/cc/Attribution" />
-            <permits
-            rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
-        </License>
-    </rdf:RDF>
-    -->
-
-  </div>
 </body>
 </html>

@@ -24,18 +24,6 @@
       <a href="general.html#vim">VIM</a>
       </p>
 
-      SSH:
-
-      <blockquote>
-      <a href="general.html#sshtunnel">Tunneling</a>
-      &nbsp;&#183;&nbsp;
-      <a href="general.html#sshfingerprint">SSH Key Fingerprint</a>
-      &nbsp;&#183;&nbsp;
-      <a href="general.html#sshagent">SSH Agent</a>
-      &nbsp;&#183;&nbsp;
-      <a href="general.html#sshkeepalives">SSH Keepalives</a>
-      </blockquote>
-
   </blockquote>
 
   <hr />
@@ -141,88 +129,6 @@
         >https://stackoverflow.com/questions/3033423/</a></p>
     </li>
   </ul>
-  <hr />
-
-  <h3><a id="sshtunnel">SSH Tunneling</a></h3>
-
-  <dl>
-  <dt>To create an SSH tunnel for a tcp service running on a
-  <b><i>server</i></b>, do the following on the
-  <b><i>client</i></b>:</dt>
-  <dd><pre>$ ssh -N -L <b><i>client_port</i></b>:localhost:<b><i>server_port</i></b> <b><i>user</i></b>@<b><i>server</i></b></pre>
-  </dd>
-  </dl>
-
-  Here <b><i>client_port</i></b> is the port to connect to
-  on the <b><i>client</i></b> and <b><i>server_port</i></b>
-  is the port on which the service is running on the
-  <b><i>server</i></b>. Generally I pick 50000 +
-  <b><i>server_port</i></b> for the <b><i>client_port</i></b>.
-  Examples:
-  <ul>
-  <li>AppleShare:
-  <pre>$ ssh -N -L 50548:localhost:548 <b><i>user@afpserver</i></b></pre>
-  </li>
-  <li>SMB:
-  <pre>$ ssh -N -L 50445:localhost:445 <b><i>user@smbserver</i></b></pre>
-  </li>
-  <li>VNC:
-  <pre>$ ssh -N -L 55900:localhost:5900 <b><i>user@vncserver</i></b></pre>
-  </li>
-  </ul>
-
-  <i>See</i> <a href=
-  "http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm"
-  >http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm</a>.
-
-  <hr />
-
-  <h3><a id="sshfingerprint">SSH Key Fingerprint</a></h3>
-
-  <dl>
-  <dt>To get a SSH key fingerprint, do the following:</dt>
-  <dd><pre>$ ssh-keygen -l -f <b><i>public_key</i></b></pre></dd>
-  <dt>Here <b><i>public_key</i></b> is the path to the public key. For
-  example the key fingerprint for the dsa host key can be obtained by:</dt>
-  <dd><pre>$ ssh-keygen -l -f /etc/ssh/ssh_host_dsa_key.pub</pre></dd>
-  </dl>
-
-  <hr />
-
-  <h3><a id="sshagent">SSH Agent</a></h3>
-
-  <dl>
-  <dt>To start ssh-agent:</dt>
-  <dd><pre>$ eval `ssh-agent`</pre></dd>
-  <dt>To add a ssh key to ssh-agent:</dt>
-  <dd><pre>$ ssh-add <b><i>key</i></b></pre>
-  <p>Here <b><i>key</i></b> is the path to the rsa or dsa key.</p>
-  </dd>
-  <dt>To stop ssh-agent:</dt>
-  <dd><pre>$ ssh-agent -k</pre></dd>
-  </dl>
-
-  <i>See</i> <a href="http://www.cs.utk.edu/~england/ssh.html"
-  >http://www.cs.utk.edu/~england/ssh.html</a>.
-
-  <hr />
-
-  <h3><a id="sshkeepalives">SSH Keepalives</a></h3>
-
-  <dl>
-  <dt>Add the following to $HOME/.ssh/config to prevent dropped
-  connections:</dt>
-  <dd><pre>Host *
-    ServerAliveInterval 120
-    ServerAliveCountMax 3</pre>
-  </dd>
-  </dl>
-
-  <i>See</i> <a href="http://www.kehlet.cx/articles/129.html"
-  >http://www.kehlet.cx/articles/129.html</a>; <a href=
-  "http://www.snailbook.com/faq/timeouts.auto.html"
-  >http://www.snailbook.com/faq/timeouts.auto.html</a>.
-
   <hr />
 
   <div class="c3">
