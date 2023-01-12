@@ -12,3 +12,10 @@ set shiftwidth=4    " 4 spaces for autoindents
 set tabstop=4       " 4 spaces per tab
 set expandtab       " turn tabs into spaces
 "set cul             " highlight current line
+
+" highlight trailing whitespace in red
+" from: https://stackoverflow.com/questions/356126
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
