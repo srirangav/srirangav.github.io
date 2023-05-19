@@ -142,12 +142,28 @@
                 click the "I accept the risk!" button.
             </li>
             <li>Search for
+                "<code>app.normandy.enable</code>".
+                Double click to set the value to "false".
+            </li>
+            <li>Search for
+                "<code>app.normandy.optoutstudies.enabled</code>".
+                Double click to set the value to "false".
+            </li>
+            <li>Search for
                 "<code>beacon.enabled</code>".
                 Double click to set the value to "false".
             </li>
             <li>Search for
+                "<code>browser.aboutHomeSnippets.updateUrl</code>".
+                Double click to set the value to a blank string (&quot;&quot;).
+            </li>
+            <li>Search for
                 "<code>browser.safebrowsing.downloads.remote.enabled</code>".
                 Double click to set the value to "false".
+            </li>
+            <li>Search for
+                "<code>browser.search.geoip.url</code>".
+                Double click to set the value to a blank string (&quot;&quot;).
             </li>
             <li>Search for
                 "<code>browser.send_pings</code>".
@@ -160,6 +176,10 @@
             <li>Search for
                 "<code>browser.sessionstore.privacy_level</code>".
                 Double click to set the value to "2".
+            </li>
+            <li>Search for
+                "<code>browser.startup.homepage_override.mstone</code>".
+                Double click to set the value to "ignore".
             </li>
             <li>Search for
                 "<code>browser.urlbar.speculativeConnect.enabled</code>".
@@ -190,7 +210,19 @@
                 Double click to set the value to "false".
             </li>
             <li>Search for
+                "<code>extensions.getAddons.cache.enabled</code>".
+                Double click to set the value to "false".
+            </li>
+            <li>Search for
                 "<code>extensions.pocket.enabled</code>".
+                Double click to set the value to "false".
+            </li>
+            <li>Search for
+                "<code>gfx.downloadable_fonts.enabled</code>".
+                Double click to set the value to "false".
+            </li>
+            <li>Search for
+                "<code>gfx.downloadable_fonts.woff2.enabled</code>".
                 Double click to set the value to "false".
             </li>
             <li>Search for
@@ -210,12 +242,20 @@
                 Double click to set the value to "false".
             </li>
             <li>Search for
+                "<code>messaging-system.rsexperimentloader.enabled</code>".
+                Double click to set the value to "false".
+            </li>
+            <li>Search for
                 "<code>network.dns.disablePrefetch</code>".
                 Double click to set the value to "true".
             </li>
             <li>Search for
                 "<code>network.dns.disablePrefetchFromHTTPS</code>".
                 Double click to set the value to "true".
+            </li>
+            <li>Search for
+                "<code>network.http.speculative-parallel-limit</code>".
+                Double click to set the value to "0".
             </li>
             <li>Search for
                 "<code>network.predictor.enabled</code>".
@@ -270,7 +310,7 @@
         </ol>
 
         <blockquote>
-        Source:
+        Sources:
         <ul>
             <li><a href=
             "https://support.mozilla.org/en-US/questions/1139372"
@@ -302,6 +342,15 @@
             >Firefox: remove known tracking parameters from URLs in all
             modes</a>, <a href="https://www.ghacks.net/">ghacks</a>
             (June 29, 2022).
+            </li>
+            <li>Marin Brinkmann, <a href=
+            "https://www.ghacks.net/2022/09/17/how-to-block-web-fonts-to-improve-privacy/"
+            >How to block web fonts to improve privacy</a>,
+            <a href="https://www.ghacks.net/">ghacks.net</a>.
+            </li>
+            <li><a href=
+            "https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections"
+            >How to stop Firefox from making automatic connections</a>
             </li>
         </ul>
         </blockquote>
@@ -732,13 +781,20 @@ Source: Chris Siebenmann <a href=
 
 <hr>
 
-<p><a id="ublock">uBlock Origin Rules</a></p>
+<p><a id="ublock">uBlock Origin Settings</a></p>
 
 <blockquote>
 
-    Add the following to "My Filters":
-
     <ul>
+
+    <li>Import Fanboy's Anti-Fonts list:
+        <a href="https://fanboy.co.nz/fanboy-antifonts.txt"
+        >https://fanboy.co.nz/fanboy-antifonts.txt</a>
+    </li>
+
+    <li>Add the following to "My Filters":
+
+        <ul>
         <li>The content of <a
         href="https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt"
         >https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt</a>
@@ -776,7 +832,9 @@ duckduckgo.*##.results > div:has(a[href*=".pinterest.com"])
 
 ! Block google popups
 ||accounts.google.com/gsi/iframe/select$subdocument
-        </pre>
+
+! block third party fonts
+*$font,third-party</pre>
 
         See: Sam McLeod, <a href=
              "https://smcleod.net/software/2022/05/16/firefox-addons-2022/"
@@ -784,9 +842,15 @@ duckduckgo.*##.results > div:has(a[href*=".pinterest.com"])
             Marin Brinkmann, <a href=
             "https://www.ghacks.net/2022/12/24/how-to-block-sign-in-with-google-popups-on-sites/"
             >How to block sign in with Google popups on sites</a>,
-            <a href="https://www.ghacks.net/">ghacks.net</a> (Dec. 24, 2022).
+            <a href="https://www.ghacks.net/">ghacks.net</a> (Dec. 24, 2022);
+            Marin Brinkmann, <a href=
+            "https://www.ghacks.net/2022/09/17/how-to-block-web-fonts-to-improve-privacy/"
+            >How to block web fonts to improve privacy</a>,
+            <a href="https://www.ghacks.net/">ghacks.net</a>.
         </li>
     </ul>
+    </li>
+</ul>
 </blockquote>
 
 <hr>
