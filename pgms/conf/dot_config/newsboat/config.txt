@@ -1,17 +1,31 @@
 # newsboat config
 
 # open links in the MacOSX default browser (and keep it in the background)
-# browser	"open -g"
+browser "open -g"
 
 # open links in links
 # see https://opensource.com/article/20/2/newsboat
 
-browser "/opt/local/bin/links %u"
+#browser "links %u"
 
 # populate / update all feeds on startup
 
 refresh-on-startup yes
 prepopulate-query-feeds yes
+
+# do not delete read articles on quit
+
+delete-read-articles-on-quit no
+
+# download full page for blank items
+
+download-full-page yes
+
+# show read articles and feeds
+
+show-read-articles  yes
+show-read-feeds yes
+toggleitemread-jumps-to-next-unread no
 
 # automatically add all podcast episodes to the download queue
 # podcast-auto-enqueue yes
@@ -20,6 +34,10 @@ prepopulate-query-feeds yes
 # https://wiki.archlinux.org/title/Newsboat
 
 reload-threads 8
+
+# confirm before quitting
+
+confirm-exit yes
 
 # category separators
 # https://wiki.archlinux.org/title/Newsboat
@@ -35,11 +53,13 @@ unbind-key G
 unbind-key g
 unbind-key ^B
 unbind-key ^F
+unbind-key ^V
 
 bind-key G end
 bind-key g home
 bind-key ^B pageup
 bind-key ^F pagedown
+bind-key ^V pagedown
 bind-key SPACE pagedown
 
 # gnus style article / feed manipulation
@@ -74,13 +94,13 @@ bind-key k prev                 # previous article
 
 bind-key U show-urls            # show Urls (b/c 'u' is used for toggling 
                                 # status)
-#bind-key f edit-flags          # Flag / mark an article
+bind-key f edit-flags           # Flag / mark an article
 bind-key m edit-flags           # flag / Mark and article
 
-# macro to open urls in firefox (type ',f' to invoke)
+# macro to open urls in the default browser (type ',b' to invoke)
 # see https://wiki.archlinux.org/title/Newsboat
 
-macro f set browser "open -g" ; open-in-browser ; set browser "/opt/local/bin/links %u"
+# macro o set browser "open -g" ; open-in-browser ; set browser "links %u"
 
 # podboat settings
 

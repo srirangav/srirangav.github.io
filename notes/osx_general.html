@@ -38,8 +38,11 @@
         Finder windows on Big Sur (11.x)</a></li>
     <li><a href="osx_general.html#bigsuralert">Restore classic alerts Big
         Sur (11.x) and Monterey (12.x)</a></li>
+    <li><a href="osx_general.html#restart_swupdate"
+        >Restart stuck software updates on Big Sur (11.x) and newer</a></li>
     <li><a href="osx_general.html#lowpower"
         >Enable/disable low power mode on Monterey (12.x)</a></li>
+
 </uL>
 
 <hr />
@@ -221,6 +224,17 @@ Monterey (12.x):</a></h3>
 From: <a href="https://mjtsai.com/blog/">Michael Tsai</a>, <a href=
 "https://mjtsai.com/blog/2022/04/01/wider-big-sur-alerts/"
 >Wider Alerts on Monterey and Big Sur</a> (Apr. 1, 2022).
+
+<hr />
+
+<h3><a id="restart_swupdate"
+>Restart stuck software updates on Big Sur (11.x) and newer:</a></h3>
+
+<pre>$ sudo launchctl kickstart -k system/com.apple.softwareupdated</pre>
+
+From: <a href=
+"https://community.jamf.com/t5/jamf-pro/big-sur-11-6-x-software-update-hangs/m-p/257525#M238472"
+>https://community.jamf.com/t5/jamf-pro/big-sur-11-6-x-software-update-hangs/m-p/257525#M238472</a>.
 
 <hr />
 
