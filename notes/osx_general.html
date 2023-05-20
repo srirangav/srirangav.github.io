@@ -22,16 +22,19 @@
     <li><a href="osx_general.html#osxscreenshot">Changing Screenshot
         Format</a></li>
     <li><a href="osx_general.html#osxversion">Getting Version Info</a></li>
-    <li><a href="osx_general.html#osxdsstore">Disable .DSStore on Network 
+    <li><a href="osx_general.html#osxdsstore">Disable .DSStore on Network
         Volumes</a></li>
     <li><a href="osx_general.html#osxafpguest">Disable AFP Guest
         Access</a></li>
-    <li><a href="osx_general.html#osxdashboard">Disable Dashboard</a></li>
+    <li><a href="osx_general.html#icloudsaves">Disable iCloud Saving</a></li>
+    <li><a href="osx_general.html#osxdashboard">Disable / Enable Dashboard</a></li>
     <li><a href="osx_general.html#hqicons">Built-in High Quality
         Icons</a></li>
     <li><a href="osx_general.html#kext">List Kernel Extensions</a></li>
     <li><a href="osx_general.html#findertags">Disable/enable recent tags
         in Finder</a></li>
+    <li><a href="osx_general.html#finderpreviews">Disable/enable preview
+        controls in Finder</a></li>
     <li><a href="osx_general.html#bigsuricon">Location of Icon for / on
         Big Sur (11.x)</a></li>
     <li><a href="osx_general.html#bigsurpath">Restore classic path in
@@ -85,14 +88,14 @@ Finished partitioning on disk disk<b><i>X</i></b></pre>
 <h3><a id="osxshell">Changing Shells on MacOS X</a></h3>
 
 <pre>$ sudo niutil -createprop / /Users/<b><i>username</i></b> shell <b><i>shell</i></b></pre>
-  
+
 where <b><i>username</i></b> is your short username and <b><i>shell</i></b>
 is the full path to the new shell.
 
 <hr />
 
 <h3><a id="osxx11">MacOS X X11 Options</a></h3>
-  
+
 <dl>
     <dt>Map Option to META:</dt>
     <dd>
@@ -102,7 +105,7 @@ is the full path to the new shell.
     <pre>$ defaults write com.apple.x11 nolisten_tcp -boolean true</pre>
     </dd>
 </dl>
-  
+
 <hr />
 
 <h3><a id="osxscreenshot">MacOS X Screenshot Type</a></h3>
@@ -114,7 +117,7 @@ where <b><i>type</i></b> is either pdf, png, jpg or gif.
 <hr />
 
 <h3><a id="osxversion">Getting MacOS X Version Info</a></h3>
-  
+
 <dl>
     <dt>System Version:</dt>
     <dd>
@@ -132,8 +135,8 @@ where <b><i>type</i></b> is either pdf, png, jpg or gif.
 
 <h3><a id="osxdsstore">Disable .DSStore files on Network Volumes</a></h3>
 
-<pre>$ defaults write com.apple.desktopservices DSDontWriteNetworkStores true</pre>
-  
+<pre>$ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true</pre>
+
 <hr />
 
 <h3><a id="osxafpguest">Disable AFP Guest Access</a></h3>
@@ -142,21 +145,18 @@ where <b><i>type</i></b> is either pdf, png, jpg or gif.
 
 <hr />
 
-<h3><a id="osxdashboard">Disable Dashboard</a></h3>
+<h3><a id="osxafpguest">Disable iCloud Saving</a></h3>
 
-<dl>
-      <dt>To disable Dashboard:</dt>
-      <dd>
-      <pre>$ defaults write com.apple.dashboard mcx-disabled -boolean YES
-$ killall Dock</pre>
-      </dd>
-      <dt>To enable Dashboard:</dt>
-      <dd>
-      <pre>$ defaults write com.apple.dashboard mcx-disabled -boolean NO
-$ killall Dock</pre>
-      </dd>  
-</dl>
-  
+<pre>$ defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false</pre>
+
+<hr />
+
+
+<h3><a id="osxdashboard">Disable / Enable Dashboard</a></h3>
+
+<pre>$ defaults write com.apple.dashboard mcx-disabled -boolean YES &amp;&amp; killall Dock</pre>
+<pre>$ defaults write com.apple.dashboard mcx-disabled -boolean NO &amp;&amp; killall Dock</pre>
+
 <hr />
 
 <h3><a id="hqicons">Built-in High Quality Icons</a></h3>
@@ -165,7 +165,7 @@ $ killall Dock</pre>
 
 From: Paul Horowitz, <a href=
 "https://osxdaily.com/2012/06/27/get-53-high-quality-mac-apple-hardware-icons-right-in-os-x/"
->Get 53+ High Quality Mac &amp; Apple Hardware Icons Right in Mac OS X</a>, 
+>Get 53+ High Quality Mac &amp; Apple Hardware Icons Right in Mac OS X</a>,
 <a href="https://osxdaily.com/">OSX Daily</a> (June 27, 2012).
 
 <hr />
@@ -178,7 +178,7 @@ From: Paul Horowitz, <a href=
 
 From: Lloyd Chambers, <a href=
 "https://macperformanceguide.com/blog/2021/20210511_1300-macOS-kextstat.html"
->macOS Big Sur: how to List Active Kernel Extensions</a>, <a 
+>macOS Big Sur: how to List Active Kernel Extensions</a>, <a
 href="https://macperformanceguide.com/"
 >MacPerformance Guide</a> (May 11, 2021).
 
@@ -186,11 +186,22 @@ href="https://macperformanceguide.com/"
 
 <h3><a id="findertags">Disable/enable recent tags in Finder:</a></h3>
 
-<pre>$ defaults write com.apple.Finder ShowRecentTags -bool false
-$ killall Finder</pre>
+<pre>$ defaults write com.apple.Finder ShowRecentTags -bool false &amp;&amp; killall Finder</pre>
 
-<pre>$ defaults write com.apple.Finder ShowRecentTags -bool true
-$ killall Finder</pre>
+<pre>$ defaults write com.apple.Finder ShowRecentTags -bool true &amp;&amp; killall Finder</pre>
+
+<hr />
+
+<h3><a id="finderpreviews">Disable/enable preview controls in Finder:</a></h3>
+
+<pre>$ defaults write com.apple.finder QLInlinePreviewMinimumSupportedSize -int 514 &amp;&amp; killall Finder</pre>
+
+<pre>$ defaults write com.apple.finder QLInlinePreviewMinimumSupportedSize -int 64 &amp;&amp; killall Finder</pre>
+
+From: Jacob, <a href=
+"https://beamtic.com/disable-preview-controls-mac"
+>Disable annoying preview controls in Mac Finder</a>, 
+<a href="https://beamtic.com/">Beamtic</a> (Oct. 12, 2022).
 
 <hr />
 
