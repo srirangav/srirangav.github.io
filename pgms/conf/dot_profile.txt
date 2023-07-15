@@ -88,7 +88,7 @@ case $- in
                 # bash style tab completion for pdksh
                 # in emacs mode
 
-                if type bind > /dev/null 2>&1 ; then 
+                if type bind > /dev/null 2>&1 ; then
                    bind "^I=complete"
                    bind "^I^I=complete-list"
                 fi
