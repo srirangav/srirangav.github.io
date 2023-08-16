@@ -38,11 +38,11 @@
     <li><a href="index.html#noavahi">Disable Avahi</a></li>
 
     <li><a href="index.html#nocups">Disable CUPS</a></li>
-    
+
     <li><a href="index.html#rmapps">Remove Extra Apps</a></li>
-    
+
     <li><a href="index.html#isos">CDs/ISOs</a></li>
-    
+
     <li><a href="index.html#debvers"
     >Getting the Debian Version/Release</a></li>
 
@@ -315,7 +315,7 @@ re-enable it:
 
 <ol>
 
-    <li>Get the most recent updates: 
+    <li>Get the most recent updates:
         <p><code>$ sudo apt-get update</code></p>
     </li>
 
@@ -364,8 +364,8 @@ See: <a href=
 <hr />
 
 <p><b><a id="gtweaks">Enable</a> <a href=
-      "https://wiki.gnome.org/Apps/Tweaks">Gnome Tweaks</a> and 
-      Gnome Shell Extensions 
+      "https://wiki.gnome.org/Apps/Tweaks">Gnome Tweaks</a> and
+      Gnome Shell Extensions
       (if using <a href="https://www.gnome.org/">Gnome</a>)</b></p>
 
 <p>
@@ -428,7 +428,7 @@ From: <a href=
 <p><b><a id="rmapps">Remove Extra Apps</a></b></p>
 
 <ol>
-    <li>Remove Nano</a>:
+    <li>Remove Nano:
         <p><code>$ sudo apt-get remove --purge nano</code></p>
     </li>
 
@@ -443,14 +443,14 @@ From: <a href=
         <p><code>$ sudo apt-get remove --purge exfalso</code></p>
     </li>
     <li>Remove all unused apps:
-        <p><code>$ sudo apt-get -s autoremove</code></p>    
+        <p><code>$ sudo apt-get -s autoremove</code></p>
     </li>
     <li>Clean up:
         <p><code>$ sudo apt-get clean &amp;&amp; sudo apt-get autoremove</code></p>
     </li>
 </ol>
 
-From: 
+From:
 <ul>
     <li><a href=
       "https://askubuntu.com/questions/180403/how-to-uninstall-libreoffice"
@@ -495,13 +495,13 @@ From:
 
             <li>Create the ISO:
 
-            <p><code>$ xorrisofs -v -J -r -V <i>label</i> -o <i>name</i>.iso 
+            <p><code>$ xorrisofs -v -J -r -V <i>label</i> -o <i>name</i>.iso
             <i>path</i></code></p>
 
-            where <i>label</i> is the label for the ISO, 
-            <i>name</i> is the name of the ISO, and 
+            where <i>label</i> is the label for the ISO,
+            <i>name</i> is the name of the ISO, and
             <i>path</i> is the directory from which the ISO should be made.
-        
+
             </li>
         </ol>
         </p>
@@ -509,7 +509,7 @@ From:
     <p>From: <a href=
     "https://wiki.debian.org/BurnCd#Make_an_ISO_9660_image_file"
     >https://wiki.debian.org/BurnCd#Make_an_ISO_9660_image_file</a></p>
-    
+
     </li>
 
 </ul>
@@ -523,7 +523,7 @@ From:
     <li>Install lsb-release:
         <p><code>$ sudo apt-get install lsb-release</code></p>
     </li>
-    
+
     <li>Once lsb-release is installed, the Debian Version/Release can
     be queried as follows:
         <p><code>$ lsb_release -da</code></p>
@@ -568,13 +568,13 @@ From:
     <p><code>$ sudo apt install dnscrypt-proxy</code></p>
     </li>
     <li>
-        <p>Edit <code>/etc/dnscrypt-proxy/dnscrypt-proxy.toml</code> 
+        <p>Edit <code>/etc/dnscrypt-proxy/dnscrypt-proxy.toml</code>
         as needed.</p>
     </li>
     <li>Restart <code>dnscrypt-proxy</code>:
     <p><code>$ sudo systemctl restart dnscrypt-proxy</code></p>
     </li>
-    <li><p>Use NetworkManager (e.g. <code>nmtui</code>) to set the 
+    <li><p>Use NetworkManager (e.g. <code>nmtui</code>) to set the
     DNS server to 127.0.2.1 and enable the ignore DNS servers set
     by the DHCP server.</p></li>
     <li>Restart NetworkManager:
