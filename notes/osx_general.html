@@ -45,6 +45,8 @@
         >Restart stuck software updates on Big Sur (11.x) and newer</a></li>
     <li><a href="osx_general.html#lowpower"
         >Enable/disable low power mode on Monterey (12.x)</a></li>
+    <li><a href="osx_general.html#fvkey"
+        >Enable/disable password to wake from sleep / hibernate</a></li>
 
 </uL>
 
@@ -145,7 +147,7 @@ where <b><i>type</i></b> is either pdf, png, jpg or gif.
 
 <hr />
 
-<h3><a id="osxafpguest">Disable iCloud Saving</a></h3>
+<h3><a id="icloudsaves">Disable iCloud Saving</a></h3>
 
 <pre>$ defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false</pre>
 
@@ -258,6 +260,18 @@ $ sudo pmset -a lowpowermode 0</pre>
 From: <a href=
 "https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/"
 >https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/</a>.
+
+<hr />
+
+<h3><a id="fvkey"
+>Enable/disable password to wake from sleep / hibernate</a></h3>
+
+<pre>$ sudo pmset -a DestroyFVKeyOnStandby 1
+$ sudo pmset -a DestroyFVKeyOnStandby 0</pre>
+
+From: <a href=
+"https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/"
+>https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/</a>.
 
 <hr />
 
