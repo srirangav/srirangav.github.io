@@ -37,7 +37,7 @@ function! ToggleSpelling()
     endif
     let s:spellingState = !s:spellingState
 endfunction
-map <C-s> :ToggleSpelling<CR>
+nnoremap <C-s> :ToggleSpelling<CR>
 
 " highlight trailing white space in red
 " requires vim-runtime on Debian
@@ -46,3 +46,7 @@ map <C-s> :ToggleSpelling<CR>
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
+" remove trailing whitespace
+" https://vimtricks.com/p/vim-remove-trailing-whitespace/
+
+nnoremap <C-l> :%s/\s\+$//e<CR>
