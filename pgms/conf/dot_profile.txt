@@ -51,22 +51,11 @@ case $- in
             PAGER="less"
             LESSHISTFILE="/dev/null"
             LESSHISTSIZE="0"
-            LESSSECURE="YES"
+            LESSSECURE="1"
             export LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
 
-        # see if a terminal browser is available
-
-        BROWSER=""
-        if type links > /dev/null 2>&1 ; then
-            BROWSER="links"
-        elif type lynx > /dev/null 2>&1 ; then
-            BROWSER="lynx"
-        elif type w3m > /dev/null 2>&1 ; then
-            BROWSER="w3m"
-        fi
-
-        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH BROWSER
+        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
 
         # set bash and ksh specific options
 
@@ -78,7 +67,7 @@ case $- in
 
                 set -o emacs
 
-                # additional option, may not be available on
+                # additional options, may not be available on
                 # all ksh versions
 
                 set -o notify >/dev/null 2>&1
@@ -118,7 +107,6 @@ case $- in
             # math, instead of just integer math
 
             alias bc="bc -l" ;
-
         fi
 
         ;;

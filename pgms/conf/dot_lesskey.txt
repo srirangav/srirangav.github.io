@@ -1,0 +1,3 @@
+# disable less history
+LESSHISTFILE=/dev/null
+LESSHISTSIZE=0
