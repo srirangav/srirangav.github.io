@@ -5,16 +5,43 @@ set showmode        " show current mode (insert/append/etc.) in status bar
 set showcmd         " show typed command in status bar
 set number          " show line numbers
 set ruler           " show cursor position in status bar
-set ignorecase      " case insensitive searching
-set smartcase       " case sensitive if uppercase characters are provided
 set smartindent     " smart auto indenting
-set shiftwidth=4    " 4 spaces for autoindents
+set shiftwidth=4    " 4 spaces for auto indents
 set tabstop=4       " 4 spaces per tab
 set expandtab       " turn tabs into spaces
 "set cul             " highlight current line
 
-" highlight trailing whitespace in red
-" from: https://stackoverflow.com/questions/356126
+" enhanced searching
+" https://www.twilio.com/blog/5-quality-of-life-vim-tricks-for-your-vimrc
+
+set hlsearch        " highlight search terms
+set incsearch       " highlight search terms as you type them
+set showmatch       " highlight matching parentheses
+set ignorecase      " case insensitive searching
+set smartcase       " case sensitive if uppercase characters are provided
+nnoremap <CR> :noh<CR>
+
+" enable builtin spellchecking
+" https://vimtricks.com/p/vim-spell-check/
+" https://www.linux.com/training-tutorials/using-spell-checking-vim/
+" https://unix.stackexchange.com/questions/12889
+" https://vi.stackexchange.com/questions/15578
+
+let s:spellingState=0
+command! ToggleSpelling call ToggleSpelling()
+function! ToggleSpelling()
+    if s:spellingState
+       set nospell
+    else
+       set spell spelllang=en_us
+    endif
+    let s:spellingState = !s:spellingState
+endfunction
+map <C-s> :ToggleSpelling<CR>
+
+" highlight trailing white space in red
+" requires vim-runtime on Debian
+" https://stackoverflow.com/questions/356126
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
