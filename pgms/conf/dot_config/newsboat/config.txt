@@ -45,7 +45,7 @@ confirm-exit yes
 highlight feedlist "---.*---" default default bold
 highlight feedlist ".*0/0.." default default invis
 
-# custom key bindings 
+# custom key bindings
 
 # vi style navigation (b/c I can't get M- to work properly)
 
@@ -53,13 +53,11 @@ unbind-key G
 unbind-key g
 unbind-key ^B
 unbind-key ^F
-unbind-key ^V
 
 bind-key G end
 bind-key g home
 bind-key ^B pageup
 bind-key ^F pagedown
-bind-key ^V pagedown
 bind-key SPACE pagedown
 
 # gnus style article / feed manipulation
@@ -79,7 +77,7 @@ unbind-key u
 unbind-key U
 unbind-key x
 
-bind-key C mark-feed-read       # Catch-up by marking all articles in a 
+bind-key C mark-feed-read       # Catch-up by marking all articles in a
                                 # feed as read
 bind-key n toggle-article-read  # mark article New / unread
 bind-key u toggle-article-read  # mark article new / Unread
@@ -92,7 +90,7 @@ bind-key k prev                 # previous article
 
 # other key bindings
 
-bind-key U show-urls            # show Urls (b/c 'u' is used for toggling 
+bind-key U show-urls            # show Urls (b/c 'u' is used for toggling
                                 # status)
 bind-key f edit-flags           # Flag / mark an article
 bind-key m edit-flags           # flag / Mark and article
