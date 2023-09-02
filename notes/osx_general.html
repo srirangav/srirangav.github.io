@@ -4,18 +4,20 @@
   <meta http-equiv="Content-Type" content="text/html;
         charset=utf-8" />
   <title>General MacOS X Notes</title>
-  <link href="../shared/site.css" type="text/css"
-        rel="stylesheet" />
+  <style>
+  body {
+      font-family: sans-serif;
+  }
+  </style>
 </head>
 
 <body>
 
-<h2 class="c1">General MacOS X Notes</h2>
+<h2>General MacOS X Notes</h2>
 
 <p>These are some general notes about MacOS X.</p>
 
 <ul>
-    <li><a href="osx_general.html#osxquitfinder">Add Quit to Finder</a></li>
     <li><a href="osx_general.html#osxramdisk">Creating a Ram Disk</a></li>
     <li><a href="osx_general.html#osxshell">Changing Shells</a></li>
     <li><a href="osx_general.html#osxx11">X11 Options</a></li>
@@ -27,18 +29,11 @@
     <li><a href="osx_general.html#osxafpguest">Disable AFP Guest
         Access</a></li>
     <li><a href="osx_general.html#icloudsaves">Disable iCloud Saving</a></li>
-    <li><a href="osx_general.html#osxdashboard">Disable / Enable Dashboard</a></li>
+    <li><a href="osx_general.html#osxdashboard">Disable / Enable
+        Dashboard</a></li>
     <li><a href="osx_general.html#hqicons">Built-in High Quality
         Icons</a></li>
     <li><a href="osx_general.html#kext">List Kernel Extensions</a></li>
-    <li><a href="osx_general.html#findertags">Disable/enable recent tags
-        in Finder</a></li>
-    <li><a href="osx_general.html#finderpreviews">Disable/enable preview
-        controls in Finder</a></li>
-    <li><a href="osx_general.html#bigsuricon">Location of Icon for / on
-        Big Sur (11.x)</a></li>
-    <li><a href="osx_general.html#bigsurpath">Restore classic path in
-        Finder windows on Big Sur (11.x)</a></li>
     <li><a href="osx_general.html#bigsuralert">Restore classic alerts Big
         Sur (11.x) and Monterey (12.x)</a></li>
     <li><a href="osx_general.html#restart_swupdate"
@@ -47,14 +42,9 @@
         >Enable/disable low power mode on Monterey (12.x)</a></li>
     <li><a href="osx_general.html#fvkey"
         >Enable/disable password to wake from sleep / hibernate</a></li>
-
+    <li><a href="osx_general.html#dnscache"
+        >Reset DNS cache on Monterey (12.x)</a></li>
 </uL>
-
-<hr />
-
-<h3><a id="osxquitfinder">Add Quit to Finder</a></h3>
-
-<pre>$ defaults write com.apple.Finder QuitMenuItem 1 &amp;&amp; killall Finder</pre>
 
 <hr />
 
@@ -153,7 +143,6 @@ where <b><i>type</i></b> is either pdf, png, jpg or gif.
 
 <hr />
 
-
 <h3><a id="osxdashboard">Disable / Enable Dashboard</a></h3>
 
 <pre>$ defaults write com.apple.dashboard mcx-disabled -boolean YES &amp;&amp; killall Dock</pre>
@@ -180,57 +169,14 @@ From: Paul Horowitz, <a href=
 
 From: Lloyd Chambers, <a href=
 "https://macperformanceguide.com/blog/2021/20210511_1300-macOS-kextstat.html"
->macOS Big Sur: how to List Active Kernel Extensions</a>, <a
-href="https://macperformanceguide.com/"
+>macOS Big Sur: how to List Active Kernel Extensions</a>,
+<a href="https://macperformanceguide.com/"
 >MacPerformance Guide</a> (May 11, 2021).
 
 <hr />
 
-<h3><a id="findertags">Disable/enable recent tags in Finder:</a></h3>
-
-<pre>$ defaults write com.apple.Finder ShowRecentTags -bool false &amp;&amp; killall Finder</pre>
-
-<pre>$ defaults write com.apple.Finder ShowRecentTags -bool true &amp;&amp; killall Finder</pre>
-
-<hr />
-
-<h3><a id="finderpreviews">Disable/enable preview controls in Finder:</a></h3>
-
-<pre>$ defaults write com.apple.finder QLInlinePreviewMinimumSupportedSize -int 514 &amp;&amp; killall Finder</pre>
-
-<pre>$ defaults write com.apple.finder QLInlinePreviewMinimumSupportedSize -int 64 &amp;&amp; killall Finder</pre>
-
-From: Jacob, <a href=
-"https://beamtic.com/disable-preview-controls-mac"
->Disable annoying preview controls in Mac Finder</a>, 
-<a href="https://beamtic.com/">Beamtic</a> (Oct. 12, 2022).
-
-<hr />
-
-<h3><a id="bigsuricon">Location of Icon for / on Big Sur (11.x)</a></h3>
-
-<pre>/System/Volumes/Data/.VolumeIcon.icns</pre>
-
-<hr />
-
-<h3><a id="bigsurpath">Restore classic path in Finder windows on
-    Big Sur (11.x)</a></h3>
-
-<ol>
-   <li>
-   <pre>$ defaults write -g NSWindowSupportsAutomaticInlineTitle -bool false</pre>
-   </li>
-   <li>Relaunch the Finder</li>
-</ol>
-
-From: <a href="https://mjtsai.com/blog/">Michael Tsai</a>, <a href=
-"https://mjtsai.com/blog/2020/10/30/more-big-sur-ui-refinements/"
->More Big Sur UI Refinements</a> (Oct. 30, 2020).
-
-<hr />
-
 <h3><a id="bigsuralert">Restore classic alerts Big Sur (11.x) and
-Monterey (12.x):</a></h3>
+Monterey (12.x)</a></h3>
 
 <pre>$ defaults write -g NSAlertMetricsGatheringEnabled -bool false</pre>
 
@@ -241,7 +187,7 @@ From: <a href="https://mjtsai.com/blog/">Michael Tsai</a>, <a href=
 <hr />
 
 <h3><a id="restart_swupdate"
->Restart stuck software updates on Big Sur (11.x) and newer:</a></h3>
+>Restart stuck software updates on Big Sur (11.x) and newer</a></h3>
 
 <pre>$ sudo launchctl kickstart -k system/com.apple.softwareupdated</pre>
 
@@ -252,7 +198,7 @@ From: <a href=
 <hr />
 
 <h3><a id="lowpower"
->Enable/disable low power mode on Monterey (12.x):</a></h3>
+>Enable/disable low power mode on Monterey (12.x)</a></h3>
 
 <pre>$ sudo pmset -a lowpowermode 1
 $ sudo pmset -a lowpowermode 0</pre>
@@ -275,9 +221,18 @@ From: <a href=
 
 <hr />
 
-<span class="c2">
+<h3><a id="dnscache"
+>Reset DNS cache on Monterey (12.x)</a></h3>
+
+<pre>$ sudo dscacheutil -flushcache &amp;&amp; sudo killall -HUP mDNSResponder</pre>
+
+From: <a href=
+"https://osxdaily.com/2022/11/21/how-clear-dns-cache-macos-ventura-monterey/"
+>https://osxdaily.com/2022/11/21/how-clear-dns-cache-macos-ventura-monterey/</a>.
+
+<hr />
+
 <a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>
-</span>
 
 </body>
 </html>

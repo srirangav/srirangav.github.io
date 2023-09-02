@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;
+        charset=utf-8" />
+  <title>MacOS Finder X Notes</title>
+  <style>
+  body {
+      font-family: sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+
+<h2>MacOS X Finder Notes</h2>
+
+<p>These are some notes about MacOS X FInder.</p>
+
+<ul>
+    <li><a href="osx_finder.html#osxquitfinder">Add Quit to Finder</a></li>
+    <li><a href="osx_finder.html#findertags">Disable/enable recent tags
+        in Finder</a></li>
+    <li><a href="osx_finder.html#finderpreviews">Disable/enable preview
+        controls in Finder</a></li>
+    <li><a href="osx_finder.html#bigsuricon">Location of Icon for / on
+        Big Sur (11.x)</a></li>
+    <li><a href="osx_finder.html#bigsurpath">Restore classic path in
+        Finder windows on Big Sur (11.x)</a></li>
+</uL>
+
+<hr />
+
+<h3><a id="osxquitfinder">Add Quit to Finder</a></h3>
+
+<pre>$ defaults write com.apple.Finder QuitMenuItem 1 &amp;&amp; killall Finder</pre>
+
+<hr />
+
+<h3><a id="findertags">Disable/enable recent tags in Finder</a></h3>
+
+<pre>$ defaults write com.apple.Finder ShowRecentTags -bool false &amp;&amp; killall Finder</pre>
+
+<pre>$ defaults write com.apple.Finder ShowRecentTags -bool true &amp;&amp; killall Finder</pre>
+
+<hr />
+
+<h3><a id="finderpreviews">Disable/enable preview controls in Finder</a></h3>
+
+<pre>$ defaults write com.apple.finder QLInlinePreviewMinimumSupportedSize -int 514 &amp;&amp; killall Finder</pre>
+
+<pre>$ defaults write com.apple.finder QLInlinePreviewMinimumSupportedSize -int 64 &amp;&amp; killall Finder</pre>
+
+From: Jacob, <a href=
+"https://beamtic.com/disable-preview-controls-mac"
+>Disable annoying preview controls in Mac Finder</a>,
+<a href="https://beamtic.com/">Beamtic</a> (Oct. 12, 2022).
+
+<hr />
+
+<h3><a id="bigsuricon">Location of Icon for / on Big Sur (11.x)</a></h3>
+
+<pre>/System/Volumes/Data/.VolumeIcon.icns</pre>
+
+<hr />
+
+<h3><a id="bigsurpath">Restore classic path in Finder windows on
+    Big Sur (11.x)</a></h3>
+
+<ol>
+   <li>
+   <pre>$ defaults write -g NSWindowSupportsAutomaticInlineTitle -bool false</pre>
+   </li>
+   <li>Relaunch the Finder</li>
+</ol>
+
+From: <a href="https://mjtsai.com/blog/">Michael Tsai</a>, <a href=
+"https://mjtsai.com/blog/2020/10/30/more-big-sur-ui-refinements/"
+>More Big Sur UI Refinements</a> (Oct. 30, 2020).
+
+<hr />
+
+<a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>
+
+</body>
+</html>
