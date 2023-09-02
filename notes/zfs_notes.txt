@@ -462,7 +462,7 @@ To List latest snapshot on all volumes:
 
     $ zfs list | awk '/enc\// { print $1; }' | \
       while read VOL ; do \
-          zfs list -H -t snapshot "$VOL" | i\
+          zfs list -H -t snapshot "$VOL" | \
           sort -rn | head -1 | awk '{ print $1; }'; \
       done
 
