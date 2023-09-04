@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>wget Notes</title>
+</head>
+
+<body>
+<pre><a href="../index.html">Home</a> / <a 
+      href="index.html">Notes</a> / wget Notes
+=========================
+
+Output Urls to STDOUT with wget:
+
+    It is possible to have wget to ouput the content of a [url] to
+    STDOUT (like curl) using a Bourne-like shell on systems that
+    support the /dev/fd filesystem:
+
+    ( exec 6&gt;&amp;1 ; wget -O /dev/fd/6 [url] 2&gt;/dev/null ; exec 6&gt;&amp;- )
+
+</pre>
+</body>
+</html>
+
