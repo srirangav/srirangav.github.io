@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>body { font-family: monospace; }</style>
+    <title>GnuPG Notes</title>
+</head>
+
+<body>
+<pre><a href="../index.html">Home</a> / <a
+      href="index.html">Notes</a> / <a
+      href="http://www.gnupg.org">GnuPG</a> Notes
+==========================
+
+1. Create a new key:
+
+    $ gpg --gen-key
+
+2. List all public keys:
+
+    $ gpg --list-keys
+
+3. List your public keys:
+
+    $ gpg --list-keys 'user'
+
+4. Get your key fingerprint:
+
+    $ gpg --fingerprint 'user'
+
+5. Export your public key in ascii:
+
+    $ gpg -a --export 'user'
+
+6. Importing a public key from a [FILE]:
+
+    $ gpg --import [FILE]
+
+7. Importing a public key from a [URL] a using <a
+href="http://curl.haxx.se/">curl</a>:
+
+    $ curl [URL] | gpg --import
+
+8. Importing the public key with [id] from a [keyserver]:
+
+    $ gpg --keyserver [keyserver] --recv-key [id]
+
+    See <a href="http://www.gnupg.org/gph/en/manual.html#AEN84"
+      >http://www.gnupg.org/gph/en/manual.html#AEN84</a>.
+
+9. Creating a ascii signature for a [file] in a separate [signature_file]:
+
+    $ gpg -asb -o [signature_file] [file]
+
+    or
+
+    $ gpg --sign --detach-sign --armor --output [signature_file] [file]
+
+    If -o / --output [signature_file] is omitted, the signature is
+    stored in [file].asc.
+
+10. Verifying a signature:
+
+    $ gpg --verify [signature_file] [file]
+
+    If [file] is omitted, then [signature_file] must be named [file].asc
+
+</pre>
+</body>
+</html>
+

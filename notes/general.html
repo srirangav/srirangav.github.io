@@ -17,8 +17,6 @@
   <blockquote>
 
       <p>
-      <a href="general.html#gpg">GnuPG</a>
-      &nbsp;&#183;&nbsp;
       <a href="general.html#wgetstdout">Output Urls to STDOUT with wget</a>
       &nbsp;&#183;&nbsp;
       <a href="general.html#vim">VIM</a>
@@ -38,97 +36,6 @@
 
   Here <b><i>url</i></b> is the url to be displayed.
 
-  <hr />
-
-  <h3><a id="gpg">GnuPG Notes</a></h3>
-
-  The following are some commonly used
-  <a href="http://www.gnupg.org">GnuPG</a> commands.
-  <ul>
-  <li>Create a new key:
-      <pre>$ gpg --gen-key</pre>
-  </li>
-  <li>Listing public keys:
-      <pre>$ gpg --list-keys '<b><i>user</i></b>'</pre>
-      <p>If <b><i>user</i></b> is omitted, all public keys are listed.</p>
-  </li>
-  <li>Get a key fingerprint:
-      <pre>$ gpg --fingerprint '<b><i>user</i></b>'</pre>
-  </li>
-  <li>Export a public key in ascii:
-      <pre>$ gpg -a --export '<b><i>user</i></b>'</pre>
-  </li>
-  <li>Importing a public key from a <b><i>file</i></b>:
-      <pre>$ gpg --import <b><i>file</i></b></pre>
-  </li>
-  <li>Importing a public key from a <b><i>url</i></b> using
-      <a href="http://curl.haxx.se/">curl</a>:
-      <pre>$ curl <b><i>url</i></b> | gpg --import</pre>
-  </li>
-  <li>Importing a public key from a <b><i>keyserver</i></b>:
-      <pre>$ gpg --keyserver <b><i>keyserver</i></b> --recv-key <b><i>id</i></b></pre>
-      <p><i>See</i> <a
-      href="http://www.gnupg.org/gph/en/manual.html#AEN84"
-      >http://www.gnupg.org/gph/en/manual.html#AEN84</a>.</p>
-  </li>
-  <li>Creating a ascii signature in a separate file:
-      <pre>$ gpg -asb -o <b><i>signature_file</i></b> <b><i>file</i></b></pre>
-      or
-      <pre>$ gpg --sign --detach-sign --armor --output <b><i>signature_file</i></b> <b><i>file</i></b></pre>
-
-      <p>If -o / --output <b><i>signature_file</i></b> is omitted, the signature
-      is stored in <b><i>file</i></b>.asc.</p>
-  </li>
-  <li>Verifying a signature:
-      <pre>$ gpg --verify <b><i>signature_file</i></b> <b><i>file</i></b></pre>
-      <p>If <b><i>file</i></b> is omitted, then
-         <b><i>signature_file</i></b> must have the name
-         <b><i>file</i></b>.asc.</p>
-  </li>
-  </ul>
-
-  <hr />
-
-  <h3><a id="vim">VIM Notes</a></h3>
-
-  The following are some commonly used
-  <a href="http://www.vim.org">VIM</a> commands.
-  <ul>
-  <li>CVS commit'ing the current file:
-      <pre>:!cvs commit -m '<b><i>commit message</i></b>' %</pre>
-  </li>
-  <li>Spell checking the current file:
-     <pre>:!aspell -c %</pre>
-  </li>
-  <li><p>Hard wrap to 80 columns:</p>
-      <ol>
-        <li><p>Set the text width to 80 columns:
-            <pre>:set textwidth=80</pre>
-            or
-            <pre>:set tw=80</pre>
-        </p></li>
-        <li><p>To format the entire file, go to the start of the
-               file, <code>gg</code>, and then: <code>gqG</code>
-        </p></li>
-        <li><p>To format the current line only: <code>gq$</code><p></li>
-        <li><p>To format the current paragraph only: <code>gq}</code>
-        <p></li>
-      </ol>
-      Alternative: <code>:%!fold -w <i>col</i></code>
-  </li>
-  </ul>
-
-  <i>Sources:</i>
-  <ul>
-    <li><p><a href=
-              "http://mark.stosberg.com/Tech/text_editor_review.html#vim"
-        >http://mark.stosberg.com/Tech/text_editor_review.html#vim</a></p>
-    </li>
-    <li><p><a href=
-              "https://stackoverflow.com/questions/3033423/"
-        >https://stackoverflow.com/questions/3033423/</a></p>
-    </li>
-  </ul>
   <hr />
 
   <div class="c3">
