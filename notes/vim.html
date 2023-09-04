@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>VIM Notes</title>
+</head>
+
+<body>
+<pre><a href="../index.html">Home</a> / <a
+      href="index.html">Notes</a> / <a
+      href="https://www.vim.org/">VIM</a> Notes
+========================
+
+1. CVS commit the current file:
+
+    :!cvs commit -m '[commit message]' %
+
+2. Spell checking the current file:
+
+    :!aspell -c %
+
+3. Hard wrap text to 80 columns:
+
+    a. Set the text width to 80 columns:
+
+        :set textwidth=80
+
+        or
+
+        :set tw=80
+
+    b. To format the entire file, go to the start of the file (:gg),
+       and then:
+
+        :gqG
+
+        To format the current line only use :gq$
+
+        To format the current paragraph only use :gq}
+
+    c. Alternatively, use :%!fold -w [col]
+
+Sources: <a href=
+         "http://mark.stosberg.com/Tech/text_editor_review.html#vim"
+         >http://mark.stosberg.com/Tech/text_editor_review.html#vim</a>
+         <a href=
+         "https://stackoverflow.com/questions/3033423/"
+         >https://stackoverflow.com/questions/3033423/</a>
+
+See also: <a href="../pgms/conf/dot_vimrc.txt">.vimrc</a>
+
+</pre>
+</body>
+</html>
+
