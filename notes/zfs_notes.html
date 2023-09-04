@@ -1,6 +1,14 @@
----------
-ZFS Notes
----------
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>ZFS Notes</title>
+</head>
+
+<body>
+<pre><a href="../index.html">Home</a> / <a
+      href="index.html">Notes</a> / ZFS Notes
+========================
 
 These are some notes about working with OpenZFS (mainly on MacOSX,
 but they should apply generally to any system using OpenZFS).
@@ -64,14 +72,22 @@ needs to first be created.
 
    The '-O casesensitivity=insensitive' and '-O normalization=formD' are
    optional, but helpful on MacOSX because they make the pool to act like
-   more like a standard Mac disk.  See, e.g.:
+   more like a standard Mac disk, see:
 
-    https://openzfsonosx.org/wiki/Zpool#Feature_flags
+   <a href="https://openzfsonosx.org/wiki/Zpool#Feature_flags"
+   >https://openzfsonosx.org/wiki/Zpool#Feature_flags<a/>
 
    Note, this command also enables compression for the zpool, which I
    prefer.  For more information about ZFS compression, see:
 
-    https://klarasystems.com/articles/openzfs1-understanding-transparent-compression/
+   <a href="https://klarasystems.com/articles/openzfs1-understanding-transparent-compression/"
+   >https://klarasystems.com/articles/openzfs1-understanding-transparent-compression/<a>
+
+   To enable encryption for the entire pool, add '-O encryption=aes-256-ccm 
+   -O keyformat=passphrase' to the list of options, see:
+   
+   <a href="https://openzfsonosx.org/forum/viewtopic.php?f=11&t=3713#p11803"
+   >https://openzfsonosx.org/forum/viewtopic.php?f=11&t=3713#p11803</a>
 
 2. To combine multiple hard drives and make them look seem like one
    larger drive:
@@ -93,7 +109,8 @@ needs to first be created.
    This is the equivalent of a RAID 0 volume and offers no protection
    against drive failure, see:
 
-    https://en.m.wikipedia.org/wiki/Standard_RAID_levels
+   <a href="https://en.m.wikipedia.org/wiki/Standard_RAID_levels"
+   >https://en.m.wikipedia.org/wiki/Standard_RAID_levels</a>
 
    I do not generally use this.
 
@@ -116,31 +133,36 @@ needs to first be created.
    on all the other disks.
 
    This is the equivalent of a RAID 1 volume and preserves data as long
-   as at least one drive is operational:
+   as at least one drive is operational, see:
 
-    https://en.m.wikipedia.org/wiki/Standard_RAID_levels
+   <a href="https://en.m.wikipedia.org/wiki/Standard_RAID_levels"
+   >https://en.m.wikipedia.org/wiki/Standard_RAID_levels</a>
 
-NOTE: When the disk(s) in the zpool are ssd, use '-o ashift=13' instead of
-      '-o ashift=12', as above.  An ashift value of 13 may be better for
-      ssds to avoid performance degradation over time, see, e.g.:
+4. When the disks in the zpool are ssds, use '-o ashift=13' instead of 
+   '-o ashift=12', as above.  An ashift value of 13 may be better for 
+   ssds to avoid performance degradation over time, see, e.g.:
 
-        https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#alignment-shift-ashift
-        https://old.reddit.com/r/zfs/comments/6duz3j/zfs_on_a_purely_ssd_setup/
+   <a href="https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#alignment-shift-ashift"
+   >https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#alignment-shift-ashift</a>
+   <a href="https://old.reddit.com/r/zfs/comments/6duz3j/zfs_on_a_purely_ssd_setup/"
+   >https://old.reddit.com/r/zfs/comments/6duz3j/zfs_on_a_purely_ssd_setup/</a>
 
-      In addition, for ssds, TRIM support should be enabled:
+   In addition, for ssds, TRIM support should be enabled:
 
-        $ sudo zpool set autotrim=on [name]
+    $ sudo zpool set autotrim=on [name]
 
-      where [name] is the name of the pool.  TRIM is a ssd specific feature
-      that helps limit performance degradation of ssds, see:
+   where [name] is the name of the pool.  TRIM is a ssd specific feature
+   that helps limit performance degradation of ssds, see:
 
-        https://en.m.wikipedia.org/wiki/Trim_(computing)
+   <a href="https://en.m.wikipedia.org/wiki/Trim_(computing)"
+   >https://en.m.wikipedia.org/wiki/Trim_(computing)</a>
 
-      For SMR hard drives, TRIM support should be disabled:
+   For SMR hard drives, TRIM support should be disabled:
 
-        $ sudo zpool set autotrim=off [name]
+    $ sudo zpool set autotrim=off [name]
 
-      See: https://vermaden.wordpress.com/2022/05/08/zfs-on-smr-drives/
+   See: <a href="https://vermaden.wordpress.com/2022/05/08/zfs-on-smr-drives/"
+   >https://vermaden.wordpress.com/2022/05/08/zfs-on-smr-drives/</a>
 
 ----------------------------
 Mounting / Importing a zpool
@@ -183,10 +205,10 @@ as follows:
 
 where [name] is the zpool's name.
 
-References:
-
-    https://openzfsonosx.org/wiki/Stopping_Spotlight_etc._from_changing_ZFS_without_permission
-    https://apple.stackexchange.com/questions/6707/how-to-stop-os-x-from-writing-spotlight-and-trash-files-to-memory-cards-and-usb
+Sources: <a href="https://openzfsonosx.org/wiki/Stopping_Spotlight_etc._from_changing_ZFS_without_permission"
+         >https://openzfsonosx.org/wiki/Stopping_Spotlight_etc._from_changing_ZFS_without_permission</a>
+         <a href="https://apple.stackexchange.com/questions/6707/"
+         >https://apple.stackexchange.com/questions/6707/</a>
 
 ----------------------------------
 Listing Available / Mounted zpools
@@ -228,9 +250,8 @@ rename it to Mercury7:
     $ sudo zpool export Mercury
     $ sudo zpool import Mercury Mercury7
 
-References:
-
-    https://forums.freebsd.org/threads/renaming-zfs-pool-via-zpool-import.65498/
+Source: <a href="https://forums.freebsd.org/threads/renaming-zfs-pool-via-zpool-import.65498/"
+        >https://forums.freebsd.org/threads/renaming-zfs-pool-via-zpool-import.65498/</a>
 
 -----------------
 Scrubbing a zpool
@@ -238,28 +259,27 @@ Scrubbing a zpool
 
 The data integrity on a zpool can be confirmed by 'scrubbing' it.
 
-To start a scrub:
+1. To start a scrub:
 
     $ sudo zpool scrub [name]
 
-To stop / cancel a scrub that is in progress:
+2. To stop / cancel a scrub that is in progress:
 
     $ sudo zpool scrub -s [name]
 
-To pause a scrub that is in progress:
+3. To pause a scrub that is in progress:
 
     $ sudo zpool scrub -p [name]
 
-To resume a paused scrub (this is same command used to start a new
+4. To resume a paused scrub (this is same command used to start a new
 scrub):
 
     $ sudo zpool scrub [name]
 
 In each of the above commands, [name] is the zpool's name.
 
-References:
-
-    https://openzfs.github.io/openzfs-docs/man/8/zpool-scrub.8.html
+Source: <a href="https://openzfs.github.io/openzfs-docs/man/8/zpool-scrub.8.html"
+        >https://openzfs.github.io/openzfs-docs/man/8/zpool-scrub.8.html</a>
 
 -------------------------------------------------
 Creating an Encrypted Dataset / Volume on a zpool
@@ -293,9 +313,8 @@ options are useful for making the encrypted volume act like a
 traditional MacOS / MacOSX drive but may be omitted, if that
 compatibility is not needed.
 
-References:
-
-    https://blog.heckel.io/2017/01/08/zfs-encryption-openzfs-zfs-on-linux/
+Source: <a href="https://blog.heckel.io/2017/01/08/zfs-encryption-openzfs-zfs-on-linux/"
+        >https://blog.heckel.io/2017/01/08/zfs-encryption-openzfs-zfs-on-linux/</a>
 
 ------------------------------------
 Enable sha512 Checksums for a Volume
@@ -309,9 +328,10 @@ where [pool] is the zpool's name and [vol] is the name of the
 volume / filesystem on that zpool.
 
 SHA512 checksum for data is faster than the default on 64-bit
-systems by about 50%:
+systems by about 50%, see:
 
-https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7
+<a href="https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7"
+>https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7</a>
 
 Alternatively, 'checksum=skein', which is 80% faster than the default
 on 64-bit systems, or 'checksum=edonr', which is 350% faster than the
@@ -319,7 +339,8 @@ default, could be used.  I do not use 'checksum=edonr' because FreeBSD
 does not currently support it.  I may transition to 'checksum=skein'
 in the future since it may slightly more secure than sha512, see:
 
-https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7
+<a href="https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7"
+>https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7</a>
 
 ------------------------------------------------
 Increasing / Decreasing Record Size for a Volume
@@ -359,10 +380,10 @@ A few rules of thumb for setting the record size are:
       16K for MySQL InnoDB
        8K for PostgreSQL
 
-References:
-
-    https://blog.programster.org/zfs-record-size
-    https://klarasystems.com/articles/tuning-recordsize-in-openzfs/
+Source: <a href="https://blog.programster.org/zfs-record-size"
+        >https://blog.programster.org/zfs-record-size</a>
+        <a href="https://klarasystems.com/articles/tuning-recordsize-in-openzfs/"
+        >https://klarasystems.com/articles/tuning-recordsize-in-openzfs/</a>
 
 -------------------------------
 Mounting All Volumes on a zpool
@@ -374,9 +395,8 @@ The following command can be used to mount all the volumes on a zpool:
 
 where [pool] is the name of the zpool.
 
-References:
-
-    https://serverfault.com/questions/450818/recursively-mounting-zfs-filesystems
+Source: <a href="https://serverfault.com/questions/450818/recursively-mounting-zfs-filesystems"
+        >https://serverfault.com/questions/450818/recursively-mounting-zfs-filesystems</a>
 
 -----------------------------------------
 Destroying a Volume/Filesystem on a zpool
@@ -391,7 +411,7 @@ where:
     [pool] is the zpool's name
     [vol]  is the name of the volume / filesystem that should be destroyed
 
-BE CAREFUL - THERE IS NO WARNING OR PROMPT FOR CONFIRMATION
+WARNING: BE CAREFUL - THERE IS NO PROMPT FOR CONFIRMATION
 
 ------------------
 Creating Snapshots
@@ -439,18 +459,18 @@ where:
            should be created
     [snap] is the name for the snapshot (ex. 2021-11-05-01)
 
-BE CAREFUL - THERE IS NO WARNING OR PROMPT FOR CONFIRMATION
+WARNING: BE CAREFUL - THERE IS NO PROMPT FOR CONFIRMATION
 
-References:
-
-    https://www.freebsd.org/doc/handbook/zfs-zfs.html
-    https://serverfault.com/questions/192927/
+Source: <a href="https://www.freebsd.org/doc/handbook/zfs-zfs.html"
+        >https://www.freebsd.org/doc/handbook/zfs-zfs.html</a>
+        <a href="https://serverfault.com/questions/192927/"
+        >https://serverfault.com/questions/192927/</a>
 
 -----------------
 Listing Snapshots
 -----------------
 
-To list all snapshots:
+1. To list all snapshots:
 
     $ zfs list -t snapshot
 
@@ -458,7 +478,7 @@ To list all snapshots:
 
     $ zfs list -t all
 
-To List latest snapshot on all volumes:
+2. To List latest snapshot on all volumes:
 
     $ zfs list | awk '/enc\// { print $1; }' | \
       while read VOL ; do \
@@ -523,15 +543,21 @@ Replicating Snapshots
 
     $ zfs receive -a [dest_pool]/[dest_vol]
 
-References:
-
-    https://www.freebsd.org/doc/handbook/zfs-zfs.html
-    https://forums.freebsd.org/threads/incremental-zfs-backup-errors.44530/
-    https://unix.stackexchange.com/questions/343675/
+Source: <a href="https://www.freebsd.org/doc/handbook/zfs-zfs.html"
+        >https://www.freebsd.org/doc/handbook/zfs-zfs.html</a>
+        <a href="https://forums.freebsd.org/threads/incremental-zfs-backup-errors.44530/"
+        >https://forums.freebsd.org/threads/incremental-zfs-backup-errors.44530/</a>
+        <a href="https://unix.stackexchange.com/questions/343675/"
+        >https://unix.stackexchange.com/questions/343675/</a>
 
 -------
 History
 -------
 
+09/04/2023 - convert to html; add notes about enabling encryption when 
+             creating a zpool
 05/09/2022 - Add tips for SMR drives0
 04/22/2022 - Initial Version
+</pre>
+</body>
+</html>
