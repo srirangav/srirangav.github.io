@@ -83,9 +83,9 @@ needs to first be created.
    <a href="https://klarasystems.com/articles/openzfs1-understanding-transparent-compression/"
    >https://klarasystems.com/articles/openzfs1-understanding-transparent-compression/<a>
 
-   To enable encryption for the entire pool, add '-O encryption=aes-256-ccm 
+   To enable encryption for the entire pool, add '-O encryption=aes-256-ccm
    -O keyformat=passphrase' to the list of options, see:
-   
+
    <a href="https://openzfsonosx.org/forum/viewtopic.php?f=11&t=3713#p11803"
    >https://openzfsonosx.org/forum/viewtopic.php?f=11&t=3713#p11803</a>
 
@@ -138,13 +138,15 @@ needs to first be created.
    <a href="https://en.m.wikipedia.org/wiki/Standard_RAID_levels"
    >https://en.m.wikipedia.org/wiki/Standard_RAID_levels</a>
 
-4. When the disks in the zpool are ssds, use '-o ashift=13' instead of 
-   '-o ashift=12', as above.  An ashift value of 13 may be better for 
+4. When the disks in the zpool are ssds, use '-o ashift=13' instead of
+   '-o ashift=12', as above.  An ashift value of 13 may be better for
    ssds to avoid performance degradation over time, see, e.g.:
 
-   <a href="https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#alignment-shift-ashift"
+   <a href=
+   "https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#alignment-shift-ashift"
    >https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#alignment-shift-ashift</a>
-   <a href="https://old.reddit.com/r/zfs/comments/6duz3j/zfs_on_a_purely_ssd_setup/"
+   <a href=
+   "https://old.reddit.com/r/zfs/comments/6duz3j/zfs_on_a_purely_ssd_setup/"
    >https://old.reddit.com/r/zfs/comments/6duz3j/zfs_on_a_purely_ssd_setup/</a>
 
    In addition, for ssds, TRIM support should be enabled:
@@ -161,7 +163,8 @@ needs to first be created.
 
     $ sudo zpool set autotrim=off [name]
 
-   See: <a href="https://vermaden.wordpress.com/2022/05/08/zfs-on-smr-drives/"
+   See: <a href=
+   "https://vermaden.wordpress.com/2022/05/08/zfs-on-smr-drives/"
    >https://vermaden.wordpress.com/2022/05/08/zfs-on-smr-drives/</a>
 
 ----------------------------
@@ -205,9 +208,11 @@ as follows:
 
 where [name] is the zpool's name.
 
-Sources: <a href="https://openzfsonosx.org/wiki/Stopping_Spotlight_etc._from_changing_ZFS_without_permission"
+Sources: <a href=
+         "https://openzfsonosx.org/wiki/Stopping_Spotlight_etc._from_changing_ZFS_without_permission"
          >https://openzfsonosx.org/wiki/Stopping_Spotlight_etc._from_changing_ZFS_without_permission</a>
-         <a href="https://apple.stackexchange.com/questions/6707/"
+         <a href=
+         "https://apple.stackexchange.com/questions/6707/"
          >https://apple.stackexchange.com/questions/6707/</a>
 
 ----------------------------------
@@ -250,7 +255,8 @@ rename it to Mercury7:
     $ sudo zpool export Mercury
     $ sudo zpool import Mercury Mercury7
 
-Source: <a href="https://forums.freebsd.org/threads/renaming-zfs-pool-via-zpool-import.65498/"
+Source: <a href=
+        "https://forums.freebsd.org/threads/renaming-zfs-pool-via-zpool-import.65498/"
         >https://forums.freebsd.org/threads/renaming-zfs-pool-via-zpool-import.65498/</a>
 
 -----------------
@@ -278,7 +284,8 @@ scrub):
 
 In each of the above commands, [name] is the zpool's name.
 
-Source: <a href="https://openzfs.github.io/openzfs-docs/man/8/zpool-scrub.8.html"
+Source: <a href=
+        "https://openzfs.github.io/openzfs-docs/man/8/zpool-scrub.8.html"
         >https://openzfs.github.io/openzfs-docs/man/8/zpool-scrub.8.html</a>
 
 -------------------------------------------------
@@ -313,7 +320,8 @@ options are useful for making the encrypted volume act like a
 traditional MacOS / MacOSX drive but may be omitted, if that
 compatibility is not needed.
 
-Source: <a href="https://blog.heckel.io/2017/01/08/zfs-encryption-openzfs-zfs-on-linux/"
+Source: <a href=
+        "https://blog.heckel.io/2017/01/08/zfs-encryption-openzfs-zfs-on-linux/"
         >https://blog.heckel.io/2017/01/08/zfs-encryption-openzfs-zfs-on-linux/</a>
 
 ------------------------------------
@@ -330,7 +338,8 @@ volume / filesystem on that zpool.
 SHA512 checksum for data is faster than the default on 64-bit
 systems by about 50%, see:
 
-<a href="https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7"
+<a href=
+"https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7"
 >https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7</a>
 
 Alternatively, 'checksum=skein', which is 80% faster than the default
@@ -339,7 +348,8 @@ default, could be used.  I do not use 'checksum=edonr' because FreeBSD
 does not currently support it.  I may transition to 'checksum=skein'
 in the future since it may slightly more secure than sha512, see:
 
-<a href="https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7"
+<a href=
+"https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7"
 >https://www.freebsd.org/cgi/man.cgi?query=zpool-features&sektion=7</a>
 
 ------------------------------------------------
@@ -380,9 +390,11 @@ A few rules of thumb for setting the record size are:
       16K for MySQL InnoDB
        8K for PostgreSQL
 
-Source: <a href="https://blog.programster.org/zfs-record-size"
+Source: <a href=
+        "https://blog.programster.org/zfs-record-size"
         >https://blog.programster.org/zfs-record-size</a>
-        <a href="https://klarasystems.com/articles/tuning-recordsize-in-openzfs/"
+        <a href=
+        "https://klarasystems.com/articles/tuning-recordsize-in-openzfs/"
         >https://klarasystems.com/articles/tuning-recordsize-in-openzfs/</a>
 
 -------------------------------
@@ -395,7 +407,8 @@ The following command can be used to mount all the volumes on a zpool:
 
 where [pool] is the name of the zpool.
 
-Source: <a href="https://serverfault.com/questions/450818/recursively-mounting-zfs-filesystems"
+Source: <a href=
+        "https://serverfault.com/questions/450818/recursively-mounting-zfs-filesystems"
         >https://serverfault.com/questions/450818/recursively-mounting-zfs-filesystems</a>
 
 -----------------------------------------
@@ -461,7 +474,8 @@ where:
 
 WARNING: BE CAREFUL - THERE IS NO PROMPT FOR CONFIRMATION
 
-Source: <a href="https://www.freebsd.org/doc/handbook/zfs-zfs.html"
+Source: <a href=
+        "https://www.freebsd.org/doc/handbook/zfs-zfs.html"
         >https://www.freebsd.org/doc/handbook/zfs-zfs.html</a>
         <a href="https://serverfault.com/questions/192927/"
         >https://serverfault.com/questions/192927/</a>
@@ -543,18 +557,30 @@ Replicating Snapshots
 
     $ zfs receive -a [dest_pool]/[dest_vol]
 
-Source: <a href="https://www.freebsd.org/doc/handbook/zfs-zfs.html"
+Source: <a href=
+        "https://www.freebsd.org/doc/handbook/zfs-zfs.html"
         >https://www.freebsd.org/doc/handbook/zfs-zfs.html</a>
-        <a href="https://forums.freebsd.org/threads/incremental-zfs-backup-errors.44530/"
+        <a href=
+        "https://forums.freebsd.org/threads/incremental-zfs-backup-errors.44530/"
         >https://forums.freebsd.org/threads/incremental-zfs-backup-errors.44530/</a>
-        <a href="https://unix.stackexchange.com/questions/343675/"
+        <a href=
+        "https://unix.stackexchange.com/questions/343675/"
         >https://unix.stackexchange.com/questions/343675/</a>
+
+-------------
+Helpful Links
+-------------
+
+ZFS For Dummies - <a href=
+"https://ikrima.dev/dev-notes/homelab/zfs-for-dummies/"
+>https://ikrima.dev/dev-notes/homelab/zfs-for-dummies/</a>
 
 -------
 History
 -------
 
-09/04/2023 - convert to html; add notes about enabling encryption when 
+09/05/2023 - Add link to ZFS For Dummies
+09/04/2023 - Convert to html; add notes about enabling encryption when
              creating a zpool
 05/09/2022 - Add tips for SMR drives0
 04/22/2022 - Initial Version
