@@ -1,238 +1,145 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html;
-        charset=utf-8" />
-  <title>General MacOS X Notes</title>
-  <style>
-  body {
-      font-family: sans-serif;
-  }
-  </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>General MacOSX Notes</title>
 </head>
 
 <body>
+<pre><a href="../index.html">Home</a> / <a
+      href="index.html">Notes</a> / General MacOSX Notes
+===================================
 
-<h2>General MacOS X Notes</h2>
-
-<p>These are some general notes about MacOS X.</p>
-
-<ul>
-    <li><a href="osx_general.html#osxramdisk">Creating a Ram Disk</a></li>
-    <li><a href="osx_general.html#osxshell">Changing Shells</a></li>
-    <li><a href="osx_general.html#osxx11">X11 Options</a></li>
-    <li><a href="osx_general.html#osxscreenshot">Changing Screenshot
-        Format</a></li>
-    <li><a href="osx_general.html#osxversion">Getting Version Info</a></li>
-    <li><a href="osx_general.html#osxdsstore">Disable .DSStore on Network
-        Volumes</a></li>
-    <li><a href="osx_general.html#osxafpguest">Disable AFP Guest
-        Access</a></li>
-    <li><a href="osx_general.html#icloudsaves">Disable iCloud Saving</a></li>
-    <li><a href="osx_general.html#osxdashboard">Disable / Enable
-        Dashboard</a></li>
-    <li><a href="osx_general.html#hqicons">Built-in High Quality
-        Icons</a></li>
-    <li><a href="osx_general.html#kext">List Kernel Extensions</a></li>
-    <li><a href="osx_general.html#bigsuralert">Restore classic alerts Big
-        Sur (11.x) and Monterey (12.x)</a></li>
-    <li><a href="osx_general.html#restart_swupdate"
-        >Restart stuck software updates on Big Sur (11.x) and newer</a></li>
-    <li><a href="osx_general.html#lowpower"
-        >Enable/disable low power mode on Monterey (12.x)</a></li>
-    <li><a href="osx_general.html#fvkey"
-        >Enable/disable password to wake from sleep / hibernate</a></li>
-    <li><a href="osx_general.html#dnscache"
-        >Reset DNS cache on Monterey (12.x)</a></li>
-</uL>
+ 1. Creating a Ram Disk
 
-<hr />
+    a. Create and mount the ramdisk:
 
-<h3>
-<a id="osxramdisk">Creating Ram Disk in MacOSX</a>
-</h3>
+        $ hdid -nomount ram://[size]
+        /dev/disk[X]
 
-<ol>
-    <li>Create and mount the ramdisk:
-        <pre>$ hdid -nomount ram://<b><i>size</i></b>
-/dev/disk<b><i>X</i></b></pre>
-        <p>Here <b><i>size</i></b> should be 2 * 1024 * desired size in MB
-        and <b><i>X</i></b> will be the disk number for the ramdisk that
-        hdid allocated.</p>
-    </li>
+        [size] should be 2 * 1024 * desired size of the RAM disk in MB 
+        [X] will be the disk number for the ramdisk that hdid allocated.
 
-    <li>Format the ramdisk for HFS+:
-        <pre>$ diskutil eraseDisk HFS+ RAMDISK disk<b><i>X</i></b>
-Started erase on disk disk<b><i>X</i></b>
-Creating Partition Map
-5% ..Formatting Disk  100% ..
-Finished erase on disk disk<b><i>X</i></b>
-Finished partitioning on disk disk<b><i>X</i></b></pre>
-    </li>
+    b. Format the ramdisk for HFS+:
 
-      <li>Eject the disk when you are finished using it:
-          <pre>$ hdiutil detach /dev/disk<b><i>X</i></b></pre>
-      </li>
-</ol>
+        $ diskutil eraseDisk HFS+ RAMDISK disk[X]
 
-<hr />
+    c. Eject the disk when you are finished using it:
 
-<h3><a id="osxshell">Changing Shells on MacOS X</a></h3>
+        $ hdiutil detach /dev/disk[X]
 
-<pre>$ sudo niutil -createprop / /Users/<b><i>username</i></b> shell <b><i>shell</i></b></pre>
+ 2. Changing Shells (outdated)
 
-where <b><i>username</i></b> is your short username and <b><i>shell</i></b>
-is the full path to the new shell.
+    $ sudo niutil -createprop / /Users/[username] shell [shell]
 
-<hr />
+    [username] is your short username
+    [shell] is the full path to the new shell
 
-<h3><a id="osxx11">MacOS X X11 Options</a></h3>
+ 3. MacOS X X11 Options (outdated)
 
-<dl>
-    <dt>Map Option to META:</dt>
-    <dd>
-    <pre>$ defaults write com.apple.x11 swap_alt_meta -bool true</pre></dd>
-    <dt>Disable X11 Server from listening for remote connection:</dt>
-    <dd>
-    <pre>$ defaults write com.apple.x11 nolisten_tcp -boolean true</pre>
-    </dd>
-</dl>
+    a. Map Option to META:
 
-<hr />
+        $ defaults write com.apple.x11 swap_alt_meta -bool true
+    
+    b. Disable X11 Server from listening for remote connections:
 
-<h3><a id="osxscreenshot">MacOS X Screenshot Type</a></h3>
+        $ defaults write com.apple.x11 nolisten_tcp -boolean true
 
-<pre>$ defaults write com.apple.screencapture type <b><i>type</i></b></pre>
+ 4. Change the Screenshot Type
 
-where <b><i>type</i></b> is either pdf, png, jpg or gif.
+    $ defaults write com.apple.screencapture type [type]
 
-<hr />
+    [type] is either pdf, png, jpg or gif
 
-<h3><a id="osxversion">Getting MacOS X Version Info</a></h3>
+ 5. Disable .DSStore files on Network Volumes
 
-<dl>
-    <dt>System Version:</dt>
-    <dd>
-        <pre>$ defaults read loginwindow SystemVersionStampAsString</pre>
-        <pre>$ sw_vers -productVersion</pre>
-    </dd>
-    <dt>Build Version:</dt>
-    <dd>
-        <pre>$ defaults read loginwindow BuildVersionStampAsString</pre>
-        <pre>$ sw_vers -buildVersion</pre>
-    </dd>
-</dl>
+    $ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-<hr />
+ 6. Disable AFP Guest Access
 
-<h3><a id="osxdsstore">Disable .DSStore files on Network Volumes</a></h3>
+    $ defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool false
 
-<pre>$ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true</pre>
+ 7. Disable iCloud Saving
 
-<hr />
+    $ defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false
 
-<h3><a id="osxafpguest">Disable AFP Guest Access</a></h3>
+ 8. Disable / Enable Dashboard
 
-<pre>$ defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool false</pre>
+    $ defaults write com.apple.dashboard mcx-disabled -boolean YES &amp;&amp; killall Dock
+    $ defaults write com.apple.dashboard mcx-disabled -boolean NO &amp;&amp; killall Dock
 
-<hr />
+ 9. Get MacOSX Version Info
 
-<h3><a id="icloudsaves">Disable iCloud Saving</a></h3>
+    a. System Version:
 
-<pre>$ defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false</pre>
+        $ defaults read loginwindow SystemVersionStampAsString
 
-<hr />
+        or
 
-<h3><a id="osxdashboard">Disable / Enable Dashboard</a></h3>
+        $ sw_vers -productVersion
 
-<pre>$ defaults write com.apple.dashboard mcx-disabled -boolean YES &amp;&amp; killall Dock</pre>
-<pre>$ defaults write com.apple.dashboard mcx-disabled -boolean NO &amp;&amp; killall Dock</pre>
+    b. Build Version:
 
-<hr />
+        $ defaults read loginwindow BuildVersionStampAsString
 
-<h3><a id="hqicons">Built-in High Quality Icons</a></h3>
+        or 
 
-<pre>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/</pre>
+        $ sw_vers -buildVersion
 
-From: Paul Horowitz, <a href=
-"https://osxdaily.com/2012/06/27/get-53-high-quality-mac-apple-hardware-icons-right-in-os-x/"
->Get 53+ High Quality Mac &amp; Apple Hardware Icons Right in Mac OS X</a>,
-<a href="https://osxdaily.com/">OSX Daily</a> (June 27, 2012).
+10. List Kernel Extensions
 
-<hr />
+    a. Before Big Sur (11.x): $ kextstat -l
 
-<h3><a id="kext">List Kernel Extensions</a></h3>
+    b. Big Sur (11.x) and newer: $ kmutil showloaded
 
-<p>Before Big Sur (11.x): <code>$ kextstat -l</code></p>
+    From: Lloyd Chambers, <a href=
+          "https://macperformanceguide.com/blog/2021/20210511_1300-macOS-kextstat.html"
+          >macOS Big Sur: how to List Active Kernel Extensions</a>,
+          <a href="https://macperformanceguide.com/"
+          >MacPerformance Guide</a> (May 11, 2021).
 
-<p>Big Sur (11.x) and newer: <code>$ kmutil showloaded</code></p>
+11. Restore classic alerts Big Sur (11.x) and Monterey (12.x)
 
-From: Lloyd Chambers, <a href=
-"https://macperformanceguide.com/blog/2021/20210511_1300-macOS-kextstat.html"
->macOS Big Sur: how to List Active Kernel Extensions</a>,
-<a href="https://macperformanceguide.com/"
->MacPerformance Guide</a> (May 11, 2021).
+    $ defaults write -g NSAlertMetricsGatheringEnabled -bool false
 
-<hr />
+    From: <a href="https://mjtsai.com/blog/">Michael Tsai</a>, <a href=
+          "https://mjtsai.com/blog/2022/04/01/wider-big-sur-alerts/"
+          >Wider Alerts on Monterey and Big Sur</a> (Apr. 1, 2022).
 
-<h3><a id="bigsuralert">Restore classic alerts Big Sur (11.x) and
-Monterey (12.x)</a></h3>
+12. Restart stuck software updates on Big Sur (11.x) and newer
 
-<pre>$ defaults write -g NSAlertMetricsGatheringEnabled -bool false</pre>
+    $ sudo launchctl kickstart -k system/com.apple.softwareupdated
 
-From: <a href="https://mjtsai.com/blog/">Michael Tsai</a>, <a href=
-"https://mjtsai.com/blog/2022/04/01/wider-big-sur-alerts/"
->Wider Alerts on Monterey and Big Sur</a> (Apr. 1, 2022).
+    From: <a href=
+          "https://community.jamf.com/t5/jamf-pro/big-sur-11-6-x-software-update-hangs/m-p/257525#M238472"
+          >https://community.jamf.com/t5/jamf-pro/big-sur-11-6-x-software-update-hangs/m-p/257525#M238472</a>.
 
-<hr />
+13. Enable/disable low power mode on Monterey (12.x)
 
-<h3><a id="restart_swupdate"
->Restart stuck software updates on Big Sur (11.x) and newer</a></h3>
+    $ sudo pmset -a lowpowermode 1
+    $ sudo pmset -a lowpowermode 0
 
-<pre>$ sudo launchctl kickstart -k system/com.apple.softwareupdated</pre>
+    From: <a href=
+          "https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/"
+          >https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/</a>.
 
-From: <a href=
-"https://community.jamf.com/t5/jamf-pro/big-sur-11-6-x-software-update-hangs/m-p/257525#M238472"
->https://community.jamf.com/t5/jamf-pro/big-sur-11-6-x-software-update-hangs/m-p/257525#M238472</a>.
+14. Enable/disable password to wake from sleep / hibernate
 
-<hr />
+    $ sudo pmset -a DestroyFVKeyOnStandby 1
+    $ sudo pmset -a DestroyFVKeyOnStandby 0
 
-<h3><a id="lowpower"
->Enable/disable low power mode on Monterey (12.x)</a></h3>
+    From: <a href=
+          "https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/"
+          >https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/</a>.
 
-<pre>$ sudo pmset -a lowpowermode 1
-$ sudo pmset -a lowpowermode 0</pre>
+15. Reset the DNS cache on Monterey (12.x)
 
-From: <a href=
-"https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/"
->https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/</a>.
+    $ sudo dscacheutil -flushcache &amp;&amp; sudo killall -HUP mDNSResponder
 
-<hr />
+    From: <a href=
+          "https://osxdaily.com/2022/11/21/how-clear-dns-cache-macos-ventura-monterey/"
+          >https://osxdaily.com/2022/11/21/how-clear-dns-cache-macos-ventura-monterey/</a>
 
-<h3><a id="fvkey"
->Enable/disable password to wake from sleep / hibernate</a></h3>
-
-<pre>$ sudo pmset -a DestroyFVKeyOnStandby 1
-$ sudo pmset -a DestroyFVKeyOnStandby 0</pre>
-
-From: <a href=
-"https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/"
->https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/</a>.
-
-<hr />
-
-<h3><a id="dnscache"
->Reset DNS cache on Monterey (12.x)</a></h3>
-
-<pre>$ sudo dscacheutil -flushcache &amp;&amp; sudo killall -HUP mDNSResponder</pre>
-
-From: <a href=
-"https://osxdaily.com/2022/11/21/how-clear-dns-cache-macos-ventura-monterey/"
->https://osxdaily.com/2022/11/21/how-clear-dns-cache-macos-ventura-monterey/</a>.
-
-<hr />
-
-<a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>
-
+</pre>
 </body>
 </html>
