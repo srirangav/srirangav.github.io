@@ -1,192 +1,138 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-    <meta http-equiv="Content-Type" content=
-    "text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>SSH Notes</title>
-    <link href="../shared/site.css" type="text/css"
-        rel="stylesheet" />
 </head>
 
 <body>
+<pre><a href="../index.html">Home</a> / <a
+      href="index.html">Notes</a> / SSH Notes
+==========================
 
-    <h2 class="c1">SSH Notes</h2>
+1. SSH Key Fingerprint
 
-    <p>These are some  notes about ssh.</p>
+   To get a SSH key fingerprint, do the following:
 
-    <blockquote>
-        <a href="ssh.html#tunnel">Tunneling</a>
-        &nbsp;&#183;&nbsp;
-        <a href="ssh.html#fingerprint">SSH key fingerprints</a>
-        &nbsp;&#183;&nbsp;
-        <a href="ssh.html#agent">SSH Agent</a>
-        &nbsp;&#183;&nbsp;
-        <a href="ssh.html#keepalive">Keepalives</a>
-        &nbsp;&#183;&nbsp;
-        <a href="ssh.html#oldserver">Connecting to old servers</a>
-        &nbsp;&#183;&nbsp;
-        <a href="ssh_nopass.html">SSH without a password</a>
+   $ ssh-keygen -l -f [public_key]
 
-    </blockquote>
+   For example the key fingerprint for the dsa host key
+   can be obtained as follows:
 
-    <hr />
+   $ ssh-keygen -l -f /etc/ssh/ssh_host_dsa_key.pub
 
-    <h3><a id="tunnel">Tunneling</a></h3>
+2. Tunneling
 
-    <dl>
-        <dt>To create an SSH tunnel for a tcp service running on a
-            <b><i>server</i></b>, do the following on the
-            <b><i>client</i></b>:
-        </dt>
-        <dd><pre>$ ssh -N -L <b><i>client_port</i></b>:localhost:<b><i>server_port</i></b> <b><i>user</i></b>@<b><i>server</i></b></pre>
-        </dd>
-    </dl>
+   To create an SSH tunnel for a tcp service running on a
+   [server], do the following on the [client]:
 
-    Here <b><i>client_port</i></b> is the port to connect to
-    on the <b><i>client</i></b> and <b><i>server_port</i></b>
-    is the port on which the service is running on the
-    <b><i>server</i></b>. Generally I pick 50000 +
-    <b><i>server_port</i></b> for the <b><i>client_port</i></b>.
+   $ ssh -N -L [client_port]:localhost:[server_port] [user]@[server]
+
+   [client_port] is the port to connect to on the [client]
+   [server_port] is the port on which the tcp service that
+                 needs to be tunneled is running on the [server]
+
+    Generally I pick 50000 + [server_port] for the [client_port].
 
     Examples:
-    <ul>
-        <li>AppleShare:
-        <pre>$ ssh -N -L 50548:localhost:548 <b><i>user@afpserver</i></b></pre>
-        </li>
-        <li>SMB:
-        <pre>$ ssh -N -L 50445:localhost:445 <b><i>user@smbserver</i></b></pre>
-        </li>
-        <li>VNC:
-        <pre>$ ssh -N -L 55900:localhost:5900 <b><i>user@vncserver</i></b></pre>
-        </li>
-    </ul>
 
-    <i>See</i> <a href=
+    a.  AppleShare:
+
+        $ ssh -N -L 50548:localhost:548 [user]@[afpserver]
+
+    b. SMB:
+
+        $ ssh -N -L 50445:localhost:445 [user]@[smbserver]
+
+    c. VNC:
+
+        $ ssh -N -L 55900:localhost:5900 [user]@[vncserver]
+
+    From: <a href=
     "http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm"
     >http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm</a>.
 
-    <hr />
+3. SSH Agent
 
-    <h3><a id="fingerprint">SSH Key Fingerprint</a></h3>
+   a. To start ssh-agent:
 
-      <dl>
-          <dt>To get a SSH key fingerprint, do the following:</dt>
-          <dd><pre>$ ssh-keygen -l -f <b><i>public_key</i></b></pre></dd>
+      $ eval `ssh-agent`
 
-          <dt>Here <b><i>public_key</i></b> is the path to the public key. For
-          example the key fingerprint for the dsa host key can be obtained by:
-          </dt>
-          <dd><pre>$ ssh-keygen -l -f /etc/ssh/ssh_host_dsa_key.pub</pre></dd>
-      </dl>
+   b. To add a ssh key to ssh-agent:
 
-    <hr />
+      $ ssh-add [key]
+      
+   c. To stop ssh-agent:
+      
+      $ ssh-agent -k
 
-    <h3><a id="agent">SSH Agent</a></h3>
-
-    <dl>
-        <dt>To start ssh-agent:</dt>
-        <dd><pre>$ eval `ssh-agent`</pre></dd>
-
-        <dt>To add a ssh key to ssh-agent:</dt>
-        <dd><pre>$ ssh-add <b><i>key</i></b></pre>
-            <p>Here <b><i>key</i></b> is the path to the rsa or dsa key.</p>
-        </dd>
-
-        <dt>To stop ssh-agent:</dt>
-        <dd><pre>$ ssh-agent -k</pre></dd>
-    </dl>
-
-    <i>See</i> <a href="http://www.cs.utk.edu/~england/ssh.html"
+    From: <a href="http://www.cs.utk.edu/~england/ssh.html"
     >http://www.cs.utk.edu/~england/ssh.html</a>.
 
-    <hr />
+4. SSH Keepalives
 
-    <h3><a id="keepalive">SSH Keepalives</a></h3>
-
-    <dl>
-        <dt>Add the following to $HOME/.ssh/config to prevent dropped
-        connections:</dt>
-        <dd><pre>Host *
+   Add the following to $HOME/.ssh/config to prevent dropped
+   connections:
+   
+   Host *
         ServerAliveInterval 120
-        ServerAliveCountMax 3</pre>
-        </dd>
-    </dl>
+        ServerAliveCountMax 3
 
-    <i>See</i> <a href="http://www.kehlet.cx/articles/129.html"
+    See: <a href="http://www.kehlet.cx/articles/129.html"
     >http://www.kehlet.cx/articles/129.html</a>; <a href=
     "http://www.snailbook.com/faq/timeouts.auto.html"
     >http://www.snailbook.com/faq/timeouts.auto.html</a>.
 
-    <hr />
+5. Connecting to older SSH servers
 
-    <h3><a id="oldserver">Connecting to older SSH servers</a></h3>
+   a. Some older SSH servers (for example, MacOSX 10.4 (Tiger)),
+      require diffie-hellman-group1-sha1 key exchange algorithm,
+      so to connect to such servers, add the following to 
+      ~/.ssh/config:
 
-    <ul>
-            
-        <li><p>Some older SSH servers (for example, MacOSX 10.4 (Tiger)),
-        require diffie-hellman-group1-sha1 key exchange algorithm, so
-        to connect to such servers, add the following
-        <code>~/.ssh/config</code>:
-        <pre>Host [<i>host</i>]
-        KexAlgorithms +diffie-hellman-group1-sha1
-        HostKeyAlgorithms +ssh-rsa
-        PubkeyAcceptedKeyTypes +ssh-rsa</pre>
-        where <i>host</i> is the hostname or IP address of the
-        server.
-        <p>Alternatively, use the command line option
-        <code>-oKexAlgorithms=+diffie-hellman-group1-sha1</code>
-        to connect to such servers:
-        <pre>$ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 [<i>user</i>]@[<i>host</i>]</pre>
-        where <i>user</i> is the username on the server and <i>host</i> 
-        is the hostname or IP address of the server.</p>
-        If you don't already have a RSA key, you may need to
-        create one as follows:
-        <pre>$ ssh-keygen -t rsa -f ~/.ssh/id_rsa -P ''</pre>
-        </p>
-        </li>
+      Host [server]
+           KexAlgorithms +diffie-hellman-group1-sha1
+           HostKeyAlgorithms +ssh-rsa
+           PubkeyAcceptedKeyTypes +ssh-rsa
         
-        <li><p>OpenSSH 8.8 and later have disabled RSA keys with 
-        SHA1 signatures, but some older servers do not support newer
-        signature, so to connect
-        to those servers, one can add the following to 
-        <code>~/.ssh/config</code>:
-        <pre>Host [<i>host</i>]
-        HostkeyAlgorithms +ssh-rsa
-        PubkeyAcceptedAlgorithms +ssh-rsa</pre>
-        where <i>host</i> is the hostname or IP address of the
-        server.
-        </p>
-        <p>Alternatively, one can add the command line option
-        <code>-oHostKeyAlgorithms=+ssh-rsa</code>to connect to such servers:
-        <pre>$ ssh -oHostKeyAlgorithms=+ssh-rsa [<i>user</i>]@[<i>host</i>]</pre>
-        where <i>user</i> is the username on the server and <i>host</i> 
-        is the hostname or IP address of the server.</p>
-        <p>As above, if you don't already have a RSA key, you may need to 
-        create one.</p> 
-        </li>
-                
-    </ul>
-    
-    References:
-    <ul>
-        <li><a href="https://www.openssh.com/legacy.html"
-        >OpenSSH Legacy Options</a>
-        </li>
-        <li><a href="https://community.atlassian.com/t5/Bitbucket-articles/OpenSSH-8-8-client-incompatibility-and-workaround/ba-p/1826047"
-        >OpenSSH 8.8 client incompatibility and workaround</a>
-        </li>
-        <li><a href="https://richsitblog.com/index.php/2022/10/28/ssh-problems-after-macos-13-ventura-upgrade/"
-        >SSH Problems After MacOS 13 Ventura Upgrade</a>
-        </li>
-    </ul>
-    
-    <hr />
+      Alternatively, use the command line option 
+      -oKexAlgorithms=+diffie-hellman-group1-sha1 to connect to 
+      such servers:
+      
+      $ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 [user]@[server]
 
-    <span class="c2">
-    <a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>
-    </span>
+      If you don't already have a RSA key, you may need to
+      create one as follows:
+      
+      $ ssh-keygen -t rsa -f ~/.ssh/id_rsa -P ''
 
+   b. OpenSSH 8.8 and later have disabled RSA keys with SHA1
+      signatures, but some older servers do not support newer
+      signature, so to connect to those servers, add the 
+      following to ~/.ssh/config::
+
+      Host [server]
+           HostkeyAlgorithms +ssh-rsa
+           PubkeyAcceptedAlgorithms +ssh-rsa
+
+      Alternatively, one can add the command line option
+      -oHostKeyAlgorithms=+ssh-rsa to connect to such servers:
+
+      $ ssh -oHostKeyAlgorithms=+ssh-rsa [user]@[server]
+
+      As above, if you don't already have a RSA key, you may need
+      to create one.
+
+    Sources: <a href=
+             "https://www.openssh.com/legacy.html"
+             >OpenSSH Legacy Options</a>,
+             <a href=
+             "https://community.atlassian.com/t5/Bitbucket-articles/OpenSSH-8-8-client-incompatibility-and-workaround/ba-p/1826047"
+             >OpenSSH 8.8 client incompatibility and workaround</a>
+             <a href=
+             "https://richsitblog.com/index.php/2022/10/28/ssh-problems-after-macos-13-ventura-upgrade/"
+             >SSH Problems After MacOS 13 Ventura Upgrade</a>
+
+</pre>
 </body>
 </html>
