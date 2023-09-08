@@ -17,7 +17,7 @@
         $ hdid -nomount ram://[size]
         /dev/disk[X]
 
-        [size] should be 2 * 1024 * desired size of the RAM disk in MB 
+        [size] should be 2 * 1024 * desired size of the RAM disk in MB
         [X] will be the disk number for the ramdisk that hdid allocated.
 
     b. Format the ramdisk for HFS+:
@@ -40,7 +40,7 @@
     a. Map Option to META:
 
         $ defaults write com.apple.x11 swap_alt_meta -bool true
-    
+
     b. Disable X11 Server from listening for remote connections:
 
         $ defaults write com.apple.x11 nolisten_tcp -boolean true
@@ -68,7 +68,17 @@
     $ defaults write com.apple.dashboard mcx-disabled -boolean YES &amp;&amp; killall Dock
     $ defaults write com.apple.dashboard mcx-disabled -boolean NO &amp;&amp; killall Dock
 
- 9. Get MacOSX Version Info
+ 9. Disable in-app rating and reviews:
+
+    $ defaults write com.apple.appstore InAppReviewEnabled -bool false
+
+    From: <a href=
+    "https://derflounder.wordpress.com/2023/07/20/disabling-in-app-review-requests-for-apps-installed-from-the-macos-app-store/"
+    >Disabling in-app review requests for apps installed from the macOS App Store</a>,
+    <a href="https://derflounder.wordpress.com/"
+    >Der Flounder</a> (July 20, 2023)
+
+10. Get MacOSX Version Info
 
     a. System Version:
 
@@ -82,11 +92,11 @@
 
         $ defaults read loginwindow BuildVersionStampAsString
 
-        or 
+        or
 
         $ sw_vers -buildVersion
 
-10. List Kernel Extensions
+11. List Kernel Extensions
 
     a. Before Big Sur (11.x): $ kextstat -l
 
@@ -98,7 +108,7 @@
           <a href="https://macperformanceguide.com/"
           >MacPerformance Guide</a> (May 11, 2021).
 
-11. Restore classic alerts Big Sur (11.x) and Monterey (12.x)
+12. Restore classic alerts Big Sur (11.x) and Monterey (12.x)
 
     $ defaults write -g NSAlertMetricsGatheringEnabled -bool false
 
@@ -106,7 +116,7 @@
           "https://mjtsai.com/blog/2022/04/01/wider-big-sur-alerts/"
           >Wider Alerts on Monterey and Big Sur</a> (Apr. 1, 2022).
 
-12. Restart stuck software updates on Big Sur (11.x) and newer
+13. Restart stuck software updates on Big Sur (11.x) and newer
 
     $ sudo launchctl kickstart -k system/com.apple.softwareupdated
 
@@ -114,7 +124,7 @@
           "https://community.jamf.com/t5/jamf-pro/big-sur-11-6-x-software-update-hangs/m-p/257525#M238472"
           >https://community.jamf.com/t5/jamf-pro/big-sur-11-6-x-software-update-hangs/m-p/257525#M238472</a>.
 
-13. Enable/disable low power mode on Monterey (12.x)
+14. Enable/disable low power mode on Monterey (12.x)
 
     $ sudo pmset -a lowpowermode 1
     $ sudo pmset -a lowpowermode 0
@@ -123,7 +133,7 @@
           "https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/"
           >https://osxdaily.com/2022/03/30/enable-low-power-mode-mac-command-line/</a>.
 
-14. Enable/disable password to wake from sleep / hibernate
+15. Enable/disable password to wake from sleep / hibernate
 
     $ sudo pmset -a DestroyFVKeyOnStandby 1
     $ sudo pmset -a DestroyFVKeyOnStandby 0
@@ -132,7 +142,7 @@
           "https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/"
           >https://eclecticlight.co/2017/01/20/power-management-in-detail-using-pmset/</a>.
 
-15. Reset the DNS cache on Monterey (12.x)
+16. Reset the DNS cache on Monterey (12.x)
 
     $ sudo dscacheutil -flushcache &amp;&amp; sudo killall -HUP mDNSResponder
 
