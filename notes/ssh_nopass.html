@@ -1,150 +1,111 @@
-<!DOCTYPE html>
-
+<!DOCTYPE HTML>
 <html>
-
 <head>
-    <meta http-equiv="Content-Type" content=
-    "text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>SSH Without a Password</title>
-    <link href="../shared/site.css" type="text/css"
-        rel="stylesheet" />
 </head>
 
 <body>
+<pre><a href="../index.html">Home</a> / <a
+      href="index.html">Notes</a> / SSH Without a Password
+=====================================
 
-    <h2 class="c1">SSH without a Password</h2>
+The following steps can be used to ssh from one system to
+another without specifying a password.
 
-    The following steps can be used to ssh from one system to
-    another without specifying a password.
+Notes
+------
 
-    <h3>Notes:</h3>
+A. The system from which the ssh session is started via the
+   ssh command is the [client]
 
-    <ul>
-        <li>The system from which the ssh session is started via the
-        ssh command is the <i>client</i>.
-        </li>
+B. The system that the ssh session connects to is the [server].
 
-        <li>The system that the ssh session connects to is the
-        <i>server</i>.
-        </li>
+C. These steps seem to work on systems running <a href=
+   "http://www.openssh.org">OpenSSH</a>.
 
-        <li>These steps seem to work on systems running <a href=
-        "http://www.openssh.org">OpenSSH</a>.
-        </li>
+D. The steps assume that a RSA key is being used because
+   OpenSSH has deprecated DSA keys as being "too [] weak and
+   [] recommend[s] against [their] use" (see <a href=
+   "https://www.openssh.com/legacy.html"
+   >OpenSSH Legacy Options</a>). To use a DSA key (for example,
+   on an older system) substitute 'dsa' for 'rsa'.
 
-        <li>The steps assume that a RSA key is being used because
-        OpenSSH has deprecated DSA keys as being "too [] weak and
-        [] recommend[s] against [their] use" (see <a href=
-        "https://www.openssh.com/legacy.html"
-        >OpenSSH Legacy Options</a>). To use a DSA key (for example,
-        on an older system) substitute 'dsa' for 'rsa'.
-        </li>
+E. The steps assume that you are using a Bourne-like shell
+   (sh, <a href="http://www.kornshell.com/">ksh</a> or <a href=
+   "http://www.gnu.org/software/bash/bash.html">bash</a>)
 
-        <li>The steps assume that you are using a Bourne-like shell
-        (sh, <a href="http://www.kornshell.com/">ksh</a> or <a href=
-        "http://www.gnu.org/software/bash/bash.html">bash</a>)
-        </li>
+Steps:
+------
 
-        <li>Some of this information came from:<br />
-          <a href="http://www.der-keiler.de/Mailing-Lists/securityfocus/Secure_Shell/2002-12/0083.html"
-          >http://www.der-keiler.de/Mailing-Lists/securityfocus/Secure_Shell/2002-12/0083.html</a>
-        </li>
-    </ul>
-  
-    <hr />
+1. On the [client] run the following commands:
 
-    <h3>Steps:</h3>
+    $ mkdir -p ~/.ssh
+    $ chmod 0700 ~/.ssh
+    $ ssh-keygen -t rsa -f ~/.ssh/id_rsa -P ''
 
-    <ol>
-        <li>
-        <p>On the <i>client</i> run the following commands:
-        <pre>$ mkdir -p ~/.ssh
-$ chmod 0700 ~/.ssh
-$ ssh-keygen -t rsa -f ~/.ssh/id_rsa -P ''</pre>
+   This should result in two files, ~/.ssh/id_rsa (private key)
+   and ~/.ssh/id_rsa.pub (public key).
 
-        This should result in two files, <code>~/.ssh/id_rsa</code> 
-        (private key) and <code>~/.ssh/id_rsa.pub</code> (public key).
-        </p>
-        </li>
+2. Copy ~/.ssh/id_rsa.pub to the [server].
 
-        <li>
-            <p>Copy <code>~/.ssh/id_rsa.pub</code> to the 
-            <i>server</i>.
-            </p>
-        </li>
+3. On the [server] run the following commands:
 
-        <li>
-            <p>On the <i>server</i> run the following commands:
-            <pre>$ mkdir -p ~/.ssh
-$ chmod 0700 ~/.ssh
-$ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys2
-$ chmod 0600 ~/.ssh/authorized_keys2</pre>
+    $ mkdir -p ~/.ssh
+    $ chmod 0700 ~/.ssh
+    $ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys2
+    $ chmod 0600 ~/.ssh/authorized_keys2
 
-            Depending on the version of OpenSSH the following commands
-            may also be required:
-            <pre>$ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
-$ chmod 0600 ~/.ssh/authorized_keys</pre>
+   Depending on the version of OpenSSH the following commands
+   may also be required:
 
-            An alternative is to create a link from authorized_keys2 to
-            authorized_keys:
-            <pre>$ cd ~/.ssh &amp;&amp; ln -s authorized_keys2 authorized_keys</pre>
-            </p>
-        </li>
+    $ cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+    $ chmod 0600 ~/.ssh/authorized_keys
 
-        <li>
-            <p>On the <i>client</i> test the results by ssh'ing to
-            the <i>server</i>:
-            <pre>$ ssh -i ~/.ssh/id_rsa <i>server</i></pre>
-            If a password prompt appears, adding the <code>-v</code> 
-            option before <code>-i</code> may be helpful to determine
-            the problem.
-            </p>
-       </li>
+   An alternative is to create a link from authorized_keys2 to
+   authorized_keys:
 
-        <li>
-            <p>(Optional) Add the following ~/.ssh/config on the
-            <i>client</i>:
-            <pre>Host <i>server</i>
-     IdentityFile ~/.ssh/id_rsa</pre>
+   $ cd ~/.ssh &amp;&amp; ln -s authorized_keys2 authorized_keys
 
-            This allows access to the <i>server</i> without having
-            to specify the <code>id_rsa</code> file as an argument 
-            to <code>ssh</code> each time.
-            </p>
-        </li>
-    </ol>
+4. On the [client] test the results by ssh'ing to the [server]:
 
-    <h3>Helpful manpages:</h3>
+    $ ssh -i ~/.ssh/id_rsa [server]
 
-    <ul>
-        <li><a href=
-        "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
-        ssh(1)</a></li>
+   If a password prompt appears, adding the -v option before the
+   -i option may be helpful to determine the problem.
 
-        <li><a href=
-        "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-keygen&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
-        ssh-keygen(1)</a></li>
+5. (Optional) Add the following ~/.ssh/config on the [client]:
 
-        <li><a href=
-        "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh_config&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
-        ssh_config(5)</a></li>
-    </ul>
+    Host [server]
+        IdentityFile ~/.ssh/id_rsa
 
-    <h3>Translations:</h3>
-    <ul>
-        <li>Indonesian translation by Jordan Silaen /
-         <a href="http://ChameleonJohn.com">ChameleonJohn.com</a>:
-         <a href=
-            "http://www.chameleonjohn.com/translations/ssh_nopass-Indonesian"
-         >http://www.chameleonjohn.com/translations/ssh_nopass-Indonesian</a>
-        </li>
-    </ul>
+   This allows access to the [server] without having to specify
+   the id_rsa file as an argument to ssh each time.
 
-    <hr />
+Translations:
+-------------
 
-    <span class="c2">
-    <a href="../index.html">Home</a>&nbsp;/&nbsp;<a href="index.html">Notes</a>
-    </span>
+Indonesian translation by Jordan Silaen / <a href=
+"http://ChameleonJohn.com">ChameleonJohn.com</a>:
+ 
+<a href=
+"http://www.chameleonjohn.com/translations/ssh_nopass-Indonesian"
+>http://www.chameleonjohn.com/translations/ssh_nopass-Indonesian</a>
 
+References:
+-----------
+
+1. <a href=
+   "http://www.der-keiler.de/Mailing-Lists/securityfocus/Secure_Shell/2002-12/0083.html"
+   >http://www.der-keiler.de/Mailing-Lists/securityfocus/Secure_Shell/2002-12/0083.html</a>
+2. <a href=
+   "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"
+   >ssh(1)</a>, <a href=
+   "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-keygen&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"
+   >ssh-keygen(1)</a>, <a href=
+   "http://www.openbsd.org/cgi-bin/man.cgi?query=ssh_config&amp;apropos=0&amp;sektion=0&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html"
+   >ssh_config(5)</a>
+
+</pre>
 </body>
 </html>
