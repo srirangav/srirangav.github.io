@@ -1,5 +1,9 @@
 # newsboat config
 
+# do not keep history
+
+history-limit 0
+
 # open links in the MacOSX default browser (and keep it in the background)
 browser "open -g"
 

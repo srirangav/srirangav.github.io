@@ -50,7 +50,14 @@
 
     From: <a href=
     "http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm"
-    >http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm</a>.
+    >http://www.aerospacesoftware.com/samba-ssh-tunnel-howto.htm</a>
+    (Dead link).
+
+    For instructions on creating nested tunnels, see J. Schauma,
+    <a href= "https://www.netmeister.org/blog/nested-ssh-tunnels.html"
+    >Nested SSH Tunnels</a>, <a href=
+    "https://www.netmeister.org/index.html"
+    >Signs of Tiviality</a> (Feb. 23, 2007)
 
 3. SSH Agent
 
@@ -61,54 +68,55 @@
    b. To add a ssh key to ssh-agent:
 
       $ ssh-add [key]
-      
+
    c. To stop ssh-agent:
-      
+
       $ ssh-agent -k
 
     From: <a href="http://www.cs.utk.edu/~england/ssh.html"
-    >http://www.cs.utk.edu/~england/ssh.html</a>.
+    >http://www.cs.utk.edu/~england/ssh.html</a> (dead link).
 
 4. SSH Keepalives
 
    Add the following to $HOME/.ssh/config to prevent dropped
    connections:
-   
+
    Host *
         ServerAliveInterval 120
         ServerAliveCountMax 3
 
     See: <a href="http://www.kehlet.cx/articles/129.html"
-    >http://www.kehlet.cx/articles/129.html</a>; <a href=
-    "http://www.snailbook.com/faq/timeouts.auto.html"
-    >http://www.snailbook.com/faq/timeouts.auto.html</a>.
+         >http://www.kehlet.cx/articles/129.html</a> (dead link);
+         <a href=
+         "http://www.snailbook.com/faq/timeouts.auto.html"
+         >http://www.snailbook.com/faq/timeouts.auto.html</a>.
 
 5. Connecting to older SSH servers
 
    a. Some older SSH servers (for example, MacOSX 10.4 (Tiger)),
       require diffie-hellman-group1-sha1 key exchange algorithm,
-      so to connect to such servers, add the following to 
+      so to connect to such servers, add the following to
       ~/.ssh/config:
 
       Host [server]
            KexAlgorithms +diffie-hellman-group1-sha1
            HostKeyAlgorithms +ssh-rsa
            PubkeyAcceptedKeyTypes +ssh-rsa
-        
-      Alternatively, use the command line option 
-      -oKexAlgorithms=+diffie-hellman-group1-sha1 to connect to 
+
+      Alternatively, use the command line option
+      -oKexAlgorithms=+diffie-hellman-group1-sha1 to connect to
       such servers:
-      
+
       $ ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 [user]@[server]
 
       If you don't already have a RSA key, you may need to
       create one as follows:
-      
+
       $ ssh-keygen -t rsa -f ~/.ssh/id_rsa -P ''
 
    b. OpenSSH 8.8 and later have disabled RSA keys with SHA1
       signatures, but some older servers do not support newer
-      signature, so to connect to those servers, add the 
+      signature, so to connect to those servers, add the
       following to ~/.ssh/config::
 
       Host [server]
