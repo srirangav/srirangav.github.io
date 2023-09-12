@@ -64,6 +64,12 @@ bind-key ^B pageup
 bind-key ^F pagedown
 bind-key SPACE pagedown
 
+# search for feeds, not articles, with /
+# see: https://github.com/newsboat/newsboat/issues/2338
+
+unbind-key /
+bind-key / goto-title
+
 # gnus style article / feed manipulation
 
 unbind-key A
