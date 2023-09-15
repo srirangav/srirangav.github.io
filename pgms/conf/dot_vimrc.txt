@@ -9,6 +9,8 @@ set smartindent     " smart auto indenting
 set shiftwidth=4    " 4 spaces for auto indents
 set tabstop=4       " 4 spaces per tab
 set expandtab       " turn tabs into spaces
+set viminfo=        " disable viminfo
+let g:netrw_dirhistmax=0 " disable netrwhist
 "set cul             " highlight current line
 
 " enhanced searching
