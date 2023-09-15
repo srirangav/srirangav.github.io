@@ -28,7 +28,6 @@ nnoremap <CR> :noh<CR>
 " https://vi.stackexchange.com/questions/15578
 
 let s:spellingState=0
-command! ToggleSpelling call ToggleSpelling()
 function! ToggleSpelling()
     if s:spellingState
        set nospell
@@ -37,7 +36,7 @@ function! ToggleSpelling()
     endif
     let s:spellingState = !s:spellingState
 endfunction
-nnoremap <C-s> :ToggleSpelling<CR>
+nnoremap <C-s> :call ToggleSpelling()<CR>
 
 " highlight trailing white space in red
 " requires vim-runtime on Debian
@@ -48,5 +47,14 @@ match ExtraWhitespace /\s\+$/
 
 " remove trailing whitespace
 " https://vimtricks.com/p/vim-remove-trailing-whitespace/
+" https://github.com/Omar12/dotfiles/blob/master/.vimrc
 
-nnoremap <C-l> :%s/\s\+$//e<CR>
+function! StripWhitespace()
+    let save_cursor = getpos(".")
+	let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfunction
+nnoremap ss :call StripWhitespace()<CR>
+
