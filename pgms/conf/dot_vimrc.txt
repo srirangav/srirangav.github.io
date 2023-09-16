@@ -9,9 +9,14 @@ set smartindent     " smart auto indenting
 set shiftwidth=4    " 4 spaces for auto indents
 set tabstop=4       " 4 spaces per tab
 set expandtab       " turn tabs into spaces
-set viminfo=        " disable viminfo
-let g:netrw_dirhistmax=0 " disable netrwhist
+set tw=70           " set text width (for hardwrapping) to 70 columns
+set splitbelow      " new horizontal splits are on the bottom
+set splitright      " new vertical splits are on the right
 "set cul             " highlight current line
+
+" disable history
+set viminfo=
+let g:netrw_dirhistmax=0
 
 " enhanced searching
 " https://www.twilio.com/blog/5-quality-of-life-vim-tricks-for-your-vimrc

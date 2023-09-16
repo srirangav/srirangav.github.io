@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content=
+    "width=device-width, minimum-scale=1, initial-scale=1, shrink-to-fit=no">
+    <style>pre { overflow: auto; }</style>
     <title>VIM Notes</title>
 </head>
 
@@ -15,11 +18,16 @@
 
     :!cvs commit -m '[commit message]' %
 
-2. Spell checking the current file:
+2. Execute a command and read its input into the current
+   buffer:
+
+   :r![command]
+
+3. Spell checking the current file:
 
     :!aspell -c %
 
-3. Hard wrap text to 80 columns:
+4. Hard wrap text to 80 columns:
 
     a. Set the text width to 80 columns:
 
@@ -40,16 +48,36 @@
 
     c. Alternatively, use :%!fold -w [col]
 
-Sources: <a href=
-         "http://mark.stosberg.com/Tech/text_editor_review.html#vim"
-         >http://mark.stosberg.com/Tech/text_editor_review.html#vim</a>
-         <a href=
-         "https://stackoverflow.com/questions/3033423/"
-         >https://stackoverflow.com/questions/3033423/</a>
+    Sources: <a href=
+             "http://mark.stosberg.com/Tech/text_editor_review.html#vim"
+             >http://mark.stosberg.com/Tech/text_editor_review.html#vim</a>
+             <a href=
+             "https://stackoverflow.com/questions/3033423/"
+             >https://stackoverflow.com/questions/3033423/</a>
+             <a href=
+             "https://vim.works/2019/03/16/wrapping-text-in-vim/"
+             >https://vim.works/2019/03/16/wrapping-text-in-vim/</a>
 
-See also: <a href="../pgms/conf/dot_vimrc.txt">.vimrc</a>
+5. Split a window and edit two files
 
+    a. :sp or &lt;CTRL&gt;ws (horizontal split, new window on the top
+       :vs or &lt;CTRL&gt;vw (vertical split, new window is on the left)
+
+    b. &lt;CTRL&gt;ww (move to new window)
+
+    c. :edit [file]
+
+    To resize a split: &lt;CTRL&gt;w+ (increase size)
+                       &lt;CTRL&gt;w- (decrease size)
+
+    To close a split: :only or :q or &lt;CTRL&gt;wo
+
+    Sources: <a href=
+             "https://vim.works/2019/03/03/split-windows-in-vim/"
+             >https://vim.works/2019/03/03/split-windows-in-vim/</a>
+             <a href=
+             "https://vi.stackexchange.com/questions/64/"
+             >https://vi.stackexchange.com/questions/64/</a>
 </pre>
 </body>
 </html>
-
