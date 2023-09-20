@@ -2,7 +2,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Git Notes</title>
+    <meta name="viewport" content=
+    "width=device-width, minimum-scale=1.0, initial-scale=1.0, shrink-to-fit=no">
+     <title>Git Notes</title>
 </head>
 
 <body>
@@ -19,35 +21,35 @@
 3. Working with Branches:
 
     a. List local branches:
-    
+
         $ git branch
-    
+
     b. List remote branches:
 
         $ git branch -r
-    
+
     c. List all branches:
-        
+
         $ git branch -a
 
     d. List current branch:
-    
+
         $ git rev-parse --abbrev-ref HEAD
-    
+
     e. Delete local [branch]:
-    
+
         $ git branch -D [branch]
 
     f. Delete remote [branch]:
-        
+
         $ git push origin --delete [branch]
 
     g. Synchronize local branches with remote branches:
 
         $ git fetch -p
-        
+
     h. Rename local branches:
-        
+
         $ git checkout master
         $ git branch -m [current_name] [new_name]
 
@@ -74,12 +76,27 @@
 
        [num] is the number of commits from the first commit through
        the last commit to be rebased, inclusive.
-    
+
     b. In the editor that opens, mark the first commit as 'pick', and
        and the remaining as 'squash'
-   
+
     See: <a href="https://www.git-tower.com/learn/git/faq/git-squash/"
          >https://www.git-tower.com/learn/git/faq/git-squash/</a>
+
+5. Signing failure for commits
+
+   If the following error appears, it is probably due to a hung
+   gpg-agent:
+
+    error: gpg failed to sign the data
+    fatal: failed to write commit object
+
+   gpg-agent can be restarted as follows:
+
+   $ gpgconf --kill gpg-agent
+
+   See: <a href="https://stackoverflow.com/questions/41052538"
+        >https://stackoverflow.com/questions/41052538</a>
 
 </pre>
 </body>
