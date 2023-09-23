@@ -1,1 +1,27 @@
+" .exrc
+
+" enable secure mode and disable messages
+set secure
+set nomesg
+
+" appearance
 set showmode
+set ruler
+set showmatch
+"set number
+
+" indenting / wrapping
+
+set autoindent
+set shiftwidth=4
+set tabstop=4
+set ts=4
+
+" searching
+set extended
+set iclower
+set searchincr
+
+" enable file completion using tab
+" https://groups.google.com/g/comp.editors/c/hB5tn_BQmOE
+set filec=\	

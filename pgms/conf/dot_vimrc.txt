@@ -1,18 +1,30 @@
 " .vimrc - vim configuration
 " based on: https://stackoverflow.com/questions/1218390
+"           https://trofi.github.io/posts/277-from-mcedit-to-vim.html
 
+" appearance
+
+set laststatus=2    " always show the status bar at the bottom
 set showmode        " show current mode (insert/append/etc.) in status bar
 set showcmd         " show typed command in status bar
 set number          " show line numbers
 set ruler           " show cursor position in status bar
+set showtabline=2   " show the tab bar even only one file is open
+"set cul             " highlight current line
+
+" window splitting
+
+set splitbelow      " new horizontal splits are on the bottom
+set splitright      " new vertical splits are on the right
+
+" indenting / wrapping
+
 set smartindent     " smart auto indenting
+set copyindent      " copy indentation style of prior line
 set shiftwidth=4    " 4 spaces for auto indents
 set tabstop=4       " 4 spaces per tab
 set expandtab       " turn tabs into spaces
-set tw=70           " set text width (for hardwrapping) to 70 columns
-set splitbelow      " new horizontal splits are on the bottom
-set splitright      " new vertical splits are on the right
-"set cul             " highlight current line
+set tw=72           " set text width (for hardwrapping) to 70 columns
 
 " disable history
 set viminfo=
