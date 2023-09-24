@@ -783,28 +783,26 @@ Source: Chris Siebenmann <a href=
 
 <p><a id="ublock">uBlock Origin Settings</a></p>
 
-<blockquote>
-
     <ul>
 
-    <li>Import Fanboy's Anti-Fonts list:
-        <a href="https://fanboy.co.nz/fanboy-antifonts.txt"
-        >https://fanboy.co.nz/fanboy-antifonts.txt</a>
+    <li>Import the following in Filter Lists &gt; Import:<pre>
+<a href="https://fanboy.co.nz/fanboy-antifonts.txt"
+>https://fanboy.co.nz/fanboy-antifonts.txt</a>
+<a href=
+"https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt"
+>https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt</a>
+<a href=
+"https://raw.githubusercontent.com/arosh/ublacklist-stackoverflow-translation/master/uBlacklist.txt"
+>https://raw.githubusercontent.com/arosh/ublacklist-stackoverflow-translation/master/uBlacklist.txt</a>
+<a href=
+"https://github.com/mig4ng/ublock-origin-filters/blob/main/stackoverflow-co.txt"
+>https://github.com/mig4ng/ublock-origin-filters/blob/main/stackoverflow-co.txt</a>
+<a href=
+"https://github.com/mig4ng/ublock-origin-filters/blob/main/linkedin.txt"
+>https://github.com/mig4ng/ublock-origin-filters/blob/main/linkedin.txt</a></pre>
     </li>
-
-    <li>Add the following to "My Filters":
-
-        <ul>
-        <li>The content of <a
-        href="https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt"
-        >https://raw.githubusercontent.com/arosh/ublacklist-github-translation/master/uBlacklist.txt</a>
-        </li>
-        <li>The content of <a
-        href="https://raw.githubusercontent.com/arosh/ublacklist-stackoverflow-translation/master/uBlacklist.txt"
-        >https://raw.githubusercontent.com/arosh/ublacklist-stackoverflow-translation/master/uBlacklist.txt</a>
-        </li>
-        <li>Additional filters:
-        <br><pre># Remove tracking tokens
+   <li>Add the following to "My filters":<pre>
+! Remove tracking tokens
 *$removeparam=utm_source
 *$removeparam=fbclid
 *$removeparam=gclid
@@ -831,12 +829,14 @@ google.*##a[href*=".pinterest."]:upward(1)
 duckduckgo.*##.results > div:has(a[href*=".pinterest.com"])
 
 ! Block google popups
-||accounts.google.com/gsi/iframe/select$subdocument
+accounts.google.com/gsi/iframe
 
 ! block third party fonts
 *$font,third-party</pre>
+</li>
+</ul>
 
-        See: Sam McLeod, <a href=
+See: Sam McLeod, <a href=
              "https://smcleod.net/software/2022/05/16/firefox-addons-2022/"
             >Firefox Addons - 2022 Edition</a> (May 17, 2022);
             Marin Brinkmann, <a href=
@@ -847,12 +847,6 @@ duckduckgo.*##.results > div:has(a[href*=".pinterest.com"])
             "https://www.ghacks.net/2022/09/17/how-to-block-web-fonts-to-improve-privacy/"
             >How to block web fonts to improve privacy</a>,
             <a href="https://www.ghacks.net/">ghacks.net</a>.
-        </li>
-    </ul>
-    </li>
-</ul>
-</blockquote>
-
 <hr>
 
 <p>
