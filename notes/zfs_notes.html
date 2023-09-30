@@ -269,15 +269,21 @@ The data integrity on a zpool can be confirmed by 'scrubbing' it.
 
     $ sudo zpool scrub [name]
 
-2. To stop / cancel a scrub that is in progress:
+2. To monitor a scrub that is in progress:
+
+    $ zpool status [secs]
+
+   where [secs] is the refresh interval
+
+3. To stop / cancel a scrub that is in progress:
 
     $ sudo zpool scrub -s [name]
 
-3. To pause a scrub that is in progress:
+4. To pause a scrub that is in progress:
 
     $ sudo zpool scrub -p [name]
 
-4. To resume a paused scrub (this is same command used to start a new
+5. To resume a paused scrub (this is same command used to start a new
 scrub):
 
     $ sudo zpool scrub [name]
