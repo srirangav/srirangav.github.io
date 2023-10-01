@@ -23,11 +23,7 @@
 
    :r![command]
 
-3. Spell checking the current file:
-
-    :!aspell -c %
-
-4. Hard wrap text to 80 columns:
+3. Hard wrap text to 80 columns:
 
     a. Set the text width to 80 columns:
 
@@ -58,7 +54,7 @@
              "https://vim.works/2019/03/16/wrapping-text-in-vim/"
              >https://vim.works/2019/03/16/wrapping-text-in-vim/</a>
 
-5. Split a window and edit two files
+4. Split a window and edit two files
 
     a. :sp or &lt;CTRL&gt;ws (horizontal split, new window on the top
        :vs or &lt;CTRL&gt;vw (vertical split, new window is on the left)
@@ -78,6 +74,17 @@
              <a href=
              "https://vi.stackexchange.com/questions/64/"
              >https://vi.stackexchange.com/questions/64/</a>
+
+5. Spell checking the current file:
+
+    :!aspell -c %
+
+6. Enable a custom dictionary for additional words for spelling mode:
+
+   $ mkdir -p ~/.vim/spell && touch ~/.vim/spell/en.utf-8.add
+
+   From: https://codeyarns.com/tech/2015-09-30-how-to-make-spellfile-in-vim.html
+
 </pre>
 </body>
 </html>
