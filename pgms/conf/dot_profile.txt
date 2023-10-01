@@ -43,16 +43,19 @@ case $- in
         VISUAL="$EDITOR"
         FCEDIT="$EDITOR"
 
-        # if less is available, use it as our pager, otherwise
-        # default to more
+        # default to more unless less is available
 
         PAGER="more"
         if type less > /dev/null 2>&1 ; then
             PAGER="less"
+            # startup option - disable terminal init, and
+            # use raw control characters
+            LESS="-XR"
+            # disable history and use secure mode
             LESSHISTFILE="/dev/null"
             LESSHISTSIZE="0"
             LESSSECURE="1"
-            export LESSHISTFILE LESSHISTSIZE LESSSECURE
+            export LESS LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
 
         export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
