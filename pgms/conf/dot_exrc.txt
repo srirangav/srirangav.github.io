@@ -4,6 +4,9 @@
 set secure
 set nomesg
 
+" go to top of the file
+map gg 1G
+
 " appearance
 set showmode
 set ruler
@@ -16,6 +19,7 @@ set autoindent
 set shiftwidth=4
 set tabstop=4
 set ts=4
+set noextended
 
 " searching
 set extended
