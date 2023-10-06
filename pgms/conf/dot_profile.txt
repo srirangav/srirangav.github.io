@@ -63,7 +63,7 @@ case $- in
         # set bash and ksh specific options
 
         case "$0" in
-            *bash*)
+            *bash*|*dash*)
                 set -o emacs notify ignoreeof noclobber
                 ;;
             *ksh*)
