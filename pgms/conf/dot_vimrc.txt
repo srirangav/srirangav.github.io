@@ -4,12 +4,12 @@
 
 " appearance
 
-set laststatus=2    " always show the status bar at the bottom
+"set laststatus=2    " always show the status bar at the bottom
 set showmode        " show current mode (insert/append/etc.) in status bar
 set showcmd         " show typed command in status bar
 set number          " show line numbers
 set ruler           " show cursor position in status bar
-set showtabline=2   " show the tab bar even only one file is open
+"set showtabline=2   " show the tab bar even only one file is open
 "set cul             " highlight current line
 
 " window splitting
@@ -40,6 +40,20 @@ set ignorecase      " case insensitive searching
 set smartcase       " case sensitive if uppercase characters are provided
 nnoremap <CR> :noh<CR>
 
+" highlight trailing white space in red
+" requires vim-runtime on Debian
+" https://stackoverflow.com/questions/356126
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+" highlight non-ascii characters in red
+" may require vim-runtime on Debian
+" https://stackoverflow.com/questions/16987362/
+
+highlight nonascii guibg=Red ctermbg=1 term=standout
+au BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
+
 " enable builtin spellchecking
 " https://vimtricks.com/p/vim-spell-check/
 " https://www.linux.com/training-tutorials/using-spell-checking-vim/
@@ -57,13 +71,6 @@ function! ToggleSpelling()
 endfunction
 nnoremap <C-s> :call ToggleSpelling()<CR>
 
-" highlight trailing white space in red
-" requires vim-runtime on Debian
-" https://stackoverflow.com/questions/356126
-
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-
 " remove trailing whitespace
 " https://vimtricks.com/p/vim-remove-trailing-whitespace/
 " https://github.com/Omar12/dotfiles/blob/master/.vimrc
@@ -76,4 +83,3 @@ function! StripWhitespace()
     call setreg('/', old_query)
 endfunction
 nnoremap ss :call StripWhitespace()<CR>
-
