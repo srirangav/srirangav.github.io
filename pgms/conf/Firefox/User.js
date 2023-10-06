@@ -90,6 +90,11 @@ user_pref("security.insecure_connection_text.pbmode.enabled", true);
 user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 
+// disable javascript pdf viewer
+// https://support.mozilla.org/en-US/questions/950988
+
+user_pref("pdfjs.disabled", true);
+
 // prevent javascript from interfering with cut and paste
 // From: https://utcc.utoronto.ca/~cks/space/blog/web/FirefoxClipboardeventsIssue
 
