@@ -409,3 +409,15 @@ user_pref("network.http.referer.disallowCrossSiteRelaxingDefault.top_navigation"
 user_pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
 user_pref("browser.pagethumbnails.capturing_disabled", true);
 
+// force pop-up windows to open in a new tab
+// from: https://codeyarns.com/tech/2023-10-13-firefox-configuration-editor.html
+
+user_pref("browser.link.open_newwindow.restriction", 0);
+
+// disable autocomplete popup
+// from: https://www-archive.mozilla.org/unix/customizing.html
+
+user_pref("browser.urlbar.autocomplete.enabled", false);
+user_pref("browser.urlbar.showPopup", false);
+user_pref("browser.urlbar.showSearch", false);
+
