@@ -116,15 +116,19 @@ user_pref("dom.webnotifications.serviceworker.enabled", false);
 user_pref("network.IDN_show_punycode", true);
 
 // secure fonts
-// Frome: https://www.ghacks.net/2022/09/17/how-to-block-web-fonts-to-improve-privacy/
+// From: https://www.ghacks.net/2022/09/17/how-to-block-web-fonts-to-improve-privacy/
 
-user_pref("gfx.downloadable_fonts.enabled", false);
 user_pref("gfx.downloadable_fonts.woff2.enabled", false);
 user_pref("gfx.downloadable_fonts.fallback_delay", -1);
 user_pref("layout.css.font-visibility.private", 1);
 user_pref("layout.css.font-visibility.standard", 1);
 user_pref("layout.css.font-visibility.trackingprotection", 1);
 user_pref("gfx.font_rendering.opentype_svg.enabled", false);
+
+// disabled because icons sometimes fail to work
+// https://support.mozilla.org/en-US/questions/1289999
+
+user_pref("gfx.downloadable_fonts.enabled", false);
 
 // enable query stripping
 // From: https://www.ghacks.net/2022/06/29/firefox-remove-known-tracking-parameters-from-urls-in-all-modes/
