@@ -120,15 +120,16 @@ user_pref("network.IDN_show_punycode", true);
 
 user_pref("gfx.downloadable_fonts.woff2.enabled", false);
 user_pref("gfx.downloadable_fonts.fallback_delay", -1);
-user_pref("layout.css.font-visibility.private", 1);
-user_pref("layout.css.font-visibility.standard", 1);
-user_pref("layout.css.font-visibility.trackingprotection", 1);
 user_pref("gfx.font_rendering.opentype_svg.enabled", false);
 
 // disabled because icons sometimes fail to work
 // https://support.mozilla.org/en-US/questions/1289999
+// user_pref("gfx.downloadable_fonts.enabled", false);
 
-user_pref("gfx.downloadable_fonts.enabled", false);
+// disabled by arkenfox v118
+// user_pref("layout.css.font-visibility.private", 1);
+// user_pref("layout.css.font-visibility.standard", 1);
+// user_pref("layout.css.font-visibility.trackingprotection", 1);
 
 // enable query stripping
 // From: https://www.ghacks.net/2022/06/29/firefox-remove-known-tracking-parameters-from-urls-in-all-modes/
@@ -224,16 +225,18 @@ user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 
 // disable suggestions
 
-user_pref("browser.fixup.alternate.enabled", false);
 user_pref("browser.search.suggest.enabled", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.suggest.engines", false);
 user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);
-user_pref("browser.urlbar.dnsResolveSingleWordsAfterSearch", 0);
 user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
 user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
 user_pref("browser.urlbar.maxRichResults", 0);
+
+// disabled in arkenfox v118
+// user_pref("browser.fixup.alternate.enabled", "");
+// user_pref("browser.urlbar.dnsResolveSingleWordsAfterSearch", "");
 
 // disable telemetry
 
@@ -370,9 +373,9 @@ user_pref("devtools.debugger.remote-enabled", false);
 user_pref("permissions.manager.defaultsUrl", "");
 user_pref("webchannel.allowObject.urlWhitelist", "");
 
+// disabled by arkenfox v118
 // disable permission delegation
-
-user_pref("permissions.delegation.enabled", false);
+// user_pref("permissions.delegation.enabled", false);
 
 // downloads security / usability
 
@@ -384,9 +387,11 @@ user_pref("browser.download.always_ask_before_handling_new_types", true);
 
 user_pref("browser.contentblocking.category", "strict");
 user_pref("privacy.antitracking.enableWebcompat", false);
-user_pref("privacy.partition.serviceWorkers", true);
-user_pref("privacy.partition.always_partition_third_party_non_cookie_storage", true);
-user_pref("privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage", false);
+
+// disabled by arkenfox v118
+// user_pref("privacy.partition.serviceWorkers", true);
+// user_pref("privacy.partition.always_partition_third_party_non_cookie_storage", true);
+// user_pref("privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage", false);
 
 // disable asm.js, webassembly, Ion and baseline JIT
 
@@ -424,4 +429,14 @@ user_pref("browser.link.open_newwindow.restriction", 0);
 user_pref("browser.urlbar.autocomplete.enabled", false);
 user_pref("browser.urlbar.showPopup", false);
 user_pref("browser.urlbar.showSearch", false);
+
+// added in arkenfox v118
+
+user_pref("browser.download.start_downloads_in_tmp_dir", true);
+user_pref("browser.shopping.experience2023.enabled", false);
+user_pref("browser.urlbar.addons.featureGate", false);
+user_pref("browser.urlbar.mdn.featureGate", false);
+user_pref("browser.urlbar.pocket.featureGate", false);
+user_pref("browser.urlbar.trending.featureGate", false);
+user_pref("browser.urlbar.weather.featureGate", false);
 
