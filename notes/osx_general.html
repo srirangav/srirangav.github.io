@@ -150,6 +150,21 @@
           "https://osxdaily.com/2022/11/21/how-clear-dns-cache-macos-ventura-monterey/"
           >https://osxdaily.com/2022/11/21/how-clear-dns-cache-macos-ventura-monterey/</a>
 
+17. Converting a Samsung T7 to APFS
+
+    My Samsung T7 came formatted as EXFAT, and DiskUtility.app would not
+    allow it to be formatted as APFS with encryption.  To covert the
+    disk to APFS, I did the following:
+
+    1. Partition to disk as GPT with a Journaled HFS+ partition:
+
+       $ diskutil partitionDisk disk[#] GPT JHFS+ "T7" 0g
+
+       Replace # with the disk number shown by 'diskutil list'
+
+    2. In DiskUtility.app, select the disk named "T7" and partition it
+       a APFS encrypted
+
 </pre>
 </body>
 </html>
