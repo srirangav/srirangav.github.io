@@ -440,3 +440,8 @@ user_pref("browser.urlbar.pocket.featureGate", false);
 user_pref("browser.urlbar.trending.featureGate", false);
 user_pref("browser.urlbar.weather.featureGate", false);
 
+// added in arkenfox v119
+
+user_pref("browser.search.separatePrivateDefault", true);
+user_pref("browser.search.separatePrivateDefault.ui.enabled", true);
+
