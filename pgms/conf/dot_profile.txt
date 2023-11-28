@@ -110,6 +110,8 @@ case $- in
             # math, instead of just integer math
 
             alias bc="bc -l" ;
+            alias lynx="lynx -restrictions=all -number_links -underline_links -unique_urls" ;
+
         fi
 
         ;;
