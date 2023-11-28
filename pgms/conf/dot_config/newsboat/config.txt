@@ -81,6 +81,8 @@ unbind-key j
 unbind-key J
 unbind-key k
 unbind-key K
+unbind-key l
+unbind-key L
 unbind-key n
 unbind-key p
 unbind-key u
@@ -105,10 +107,10 @@ bind-key U show-urls            # show Urls (b/c 'u' is used for toggling
 bind-key f edit-flags           # Flag / mark an article
 bind-key m edit-flags           # flag / Mark and article
 
-# macro to open urls in the default browser (type ',b' to invoke)
+# macro to open urls in Lynx
 # see https://wiki.archlinux.org/title/Newsboat
 
-# macro o set browser "open -g" ; open-in-browser ; set browser "links %u"
+macro l set browser "lynx %u" ; open-in-browser ; set browser "open -g"
 
 # podboat settings
 
