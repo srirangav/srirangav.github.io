@@ -36,7 +36,7 @@
     $ gpg --import [FILE]
 
 7. Importing a public key from a [URL] a using <a
-href="http://curl.haxx.se/">curl</a>:
+   href="http://curl.haxx.se/">curl</a>:
 
     $ curl [URL] | gpg --import
 
@@ -44,8 +44,23 @@ href="http://curl.haxx.se/">curl</a>:
 
     $ gpg --keyserver [keyserver] --recv-key [id]
 
-    See <a href="http://www.gnupg.org/gph/en/manual.html#AEN84"
-      >http://www.gnupg.org/gph/en/manual.html#AEN84</a>.
+    Reliable keyservers include:
+
+    keyserver.ubuntu.com
+    pgp.mit.edu
+    keyserver.pgp.com
+
+    If importing hangs, it could be because the firewall is blocking
+    outgoing port 11371/TCP.
+
+    It could be due to not having outbound IPV6 connectivity.  If the
+    issue is due to IPV6, add 'disable-ipv6' to ~/.gnupg/dirmngr.conf,
+    kill any running dirmngr processes and retry importing keys.
+
+    See: <a href="http://www.gnupg.org/gph/en/manual.html#AEN84"
+         >http://www.gnupg.org/gph/en/manual.html#AEN84</a>
+         <a href="https://rvm.io/rvm/security"
+         >https://rvm.io/rvm/security</a>
 
 9. Creating a ascii signature for a [file] in a separate [signature_file]:
 
