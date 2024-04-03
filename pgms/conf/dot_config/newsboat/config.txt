@@ -110,7 +110,8 @@ bind-key m edit-flags           # flag / Mark and article
 # macro to open urls in Lynx
 # see https://wiki.archlinux.org/title/Newsboat
 
-macro l set browser "lynx %u" ; open-in-browser ; set browser "open -g"
+#macro l set browser "lynx %u" ; open-in-browser ; set browser "open -g"
+macro l set browser "links %u" ; open-in-browser ; set browser "open -g"
 
 # podboat settings
 
