@@ -48,8 +48,7 @@ case $- in
         PAGER="more"
         if type less > /dev/null 2>&1 ; then
             PAGER="less"
-            # startup option - disable terminal init, and
-            # use raw control characters
+            # disable terminal init, and use raw control characters
             LESS="-XR"
             # disable history and use secure mode
             LESSHISTFILE="/dev/null"
@@ -58,7 +57,11 @@ case $- in
             export LESS LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
 
-        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
+        # make ksh read .profile instead of .kshrc
+
+        ENV="$HOME/.profile"
+
+        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH ENV
 
         # set bash and ksh specific options
 
@@ -76,18 +79,14 @@ case $- in
                 set -o notify >/dev/null 2>&1
                 set -o ignoreeof >/dev/null 2>&1
                 set -o noclobber >/dev/null 2>&1
+                set -o markdirs >/dev/null 2>&1
 
-                # bash style tab completion for pdksh
-                # in emacs mode
+                # bash style tab completion in emacs mode
 
                 if type bind > /dev/null 2>&1 ; then
-                   bind "^I=complete"
-                   bind "^I^I=complete-list"
-                fi
-
-                if [ -r "$HOME/.kshrc" ] ; then
-                   ENV="$HOME/.kshrc"
-                   export ENV
+                   bind "^I=complete-list"
+                   #bind "^I=complete"
+                   #bind "^I^I=complete-list"
                 fi
                 ;;
         esac
