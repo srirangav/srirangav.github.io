@@ -4,11 +4,13 @@
 
 " appearance
 
-"set laststatus=2    " always show the status bar at the bottom
 set showmode        " show current mode (insert/append/etc.) in status bar
 set showcmd         " show typed command in status bar
 set number          " show line numbers
 set ruler           " show cursor position in status bar
+set background=dark " dark background (for tmux)
+                    " from: https://unix.stackexchange.com/a/363374
+"set laststatus=2    " always show the status bar at the bottom
 "set showtabline=2   " show the tab bar even only one file is open
 "set cul             " highlight current line
 
