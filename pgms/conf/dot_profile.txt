@@ -23,7 +23,7 @@ HISTFILE=/dev/null
 # disable per-session history in bash and zsh on MacOSX
 # see: https://stackoverflow.com/a/54338056
 #      https://superuser.com/a/1610999
-# also remember to created $HOME/.bash_sessions_disable
+# also remember to create $HOME/.bash_sessions_disable
 
 SHELL_SESSION_HISTORY=0
 SHELL_SESSIONS_DISABLE=1
