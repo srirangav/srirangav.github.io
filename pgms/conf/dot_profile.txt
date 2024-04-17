@@ -1,5 +1,5 @@
 #!/bin/sh
-# .profile - Bourne shell init script
+# .profile - Bourne-like shell (sh, ksh, bash, dash, zsh) init script
 
 # set the default file creation mask to something reasonably safe
 
@@ -11,6 +11,24 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/opt/local/bin:/opt/local/sbin
 PATH=$PATH:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin
 PATH=$PATH:/usr/local/zfs/bin:$HOME/bin
 export PATH
+
+# make ksh read .profile instead of .kshrc
+
+ENV="$HOME/.profile"
+
+# disable history in ksh/zsh
+
+HISTFILE=/dev/null
+
+# disable per-session history in bash and zsh on MacOSX
+# see: https://stackoverflow.com/a/54338056
+#      https://superuser.com/a/1610999
+# also remember to created $HOME/.bash_sessions_disable
+
+SHELL_SESSION_HISTORY=0
+SHELL_SESSIONS_DISABLE=1
+
+export ENV HISTFILE SHELL_SESSION_HISTORY SHELL_SESSIONS_DISABLE
 
 case $- in
 
@@ -61,17 +79,13 @@ case $- in
 
         ENV="$HOME/.profile"
 
-        # disable history in ksh/zsh
-
-        HISTFILE=/dev/null
-
-        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH ENV HISTFILE
+        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
 
         # set bash and ksh specific options
 
         case "$0" in
             *bash*|*dash*)
-                set -o emacs notify ignoreeof noclobber
+                set -o emacs ignoreeof noclobber
                 ;;
             *zsh*)
                 bindkey -e
@@ -84,7 +98,6 @@ case $- in
                 # additional options, may not be available on
                 # all ksh versions
 
-                set -o notify >/dev/null 2>&1
                 set -o ignoreeof >/dev/null 2>&1
                 set -o noclobber >/dev/null 2>&1
                 set -o markdirs >/dev/null 2>&1
@@ -102,51 +115,53 @@ case $- in
 
                 # git
 
-                set -A complete_git_1 -- \
-                    checkout \
-                    commit \
-                    diff \
-                    fetch \
-                    pull \
-                    push \
-                    restore \
-                    status \
-                    switch \
-                    > /dev/null 2>&1
+                if type git > /dev/null 2>&1 ; then
+                    set -A complete_git_1 -- \
+                           checkout \
+                           commit \
+                           diff \
+                           fetch \
+                           pull \
+                           push \
+                           restore \
+                           status \
+                           switch \
+                           > /dev/null 2>&1
+                fi
 
                 # gpg
 
                 if type gpg > /dev/null 2>&1 ; then
                     set -A complete_gpg_1 -- \
-                        --delete-keys \
-                        --import \
-                        --list-keys \
-                        --list-public-keys \
-                        --list-secret-keys \
-                        --receive-keys \
-                        --recv-keys \
-                        --send-keys \
-                        --verify \
-                        > /dev/null 2>&1
+                           --delete-keys \
+                           --import \
+                           --list-keys \
+                           --list-public-keys \
+                           --list-secret-keys \
+                           --receive-keys \
+                           --recv-keys \
+                           --send-keys \
+                           --verify \
+                           > /dev/null 2>&1
                 fi
 
                 # openssl
 
                 if type openssl > /dev/null 2>&1 ; then
                     set -A complete_openssl_1 -- \
-                        md5 rmd160 sha1 sha256 sha512 \
-                        > /dev/null 2>&1
+                           md5 rmd160 sha1 sha256 sha512 \
+                           > /dev/null 2>&1
                 fi
 
                 # tmux
 
                 if type tmux > /dev/null 2>&1 ; then
                     set -A complete_tmux_1 -- \
-                        attach \
-                        ls \
-                        new-session \
-                        new-window \
-                        > /dev/null 2>&1
+                           attach \
+                           ls \
+                           new-session \
+                           new-window \
+                           > /dev/null 2>&1
                 fi
                 ;;
 
