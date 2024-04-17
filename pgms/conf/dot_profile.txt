@@ -61,7 +61,7 @@ case $- in
 
         ENV="$HOME/.profile"
 
-        # disable history in ksh
+        # disable history in ksh/zsh
 
         HISTFILE=/dev/null
 
@@ -72,6 +72,10 @@ case $- in
         case "$0" in
             *bash*|*dash*)
                 set -o emacs notify ignoreeof noclobber
+                ;;
+            *zsh*)
+                bindkey -e
+                set -o IGNORE_EOF MARK_DIRS
                 ;;
             *ksh*)
 
@@ -131,6 +135,17 @@ case $- in
                 if type openssl > /dev/null 2>&1 ; then
                     set -A complete_openssl_1 -- \
                         md5 rmd160 sha1 sha256 sha512 \
+                        > /dev/null 2>&1
+                fi
+
+                # tmux
+
+                if type tmux > /dev/null 2>&1 ; then
+                    set -A complete_tmux_1 -- \
+                        attach \
+                        ls \
+                        new-session \
+                        new-window \
                         > /dev/null 2>&1
                 fi
                 ;;
