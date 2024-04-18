@@ -189,7 +189,6 @@ case $- in
             # run w3m in monochrome mode
 
             alias w3m="w3m -M"
-            alias lynx="lynx -restrictions=all -number_links -underline_links -unique_urls -cookie_file=/dev/null -cookie_save_file=/dev/null" ;
         fi
 
         ;;
