@@ -117,6 +117,7 @@ case $- in
 
                 if type git > /dev/null 2>&1 ; then
                     set -A complete_git_1 -- \
+                           branch \
                            checkout \
                            commit \
                            diff \
