@@ -10,6 +10,8 @@ set number          " show line numbers
 set ruler           " show cursor position in status bar
 set background=dark " dark background (for tmux)
                     " from: https://unix.stackexchange.com/a/363374
+syntax on           " enable syntax highlighting
+
 "set laststatus=2    " always show the status bar at the bottom
 "set showtabline=2   " show the tab bar even only one file is open
 "set cul             " highlight current line
@@ -22,11 +24,11 @@ set splitright      " new vertical splits are on the right
 " indenting / wrapping
 
 set smartindent     " smart auto indenting
+set expandtab       " turn tabs into spaces
 set copyindent      " copy indentation style of prior line
+set textwidth=74    " set text width (for hardwrapping)
 set shiftwidth=4    " 4 spaces for auto indents
 set tabstop=4       " 4 spaces per tab
-set expandtab       " turn tabs into spaces
-set tw=72           " set text width (for hardwrapping) to 70 columns
 
 " disable history
 set viminfo=
