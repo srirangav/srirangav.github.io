@@ -1,6 +1,7 @@
 " .vimrc - vim configuration
 " based on: https://stackoverflow.com/questions/1218390
 "           https://trofi.github.io/posts/277-from-mcedit-to-vim.html
+"           https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
 
 " appearance
 
@@ -30,9 +31,20 @@ set textwidth=74    " set text width (for hardwrapping)
 set shiftwidth=4    " 4 spaces for auto indents
 set tabstop=4       " 4 spaces per tab
 
-" disable history
+" completion
+" https://stackoverflow.com/questions/9511253
+
+set wildmenu
+set wildmode=longest:list,full
+set wildignore=*.o,*~,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+
+" disable history and backups
+
 set viminfo=
 let g:netrw_dirhistmax=0
+set nobackup
+set nowb
+set noswapfile
 
 " enhanced searching
 " https://www.twilio.com/blog/5-quality-of-life-vim-tricks-for-your-vimrc
