@@ -7,9 +7,9 @@ umask 022
 
 # set the PATH to directories where binaries are usually located
 
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/opt/local/bin:/opt/local/sbin
-PATH=$PATH:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin
-PATH=$PATH:/usr/local/zfs/bin:$HOME/bin
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/opt/local/sbin:/opt/local/bin
+PATH=$PATH:/usr/X11R6/bin:/usr/local/sbin:/usr/local/bin
+PATH=$PATH:/usr/games:/usr/local/zfs/bin:/usr/local/games:$HOME/bin
 export PATH
 
 # make ksh read .profile instead of .kshrc
