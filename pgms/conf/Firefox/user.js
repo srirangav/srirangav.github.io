@@ -6,6 +6,13 @@
 // This should be placed in the Profile folder, which can be located
 // through about:support
 //
+// History:
+//
+// 08/22/2024   disable privacy preserving ad attribution
+// 02/14/2024   updates based on arkenfox v122
+// 10/18/2023   updates based on arkenfox v118
+// 11/28/2023   updates based on arkenfox v119
+//
 // Quick and dirty validation:
 //
 // $ awk '/^\/\// { next; } /^user_pref\(\".*\)\;$/ { next; } (NF > 0) { print; }' User.js
@@ -76,7 +83,7 @@ user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 
-// disable OpenH264 codec
+// disable penH264 codec
 
 user_pref("media.gmp-gmpopenh264.enabled", false);
 
@@ -127,6 +134,7 @@ user_pref("gfx.font_rendering.opentype_svg.enabled", false);
 // user_pref("gfx.downloadable_fonts.enabled", false);
 
 // disabled by arkenfox v118
+
 // user_pref("layout.css.font-visibility.private", 1);
 // user_pref("layout.css.font-visibility.standard", 1);
 // user_pref("layout.css.font-visibility.trackingprotection", 1);
@@ -235,6 +243,7 @@ user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
 user_pref("browser.urlbar.maxRichResults", 0);
 
 // disabled in arkenfox v118
+
 // user_pref("browser.fixup.alternate.enabled", "");
 // user_pref("browser.urlbar.dnsResolveSingleWordsAfterSearch", "");
 
@@ -308,7 +317,7 @@ user_pref("signon.rememberSignons", false);
 
 user_pref("network.auth.subresource-http-auth-allow", 1);
 
-// disable unnessary disk usage
+// disable unnecessary disk usage
 
 user_pref("browser.chrome.site_icons", false);
 user_pref("browser.cache.disk.enable", false);
@@ -360,7 +369,7 @@ user_pref("dom.disable_window_move_resize", true);
 
 user_pref("permissions.default.shortcuts", 2);
 
-// disable the ui tour
+// disable the UI tour
 
 user_pref("browser.uitour.enabled", false);
 
@@ -374,6 +383,7 @@ user_pref("permissions.manager.defaultsUrl", "");
 user_pref("webchannel.allowObject.urlWhitelist", "");
 
 // disabled by arkenfox v118
+
 // disable permission delegation
 // user_pref("permissions.delegation.enabled", false);
 
@@ -389,6 +399,7 @@ user_pref("browser.contentblocking.category", "strict");
 user_pref("privacy.antitracking.enableWebcompat", false);
 
 // disabled by arkenfox v118
+
 // user_pref("privacy.partition.serviceWorkers", true);
 // user_pref("privacy.partition.always_partition_third_party_non_cookie_storage", true);
 // user_pref("privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage", false);
@@ -444,4 +455,60 @@ user_pref("browser.urlbar.weather.featureGate", false);
 
 user_pref("browser.search.separatePrivateDefault", true);
 user_pref("browser.search.separatePrivateDefault.ui.enabled", true);
+
+// added in arkenfox v122
+
+pref("browser.migrate.chrome.get_permissions.enabled", true);
+pref("browser.newtabpage.activity-stream.system.showSponsored", false);
+pref("browser.search.newSearchConfig.enabled", false);
+pref("browser.shell.checkDefaultPDF", true);
+pref("browser.shell.checkDefaultPDF.silencedByUser", false);
+pref("browser.shopping.experience2023.ads.exposure", false);
+pref("browser.startup.windowsLaunchOnLogin.disableLaunchOnLoginPrompt", false);
+pref("browser.startup.windowsLaunchOnLogin.enabled", false);
+pref("browser.theme.windows.accent-color-in-tabs.enabled", false);
+pref("browser.urlbar.quicksuggest.rustEnabled", false);
+pref("browser.urlbar.suggest.recentsearches", true);
+pref("browser.urlbar.switchTabs.searchAllContainers", false);
+pref("clipboard.imageAsFile.enabled", true);
+pref("cookiebanners.bannerClicking.pollingInterval", 500);
+pref("cookiebanners.bannerClicking.timeoutAfterDOMContentLoaded", 20000);
+pref("cookiebanners.bannerClicking.timeoutAfterLoad", 5000);
+pref("cookiebanners.service.enableGlobalRules.subFrames", true);
+pref("dom.iframe_lazy_loading.enabled", false);
+pref("dom.security.https_first_schemeless", false);
+pref("dom.w3c_pointer_events.getcoalescedevents_only_in_securecontext", false);
+pref("dom.webgpu.testing.assert-hardware-adapter", false);
+pref("dom.webgpu.workers.enabled", false);
+pref("editor.block_inline_check.use_computed_style", false);
+pref("extensions.formautofill.heuristics.interactivityCheckMode", "focusability");
+pref("extensions.script_about_blank_without_permission", false);
+pref("gfx.canvas.remote.allow-in-parent", false);
+pref("gfx.canvas.remote.texture-timeout-ms", 10000);
+pref("gfx.canvas.remote.worker-threads", -1);
+pref("gfx.font_rendering.fallback.unassigned_chars", false);
+pref("gfx.video.convert-yuv-to-nv12.image-host-win", true);
+pref("image.mem.max_legal_imgframe_size_kb", -1);
+pref("javascript.options.wasm_tail_calls", false);
+pref("layout.css.always_underline_links", false);
+pref("layout.css.text-wrap-balance-after-clamp.enabled", true);
+pref("layout.css.text-wrap-balance.enabled", false);
+pref("layout.css.text-wrap-balance.limit", 10);
+pref("layout.css.zoom.enabled", false);
+pref("layout.details.force-block-layout", true);
+pref("media.wmf.hevc.enabled", 0);
+pref("messaging-system.askForFeedback", true);
+pref("network.auth.use_redirect_for_retries", false);
+pref("network.http.http2.move_to_pending_list_after_network_change", false);
+pref("network.url.strict_protocol_setter", true);
+pref("print.enabled", true);
+pref("privacy.fingerprintingProtection.WebCompatService.logLevel", "Error");
+pref("privacy.query_stripping.strip_on_share.enableTestMode", false);
+pref("toolkit.shopping.environment", "prod");
+pref("webgl.gl_khr_no_error", false);
+
+// disable privacy preserving ad attribution
+// https://www.theregister.com/2024/06/18/mozilla_buys_anonym_betting_privacy/
+
+pref("dom.private-attribution.submission.enabled", false);
 
