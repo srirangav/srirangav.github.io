@@ -143,7 +143,7 @@
             <pre>$ git clone https://github.com/<i>username</i>/macports-ports.git</pre>
             where <i>username</i> your github username.<br><br>
         </li>
-        <li>Add the the official repository as the upstream:
+        <li>Add the official repository as the upstream:
             <pre>$ git remote add upstream https://github.com/macports/macports-ports.git</pre>
         </li>
         <li><p>On GitHub, update the fork to include any upstream changes,
@@ -183,7 +183,12 @@
 $ git push origin -f</pre>
             where <i>portname</i> is the name of the port, <i>version</i>
             is the version of the port, and -S is optional (assuming that signing
-            commits is enabled)<br><br>
+            commits is enabled).<br><br>
+            If the changes require the branch to be  rebased to the
+            master, then do the following before amending the prior commit:
+            <pre>$ git pull --rebase origin master</pre>
+            See: <a href="https://stackoverflow.com/questions/7929369/"
+            >https://stackoverflow.com/questions/7929369/</a>.<br><br>
         </li>
         <li>Switch back to the main/master branch:
             <pre>$ git checkout master</pre>
