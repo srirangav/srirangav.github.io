@@ -8,10 +8,11 @@
 //
 // History:
 //
-// 08/22/2024   disable privacy preserving ad attribution
-// 02/14/2024   updates based on arkenfox v122
 // 10/18/2023   updates based on arkenfox v118
 // 11/28/2023   updates based on arkenfox v119
+// 02/14/2024   updates based on arkenfox v122
+// 08/22/2024   disable privacy preserving ad attribution
+// 08/26/2024   updates based on arkenfox v126, 128
 //
 // Quick and dirty validation:
 //
@@ -66,6 +67,7 @@ user_pref("browser.search.geoip.url", "");
 user_pref("geo.enabled", false);
 user_pref("geo.wifi.uri", "http://127.0.0.1");
 user_pref("geo.provider.network.url", "");
+user_pref("geo.provider.network.logging.enabled", "");
 user_pref("geo.provider.ms-windows-location", false);
 user_pref("geo.provider.use_corelocation", false);
 user_pref("geo.provider.use_gpsd", false);
@@ -150,6 +152,7 @@ user_pref("privacy.query_stripping.enabled.pbmode", true);
 
 user_pref("media.navigator.enabled", false);
 user_pref("privacy.firstparty.isolate", true);
+user_pref("privacy.fingerprintingProtection.remoteOverrides.enabled", false);
 user_pref("privacy.resistFingerprinting", true);
 user_pref("privacy.resistFingerprinting.pbmode", true);
 user_pref("privacy.resistFingerprinting.block_mozAddonManager", true);
@@ -234,12 +237,14 @@ user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 // disable suggestions
 
 user_pref("browser.search.suggest.enabled", false);
-user_pref("browser.urlbar.suggest.searches", false);
-user_pref("browser.urlbar.suggest.engines", false);
-user_pref("browser.urlbar.suggest.topsites", false);
+user_pref("browser.urlbar.clipboard.featureGate", false);
+user_pref("browser.urlbar.quicksuggest.enabled", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", false);
+user_pref("browser.urlbar.suggest.engines", false);
 user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
 user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
+user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.maxRichResults", 0);
 
 // disabled in arkenfox v118
@@ -296,6 +301,7 @@ user_pref("places.history.enabled", false);
 
 // clear everything on shutdown
 // From: https://support.mozilla.org/en-US/questions/1275887
+//       https://github.com/arkenfox/user.js/issues/1846
 
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 user_pref("privacy.clearOnShutdown.cache", true);
@@ -308,6 +314,21 @@ user_pref("privacy.clearOnShutdown.openWindows", true);
 user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
 user_pref("browser.helperApps.deleteTempFileOnExit", true);
+user_pref("privacy.clearHistory.cache", true);
+user_pref("privacy.clearHistory.historyFormDataAndDownloads", true);
+user_pref("privacy.clearHistory.cookiesAndStorage", false);
+user_pref("privacy.clearHistory.siteSettings", false);
+user_pref("privacy.clearOnShutdown_v2.cookiesAndStorage", true);
+user_pref("privacy.clearOnShutdown_v2.cache", true);
+user_pref("privacy.clearOnShutdown_v2.historyFormDataAndDownloads", true);
+user_pref("privacy.clearOnShutdown_v2.siteSettings", false);
+user_pref("privacy.clearOnShutdown_v2.cookiesAndStorage", true);
+
+user_pref("privacy.clearSiteData.cache", true);
+user_pref("privacy.clearSiteData.cookiesAndStorage", false);
+user_pref("privacy.clearSiteData.historyFormDataAndDownloads", true);
+user_pref("privacy.clearSiteData.siteSettings", false);
+
 
 // do not remember signons
 
@@ -458,57 +479,63 @@ user_pref("browser.search.separatePrivateDefault.ui.enabled", true);
 
 // added in arkenfox v122
 
-pref("browser.migrate.chrome.get_permissions.enabled", true);
-pref("browser.newtabpage.activity-stream.system.showSponsored", false);
-pref("browser.search.newSearchConfig.enabled", false);
-pref("browser.shell.checkDefaultPDF", true);
-pref("browser.shell.checkDefaultPDF.silencedByUser", false);
-pref("browser.shopping.experience2023.ads.exposure", false);
-pref("browser.startup.windowsLaunchOnLogin.disableLaunchOnLoginPrompt", false);
-pref("browser.startup.windowsLaunchOnLogin.enabled", false);
-pref("browser.theme.windows.accent-color-in-tabs.enabled", false);
-pref("browser.urlbar.quicksuggest.rustEnabled", false);
-pref("browser.urlbar.suggest.recentsearches", true);
-pref("browser.urlbar.switchTabs.searchAllContainers", false);
-pref("clipboard.imageAsFile.enabled", true);
-pref("cookiebanners.bannerClicking.pollingInterval", 500);
-pref("cookiebanners.bannerClicking.timeoutAfterDOMContentLoaded", 20000);
-pref("cookiebanners.bannerClicking.timeoutAfterLoad", 5000);
-pref("cookiebanners.service.enableGlobalRules.subFrames", true);
-pref("dom.iframe_lazy_loading.enabled", false);
-pref("dom.security.https_first_schemeless", false);
-pref("dom.w3c_pointer_events.getcoalescedevents_only_in_securecontext", false);
-pref("dom.webgpu.testing.assert-hardware-adapter", false);
-pref("dom.webgpu.workers.enabled", false);
-pref("editor.block_inline_check.use_computed_style", false);
-pref("extensions.formautofill.heuristics.interactivityCheckMode", "focusability");
-pref("extensions.script_about_blank_without_permission", false);
-pref("gfx.canvas.remote.allow-in-parent", false);
-pref("gfx.canvas.remote.texture-timeout-ms", 10000);
-pref("gfx.canvas.remote.worker-threads", -1);
-pref("gfx.font_rendering.fallback.unassigned_chars", false);
-pref("gfx.video.convert-yuv-to-nv12.image-host-win", true);
-pref("image.mem.max_legal_imgframe_size_kb", -1);
-pref("javascript.options.wasm_tail_calls", false);
-pref("layout.css.always_underline_links", false);
-pref("layout.css.text-wrap-balance-after-clamp.enabled", true);
-pref("layout.css.text-wrap-balance.enabled", false);
-pref("layout.css.text-wrap-balance.limit", 10);
-pref("layout.css.zoom.enabled", false);
-pref("layout.details.force-block-layout", true);
-pref("media.wmf.hevc.enabled", 0);
-pref("messaging-system.askForFeedback", true);
-pref("network.auth.use_redirect_for_retries", false);
-pref("network.http.http2.move_to_pending_list_after_network_change", false);
-pref("network.url.strict_protocol_setter", true);
-pref("print.enabled", true);
-pref("privacy.fingerprintingProtection.WebCompatService.logLevel", "Error");
-pref("privacy.query_stripping.strip_on_share.enableTestMode", false);
-pref("toolkit.shopping.environment", "prod");
-pref("webgl.gl_khr_no_error", false);
+user_pref("browser.migrate.chrome.get_permissions.enabled", true);
+user_pref("browser.newtabpage.activity-stream.system.showSponsored", false);
+user_pref("browser.search.newSearchConfig.enabled", false);
+user_pref("browser.shell.checkDefaultPDF", true);
+user_pref("browser.shell.checkDefaultPDF.silencedByUser", false);
+user_pref("browser.shopping.experience2023.ads.exposure", false);
+user_pref("browser.startup.windowsLaunchOnLogin.disableLaunchOnLoginPrompt", false);
+user_pref("browser.startup.windowsLaunchOnLogin.enabled", false);
+user_pref("browser.theme.windows.accent-color-in-tabs.enabled", false);
+user_pref("browser.urlbar.quicksuggest.rustEnabled", false);
+user_pref("browser.urlbar.suggest.recentsearches", true);
+user_pref("browser.urlbar.switchTabs.searchAllContainers", false);
+user_pref("clipboard.imageAsFile.enabled", true);
+user_pref("cookiebanners.bannerClicking.pollingInterval", 500);
+user_pref("cookiebanners.bannerClicking.timeoutAfterDOMContentLoaded", 20000);
+user_pref("cookiebanners.bannerClicking.timeoutAfterLoad", 5000);
+user_pref("cookiebanners.service.enableGlobalRules.subFrames", true);
+user_pref("dom.iframe_lazy_loading.enabled", false);
+user_pref("dom.security.https_first_schemeless", false);
+user_pref("dom.w3c_pointer_events.getcoalescedevents_only_in_securecontext", false);
+user_pref("dom.webgpu.testing.assert-hardware-adapter", false);
+user_pref("dom.webgpu.workers.enabled", false);
+user_pref("editor.block_inline_check.use_computed_style", false);
+user_pref("extensions.formautofill.heuristics.interactivityCheckMode", "focusability");
+user_pref("extensions.script_about_blank_without_permission", false);
+user_pref("gfx.canvas.remote.allow-in-parent", false);
+user_pref("gfx.canvas.remote.texture-timeout-ms", 10000);
+user_pref("gfx.canvas.remote.worker-threads", -1);
+user_pref("gfx.font_rendering.fallback.unassigned_chars", false);
+user_pref("gfx.video.convert-yuv-to-nv12.image-host-win", true);
+user_pref("image.mem.max_legal_imgframe_size_kb", -1);
+user_pref("javascript.options.wasm_tail_calls", false);
+user_pref("layout.css.always_underline_links", false);
+user_pref("layout.css.text-wrap-balance-after-clamp.enabled", true);
+user_pref("layout.css.text-wrap-balance.enabled", false);
+user_pref("layout.css.text-wrap-balance.limit", 10);
+user_pref("layout.css.zoom.enabled", false);
+user_pref("layout.details.force-block-layout", true);
+user_pref("media.wmf.hevc.enabled", 0);
+user_pref("messaging-system.askForFeedback", true);
+user_pref("network.auth.use_redirect_for_retries", false);
+user_pref("network.http.http2.move_to_pending_list_after_network_change", false);
+user_pref("network.url.strict_protocol_setter", true);
+user_pref("print.enabled", true);
+user_pref("privacy.query_stripping.strip_on_share.enableTestMode", false);
+user_pref("toolkit.shopping.environment", "prod");
+user_pref("webgl.gl_khr_no_error", false);
 
 // disable privacy preserving ad attribution
 // https://www.theregister.com/2024/06/18/mozilla_buys_anonym_betting_privacy/
 
-pref("dom.private-attribution.submission.enabled", false);
+user_pref("dom.private-attribution.submission.enabled", false);
 
+// new from arkenfox user.js v126, v128
+
+user_pref("privacy.spoof_english", 1);
+user_pref("browser.urlbar.yelp.featureGate", false);
+user_pref("browser.contentanalysis.default_allow", false);
+user_pref("browser.contentanalysis.enabled", false);
+user_pref("browser.contentanalysis.default_result", 0);
