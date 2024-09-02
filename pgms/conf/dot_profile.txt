@@ -1,5 +1,5 @@
 #!/bin/sh
-# .profile - Bourne-like shell (sh, ksh, bash, dash, zsh) init script
+# .profile - init script for Bourne-like shells (sh, ksh, bash, dash, zsh)
 
 # set the default file creation mask to something reasonably safe
 
@@ -36,22 +36,19 @@ case $- in
 
     *i*)
 
-        HOST="`uname -n | sed -e 's/\..*$//' | tr 'A-Z' 'a-z'`"
-
         # default prompt
 
-        PS1="$HOST$ "
-        PS2="> "
+        PS1='$ '
+        PS2='> '
 
-        # change the prompt if running as root (e.g. via sudo)
+        # change the prompt if running as root (e.g. via su)
 
         if [ X"$EUID" = X"0" ] ; then
-            PS1="$HOST# "
-            PS2="#> "
+            PS1='# '
+            PS2='#> '
         fi
 
-        # include our home directory and our documents folder
-        # in the CDPATH
+        # include home directory, documents, and src in CDPATH
 
         CDPATH=".:$HOME:$HOME/Documents:$HOME/Documents/src"
 
@@ -75,25 +72,30 @@ case $- in
             export LESS LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
 
-        # make ksh read .profile instead of .kshrc
+        # export variables for interactive shells
 
-        ENV="$HOME/.profile"
-
-        export PS1 PS2 PAGER EDITOR VISUAL FCEDIT CDPATH
+        export PS1 PS2 CDPATH EDITOR VISUAL FCEDIT PAGER
 
         # set bash and ksh specific options
 
         case "$0" in
-            *bash*|*dash*)
+            *bash*)
+                set -o emacs ignoreeof noclobber
+                PS1='\h\$ '
+                ;;
+            *dash*)
                 set -o emacs ignoreeof noclobber
                 ;;
             *zsh*)
                 bindkey -e
                 set -o IGNORE_EOF MARK_DIRS
+                PS1="%m%# "
                 ;;
             *ksh*)
 
                 set -o emacs
+
+                PS1='\h\$ '
 
                 # additional options, may not be available on
                 # all ksh versions
@@ -165,7 +167,6 @@ case $- in
                            > /dev/null 2>&1
                 fi
                 ;;
-
         esac
 
         # create some safety functions
@@ -200,4 +201,3 @@ esac
 if [ -r "$HOME/.profile_local" ] ; then
     . "$HOME/.profile_local"
 fi
-
