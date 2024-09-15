@@ -16,7 +16,7 @@ export PATH
 
 ENV="$HOME/.profile"
 
-# disable history in ksh/zsh
+# disable history saving in ksh/zsh
 
 HISTFILE=/dev/null
 
@@ -72,9 +72,13 @@ case $- in
             export LESS LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
 
+        # set the scale for dc to 20 (same as bc -l)
+
+        DC_ENV_ARGS="-e 10k"
+
         # export variables for interactive shells
 
-        export PS1 PS2 CDPATH EDITOR VISUAL FCEDIT PAGER
+        export PS1 PS2 CDPATH EDITOR VISUAL FCEDIT PAGER DC_ENV_ARGS
 
         # set bash and ksh specific options
 
@@ -169,6 +173,10 @@ case $- in
                 ;;
         esac
 
+        # remove all aliases (if possible)
+
+        unalias -a > /dev/null 2>&1
+
         # create some safety functions
 
         cp () { /bin/cp -i "$@" ; }
@@ -178,20 +186,15 @@ case $- in
         yes() { echo "yes" ; }
         y()   { echo "y" ; }
 
-        # define aliases (if alias is available)
+        # run bc with -l option to load the math
+        # library so that we get floating point
+        # math, instead of just integer math
 
-        if type alias > /dev/null 2>&1 ; then
+        alias bc="bc -l" > /dev/null 2>&1
 
-            # run bc with -l option to load the math
-            # library so that we get floating point
-            # math, instead of just integer math
+        # run w3m in monochrome mode
 
-            alias bc="bc -l" ;
-
-            # run w3m in monochrome mode
-
-            alias w3m="w3m -M"
-        fi
+        alias w3m="w3m -M" > /dev/null 2>&1
 
         ;;
 esac
