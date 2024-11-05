@@ -70,6 +70,23 @@ match ExtraWhitespace /\s\+$/
 highlight nonascii guibg=Red ctermbg=1 term=standout
 au BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 
+" function to replace certain non-ascii characters with
+" their ascii equivalents
+
+function! ReplaceNonAscii()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/[“”]/"/e
+    :%s/[’’]/'/e
+    :%s/μ/u/e
+    :%s/±/+\/-/e
+    :%s/[–−]/\-/e
+    :%s/[     ]/ /e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfunction
+nnoremap rr :call ReplaceNonAscii()<CR>
+
 " enable builtin spellchecking
 " https://vimtricks.com/p/vim-spell-check/
 " https://www.linux.com/training-tutorials/using-spell-checking-vim/
