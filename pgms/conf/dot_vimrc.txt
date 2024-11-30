@@ -56,6 +56,11 @@ set ignorecase      " case insensitive searching
 set smartcase       " case sensitive if uppercase characters are provided
 nnoremap <CR> :noh<CR>
 
+" make Wq work lik wq
+" https://blog.sanctum.geek.nz/vim-koans/
+
+command! Wq wq
+
 " highlight trailing white space in red
 " requires vim-runtime on Debian
 " https://stackoverflow.com/questions/356126
@@ -80,7 +85,7 @@ function! ReplaceNonAscii()
     :%s/[’’]/'/e
     :%s/μ/u/e
     :%s/±/+\/-/e
-    :%s/[–−]/\-/e
+    :%s/[–−—]/\-/e
     :%s/[     ]/ /e
     call setpos('.', save_cursor)
     call setreg('/', old_query)
@@ -92,6 +97,7 @@ nnoremap rr :call ReplaceNonAscii()<CR>
 " https://www.linux.com/training-tutorials/using-spell-checking-vim/
 " https://unix.stackexchange.com/questions/12889
 " https://vi.stackexchange.com/questions/15578
+" https://www.tumfatig.net/2024/spell-checking-in-vim/
 
 let s:spellingState=0
 function! ToggleSpelling()
@@ -116,3 +122,8 @@ function! StripWhitespace()
     call setreg('/', old_query)
 endfunction
 nnoremap ss :call StripWhitespace()<CR>
+
+" insert short date
+" https://vim.fandom.com/wiki/Insert_current_date_or_time
+
+nnoremap tt "=strftime('%m/%d/%Y')<CR>P
