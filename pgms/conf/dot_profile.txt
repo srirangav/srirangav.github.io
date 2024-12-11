@@ -46,11 +46,13 @@ case $- in
         if [ X"$EUID" = X"0" ] ; then
             PS1='# '
             PS2='#> '
+        else
+
+            # only include home directory, documents, and src in CDPATH
+            # if not running as root
+
+            CDPATH=".:$HOME:$HOME/Documents:$HOME/Documents/src"
         fi
-
-        # include home directory, documents, and src in CDPATH
-
-        CDPATH=".:$HOME:$HOME/Documents:$HOME/Documents/src"
 
         # default the editor to vi
 
@@ -62,13 +64,18 @@ case $- in
 
         PAGER="more"
         if type less > /dev/null 2>&1 ; then
+
             PAGER="less"
-            # disable terminal init, and use raw control characters
+
+            # disable terminal init in less, and use raw control characters
             LESS="-XR"
-            # disable history and use secure mode
+
+            # disable less' history and use secure mode
+
             LESSHISTFILE="/dev/null"
             LESSHISTSIZE="0"
             LESSSECURE="1"
+
             export LESS LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
 
@@ -104,9 +111,15 @@ case $- in
                 # additional options, may not be available on
                 # all ksh versions
 
-                set -o ignoreeof >/dev/null 2>&1
-                set -o noclobber >/dev/null 2>&1
-                set -o markdirs >/dev/null 2>&1
+                set -o ignoreeof   > /dev/null 2>&1
+                set -o noclobber   > /dev/null 2>&1
+                set -o markdirs    > /dev/null 2>&1
+                set -o csh-history > /dev/null 2>&1
+
+                # ignore duplicates in command history
+
+                HISTCONTROL=ignoredups
+                export HISTCONTROL
 
                 # bash style tab completion in emacs mode
 
@@ -195,6 +208,22 @@ case $- in
         # run w3m in monochrome mode
 
         alias w3m="w3m -M" > /dev/null 2>&1
+
+        # aliases if history isn't a builtin
+
+        if ! type history > /dev/null 2>&1 ; then
+            alias history="fc -l"
+        fi
+
+        if ! type hist > /dev/null 2>&1 ; then
+            alias hist="fc -l"
+        fi
+
+        # alias for source, if it isn't a buitin
+
+        if ! type source > /dev/null 2>&1 ; then
+            alias source="."
+        fi
 
         ;;
 esac
