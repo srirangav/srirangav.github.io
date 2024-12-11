@@ -27,7 +27,7 @@ set splitright      " new vertical splits are on the right
 set smartindent     " smart auto indenting
 set expandtab       " turn tabs into spaces
 set copyindent      " copy indentation style of prior line
-set textwidth=74    " set text width (for hardwrapping)
+"set textwidth=74    " set text width (for hardwrapping)
 set shiftwidth=4    " 4 spaces for auto indents
 set tabstop=4       " 4 spaces per tab
 
@@ -81,12 +81,12 @@ au BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 function! ReplaceNonAscii()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
-    :%s/[“”]/"/e
-    :%s/[’’]/'/e
-    :%s/μ/u/e
-    :%s/±/+\/-/e
-    :%s/[–−—]/\-/e
-    :%s/[     ]/ /e
+    :%s/[“”]/"/ge
+    :%s/[’’]/'/ge
+    :%s/μ/u/ge
+    :%s/±/+\/-/ge
+    :%s/[–−—]/\-/ge
+    :%s/[      ]/ /ge
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfunction
@@ -126,4 +126,5 @@ nnoremap ss :call StripWhitespace()<CR>
 " insert short date
 " https://vim.fandom.com/wiki/Insert_current_date_or_time
 
-nnoremap tt "=strftime('%m/%d/%Y')<CR>P
+nnoremap TT "=strftime('%m/%d/%Y')<CR>P
+nnoremap HH "=strftime('%H:%M')<CR>P
