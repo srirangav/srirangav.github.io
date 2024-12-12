@@ -82,11 +82,14 @@ function! ReplaceNonAscii()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
     :%s/[“”]/"/ge
-    :%s/[’’]/'/ge
-    :%s/μ/u/ge
-    :%s/±/+\/-/ge
+    :%s/[’’‘]/'/ge
+    :%s/[μμ]/u/ge
+    :%s/±/\+\/\-/ge
     :%s/[–−—]/\-/ge
     :%s/[      ]/ /ge
+    :%s/→/\-\>/ge
+    :%s/∞/\[infinity\]/ge
+    :%s/²/\^2/ge
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfunction
