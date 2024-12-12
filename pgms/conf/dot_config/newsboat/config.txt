@@ -5,14 +5,13 @@
 history-limit 0
 
 # open links in the MacOSX default browser (and keep it in the background)
+# to open links in 'links' replace with the following:
+# browser "links %u"
+# see https://opensource.com/article/20/2/newsboat
+
 browser "/usr/bin/open -g"
 
-# open links in links
-# see https://opensource.com/article/20/2/newsboat
-#browser "links %u"
-
-# macro to open urls in an alternative browser (',' + 'O', or ',' + 'S')
-
+# macros to open urls in an alternative browsers (',' + 'O', or ',' + 'S')
 # see https://wiki.archlinux.org/title/Newsboat
 
 #macro o set browser "lynx %u" ; open-in-browser ; set browser "open -g"
@@ -23,6 +22,11 @@ macro S set browser "/usr/bin/open -g -a /Applications/Safari.app %u" ; open-in-
 
 refresh-on-startup yes
 prepopulate-query-feeds yes
+
+# reload articles in parallel:
+# https://wiki.archlinux.org/title/Newsboat
+
+reload-threads 8
 
 # do not delete read articles on quit
 
@@ -36,15 +40,10 @@ download-full-page yes
 
 show-read-articles  yes
 show-read-feeds yes
+
+# don't automatically jump to the next unread article
+
 toggleitemread-jumps-to-next-unread no
-
-# automatically add all podcast episodes to the download queue
-# podcast-auto-enqueue yes
-
-# reload articles in parallel:
-# https://wiki.archlinux.org/title/Newsboat
-
-reload-threads 8
 
 # confirm before quitting
 
@@ -57,6 +56,9 @@ highlight feedlist "---.*---" default default bold
 highlight feedlist ".*0/0.." default default invis
 
 # custom key bindings
+#
+# for a list of all available commands, see:
+# https://newsboat.org/releases/2.20.1/docs/newsboat.html#available-operations
 
 # vi style navigation (b/c I can't get M- to work properly)
 
@@ -96,17 +98,15 @@ unbind-key u
 unbind-key U
 unbind-key x
 
-bind-key C mark-feed-read       # Catch-up by marking all articles in a
-                                # feed as read
 bind-key n toggle-article-read  # mark article New / unread
 bind-key u toggle-article-read  # mark article new / Unread
 bind-key d delete-article       # Delete article
 bind-key D delete-all-articles  # Delete all articles in current feed
 bind-key x purge-deleted        # eXpunge deleted articles
-bind-key p pb-download          # download podcast episode
 bind-key j next                 # next article
 bind-key k prev                 # previous article
-
+bind-key C mark-feed-read       # Catch-up by marking all articles in a
+                                # feed as read
 # other key bindings
 
 bind-key U show-urls            # show Urls (b/c 'u' is used for toggling
@@ -116,6 +116,12 @@ bind-key m edit-flags           # flag / Mark and article
 
 # podboat settings
 
+# uncomment to automatically add all podcast episodes to the download queue
+# podcast-auto-enqueue yes
+
+bind-key ^p pb-download         # download podcast episode
+bind-key ^e pb-delete           # delete podcast download
+#bind-key e enqueue              # add podcast episode to podboat queue
+
 download-path "~/Music/Podcasts/%h-%n"
 download-filename-format "%F-%n-%t.%e"
-
