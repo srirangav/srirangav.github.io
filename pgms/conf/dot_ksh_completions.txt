@@ -1,0 +1,75 @@
+# .ksh_completions - OpenBSD ksh command completion, based on:
+# https://github.com/qbit/dotfiles/blob/master/common/dot_ksh_completions
+# https://deftly.net/posts/2017-05-01-openbsd-ksh-tab-complete.html
+
+# git
+
+# git first level cpmpletions
+
+set -A complete_git_1 -- \
+       branch \
+       checkout \
+       commit \
+       diff \
+       fetch \
+       pull \
+       push \
+       restore \
+       status \
+       switch \
+       > /dev/null 2>&1
+
+# git second level completions
+
+set -A complete_git_2 -- \
+       git branch -D \
+       git checkout -b \
+       git checkout master \
+       git commit -a \
+       git commit --amend \
+       git fetch -p \
+       git fetch upstream \
+       git pull --rebase \
+       git push --set-upstream \
+       git push origin \
+       > /dev/null 2>&1
+
+# git third level completions
+
+set -A complete_git_3 -- \
+       git commit -a -m \
+       git commit --amend -a \
+       git pull --rebase origin \
+       git push origin --delete \
+       git push origin -f \
+       git push --set-upstream origin \
+       > /dev/null 2>&1
+
+# gpg
+
+set -A complete_gpg_1 -- \
+       --delete-keys \
+       --import \
+       --list-keys \
+       --list-public-keys \
+       --list-secret-keys \
+       --receive-keys \
+       --recv-keys \
+       --send-keys \
+       --verify \
+       > /dev/null 2>&1
+
+# openssl
+
+set -A complete_openssl_1 -- \
+       md5 rmd160 sha1 sha256 sha512 \
+       > /dev/null 2>&1
+
+# tmux
+
+set -A complete_tmux_1 -- \
+       attach \
+       ls \
+       new-session \
+       new-window \
+       > /dev/null 2>&1

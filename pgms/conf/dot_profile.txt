@@ -129,59 +129,10 @@ case $- in
                    #bind "^I^I=complete-list"
                 fi
 
-                # OpenBSD ksh command completion, based on
-                # https://github.com/qbit/dotfiles/blob/master/common/dot_ksh_completions
+                # load OpenBSD ksh completions, if present
 
-                # git
-
-                if type git > /dev/null 2>&1 ; then
-                    set -A complete_git_1 -- \
-                           branch \
-                           checkout \
-                           commit \
-                           diff \
-                           fetch \
-                           pull \
-                           push \
-                           restore \
-                           status \
-                           switch \
-                           > /dev/null 2>&1
-                fi
-
-                # gpg
-
-                if type gpg > /dev/null 2>&1 ; then
-                    set -A complete_gpg_1 -- \
-                           --delete-keys \
-                           --import \
-                           --list-keys \
-                           --list-public-keys \
-                           --list-secret-keys \
-                           --receive-keys \
-                           --recv-keys \
-                           --send-keys \
-                           --verify \
-                           > /dev/null 2>&1
-                fi
-
-                # openssl
-
-                if type openssl > /dev/null 2>&1 ; then
-                    set -A complete_openssl_1 -- \
-                           md5 rmd160 sha1 sha256 sha512 \
-                           > /dev/null 2>&1
-                fi
-
-                # tmux
-
-                if type tmux > /dev/null 2>&1 ; then
-                    set -A complete_tmux_1 -- \
-                           attach \
-                           ls \
-                           new-session \
-                           new-window \
-                           > /dev/null 2>&1
+                if [ -r "$HOME/.ksh_completions" ] ; then
+                   . "$HOME/.ksh_completions"
                 fi
                 ;;
         esac
@@ -228,7 +179,7 @@ case $- in
         ;;
 esac
 
-# look for and load a local shell startup files
+# load a local shell startup file, if present
 
 if [ -r "$HOME/.profile_local" ] ; then
     . "$HOME/.profile_local"
