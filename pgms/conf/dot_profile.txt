@@ -12,10 +12,6 @@ PATH=$PATH:/usr/X11R6/bin:/usr/local/sbin:/usr/local/bin
 PATH=$PATH:/usr/games:/usr/local/zfs/bin:/usr/local/games:$HOME/bin
 export PATH
 
-# make ksh read .profile instead of .kshrc
-
-ENV="$HOME/.profile"
-
 # disable per-session history in bash and zsh on MacOSX
 # see: https://stackoverflow.com/a/54338056
 #      https://superuser.com/a/1610999
@@ -24,7 +20,7 @@ ENV="$HOME/.profile"
 SHELL_SESSION_HISTORY=0
 SHELL_SESSIONS_DISABLE=1
 
-export ENV HISTFILE SHELL_SESSION_HISTORY SHELL_SESSIONS_DISABLE
+export SHELL_SESSION_HISTORY SHELL_SESSIONS_DISABLE
 
 case $- in
 
@@ -83,52 +79,40 @@ case $- in
 
         export PS1 PS2 CDPATH EDITOR VISUAL FCEDIT PAGER DC_ENV_ARGS
 
-        # set bash and ksh specific options
+        # remove all aliases, if possible
+
+        unalias -a > /dev/null 2>&1
+
+        # shell options
 
         case "$0" in
             *bash*)
                 set -o emacs ignoreeof noclobber
                 PS1='\h\$ '
+                ENV="$HOME/.profile"
+                HISTFILE=/dev/null
                 ;;
             *dash*)
                 set -o emacs ignoreeof noclobber
+                ENV="$HOME/.profile"
+                HISTFILE=/dev/null
                 ;;
             *zsh*)
                 bindkey -e
                 set -o IGNORE_EOF MARK_DIRS
                 PS1="%m%# "
+                ENV="$HOME/.profile"
                 HISTFILE=/dev/null
                 ;;
             *ksh*)
 
-                set -o emacs
+                # ksh options, may not be available in all versions
 
-                # settings for pdksh / OpenBSD ksh
-
-                case "$KSH_VERSION" in
-                    *"PD KSH"*)
-                        PS1='\h\$ '
-                        HISTFILE=/dev/null
-                        # load OpenBSD ksh completions, if present
-
-                        if [ -r "$HOME/.ksh_completions" ] ; then
-                            . "$HOME/.ksh_completions"
-                        fi
-                    ;;
-                esac
-
-                # additional options, may not be available on
-                # all ksh versions
-
+                set -o emacs       > /dev/null 2>&1
                 set -o ignoreeof   > /dev/null 2>&1
                 set -o noclobber   > /dev/null 2>&1
                 set -o markdirs    > /dev/null 2>&1
                 set -o csh-history > /dev/null 2>&1
-
-                # ignore duplicates in command history
-
-                HISTCONTROL=ignoredups
-                export HISTCONTROL
 
                 # bash style tab completion in emacs mode
 
@@ -138,53 +122,51 @@ case $- in
                    #bind "^I^I=complete-list"
                 fi
 
+                # ignore duplicates in command history
+
+                HISTCONTROL=ignoredups
+                export HISTCONTROL
+
+                # for interactive ksh sessions, load
+                # customizations in .kshrc
+                
+                ENV="$HOME/.kshrc"
+
                 ;;
         esac
 
-        # remove all aliases, if possible
+        export ENV HISTFILE
 
-        unalias -a > /dev/null 2>&1
-
-        # create helpful aliases, if possible
-
-        if type alias > /dev/null 2>&1 ; then
-
-            # run bc with -l option to load the math
-            # library so that we get floating point
-            # math, instead of just integer math
-
-            alias bc="bc -l" > /dev/null 2>&1
-
-            # run w3m in monochrome mode
-
-            alias w3m="w3m -M" > /dev/null 2>&1
-
-            # aliases if history isn't a builtin
-
-            if ! type history > /dev/null 2>&1 ; then
-                alias history="fc -l"
+        if [ X"$ENV" != X"$HOME/.kshrc" ] ; then
+        
+            # create helpful aliases, if possible
+    
+            if type alias > /dev/null 2>&1 ; then
+    
+                # run bc with -l option to load the math
+                # library so that we get floating point
+                # math, instead of just integer math
+    
+                alias bc="bc -l" > /dev/null 2>&1
+    
+                # run w3m in monochrome mode
+    
+                alias w3m="w3m -M" > /dev/null 2>&1
+    
             fi
+    
+            unalias cp mv rm ls yes y > /dev/null 2>&1 
 
-            if ! type hist > /dev/null 2>&1 ; then
-                alias hist="fc -l"
-            fi
-
-            # alias for source, if it isn't a builtin
-
-            if ! type source > /dev/null 2>&1 ; then
-                alias source="."
-            fi
+            # create some functions
+    
+            cp () { /bin/cp -i "$@" ; }
+            mv () { /bin/mv -i "$@" ; }
+            rm () { /bin/rm -i "$@" ; }
+            ls () { /bin/ls -aFC "$@" ; }
+            yes() { echo "yes" ; }
+            y()   { echo "y" ; }
 
         fi
-
-        # create some function
-
-        cp () { /bin/cp -i "$@" ; }
-        mv () { /bin/mv -i "$@" ; }
-        rm () { /bin/rm -i "$@" ; }
-        ls () { /bin/ls -aFC "$@" ; }
-        yes() { echo "yes" ; }
-        y()   { echo "y" ; }
 
         ;;
 esac

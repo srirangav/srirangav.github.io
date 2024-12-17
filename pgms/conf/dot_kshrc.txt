@@ -1,0 +1,59 @@
+# .kshrc - interactive shell setup for ksh
+
+# create some functions
+
+unalias cp mv rm ls yes y > /dev/null 2>&1 
+
+cp () { /bin/cp -i "$@" ; }
+mv () { /bin/mv -i "$@" ; }
+rm () { /bin/rm -i "$@" ; }
+ls () { /bin/ls -aFC "$@" ; }
+yes() { echo "yes" ; }
+y()   { echo "y" ; }
+
+# run bc with -l option to load the math
+# library so that we get floating point
+# math, instead of just integer math
+
+alias bc="bc -l" > /dev/null 2>&1
+
+# run w3m in monochrome mode
+
+alias w3m="w3m -M" > /dev/null 2>&1
+
+# aliases for history and source, if not
+# already present
+
+if ! type history > /dev/null 2>&1 ; then
+    alias history="fc -l"
+fi
+
+if ! type hist > /dev/null 2>&1 ; then
+    alias hist="fc -l"
+fi
+if ! type source > /dev/null 2>&1 ; then
+    alias source="."
+fi
+
+case "$KSH_VERSION" in
+
+    # settings for pdksh / OpenBSD ksh
+
+    *"PD KSH"*)
+        PS1='\h\$ '
+
+        # read .profile instead of .kshrc
+
+        ENV="$HOME/.profile"
+
+        # disable history saving
+
+        HISTFILE=/dev/null
+
+        # load OpenBSD ksh completions, if present
+
+        if [ -r "$HOME/.ksh_completions" ] ; then
+            . "$HOME/.ksh_completions"
+        fi
+        ;;
+esac
