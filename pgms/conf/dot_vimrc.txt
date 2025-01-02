@@ -84,6 +84,9 @@ function! ReplaceNonAscii()
     :%s/[“”]/"/ge
     :%s/[’’‘]/'/ge
     :%s/[μμ]/u/ge
+    :%s/η/n/ge
+    :%s/≳/\>\~/ge
+    :%s/≲/\<\~/ge
     :%s/±/\+\/\-/ge
     :%s/[–−—]/\-/ge
     :%s/[      ]/ /ge
