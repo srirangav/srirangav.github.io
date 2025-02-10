@@ -16,6 +16,7 @@
 <ul>
     <li><a href="macports.html#common">Commonly Used Ports</a></li>
     <li><a href="macports.html#provides">Checking which Port provides a file</a></li>
+    <li><a href="macports.html#ccache">Enabling ccache</a></li>
     <li><a href="macports.html#contrib">Contributing to MacPorts</a></li>
     <li><a href="macports.html#cdrtools">Making ISO images</a></li>
 </ul>
@@ -39,6 +40,9 @@
         <li>cargo2port (macports helper for Rust-based ports):
         <a href="https://github.com/l2dy/cargo2port"
         >https://github.com/l2dy/cargo2port</a></li>
+
+        <li>ccache (compile cache): <a href=
+        "https://ccache.dev/">https://ccache.dev/</a></li>
 
         <li>cdrtools (make ISOs from CDs): <a href=
         "http://cdrtools.sourceforge.net/private/cdrecord.html"
@@ -134,6 +138,27 @@
 
 <blockquote>
 <pre>$ port provides [file]</pre>
+</blockquote>
+
+<hr>
+<h2><a id="ccache">Enabling ccache</a></h2>
+
+<blockquote>
+<ol>
+    <li><p>Install ccache:
+        <pre>$ sudo port install ccache</pre>
+        </p>
+    </li>
+    <li><p>In the file <code>/opt/local/etc/macports/macports.conf</code>,
+        uncomment the line:
+        <pre>configureccache     no</pre>
+        and change it to read:
+        <pre>configureccache     yes</pre></p>
+    </li>
+</ol>
+
+From: <a href="https://trac.macports.org/wiki/howto/ccache"
+      >https://trac.macports.org/wiki/howto/ccache</a>.
 </blockquote>
 
 <hr>
