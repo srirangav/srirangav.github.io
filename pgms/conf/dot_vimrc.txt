@@ -2,6 +2,7 @@
 " based on: https://stackoverflow.com/questions/1218390
 "           https://trofi.github.io/posts/277-from-mcedit-to-vim.html
 "           https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+"           https://github.com/CesarPiresSevero/vimconfig/blob/main/.vimrc
 
 " appearance
 
@@ -15,7 +16,14 @@ syntax on           " enable syntax highlighting
 
 "set laststatus=2    " always show the status bar at the bottom
 "set showtabline=2   " show the tab bar even only one file is open
-"set cul             " highlight current line
+"set cul             " highlight cursor / current line (eqiv.  'set cursorline')
+"set cursorcolumn    " highlight cursor / current line vertically
+
+" file type detection
+
+"filetype on
+"filetype plugin on
+"filetype indent on
 
 " window splitting
 
@@ -27,16 +35,18 @@ set splitright      " new vertical splits are on the right
 set smartindent     " smart auto indenting
 set expandtab       " turn tabs into spaces
 set copyindent      " copy indentation style of prior line
-"set textwidth=74    " set text width (for hardwrapping)
 set shiftwidth=4    " 4 spaces for auto indents
 set tabstop=4       " 4 spaces per tab
+
+"set nowrap          " don't wrap lines
+"set textwidth=74    " set text width (for hardwrapping)
 
 " completion
 " https://stackoverflow.com/questions/9511253
 
 set wildmenu
 set wildmode=longest:list,full
-set wildignore=*.o,*~,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+set wildignore=*.o,*~,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " disable history and backups
 
@@ -83,8 +93,10 @@ function! ReplaceNonAscii()
     let old_query = getreg('/')
     :%s/[“”]/"/ge
     :%s/[’’‘]/'/ge
+    :%s/[ā]/a/ge
     :%s/[μμ]/u/ge
     :%s/η/n/ge
+    :%s/ö/o/ge
     :%s/≳/\>\~/ge
     :%s/≲/\<\~/ge
     :%s/±/\+\/\-/ge
