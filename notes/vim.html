@@ -14,33 +14,37 @@
       href="https://www.vim.org/">vim</a> Notes
 ========================
 
-1. CVS commit the current file:
+ 1. CVS commit the current file:
 
     :!cvs commit -m '[commit message]' %
 
-2. Execute a command and read its input into the current
-   buffer:
+ 2. Execute a command and read its input into the current
+    buffer:
 
-   :r![command]
+    :r![command]
 
-3. Hard wrap text to 80 columns:
+ 3. Hard wrap text to 80 columns:
 
     a. Set the text width to 80 columns:
 
-        :set textwidth=80
+       :set textwidth=80
 
-        or
+       or
 
-        :set tw=80
+       :set tw=80
 
     b. To format the entire file, go to the start of the file (:gg),
        and then:
 
-        :gqG
+       :gqG
 
-        To format the current line only use :gq$
+       To format the current line only:
 
-        To format the current paragraph only use :gq}
+       :gq$
+
+       To format the current paragraph only:
+
+       :gq}
 
     c. Alternatively, use :%!fold -w [col]
 
@@ -54,7 +58,7 @@
              "https://vim.works/2019/03/16/wrapping-text-in-vim/"
              >https://vim.works/2019/03/16/wrapping-text-in-vim/</a>
 
-4. Split a window and edit two files
+ 4. Split a window and edit two files
 
     a. :sp or &lt;CTRL&gt;ws (horizontal split, new window on the top
        :vs or &lt;CTRL&gt;vw (vertical split, new window is on the left)
@@ -75,44 +79,53 @@
              "https://vi.stackexchange.com/questions/64/"
              >https://vi.stackexchange.com/questions/64/</a>
 
-5. Spell checking the current file:
+ 5. Spell checking the current file:
 
     :!aspell -c %
 
-6. Enable a custom dictionary for additional words for spelling mode:
+ 6. Enable a custom dictionary for additional words for spelling mode:
 
-   $ mkdir -p ~/.vim/spell
-   $ touch ~/.vim/spell/en.utf-8.add
+    $ mkdir -p ~/.vim/spell
+    $ touch ~/.vim/spell/en.utf-8.add
 
-   From: https://codeyarns.com/tech/2015-09-30-how-to-make-spellfile-in-vim.html
+    From: https://codeyarns.com/tech/2015-09-30-how-to-make-spellfile-in-vim.html
 
-7. Yank multiple lines
+ 7. Spelling mode shortcuts:
 
-   [num lines]Y
-   [num lines]yy
+    ]s      move to the next misspelled word
+    [s      move to the previous misspelled word
+    z=      list suggested spellings for a misspelled word
+    zw      add selected word to the custom dictionary
 
-   For example, '3yy' would yank the current line and the next two lines.
+    From: https://www.ncartron.org/vim-spellcheck-cheat-sheet.html
 
-   From: https://vi.stackexchange.com/questions/27148
-         https://superuser.com/questions/234317
+ 8. Yank multiple lines
 
-8. Copy or cut the next word:
+    [num lines]Y
+    [num lines]yy
 
-   Copy / yank - yiw
-   Cut - ciw
+    For example, '3yy' would yank the current line and the next two lines.
+
+    From: https://vi.stackexchange.com/questions/27148
+          https://superuser.com/questions/234317
+
+ 9. Copy or cut the next word:
+
+    yiw     Copy / yank next word
+    ciw     Cut
 
    From:  https://stackoverflow.com/questions/7797068/
 
-9. Delete all text to the end of the file:
+10. Delete all text to the end of the file:
 
-   From current line - dG
-   From a particular line - :[line number],$d
+    dG                  From current line
+    :[line number],$d   From a particular line
 
-10. Replace all occurrences of 'old' with 'new':
+11. Replace all occurrences of 'old' with 'new':
 
-   :%s/old/new/g
+    :%s/old/new/g
 
-11. Execute a script being edited without quiting vim:
+12. Execute a script being edited without quitting vim:
 
     :!%
 
@@ -120,22 +133,22 @@
 
 12. Navigation:
 
-    0          - move to the first column of the current line
-    ^          - move to the first non-space/tab character of the current line
-    $          - move to the last character of the current line
-    w          - move to the next word, exclusive of punctuation
-    W          - move to the next word, inclusive of punctuation
-    b          - move back one word, exclusive of punctuation
-    B          - move back one word, inclusive of punctuation
-    e          - move to the end of the current word, exclusive of punctuation
-    E          - move to the end of the current word, inclusive of punctuation
-    H          - move to the top of the current screen
-    M          - move to the middle of the current screen
-    L          - move to the bottom of the current screen
-    1G (or gg) - move to the first line of the document
-    G          - move to the last line of the document
-    CTRL-F     - move forward one screen
-    CTRL-B     - move back one screen
+    0            move to the first column of the current line
+    ^            move to the first non-space/tab character of the current line
+    $            move to the last character of the current line
+    w            move to the next word, exclusive of punctuation
+    W            move to the next word, inclusive of punctuation
+    b            move back one word, exclusive of punctuation
+    B            move back one word, inclusive of punctuation
+    e            move to the end of the current word, exclusive of punctuation
+    E            move to the end of the current word, inclusive of punctuation
+    H            move to the top of the current screen
+    M            move to the middle of the current screen
+    L            move to the bottom of the current screen
+    1G (or gg)   move to the first line of the document
+    G            move to the last line of the document
+    CTRL-F       move forward one screen
+    CTRL-B       move back one screen
 
     From: https://vermaden.wordpress.com/2024/09/23/ghost-in-the-shell-part-8-use-vi-editor/
           https://m4xshen.dev/posts/vim-basic-commands
@@ -143,7 +156,6 @@
           https://www.ungerhu.com/jxh/vi.html
           https://wiki.arahant.com/Wiki.jsp?page=Vi
           https://levelup.gitconnected.com/vim-is-not-about-speed-88968ae4283c?gi=2317b00898a3
-
 
 </pre>
 </body>
