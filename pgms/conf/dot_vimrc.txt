@@ -94,9 +94,10 @@ function! ReplaceNonAscii()
     :%s/[“”]/"/ge
     :%s/[’’‘]/'/ge
     :%s/[ā]/a/ge
-    :%s/[μμ]/u/ge
+    :%s/[μμü]/u/ge
     :%s/η/n/ge
     :%s/ö/o/ge
+    :%s/°/ \[deg\] /ge
     :%s/≳/\>\~/ge
     :%s/≲/\<\~/ge
     :%s/±/\+\/\-/ge
