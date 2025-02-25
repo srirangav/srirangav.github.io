@@ -8,50 +8,70 @@
 </head>
 
 <body>
-<pre><a href="../index.html">Home</a> / <a
-      href="index.html">Notes</a> / Git Notes
+<pre><a href="../index.html">Home</a> / <a href="index.html">Notes</a> / Git Notes
 ========================
 
-1. <a href="https://rogerdudler.github.io/git-guide/"
+ 1. <a href="https://rogerdudler.github.io/git-guide/"
    >git - The Simple Guide</a>
 
-2. <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository"
+ 2. <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository"
    >Renaming a Repository</a>
 
-3. Working with Branches:
+ 3. Git Configuration:
+
+    a. Sorting branches into columns by most recently used:
+
+       $ git config --global column.ui auto
+       $ git config --global branch.sort -committerdate
+
+    b. Sorting tags in numerical order:
+
+       $ git config --global tag.sort version:refname
+
+    c. Better diffs:
+
+       $ git config --global diff.algorithm histogram
+       $ git config --global diff.colorMoved plain
+       $ git config --global diff.mnemonicPrefix true
+       $ git config --global diff.renames true
+
+    See: <a href="https://blog.gitbutler.com/how-git-core-devs-configure-git/"
+         >https://blog.gitbutler.com/how-git-core-devs-configure-git/</a>.
+
+ 4. Working with Branches:
 
     a. List local branches:
 
-        $ git branch
+       $ git branch
 
     b. List remote branches:
 
-        $ git branch -r
+       $ git branch -r
 
     c. List all branches:
 
-        $ git branch -a
+       $ git branch -a
 
     d. List current branch:
 
-        $ git rev-parse --abbrev-ref HEAD
+       $ git rev-parse --abbrev-ref HEAD
 
     e. Delete local [branch]:
 
-        $ git branch -D [branch]
+       $ git branch -D [branch]
 
     f. Delete remote [branch]:
 
-        $ git push origin --delete [branch]
+       $ git push origin --delete [branch]
 
     g. Synchronize local branches with remote branches:
 
-        $ git fetch -p
+       $ git fetch -p
 
     h. Rename local branches:
 
-        $ git checkout master
-        $ git branch -m [current_name] [new_name]
+       $ git checkout master
+       $ git branch -m [current_name] [new_name]
 
     See: <a href="https://infoheap.com/git-list-branches/"
          >https://infoheap.com/git-list-branches/</a>
@@ -66,37 +86,35 @@
          "https://www.hostinger.com/tutorials/how-to-rename-a-git-branch"
          >https://www.hostinger.com/tutorials/how-to-rename-a-git-branch</a>
 
-4. Rebasing Commits
+ 5. Rebasing Commits
 
-    a. To rebase a commit, count the number of commits from the first
-       commit to the last commit that you want to rebase then run git
-       rebase as follows:
+    a. To rebase a commit, count the number of commits from the first commit to
+       the last commit that you want to rebase then run git rebase as follows:
 
-        $ git rebase -i HEAD~[num]
+       $ git rebase -i HEAD~[num]
 
-       [num] is the number of commits from the first commit through
-       the last commit to be rebased, inclusive.
+       where [num] is the number of commits from the first commit through the
+       last commit to be rebased, inclusive.
 
-    b. In the editor that opens, mark the first commit as 'pick', and
-       and the remaining as 'squash'
+    b. In the editor that opens, mark the first commit as 'pick', and and the
+       remaining as 'squash'
 
     See: <a href="https://www.git-tower.com/learn/git/faq/git-squash/"
          >https://www.git-tower.com/learn/git/faq/git-squash/</a>
 
-5. Signing failure for commits
+ 6. Signing failure for commits
 
-   If the following error appears, it is probably due to a hung
-   gpg-agent:
+    If the following error appears, it is probably due to a hung gpg-agent:
 
     error: gpg failed to sign the data
     fatal: failed to write commit object
 
-   gpg-agent can be restarted as follows:
+    gpg-agent can be restarted as follows:
 
-   $ gpgconf --kill gpg-agent
+    $ gpgconf --kill gpg-agent
 
-   See: <a href="https://stackoverflow.com/questions/41052538"
-        >https://stackoverflow.com/questions/41052538</a>
+    See: <a href="https://stackoverflow.com/questions/41052538"
+         >https://stackoverflow.com/questions/41052538</a>
 
 </pre>
 </body>
