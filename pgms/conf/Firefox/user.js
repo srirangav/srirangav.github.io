@@ -304,31 +304,42 @@ user_pref("places.history.enabled", false);
 //       https://github.com/arkenfox/user.js/issues/1846
 
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
-user_pref("privacy.clearOnShutdown.cache", true);
-user_pref("privacy.clearOnShutdown.cookies", true);
-user_pref("privacy.clearOnShutdown.dowsnloads", true);
-user_pref("privacy.clearOnShutdown.formdata", true);
-user_pref("privacy.clearOnShutdown.history", true);
-user_pref("privacy.clearOnShutdown.offlineApps", true);
+
+// disabled by arkenfox v135
+// https://github.com/arkenfox/user.js/issues/1941
+//user_pref("privacy.clearOnShutdown.cache", true);
+//user_pref("privacy.clearOnShutdown.cookies", true);
+//user_pref("privacy.clearOnShutdown.downloads", true);
+//user_pref("privacy.clearOnShutdown.formdata", true);
+//user_pref("privacy.clearOnShutdown.history", true);
+//user_pref("privacy.clearOnShutdown.offlineApps", true);
+//user_pref("privacy.clearOnShutdown.sessions", true);
+
+// new from arkenfox user.js v135
+user_pref("privacy.clearHistory.browsingHistoryAndDownloads", true);
+user_pref("privacy.clearHistory.formdata", true);
+user_pref("privacy.clearOnShutdown_v2.browsingHistoryAndDownloads", true);
+user_pref("privacy.clearOnShutdown_v2.downloads", true);
+user_pref("privacy.clearOnShutdown_v2.formdata", true);
+user_pref("privacy.clearSiteData.browsingHistoryAndDownloads", true);
+user_pref("privacy.clearSiteData.formdata", true);
+
 user_pref("privacy.clearOnShutdown.openWindows", true);
-user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
-user_pref("browser.helperApps.deleteTempFileOnExit", true);
-user_pref("privacy.clearHistory.cache", true);
-user_pref("privacy.clearHistory.historyFormDataAndDownloads", true);
-user_pref("privacy.clearHistory.cookiesAndStorage", false);
-user_pref("privacy.clearHistory.siteSettings", false);
 user_pref("privacy.clearOnShutdown_v2.cookiesAndStorage", true);
 user_pref("privacy.clearOnShutdown_v2.cache", true);
 user_pref("privacy.clearOnShutdown_v2.historyFormDataAndDownloads", true);
 user_pref("privacy.clearOnShutdown_v2.siteSettings", false);
 user_pref("privacy.clearOnShutdown_v2.cookiesAndStorage", true);
-
+user_pref("privacy.clearHistory.cache", true);
+user_pref("privacy.clearHistory.historyFormDataAndDownloads", true);
+user_pref("privacy.clearHistory.cookiesAndStorage", false);
+user_pref("privacy.clearHistory.siteSettings", false);
 user_pref("privacy.clearSiteData.cache", true);
 user_pref("privacy.clearSiteData.cookiesAndStorage", false);
 user_pref("privacy.clearSiteData.historyFormDataAndDownloads", true);
 user_pref("privacy.clearSiteData.siteSettings", false);
-
+user_pref("browser.helperApps.deleteTempFileOnExit", true);
 
 // do not remember signons
 
