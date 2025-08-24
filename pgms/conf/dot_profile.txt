@@ -71,6 +71,12 @@ case $- in
             export LESS LESSHISTFILE LESSHISTSIZE LESSSECURE
         fi
 
+        # enforce "C" locale
+        # https://unix.stackexchange.com/questions/288333
+
+        export LC_COLLATE=C
+        unset LC_ALL
+
         # set the scale for dc to 20 (same as bc -l)
 
         DC_ENV_ARGS="-e 10k"
@@ -88,6 +94,7 @@ case $- in
         case "$0" in
             *bash*)
                 set -o emacs ignoreeof noclobber
+                shopt -s checkwinsize > /dev/null 2>&1
                 PS1='\h\$ '
                 ENV="$HOME/.profile"
                 HISTFILE=/dev/null
