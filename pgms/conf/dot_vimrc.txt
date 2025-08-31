@@ -117,10 +117,13 @@ nnoremap rr :call ReplaceNonAscii()<CR>
 " https://unix.stackexchange.com/questions/12889
 " https://vi.stackexchange.com/questions/15578
 " https://www.tumfatig.net/2024/spell-checking-in-vim/
+
+" custom spellfile
+" default spellfile should be in ~/.vim/spell/en.utf-8.add
 " https://unix.stackexchange.com/questions/85538/
+" https://codeyarns.com/tech/2015-09-30-how-to-make-spellfile-in-vim.html
 
-set spellfile=~/.config/vim/spell/local.utf-8.add
-
+"set spellfile=~/.config/vim/spell/local.utf-8.add
 
 let s:spellingState=0
 function! ToggleSpelling()
