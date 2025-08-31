@@ -66,7 +66,7 @@ set ignorecase      " case insensitive searching
 set smartcase       " case sensitive if uppercase characters are provided
 nnoremap <CR> :noh<CR>
 
-" make Wq work lik wq
+" make Wq work like wq
 " https://blog.sanctum.geek.nz/vim-koans/
 
 command! Wq wq
@@ -117,6 +117,10 @@ nnoremap rr :call ReplaceNonAscii()<CR>
 " https://unix.stackexchange.com/questions/12889
 " https://vi.stackexchange.com/questions/15578
 " https://www.tumfatig.net/2024/spell-checking-in-vim/
+" https://unix.stackexchange.com/questions/85538/
+
+set spellfile=~/.config/vim/spell/local.utf-8.add
+
 
 let s:spellingState=0
 function! ToggleSpelling()
@@ -129,7 +133,7 @@ function! ToggleSpelling()
 endfunction
 nnoremap <C-s> :call ToggleSpelling()<CR>
 
-" remove trailing whitespace
+" remove trailing white space
 " https://vimtricks.com/p/vim-remove-trailing-whitespace/
 " https://github.com/Omar12/dotfiles/blob/master/.vimrc
 
