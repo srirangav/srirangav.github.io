@@ -45,11 +45,24 @@
 
         $ defaults write com.apple.x11 nolisten_tcp -boolean true
 
- 4. Change the Screenshot Type
+ 4. Screenshots
 
-    $ defaults write com.apple.screencapture type [type]
+    4.1 Change screenshot type
 
-    [type] is either pdf, png, jpg or gif
+        $ defaults write com.apple.screencapture type [type]
+
+        where [type] is either pdf, png, jpg or gif
+
+    4.2 Disable floating thumbnail preview (MacOS Tahoe)
+
+        $ /defaults write com.apple.screencapture show-thumbnail -bool false
+        $ killall SystemUIServer
+
+        From: <a href=
+        "https://derflounder.wordpress.com/2025/11/27/disabling-the-floating-thumbnail-preview-for-screenshots-on-macos-tahoe/"
+        >Disabling the floating thumbnail preview for screenshots on macOS Tahoe</a>,
+        <a href="https://derflounder.wordpress.com/"
+        >Der Flounder</a> (Nov. 27, 2025)
 
  5. Disable .DSStore files on Network Volumes
 
