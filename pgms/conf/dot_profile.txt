@@ -81,9 +81,13 @@ case $- in
 
         DC_ENV_ARGS="-e 10k"
 
+        # set the path for lynx.cfg
+
+        LYNX_CFG=~/.config/lynx/lynx.cfg
+
         # export variables for interactive shells
 
-        export PS1 PS2 CDPATH EDITOR VISUAL FCEDIT PAGER DC_ENV_ARGS
+        export PS1 PS2 CDPATH EDITOR VISUAL FCEDIT PAGER DC_ENV_ARGS LYNX_CFG
 
         # remove all aliases, if possible
 
@@ -138,6 +142,7 @@ case $- in
                 # customizations in .kshrc
 
                 ENV="$HOME/.kshrc"
+                export ENV
 
                 ;;
         esac
@@ -173,6 +178,11 @@ case $- in
                 # run w3m in monochrome mode
 
                 alias w3m="w3m -M" > /dev/null 2>&1
+
+                # run mpg123 in verbose mode with a 1K buffer
+
+                alias mpg123="mpg123 -v -b 1024" > /dev/null 2>&1
+
             else
 
                 # create some functions
