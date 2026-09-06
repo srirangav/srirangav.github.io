@@ -1,0 +1,8 @@
+# Firefox local profile
+# from: https://github.com/netblue30/firejail/discussions/5444#discussioncomment-4039950
+
+# workaround to allow firefox to communicate with keepassxc
+noblacklist ${RUNUSER}/app
+mkdir ${RUNUSER}/app/org.keepassxc.KeePassXC
+whitelist ${RUNUSER}/app/org.keepassxc.KeePassXC
+

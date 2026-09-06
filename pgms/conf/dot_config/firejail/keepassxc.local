@@ -1,0 +1,6 @@
+# keepassxc profile
+# from: https://github.com/netblue30/firejail/discussions/5444#discussioncomment-4039950
+
+# workaround to allow communication with keepassxc
+noblacklist ${RUNUSER}/app
+
