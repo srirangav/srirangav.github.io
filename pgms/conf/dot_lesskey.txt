@@ -1,4 +1,5 @@
 # disable less history
 # https://askubuntu.com/questions/386311
+#env
 LESSHISTFILE=/dev/null
 LESSHISTSIZE=0
