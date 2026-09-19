@@ -1,0 +1,5 @@
+# shellcheckrc - configuration for shellcheck
+
+# disable warning about using $(...) instead of backticks
+# https://www.shellcheck.net/wiki/SC2006 -- Use $(...) notation
+disable=SC2006
