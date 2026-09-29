@@ -74,9 +74,13 @@ case $- in
 
         LYNX_CFG=~/.config/lynx/lynx.cfg
 
+        # gPodder config
+        GPODDER_HOME="$HOME/.config/gPodder"
+        GPODDER_DOWNLOAD_DIR="$HOME/Music/Podcasts"
+
         # export variables for interactive shells
 
-        export PS1 PS2 CDPATH EDITOR VISUAL FCEDIT PAGER DC_ENV_ARGS LYNX_CFG
+        export PS1 PS2 CDPATH EDITOR VISUAL FCEDIT PAGER DC_ENV_ARGS LYNX_CFG GPODDER_HOME GPODDER_DOWNLOAD_DIR
 
         # shell options
 
