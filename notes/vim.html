@@ -131,9 +131,17 @@
     dG                  From current line
     :[line number],$d   From a particular line
 
-11. Replace all occurrences of 'old' with 'new':
+11. Replace all occurrences of '[old]' with '[new]':
 
-    :%s/old/new/g
+    :%s/[old]/[new]/g
+    :%s!\v[regex]![new]!
+
+    The matched string in the regex is stored in &amp;
+
+    Example: :%s!\v^\S+\.pdf!&lt;a href=&#34;&amp;&#34;&gt;&amp;&lt;/a&gt;!
+
+    From: <a href="https://stackoverflow.com/a/30603160"
+          >https://stackoverflow.com/a/30603160</a>
 
 12. Execute a script being edited without quitting vim:
 
@@ -162,12 +170,18 @@
     CTRL-F       move forward one screen
     CTRL-B       move back one screen
 
-    From: https://vermaden.wordpress.com/2024/09/23/ghost-in-the-shell-part-8-use-vi-editor/
-          https://m4xshen.dev/posts/vim-basic-commands
-          https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/
-          https://www.ungerhu.com/jxh/vi.html
-          https://wiki.arahant.com/Wiki.jsp?page=Vi
-          https://levelup.gitconnected.com/vim-is-not-about-speed-88968ae4283c?gi=2317b00898a3
+    From: <a href="https://vermaden.wordpress.com/2024/09/23/ghost-in-the-shell-part-8-use-vi-editor/"
+          >https://vermaden.wordpress.com/2024/09/23/ghost-in-the-shell-part-8-use-vi-editor/</a>
+          <a href="https://m4xshen.dev/posts/vim-basic-commands"
+          >https://m4xshen.dev/posts/vim-basic-commands</a>
+          <a href="https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/">
+          https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/</a>
+          <a href="https://www.ungerhu.com/jxh/vi.html"
+          >https://www.ungerhu.com/jxh/vi.html</a>
+          <a href="https://wiki.arahant.com/Wiki.jsp?page=Vi"
+          >https://wiki.arahant.com/Wiki.jsp?page=Vi</a>
+          <a href="https://levelup.gitconnected.com/vim-is-not-about-speed-88968ae4283c?gi=2317b00898a3"
+          >https://levelup.gitconnected.com/vim-is-not-about-speed-88968ae4283c?gi=2317b00898a3</a>
 
 </pre>
 </body>
